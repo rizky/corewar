@@ -1,13 +1,9 @@
 #!/usr/bin/python
-#
-# Made by duponc_j@epitech.net
-# Version: 1.2.1
-#
 
 '''
-An Epitech norme checker
+42 Norm Checker
 
-Usage: python norme.py <files to scan> [-nocheat] [-verbose] [-score] [-libc]
+Usage: python norm.py <files to scan> [-nocheat] [-verbose] [-score] [-libc]
 
 -verbose: affiche les messages impossible d\'ouvrir
 -nocheat: desactive la detection de la triche
@@ -66,32 +62,32 @@ class norme:
     def check_header(self):
         if (self.nb_line == 1):
             if (self.line[:2] != '/*'):
-                self.print_error('header incorrect')
+                self.print_error('Header is incorrect')
                 self.note += 20
-        elif (self.nb_line == 9):
-            if (self.line[:2] != '*/'):
-                self.print_error('header incorrect')
-        elif self.nb_line == 4 or self.nb_line == 7 or self.nb_line == 8:
-            if self.cheat:
-                p = re.compile('([\w-]* [\w-]*)$')
-                test = re.search(p, self.line)
-                if test:
-                    if not test.group(1) in self.user:
-                        self.print_error('login '+ test.group(1) +' incorrect')
-                        print "Note: -42"
-                        sys.exit()
-        elif (self.nb_line == 5):
-            if self.cheat:
-                p = re.compile('<(.*)@')
-                test = re.search(p, self.line)
-                if test:
-                    if not test.group(1) in self.user:
-                        self.print_error('login '+ test.group(1) +' incorrect')
-                        print "Note: -42"
-                        sys.exit()
-        else:
-            if (self.line[:2] != '**'):
-                self.print_error('header incorrect')
+        elif (self.nb_line == 11):
+            if (self.line[:2] != '/*'):
+                self.print_error('Header is incorrect')
+        # elif self.nb_line == 4 or self.nb_line == 7 or self.nb_line == 8:
+        #     if self.cheat:
+        #         p = re.compile('([\w-]* [\w-]*)$')
+        #         test = re.search(p, self.line)
+        #         if test:
+        #             if not test.group(1) in self.user:
+        #                 self.print_error('login '+ test.group(1) +' incorrect')
+        #                 print "Note: -42"
+        #                 sys.exit()
+        # elif (self.nb_line == 5):
+        #     if self.cheat:
+        #         p = re.compile('<(.*)@')
+        #         test = re.search(p, self.line)
+        #         if test:
+        #             if not test.group(1) in self.user:
+        #                 self.print_error('login '+ test.group(1) +' incorrect')
+        #                 print "Note: -42"
+        #                 sys.exit()
+        # else:
+        #     if (self.line[:2] != '**'):
+                # self.print_error('header incorrect')
 
     def check_virgule(self):
         if is_commented(self.line) == False:
@@ -106,14 +102,14 @@ class norme:
                 if (self.line[n] == ';' or self.line[n] == ',') and quote == 0:
                     if self.line[n + 1] != ' ' and self.line[n + 1] != '\n':
                         self.note += 1
-                        self.print_error('point-virgule ou virgule mal place')
+                        self.print_error('semicolon or coma is missplaced')
                 n = n + 1
 
     def check_nbchar(self):
-        line = self.line.replace('\t', '    ')
-        if (line[80:]):
+        # line = self.line.replace('\t', '    ')
+        if (self.line[80:]):
             self.note += 1
-            self.print_error('chaine de plus de 80 caracteres')
+            self.print_error('Line has more than 80 characters')
 
     def check_return(self):
         if (self.line[:1] == '\n'):
@@ -136,13 +132,13 @@ class norme:
                 self.nb_func = self.nb_func + 1
                 if self.nb_func == 6:
                     self.note += 1
-                    self.print_error('plus de 5 fonctions dans le fichier')
+                    self.print_error('There are more than 5 functions in the file')
             else:
                 if self.nb_func >= 1 and self.is_func:
                     self.nb_funcline = self.nb_funcline + 1
                     if self.nb_funcline >= 26:
                         self.note += 1
-                        self.print_error('fonction de plus de 25 lignes')
+                        self.print_error('Function has more than 25 lines')
 
     def check_cfunc(self):
         if is_commented(self.line) == False:
@@ -150,15 +146,15 @@ class norme:
             test = re.search(p, self.line)
             if test:
                 self.note += 1
-                self.print_error('pas d\'espace apres mot clef')
+                self.print_error('No space before condition')
 
     def check_arg(self):
         if self.line[-2:] == ")\n" and self.line[:1] != '\t'  and self.line[:1] != ' ':
             p = re.compile('(.*),(.*),(.*),(.*),(.*)\)$')
             test = re.search(p, self.line)
-            if test:
+            if test and ("define" not in self.line):
                 self.note += 1
-                self.print_error('plus de 4 arguments passes en parametre')
+                self.print_error('More than 4 arguments is declared in a function')
 
     def check_sys_include(self):
         if self.line[:1] == "#" and self.line[-2:] == "\"\n":
@@ -166,7 +162,7 @@ class norme:
         else:
             if self.line[:1] == "#" and self.line[-2:] == ">\n" and self.sys_include == 1:
                 self.note += 1
-                self.print_error('Header systeme mal placee')
+                self.print_error('System Header is missplaced')
 
     def check_comment(self):
         if self.is_func and self.comment:
@@ -174,7 +170,7 @@ class norme:
             test = re.search(p, self.line)
             if test:
                 self.note += 1
-                self.print_error('Commentaires dans le code')
+                self.print_error('Comments in the code')
 
     def check_malloc(self):
         p = re.compile('[^x](malloc)(\()')
@@ -186,16 +182,16 @@ class norme:
     def check_operateur(self, op):
         n = 0
         quote = 0
-        while self.line[n] != '\n':
+        while n < len(self.line) and self.line[n] != '\n':
             if self.line[n] == '\'' or self.line[n] == '"' and self.line[n - 1] != '\\':
                 if quote:
                     quote = 0
                 else:
                     quote = 1
-            if (self.line[n] == op) and quote == 0:
+            if (self.line[n] == op) and quote == 0 and self.line[n + 1] != '\n':
                 if self.line[n + 1] != ' ' and self.line[n + 1] != ';' and self.line[n + 1] != '=':
                     if self.line[n - 1] != op and self.line[n + 1] != op:
-                        msg = 'Operateur %c mal place' % op
+                        msg = 'Operator %c is missplaced' % op
                         self.print_error(msg)
                         self.note += 1
             n = n + 1
@@ -217,13 +213,13 @@ class norme:
         if is_commented(self.line) == False:
             self.check_nbline() # DOIT TOUJORS ETRE EN PREMIER
             self.check_sys_include()
-            self.check_virgule()
-            self.check_regex('[ \t]$', 'Espace en fin de ligne')
+            # self.check_virgule()
+            self.check_regex('[ \t]$', 'Space at the end of the line')
             if self.creturn == 0:
-                self.check_regex('return( \(\)| ;|;)', 'Mauvais format de return')
+                self.check_regex('return( \(\)| ;|;)', 'Bad format of return')
             if self.libc == 0:
                 self.check_regex('[^_](printf|atof|atoi|atol|strcmp|strlen|strcat|strncat|strncmp|strcpy|strncpy|fprintf|strstr|strtoc|sprintf|asprintf|perror|strtod|strtol|strtoul)(\()', \
-                             'Fonction de la lib C')
+                             'is a forbidden C function')
             self.check_nbchar()
             self.check_cfunc()
             self.check_arg()
@@ -234,13 +230,13 @@ class norme:
             self.check_typedef() #DOIT TOUJOURS ETRE EN DERNIER
 
     def print_error(self, msg):
-		print("{0} {1}{2}{3} {4}{5}".format("Error at",self.file,":",self.nb_line,":",msg))
+		print("{0} {1}{2}{3} {4} {5}".format("Error at",self.file,":",self.nb_line,":",msg))
 		if self.printline:
 			print self.line
 
     def cant_open(self, file):
         if (self.verbose or file == sys.argv[1]):
-            print "Impossible d'ouvrir",file
+            print "File cannot be openned",file
 
     def scan_files(self, files):
         for file_name in files:
@@ -292,26 +288,6 @@ class norme:
     def get_user(self):
         self.user.append('defrei_r')
         self.user.append('raphael defreitas')
-        #user_list = []
-        #user = os.getenv('MOULINETTE_USER')
-        #if user:
-        #    user_list = user.split(';')
-        #if not user:
-        #    user_list.append(os.getenv('USER'))
-        #for user_name in user_list:
-        #    f = open("/afs/epitech.net/site/etc/passwd", 'r')
-        #    while 1:
-        #        line = f.readline()
-        #        if line:
-        #            line = line.split(':')
-        #            if user_name == line[0]:
-        #                break
-        #        if not line:
-        #            f.close()
-        #            return
-        #    f.close()
-        #    self.user.append(user_name)
-        #    self.user.append(line[4])
 
 def check_makefile(thedir):
     file = thedir + "Makefile"
@@ -319,7 +295,7 @@ def check_makefile(thedir):
         try:
             fd = open(file, 'r')
         except IOError:
-            print "Impossible d'ouvrir le Makefile"
+            print "Cannot open Makefile"
         else:
             buffer = fd.read()
             p = re.compile('(-g|-pg|-lefence)')
@@ -329,13 +305,13 @@ def check_makefile(thedir):
             p = re.compile('(-Wall)')
             test = re.search(p, buffer)
             if not test:
-                print "-Wall n'est pas dans le Makefile"
+                print "-Wall is not in the Makefile"
             p = re.compile('(-pedantic)')
             test = re.search(p, buffer)
             if not test:
                 print "-pedantic n'est pas dans le Makefile"
             if buffer[:2] != "##":
-                print "Header du Makefile invalide"
+                print "Makefile header is invalid"
             fd.close()
 
 def get_files(argv):
@@ -351,18 +327,6 @@ def is_commented(line):
     if ((line[0] == '/' or line[0] == '*') and line[1] == '*'):
         return True
     return False
-
-def check_version():
-    file = "/afs/epitech.net/users/prof/astek/public/norme_version"
-    if os.path.isfile(file):
-        try:
-            fd = open(file, 'r')
-        except IOError:
-            print "Impossible de verifier la version du script"
-        else:
-            buffer = fd.read()
-            if (version != float(buffer)):
-                print "Mauvaise version du script, verifiez sur le public astek"
 
 def help():
     print "Aide"
@@ -380,7 +344,6 @@ def help():
 def main():
     if '-help' in sys.argv[1:]:
         help()
-    check_version()
     if len(sys.argv) == 1:
         print "Usage: norme.py <files_to_scan>"
         sys.exit()

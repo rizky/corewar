@@ -53,3 +53,4 @@ dkms.conf
 
 asm
 corewar
+.cache_exists

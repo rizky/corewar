@@ -14,9 +14,9 @@ getScriptPath () {
     echo $pathOnly;
     return
 }
-norme=$(getScriptPath)"/norme.py"
+norme=$(getScriptPath)"/norm.py"
 
-echo "------------------------------ Checking the norme ------------------------------"
+echo "------------------------------ Checking the norm ------------------------------"
 echo "Checking *.c files..."
 files=`find ./ -type f \( -name "*.c" ! -name "*op.c" \)`
 python $norme $files

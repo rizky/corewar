@@ -6,13 +6,13 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/03/21 14:40:25 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/03/21 16:35:04 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= asm
 NAME_CW:= corewar
-FILE_A:= ft_assembler
+FILE_A:= ft_asm
 FILE_CW:= ft_corewar 
 FILES:= 
 
@@ -28,7 +28,7 @@ HDRPATH:=include/
 CCHPATH:=obj/
 IFLAGS:=-I $(HDRPATH) -I $(LFTDIR)/include
 LFLAGS:=-L $(LFTDIR) -lft
-CFLAGS:=-Wall -Wextra -Werror $(IFLAGS)
+CFLAGS:=-Wall -Wextra $(IFLAGS)
 # ==================
 
 # ----- Colors -----
@@ -98,5 +98,8 @@ debug: $(NAME) $(NAME_CW)
 norm:
 	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
 	@cd $(LFTDIR) && $(MAKE) norm
+
+norm2:
+	@sh ./norm/norm.sh
 
 .PHONY: all clean fclean re test norme test_ch test_pw debug check
