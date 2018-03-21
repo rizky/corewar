@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/03/21 16:35:04 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/03/21 21:29:59 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ OBJ_CW:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILE_CW)))
 # ==================
 CCHF:=.cache_exists
 
-all: $(NAME_CW) $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_A)
 	@cd $(LFTDIR) && $(MAKE)

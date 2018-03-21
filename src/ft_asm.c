@@ -6,16 +6,73 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 14:40:47 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/03/21 16:45:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/03/21 22:21:34 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int ac, char **av)
-{
+#include "ft_asm.h"
 
-	if (ac)
+void
+	cw_print_memory(t_array *binary)
+{
+	int i;
+
+	i = 0;
+	while(i < (int)binary->size)
 	{
-		return (1);
+		ft_printf("%c", ((char*)binary->data)[i]);
+		i++;
 	}
+}
+
+void
+	cw_append_name(t_array *binary, char *str)
+{
+	int i;
+
+	fta_append_char(binary, 0x00);
+	fta_append_char(binary, 0xea);
+	fta_append_char(binary, 0x83);
+	fta_append_char(binary, 0xf3);
+	fta_append(binary, str, ft_strlen(str));
+	i = ft_strlen(str) + 4;
+	while(i < PROG_NAME_LENGTH)
+	{
+		fta_append_char(binary, 0x00);
+		i++;
+	}
+}
+
+void
+	cw_append_comment(t_array *binary, char *str)
+{
+	int i;
+
+	i = 0;
+	while (i < 12)
+	{
+		fta_append_char(binary, 0x00);
+		i++;
+	}
+	fta_append(binary, str, ft_strlen(str));
+	i = ft_strlen(str) + 12;
+	while(i < COMMENT_LENGTH)
+	{
+		fta_append_char(binary, 0x00);
+		i++;
+	}
+}
+
+int
+	main(int ac, char **av)
+{
+	t_array	binary;
+
+	binary = NEW_ARRAY(char);
+	cw_append_name(&binary, "zork");
+	cw_append_comment(&binary, "just a basic living prog");
+	fta_append_char(&binary, 0x0b);
+	fta_append_char(&binary, 0x68);
+	cw_print_memory(&binary);
 	return (0);
 }
