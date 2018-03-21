@@ -306,6 +306,10 @@ def check_makefile(thedir):
             test = re.search(p, buffer)
             if not test:
                 print "-Wall is not in the Makefile"
+            p = re.compile('(-Werror)')
+            test = re.search(p, buffer)
+            if not test:
+                print "-Werror is not in the Makefile"
             p = re.compile('(-pedantic)')
             test = re.search(p, buffer)
             if not test:
