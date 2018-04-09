@@ -6,14 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 14:40:47 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/03/21 23:53:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/09 07:43:56 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
 void
-	cw_print_memory(t_array *binary)
+	asm_print_memory(t_array *binary)
 {
 	int i;
 
@@ -25,17 +25,34 @@ void
 	}
 }
 
-void
-	cw_append_magic_nbr(t_array *binary)
+char
+	*asm_to_big_endian(int value)
 {
-	fta_append_char(binary, 0x00);
-	fta_append_char(binary, 0xea);
-	fta_append_char(binary, 0x83);
-	fta_append_char(binary, 0xf3);
+	t_array	result;
+	int		i;
+
+	i = 0;
+	result = NEW_ARRAY(char);
+	while (i < 32)
+	{
+		fta_append_char(&result, (value << i & 0xff000000) >> 24);
+		i = i + 8;
+	}
+	return (result.data);
 }
 
 void
-	cw_append_name(t_array *binary, char *str)
+	asm_append_magic_nbr(t_array *binary)
+{
+	char	*magic_nbr;
+
+	magic_nbr = asm_to_big_endian(COREWAR_EXEC_MAGIC);
+	fta_append(binary, magic_nbr, 4);
+	free(magic_nbr);
+}
+
+void
+	asm_append_name(t_array *binary, char *str)
 {
 	int i;
 
@@ -49,7 +66,7 @@ void
 }
 
 void
-	cw_append_comment(t_array *binary, char *str)
+	asm_append_comment(t_array *binary, char *str)
 {
 	int i;
 
@@ -69,7 +86,7 @@ void
 }
 
 void
-	cw_append_op(t_array *binary)
+	asm_append_op(t_array *binary)
 {
 	int i;
 
@@ -88,11 +105,13 @@ int
 {
 	t_array	binary;
 
+	(void)ac;
+	(void)av;
 	binary = NEW_ARRAY(char);
-	cw_append_magic_nbr(&binary);
-	cw_append_name(&binary, "zork");
-	cw_append_comment(&binary, "just a basic living prog");
-	cw_append_op(&binary);
-	cw_print_memory(&binary);
+	asm_append_magic_nbr(&binary);
+	asm_append_name(&binary, "zork");
+	asm_append_comment(&binary, "just a basic living prog");
+	asm_append_op(&binary);
+	asm_print_memory(&binary);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/03/21 21:29:59 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/03/22 09:01:17 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,9 +91,8 @@ fclean: clean
 re: fclean
 	@$(MAKE) all
 
-debug: $(NAME) $(NAME_CW)
-	@$(COMPILER) -g $(IFLAGS) $(SRC_A) $(SRC) $(LFLAGS) -o checker
-	@$(COMPILER) -g $(IFLAGS) $(SRC_CW) $(SRC) $(LFLAGS) -o push_swap
+debug: $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
 
 norm:
 	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
