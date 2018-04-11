@@ -1,52 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities.c                                        :+:      :+:    :+:   */
+/*   utilities_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 09:45:37 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 10:01:53 by fpetras          ###   ########.fr       */
+/*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
+/*   Updated: 2018/04/11 09:46:03 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	ft_handle_comments(char **file)
+void	ft_print_tab(char **tab)
 {
 	int i;
-	int j;
 
 	i = 0;
-	while (file[i])
+	while (tab[i])
 	{
-		j = 0;
-		while (file[i][j])
-		{
-			if (file[i][j] == COMMENT_CHAR || file[i][j] == ';')
-				file[i][j] = '\0';
-			j++;
-		}
+		ft_printf("%s\n", tab[i]);
 		i++;
 	}
 }
 
-int		ft_line_is_empty(t_asm *a)
+void	ft_free_tab(char **tab)
 {
-	int j;
+	int i;
 
-	j = 0;
-	while (a->file[a->i][j])
+	i = 0;
+	while (tab[i])
 	{
-		if (!ft_isspace(a->file[a->i][j]))
-			return (0);
-		j++;
+		free(tab[i]);
+		i++;
 	}
-	return (1);
-}
-
-void	ft_skip_empty_lines(t_asm *a)
-{
-	while (a->file[a->i] && ft_line_is_empty(a) && a->file[a->i + 1])
-		a->i++;
+	free(tab);
 }
