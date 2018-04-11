@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 09:42:37 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:01:09 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ int		main(int ac, char **av)
 
 	if (ft_init(ac, av, &a) == -1)
 		return (-1);
-	ft_parsing(&a);
+	if (ft_parsing(&a) == -1)
+		return (-1);
 //	ft_compilation();
-	ft_print_tab(a.file);
+//	ft_print_tab(a.file);
 	ft_free_tab(a.file);
 	return (0);
 }

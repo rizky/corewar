@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_strcspn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 15:03:17 by fpetras          ###   ########.fr       */
+/*   Created: 2017/11/17 08:18:53 by fpetras           #+#    #+#             */
+/*   Updated: 2017/11/17 18:11:44 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		ft_parsing(t_asm *a)
+size_t	ft_strcspn(const char *s, const char *charset)
 {
-	ft_handle_comments(a->file);
-	ft_trim_file(a->file);
-	if (ft_get_name(a) == -1 || ft_get_comment(a) == -1)
-		return (-1);
-	ft_printf("name: %s\n", a->name);
-	ft_printf("comment: %s\n", a->comment);
-	return (0);
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		j = 0;
+		while (charset[j] != '\0')
+		{
+			if (s[i] == charset[j])
+				return (i);
+			j++;
+		}
+		i++;
+	}
+	return (i);
 }
