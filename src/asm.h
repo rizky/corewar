@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 15:03:34 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:23:47 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include "../libft/include/libft.h"
 # include "../include/op.h"
 
-# define NAME		1
-# define COMMENT	2
+# define NAME			1
+# define NAME_LEN		2
+# define COMMENT		3
+# define COMMENT_LEN	4
 
 typedef struct	s_asm
 {
@@ -38,7 +40,7 @@ int				ft_line_is_empty(t_asm *a);
 void			ft_skip_empty_lines(t_asm *a);
 void			ft_trim_file(char **file);
 void			ft_print_tab(char **tab);
-void			ft_free_tab(char **tab);
+int				ft_free_tab(char **tab, int status);
 
 size_t			ft_strcspn(const char *s, const char *charset);
 

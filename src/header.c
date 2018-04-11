@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 14:57:12 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:19:38 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int			ft_get_comment(t_asm *a)
 	if (!ft_comment_cmd(a->file[a->i]) || !ft_quotes(a->file[a->i]))
 		return (ft_error(COMMENT, -1));
 	a->comment = &a->file[a->i][ft_strcspn(a->file[a->i], "\"") + 1];
+	if (ft_strlen(a->comment) > COMMENT_LENGTH)
+		return (ft_error(COMMENT_LEN, -1));
 	return (0);
 }
 
@@ -72,5 +74,7 @@ int			ft_get_name(t_asm *a)
 	if (!ft_name_cmd(a->file[a->i]) || !ft_quotes(a->file[a->i]))
 		return (ft_error(NAME, -1));
 	a->name = &a->file[a->i][ft_strcspn(a->file[a->i], "\"") + 1];
+	if (ft_strlen(a->name) > PROG_NAME_LENGTH)
+		return (ft_error(NAME_LEN, -1));
 	return (0);
 }

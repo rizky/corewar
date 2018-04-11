@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 09:46:03 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:23:32 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_print_tab(char **tab)
 	}
 }
 
-void	ft_free_tab(char **tab)
+int		ft_free_tab(char **tab, int status)
 {
 	int i;
 
@@ -35,4 +35,5 @@ void	ft_free_tab(char **tab)
 		i++;
 	}
 	free(tab);
+	return (status);
 }

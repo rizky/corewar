@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 15:01:09 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:25:28 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Only accepts files with filename extension .s
 */
 
-char	**ft_read_sourcefile(int ac, char **av)
+static char	**ft_read_sourcefile(int ac, char **av)
 {
 	int		fd;
 	int		ret;
@@ -41,14 +41,14 @@ char	**ft_read_sourcefile(int ac, char **av)
 	return (sourcefile);
 }
 
-int		ft_filename_extension(char *file)
+static int	ft_filename_extension(char *file)
 {
 	if (file[ft_strlen(file) - 1] != 's' && file[ft_strlen(file) - 2] != '.')
 		return (0);
 	return (1);
 }
 
-int		ft_init(int ac, char **av, t_asm *a)
+static int	ft_init(int ac, char **av, t_asm *a)
 {
 	ft_bzero(a, sizeof(t_asm));
 	if (ac < 2 || !ft_filename_extension(av[ac - 1]))
@@ -64,16 +64,16 @@ int		ft_init(int ac, char **av, t_asm *a)
 	return (0);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_asm a;
 
 	if (ft_init(ac, av, &a) == -1)
 		return (-1);
 	if (ft_parsing(&a) == -1)
-		return (-1);
+		return (ft_free_tab(a.file, -1));
 //	ft_compilation();
 //	ft_print_tab(a.file);
-	ft_free_tab(a.file);
+	ft_free_tab(a.file, 0);
 	return (0);
 }
