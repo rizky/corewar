@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 15:23:47 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/12 08:34:20 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef struct	s_asm
 	char		**file;
 }				t_asm;
 
-int				ft_parsing(t_asm *a);
-int				ft_get_name(t_asm *a);
-int				ft_get_comment(t_asm *a);
+int				ft_parsing(t_asm *a, header_t *h);
+int				ft_get_name(t_asm *a, header_t *h);
+int				ft_get_comment(t_asm *a, header_t *h);
 
 int				ft_error(int errcode, int status);
 

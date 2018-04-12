@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 15:25:28 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/12 08:36:14 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ static int	ft_filename_extension(char *file)
 	return (1);
 }
 
-static int	ft_init(int ac, char **av, t_asm *a)
+static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
 {
 	ft_bzero(a, sizeof(t_asm));
+	ft_bzero(h, sizeof(header_t));
 	if (ac < 2 || !ft_filename_extension(av[ac - 1]))
 	{
 		ft_dprintf(2, "Usage: %s <sourcefile.s>\n", av[0]);
@@ -66,11 +67,12 @@ static int	ft_init(int ac, char **av, t_asm *a)
 
 int			main(int ac, char **av)
 {
-	t_asm a;
+	t_asm		a;
+	header_t	h;
 
-	if (ft_init(ac, av, &a) == -1)
+	if (ft_init(ac, av, &a, &h) == -1)
 		return (-1);
-	if (ft_parsing(&a) == -1)
+	if (ft_parsing(&a, &h) == -1)
 		return (ft_free_tab(a.file, -1));
 //	ft_compilation();
 //	ft_print_tab(a.file);

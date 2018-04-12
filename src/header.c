@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 15:19:38 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/12 08:40:41 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	ft_comment_cmd(char *line)
 	return (1);
 }
 
-int			ft_get_comment(t_asm *a)
+int			ft_get_comment(t_asm *a, header_t *h)
 {
 	a->i++;
 	ft_skip_empty_lines(a);
@@ -65,10 +65,11 @@ int			ft_get_comment(t_asm *a)
 	a->comment = &a->file[a->i][ft_strcspn(a->file[a->i], "\"") + 1];
 	if (ft_strlen(a->comment) > COMMENT_LENGTH)
 		return (ft_error(COMMENT_LEN, -1));
+	ft_memcpy(h->comment, a->comment, ft_strlen(a->comment) + 1);
 	return (0);
 }
 
-int			ft_get_name(t_asm *a)
+int			ft_get_name(t_asm *a, header_t *h)
 {
 	ft_skip_empty_lines(a);
 	if (!ft_name_cmd(a->file[a->i]) || !ft_quotes(a->file[a->i]))
@@ -76,5 +77,6 @@ int			ft_get_name(t_asm *a)
 	a->name = &a->file[a->i][ft_strcspn(a->file[a->i], "\"") + 1];
 	if (ft_strlen(a->name) > PROG_NAME_LENGTH)
 		return (ft_error(NAME_LEN, -1));
+	ft_memcpy(h->prog_name, a->name, ft_strlen(a->name) + 1);
 	return (0);
 }
