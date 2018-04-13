@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 15:18:16 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/13 17:26:10 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ int		ft_error(int errnum, int status)
 		ft_dprintf(2, ".comment: Syntax Error\n");
 	else if (errnum == COMMENT_LEN)
 		ft_dprintf(2, ".comment: Comment too long\n");
+	else if (errnum == OP)
+		ft_dprintf(2, "operation: Operation is invalid\n");
 	return (status);
 }
