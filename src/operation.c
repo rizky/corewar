@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/13 17:30:23 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/13 18:21:45 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int
 	char	*func;
 	char	*op;
 	char	*opcode;
-	char	*par1 = NULL;
-	char	*par2 = NULL;
-	char	*par3 = NULL;
+	char	*param;
+	char	**params;
 
+	(void)h;
 	ft_skip_empty_lines(a);
 	func = ft_re_match_capture("^\\w+:[ \t]*\\w+[ \t]+.*",
 				"\\w+:", a->file[a->i]);
@@ -29,29 +29,17 @@ int
 	if (op == NULL)
 		return (ft_error(OP, -1));
 	opcode = ft_re_capture("\\w+", op);
-	ft_printfln("function: %s", func);
+	param = ft_re_capture("[^ \t]+", ft_re_capture("\t[^ \t]+", op));
+	ft_printfln("function:%s", func);
+	ft_printfln("op:%s", op);
 	ft_printfln("opcode:%s", opcode);
-	if (ft_strcmp(opcode, "sti") == 0)
+	params = ft_strsplit(param, ',');
+	int i = 0;
+	while (params[i])
 	{
-		par1 = ft_re_capture("r\\d+", op);
-		par2 = ft_re_capture("%:\\w+", op);
-		par3 = ft_re_capture("%\\d+", op);
+		ft_printfln("param %d: %s", i, params[i]);
+		i++;
 	}
-	else if (ft_strcmp(opcode, "and") == 0)
-	{
-		par1 = ft_re_capture("r\\d+", op);
-		par2 = ft_re_capture("%\\d+", op);
-		par3 = ft_re_capture("r\\d+", op);
-	}
-	else if (ft_strcmp(opcode, "live") == 0)
-	{
-		par1 = ft_re_capture("%\\d+", op);
-	}
-	else if (ft_strcmp(opcode, "zjmp") == 0)
-	{
-		par1 = ft_re_capture("%:\\w+", op);
-	}
-	ft_printfln("params: %s - %s - %s", par1, par2, par3);
 	ft_printfln("---");
 	return (0);
 }
