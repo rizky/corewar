@@ -113,10 +113,10 @@ class norme:
 
     def check_return(self):
         if (self.line[:1] == '\n'):
-            if (self.nb_return == 1):
-                self.note += 1
-                self.print_error('double retour a la ligne')
-            else:
+            # if (self.nb_return == 1):
+                # self.note += 1
+                # self.print_error('double retour a la ligne')
+            # else:
                 self.nb_return = 1
         else:
             self.nb_return = 0

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/13 15:16:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/13 15:23:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ char
 	return (str);
 }
 
-int			ft_get_name(t_asm *a, header_t *h)
+int
+	ft_get_name(t_asm *a, header_t *h)
 {
 	ft_skip_empty_lines(a);
-	a->name = ft_re_match_capture(".name[ \t]+\"[^\"]+\"$", "\".+\"", a->file[a->i]);
+	a->name = ft_re_match_capture(".name[ \t]+\"[^\"]+\"$",
+				"\".+\"", a->file[a->i]);
 	if (a->name == NULL)
 		return (ft_error(NAME, -1));
 	if (ft_strlen(a->name) > PROG_NAME_LENGTH)
@@ -59,10 +61,12 @@ int			ft_get_name(t_asm *a, header_t *h)
 	return (0);
 }
 
-int			ft_get_comment(t_asm *a, header_t *h)
+int
+	ft_get_comment(t_asm *a, header_t *h)
 {
 	ft_skip_empty_lines(a);
-	a->comment = ft_re_match_capture(".comment[ \t]+\"[^\"]+\"$", "\".+\"", a->file[a->i]);
+	a->comment = ft_re_match_capture(".comment[ \t]+\"[^\"]*\"$",
+				"\".*\"", a->file[a->i]);
 	if (a->comment == NULL)
 		return (ft_error(COMMENT, -1));
 	if (ft_strlen(a->comment) > COMMENT_LENGTH)
