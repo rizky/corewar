@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/13 15:17:34 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/13 15:47:11 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,7 @@ FILE_CW:= ft_corewar
 FILES:= parsing \
 		header \
 		error \
-		utilities \
-		utilities_2
+		utilities_1 utilities_2 \
 
 # ----- Libft ------
 LFTDIR:=./libft
