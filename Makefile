@@ -6,15 +6,20 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/03/22 09:01:17 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/13 14:46:45 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= asm
 NAME_CW:= corewar
-FILE_A:= ft_asm
+FILE_A:= asm
 FILE_CW:= ft_corewar 
-FILES:= 
+FILES:= parsing \
+		header \
+		error \
+		utilities \
+		utilities_2 \
+		ft_strcspn
 
 # ----- Libft ------
 LFTDIR:=./libft

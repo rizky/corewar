@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fpetras <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/10 13:57:29 by fpetras           #+#    #+#              #
-#    Updated: 2018/04/11 14:58:05 by fpetras          ###   ########.fr        #
+#    Updated: 2018/04/13 14:44:50 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C ../libft
-	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) ../libft/libft.a
+	@$(CC) $(FLAGS) -g -o $(NAME) $(OBJ) ../libft/libft.a
 
 clean:
 	@make clean -C ../libft
