@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 19:48:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 20:23:41 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,6 @@ int
 	}
 	op.size += (op.param_c > 1) ? 2 : 1;
 	a->ops[a->op_c] = op;
+	a->size += op.size;
 	return (0);
 }

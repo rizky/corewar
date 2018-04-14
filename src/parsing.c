@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 19:49:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 20:23:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,38 @@ void
 {
 	int	i;
 	int	j;
-	int	size;
+	int offset;
 
 	i = 0;
+	offset = 0;
+	ft_printfln("Dumping annotated program on standard output");
+	ft_printfln("Program size : %d bytes", a->size);
+	ft_printfln("Name : \"%s\"", a->name);
+	ft_printfln("Comment : \"%s\"", a->comment);
 	while (i < a->op_c)
 	{
 		if (a->ops[i].func != NULL)
-			ft_printfln("%s", a->ops[i].func);
-		ft_printf("(%-3d)\t%s\t", a->ops[i].size, a->ops[i].opname);
+			ft_printfln("%-5d      :\t%s", offset, a->ops[i].func);
+		ft_printf("%-5d(%-3d) :\t    %-10s", offset, a->ops[i].size, a->ops[i].opname);
 		j = 0;
 		while (j < a->ops[i].param_c)
 		{
-			ft_printf("%s\t", a->ops[i].params[j].str);
+			ft_printf("%-18s", a->ops[i].params[j].str);
 			j++;
 		}
 		ft_printf("\n");
-		ft_printf("\t%d\t", a->ops[i].opcode);
+		ft_printf("         \t    %-10d", a->ops[i].opcode);
 		j = 0;
-		size = 0;
 		while (j < a->ops[i].param_c)
 		{
-			ft_printf("%d\t", a->ops[i].params[j].value);
-			size += a->ops[i].params[j].size;
+			ft_printf("%-18d", a->ops[i].params[j].value);
 			j++;
 		}
-		ft_printf("\n");
+		ft_printf("\n\n");
+		offset += a->ops[i].size;
 		i++;
 	}
 }
-
 int		ft_parsing(t_asm *a, header_t *h)
 {
 	ft_handle_comments(a->file);
@@ -55,8 +58,6 @@ int		ft_parsing(t_asm *a, header_t *h)
 	a->i++;
 	if (ft_get_comment(a, h) == -1)
 		return (-1);
-	ft_printf("name: %s\n", h->prog_name);
-	ft_printf("comment: %s\n", h->comment);
 	a->i++;
 	while (a->file[a->i])
 	{

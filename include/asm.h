@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 19:03:15 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 20:23:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_asm
 	char		**file;
 	t_op		ops[1000];
 	int			op_c;
+	int			size;
 }				t_asm;
 
 int				ft_parsing(t_asm *a, header_t *h);
