@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 20:23:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 20:39:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void
 {
 	int	i;
 	int	j;
-	int offset;
 
 	i = 0;
-	offset = 0;
 	ft_printfln("Dumping annotated program on standard output");
 	ft_printfln("Program size : %d bytes", a->size);
 	ft_printfln("Name : \"%s\"", a->name);
@@ -28,8 +26,8 @@ void
 	while (i < a->op_c)
 	{
 		if (a->ops[i].func != NULL)
-			ft_printfln("%-5d      :\t%s", offset, a->ops[i].func);
-		ft_printf("%-5d(%-3d) :\t    %-10s", offset, a->ops[i].size, a->ops[i].opname);
+			ft_printfln("%-5d      :\t%s", a->ops[i].offset, a->ops[i].func);
+		ft_printf("%-5d(%-3d) :\t    %-10s", a->ops[i].offset, a->ops[i].size, a->ops[i].opname);
 		j = 0;
 		while (j < a->ops[i].param_c)
 		{
@@ -45,10 +43,47 @@ void
 			j++;
 		}
 		ft_printf("\n\n");
-		offset += a->ops[i].size;
 		i++;
 	}
 }
+
+int
+	asm_get_indvalue(t_asm *a, char *func)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	str = ft_re_capture("\\w+", func);
+	while (i < a->op_c)
+	{	
+		if (a->ops[i].func && ft_strcmp(a->ops[i].func, str) == 0)
+			return (a->ops[i].offset);
+		i++;
+	}
+	return (-1);
+}
+
+void
+	asm_copulate_indvalue(t_asm *a)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < a->op_c)
+	{
+		j = 0;
+		while (j < a->ops[i].param_c)
+		{
+			if (a->ops[i].params[j].type == T_IND)
+				a->ops[i].params[j].value = asm_get_indvalue(a, a->ops[i].params[j].str) - a->ops[i].offset;
+			j++;
+		}
+		i++;
+	}
+}
+
 int		ft_parsing(t_asm *a, header_t *h)
 {
 	ft_handle_comments(a->file);
@@ -65,6 +100,7 @@ int		ft_parsing(t_asm *a, header_t *h)
 		a->op_c++;
 		a->i++;
 	}
+	asm_copulate_indvalue(a);
 	asm_print_asm(a);
 	return (0);
 }

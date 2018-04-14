@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 20:23:41 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 20:38:03 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int
 
 	ft_skip_empty_lines(a);
 	func = ft_re_match_capture("^\\w+:[ \t]*\\w+[ \t]+.*",
-				"\\w+:", a->file[a->i]);
+				"\\w+", a->file[a->i]);
 	opstr = ft_re_capture("\\w+[ \t]+.*", a->file[a->i]);
 	if (opstr == NULL)
 		return (ft_error(OP, -1));
@@ -123,6 +123,7 @@ int
 	op.opcode = asm_get_opcode(opname);
 	op.func = func;
 	op.size = 0;
+	op.offset = a->size;
 	while (param_tab[op.param_c])
 	{
 		par.str = param_tab[op.param_c];
