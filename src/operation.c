@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 18:25:18 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:35:40 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ int
 	while (params[op.param_c])
 	{
 		ft_printf("param %d: %s ", op.param_c, params[op.param_c]);
-		if (asm_get_paramtype(params[op.param_c]) == PTYPE_REG)
+		if (asm_get_paramtype(params[op.param_c]) == T_REG)
 			ft_printfln("(Registry)");
-		else if (asm_get_paramtype(params[op.param_c]) == PTYPE_IND)
+		else if (asm_get_paramtype(params[op.param_c]) == T_IND)
 			ft_printfln("(Indirect)");
-		else if (asm_get_paramtype(params[op.param_c]) == PTYPE_DIR)
+		else if (asm_get_paramtype(params[op.param_c]) == T_DIR)
 			ft_printfln("(Direct)");
 		par.str = params[op.param_c];
 		par.type = asm_get_paramtype(params[op.param_c]);
