@@ -51,6 +51,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-asm*
+asm
+asm *
 corewar
 .cache_exists
