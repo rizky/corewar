@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/13 17:25:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 11:16:41 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,35 @@
 # define COMMENT_LEN	4
 # define OP				5
 
+# define PTYPE_REG 0
+# define PTYPE_IND 1
+# define PTYPE_DIR 2
+
+typedef struct	s_param
+{
+	char		*str;
+	int			type;
+	int			size;
+	int			value;
+}				t_param;
+
+typedef struct	s_op
+{
+	int			opcode;
+	int			size;
+	t_param		params[3];
+	int			param_counter;
+	int			offset;
+}				t_op;
+
 typedef struct	s_asm
 {
 	int			i;
 	char		*name;
 	char		*comment;
 	char		**file;
+	t_op		ops[1000];
+	int			op_counter;
 }				t_asm;
 
 int				ft_parsing(t_asm *a, header_t *h);
