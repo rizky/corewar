@@ -6,11 +6,36 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 15:57:22 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:54:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+void
+	asm_print_asm(t_asm *a)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < a->op_c)
+	{
+		if (a->ops[i].func != NULL)
+			ft_printfln("%s", a->ops[i].func);
+		ft_printf("\t%s\t", a->ops[i].opname);
+		j = 0;
+		while (j < a->ops[i].param_c)
+		{
+			ft_printf("%s\t", a->ops[i].params[j].str);
+			j++;
+		}
+		ft_printf("\n");
+		ft_printf("\t%d\t", a->ops[i].opcode);
+		ft_printf("\n");
+		i++;
+	}
+}
 
 int		ft_parsing(t_asm *a, header_t *h)
 {
@@ -30,5 +55,6 @@ int		ft_parsing(t_asm *a, header_t *h)
 		a->op_c++;
 		a->i++;
 	}
+	asm_print_asm(a);
 	return (0);
 }

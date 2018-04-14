@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 18:35:40 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:56:23 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int
 	ft_get_op(t_asm *a, header_t *h)
 {
 	char	*func;
-	char	*op_str;
-	char	*opcode;
+	char	*opstr;
+	char	*opname;
 	char	*param;
 	char	**params;
 	t_op	op;
@@ -80,31 +80,23 @@ int
 	ft_skip_empty_lines(a);
 	func = ft_re_match_capture("^\\w+:[ \t]*\\w+[ \t]+.*",
 				"\\w+:", a->file[a->i]);
-	op_str = ft_re_capture("\\w+[ \t]+.*", a->file[a->i]);
-	if (op_str == NULL)
+	opstr = ft_re_capture("\\w+[ \t]+.*", a->file[a->i]);
+	if (opstr == NULL)
 		return (ft_error(OP, -1));
-	opcode = ft_re_capture("\\w+", op_str);
-	param = ft_re_capture("[^ \t]+", ft_re_capture("\t[^ \t]+", op_str));
-	ft_printfln("function:%s", func);
-	ft_printfln("op:%s", op_str);
-	ft_printfln("opcode:%s (0x%02x)", opcode, asm_get_opcode(opcode));
+	opname = ft_re_capture("\\w+", opstr);
+	param = ft_re_capture("[^ \t]+", ft_re_capture("\t[^ \t]+", opstr));
 	params = ft_strsplit(param, ',');
 	op.param_c = 0;
+	op.opname = opname;
+	op.opcode = asm_get_opcode(opname);
+	op.func = func;
 	while (params[op.param_c])
 	{
-		ft_printf("param %d: %s ", op.param_c, params[op.param_c]);
-		if (asm_get_paramtype(params[op.param_c]) == T_REG)
-			ft_printfln("(Registry)");
-		else if (asm_get_paramtype(params[op.param_c]) == T_IND)
-			ft_printfln("(Indirect)");
-		else if (asm_get_paramtype(params[op.param_c]) == T_DIR)
-			ft_printfln("(Direct)");
 		par.str = params[op.param_c];
 		par.type = asm_get_paramtype(params[op.param_c]);
 		op.params[op.param_c] = par;
 		op.param_c++;
 	}
 	a->ops[a->op_c] = op;
-	ft_printfln("---");
 	return (0);
 }
