@@ -6,19 +6,18 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/13 15:51:04 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/14 20:49:54 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= asm
 NAME_CW:= corewar
-FILE_A:= asm
+FILE_A:= ft_asm
 FILE_CW:= ft_corewar 
-FILES:= parsing \
-		header \
-		operation \
-		error \
-		utilities_1 utilities_2 \
+FILES:= asm_parser asm_parser_header asm_parser_op \
+		asm_error \
+		asm_helper_1 asm_helper_2 \
+		asm_print
 
 # ----- Libft ------
 LFTDIR:=./libft
