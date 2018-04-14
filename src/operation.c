@@ -6,11 +6,51 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 15:57:22 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:22:11 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+typedef struct	s_op_dict
+{
+	char		*name;
+	int			opcode;
+}				t_op_dict;
+
+static	t_op_dict g_op_dict[16]={
+    { .name = "live", 	.opcode = 0x01 },
+    { .name = "ld", 	.opcode = 0x02 },
+    { .name = "st", 	.opcode = 0x03 },
+    { .name = "add", 	.opcode = 0x04 },
+	{ .name = "sub", 	.opcode = 0x05 },
+	{ .name = "and", 	.opcode = 0x06 },
+	{ .name = "or", 	.opcode = 0x07 },
+	{ .name = "xor", 	.opcode = 0x08 },
+	{ .name = "zjmp", 	.opcode = 0x09 },
+	{ .name = "ldi", 	.opcode = 0x0a },
+	{ .name = "sti", 	.opcode = 0x0b },
+	{ .name = "fork", 	.opcode = 0x0c },
+	{ .name = "lld", 	.opcode = 0x0d },
+	{ .name = "lldi", 	.opcode = 0x0e },
+	{ .name = "lfork", 	.opcode = 0x0f },
+	{ .name = "aff", 	.opcode = 0x10 }
+};
+
+int
+	asm_get_opcode(char	*opname)
+{
+	int i;
+
+	i = 0;
+	while (i < 16)
+	{
+		if (ft_strcmp(g_op_dict[i].name, opname) == 0)
+			return (g_op_dict[i].opcode);
+		i++;
+	}
+	return (-1);
+}
 
 int
 	asm_get_paramtype(char *param)
@@ -47,7 +87,7 @@ int
 	param = ft_re_capture("[^ \t]+", ft_re_capture("\t[^ \t]+", op_str));
 	ft_printfln("function:%s", func);
 	ft_printfln("op:%s", op_str);
-	ft_printfln("opcode:%s", opcode);
+	ft_printfln("opcode:%s (0x%02x)", opcode, asm_get_opcode(opcode));
 	params = ft_strsplit(param, ',');
 	op.param_c = 0;
 	while (params[op.param_c])
