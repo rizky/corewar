@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 15:57:25 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:24:52 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@
 # define NAME_LEN		6
 # define COMMENT_LEN	8
 # define OP				9
-
-# define PTYPE_REG 0
-# define PTYPE_IND 1
-# define PTYPE_DIR 2
 
 typedef struct	s_param
 {

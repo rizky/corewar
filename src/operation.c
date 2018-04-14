@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 18:22:11 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:25:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ int
 	asm_get_paramtype(char *param)
 {
 	if (ft_re_match("^r\\d+$", param) == 0)
-		return (PTYPE_REG);
+		return (T_REG);
 	else if (ft_re_match("^%:\\w+$", param) == 0)
-		return (PTYPE_IND);
+		return (T_IND);
 	else if (ft_re_match("^%\\d+$", param) == 0)
-		return (PTYPE_DIR);
+		return (T_DIR);
 	else
 		return (-1);
 }
