@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/11 15:23:32 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/14 12:57:38 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,11 @@ int		ft_free_tab(char **tab, int status)
 		i++;
 	}
 	free(tab);
+	return (status);
+}
+
+int		ft_free(char *str, int status)
+{
+	free(str);
 	return (status);
 }
