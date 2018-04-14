@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 12:36:09 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/14 13:20:06 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int
 	ft_skip_empty_lines(a);
 	next = a->i;
 	a->i = tmp;
-	if ((a->name = ft_re_match_capture("^.name[ \t]+\"[^\"]+\"$", "\".+\"",
+	if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]+\"$", "\".+\"",
 		a->file[a->i])) == NULL)
-		if ((a->name = ft_re_match_capture("^.name[ \t]+\"[^\"]+\"$", "\".+\"",
+		if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]+\"$", "\".+\"",
 			a->file[next])) == NULL)
 			return (ft_error(NAME, -1));
 	a->name = ft_re_capture("[^\"]+", a->name);
@@ -43,9 +43,9 @@ int
 
 	prev = a->i - 1;
 	ft_skip_empty_lines(a);
-	if ((a->comment = ft_re_match_capture("^.comment[ \t]+\"[^\"]*\"$",
+	if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
 		"\".*\"", a->file[a->i])) == NULL)
-		if ((a->comment = ft_re_match_capture("^.comment[ \t]+\"[^\"]*\"$",
+		if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
 			"\".*\"", a->file[prev])) == NULL)
 			return (ft_error(COMMENT, -1));
 	a->comment = ft_re_capture("[^\"]+", a->comment);
