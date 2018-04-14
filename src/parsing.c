@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 18:54:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:07:59 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void
 		}
 		ft_printf("\n");
 		ft_printf("\t%d\t", a->ops[i].opcode);
+		j = 0;
+		while (j < a->ops[i].param_c)
+		{
+			ft_printf("%d\t", a->ops[i].params[j].value);
+			j++;
+		}
 		ft_printf("\n");
 		i++;
 	}
@@ -51,7 +57,7 @@ int		ft_parsing(t_asm *a, header_t *h)
 	a->i++;
 	while (a->file[a->i])
 	{
-		ft_get_op(a, h);
+		ft_get_op(a);
 		a->op_c++;
 		a->i++;
 	}

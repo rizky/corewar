@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 18:45:25 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:03:15 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct	s_asm
 int				ft_parsing(t_asm *a, header_t *h);
 int				ft_get_name(t_asm *a, header_t *h);
 int				ft_get_comment(t_asm *a, header_t *h);
-int				ft_get_op(t_asm *a, header_t *h);
+int				ft_get_op(t_asm *a);
 int				ft_error(int errcode, int status);
 
 int				ft_file_is_empty(char *file);

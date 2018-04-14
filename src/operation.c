@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 18:56:23 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:08:36 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,43 @@ int
 }
 
 int
-	asm_get_paramtype(char *param)
+	asm_get_paramtype(char *param, int *value)
 {
+	char *temp;
 	if (ft_re_match("^r\\d+$", param) == 0)
+	{
+		temp = ft_re_capture("\\d+", param);
+		*value = ft_atoi(temp);
+		free(temp);
 		return (T_REG);
+	}
 	else if (ft_re_match("^%:\\w+$", param) == 0)
+	{
+		*value = 0;
 		return (T_IND);
+	}
 	else if (ft_re_match("^%\\d+$", param) == 0)
+	{
+		temp = ft_re_capture("\\d+", param);
+		*value = ft_atoi(temp);
+		free(temp);
 		return (T_DIR);
+	}
 	else
 		return (-1);
 }
 
 int
-	ft_get_op(t_asm *a, header_t *h)
+	ft_get_op(t_asm *a)
 {
 	char	*func;
 	char	*opstr;
 	char	*opname;
 	char	*param;
-	char	**params;
+	char	**param_tab;
 	t_op	op;
 	t_param	par;
 
-	(void)h;
 	ft_skip_empty_lines(a);
 	func = ft_re_match_capture("^\\w+:[ \t]*\\w+[ \t]+.*",
 				"\\w+:", a->file[a->i]);
@@ -85,15 +98,15 @@ int
 		return (ft_error(OP, -1));
 	opname = ft_re_capture("\\w+", opstr);
 	param = ft_re_capture("[^ \t]+", ft_re_capture("\t[^ \t]+", opstr));
-	params = ft_strsplit(param, ',');
+	param_tab = ft_strsplit(param, ',');
 	op.param_c = 0;
 	op.opname = opname;
 	op.opcode = asm_get_opcode(opname);
 	op.func = func;
-	while (params[op.param_c])
+	while (param_tab[op.param_c])
 	{
-		par.str = params[op.param_c];
-		par.type = asm_get_paramtype(params[op.param_c]);
+		par.str = param_tab[op.param_c];
+		par.type = asm_get_paramtype(param_tab[op.param_c], &(par.value));
 		op.params[op.param_c] = par;
 		op.param_c++;
 	}
