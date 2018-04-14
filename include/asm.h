@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 14:58:52 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/14 15:24:33 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 # define EMPTY			2
 # define NEWLINE		3
 # define MALLOC			4
-# define NAME			5
+# define HEADER			5
 # define NAME_LEN		6
-# define COMMENT		7
 # define COMMENT_LEN	8
 # define OP				9
 

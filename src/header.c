@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 14:53:41 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/14 15:25:07 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ int
 	ft_get_name(t_asm *a, header_t *h)
 {
 	int tmp;
-	int next;
 
 	ft_skip_empty_lines(a);
 	tmp = a->i;
-	a->i++;
-	ft_skip_empty_lines(a);
-	next = a->i;
-	a->i = tmp;
 	if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]+\"$", "\".+\"",
 		a->file[a->i])) == NULL)
+	{
+		a->i++;
+		ft_skip_empty_lines(a);
 		if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]+\"$", "\".+\"",
-			a->file[next])) == NULL)
-			return (ft_error(NAME, -1));
+			a->file[a->i])) == NULL)
+			return (ft_error(HEADER, -1));
+	}
+	a->i = tmp;
 	a->name = ft_re_capture("[^\"]+", a->name);
 	if (ft_strlen(a->name) > PROG_NAME_LENGTH)
 		return (ft_error(NAME_LEN, -1));
@@ -51,7 +51,7 @@ int
 		"\".*\"", a->file[a->i])) == NULL)
 		if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
 			"\".*\"", a->file[prev])) == NULL)
-			return (ft_error(COMMENT, -1));
+			return (ft_error(HEADER, -1));
 	a->comment = ft_re_capture("[^\"]+", a->comment);
 	if (ft_strlen(a->comment) > COMMENT_LENGTH)
 		return (ft_error(COMMENT_LEN, -1));
