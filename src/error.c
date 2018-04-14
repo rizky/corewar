@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 13:12:27 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/14 15:02:46 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		ft_error(int errnum, int status)
 		ft_dprintf(2, "Syntax error - unexpected end of input ");
 		ft_dprintf(2, "(Perhaps you forgot to end with a newline ?)\n");
 	}
+	if (errnum == EMPTY)
+		ft_dprintf(2, "Empty file\n");
 	if (errnum == MALLOC)
 		ft_dprintf(2, "Malloc error\n");
 	if (errnum == NAME)

@@ -6,11 +6,15 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 13:20:06 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/14 14:53:41 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+** To-do: protect ft_re_match_capture in libft (can cause segfault right now)
+*/
 
 int
 	ft_get_name(t_asm *a, header_t *h)
