@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 11:17:24 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 15:57:22 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,22 @@ int
 	ft_printfln("op:%s", op_str);
 	ft_printfln("opcode:%s", opcode);
 	params = ft_strsplit(param, ',');
-	int i = 0;
-	op.param_counter = 0;
-	while (params[i])
+	op.param_c = 0;
+	while (params[op.param_c])
 	{
-		ft_printf("param %d: %s ", i, params[i]);
-		if (asm_get_paramtype(params[i]) == PTYPE_REG)
+		ft_printf("param %d: %s ", op.param_c, params[op.param_c]);
+		if (asm_get_paramtype(params[op.param_c]) == PTYPE_REG)
 			ft_printfln("(Registry)");
-		else if (asm_get_paramtype(params[i]) == PTYPE_IND)
+		else if (asm_get_paramtype(params[op.param_c]) == PTYPE_IND)
 			ft_printfln("(Indirect)");
-		else if (asm_get_paramtype(params[i]) == PTYPE_DIR)
+		else if (asm_get_paramtype(params[op.param_c]) == PTYPE_DIR)
 			ft_printfln("(Direct)");
-		par.str = params[i];
-		par.type = asm_get_paramtype(params[i]);
-		op.params[op.param_counter] = par;
-		i++;
+		par.str = params[op.param_c];
+		par.type = asm_get_paramtype(params[op.param_c]);
+		op.params[op.param_c] = par;
+		op.param_c++;
 	}
-	a->ops[a->op_counter] = op;
+	a->ops[a->op_c] = op;
 	ft_printfln("---");
 	return (0);
 }

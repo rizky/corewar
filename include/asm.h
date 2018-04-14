@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 15:24:33 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/14 15:57:25 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ typedef struct	s_op
 	int			opcode;
 	int			size;
 	t_param		params[3];
-	int			param_counter;
+	int			param_c;
+	char		*func;
 	int			offset;
 }				t_op;
 
@@ -53,7 +54,7 @@ typedef struct	s_asm
 	char		*comment;
 	char		**file;
 	t_op		ops[1000];
-	int			op_counter;
+	int			op_c;
 }				t_asm;
 
 int				ft_parsing(t_asm *a, header_t *h);
