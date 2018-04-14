@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 19:08:36 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:48:38 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,26 @@ typedef struct	s_op_dict
 {
 	char		*name;
 	int			opcode;
+	int			d_size;
 }				t_op_dict;
 
-static	t_op_dict g_op_dict[16]={
-    { .name = "live", 	.opcode = 0x01 },
-    { .name = "ld", 	.opcode = 0x02 },
-    { .name = "st", 	.opcode = 0x03 },
-    { .name = "add", 	.opcode = 0x04 },
-	{ .name = "sub", 	.opcode = 0x05 },
-	{ .name = "and", 	.opcode = 0x06 },
-	{ .name = "or", 	.opcode = 0x07 },
-	{ .name = "xor", 	.opcode = 0x08 },
-	{ .name = "zjmp", 	.opcode = 0x09 },
-	{ .name = "ldi", 	.opcode = 0x0a },
-	{ .name = "sti", 	.opcode = 0x0b },
-	{ .name = "fork", 	.opcode = 0x0c },
-	{ .name = "lld", 	.opcode = 0x0d },
-	{ .name = "lldi", 	.opcode = 0x0e },
-	{ .name = "lfork", 	.opcode = 0x0f },
-	{ .name = "aff", 	.opcode = 0x10 }
+static	t_op_dict g_op_dict[16] = {
+    { .name = "live", 	.opcode = 0x01,	.d_size = 4 },
+    { .name = "ld", 	.opcode = 0x02,	.d_size = 4 },
+    { .name = "st", 	.opcode = 0x03,	.d_size = 0 },
+    { .name = "add", 	.opcode = 0x04,	.d_size = 0 },
+	{ .name = "sub", 	.opcode = 0x05,	.d_size = 0 },
+	{ .name = "and", 	.opcode = 0x06,	.d_size = 4 },
+	{ .name = "or", 	.opcode = 0x07,	.d_size = 4 },
+	{ .name = "xor", 	.opcode = 0x08,	.d_size = 4 },
+	{ .name = "zjmp", 	.opcode = 0x09,	.d_size = 2 },
+	{ .name = "ldi", 	.opcode = 0x0a,	.d_size = 2 },
+	{ .name = "sti", 	.opcode = 0x0b,	.d_size = 2 },
+	{ .name = "fork", 	.opcode = 0x0c,	.d_size = 2 },
+	{ .name = "lld", 	.opcode = 0x0d,	.d_size = 4 },
+	{ .name = "lldi", 	.opcode = 0x0e,	.d_size = 2 },
+	{ .name = "lfork", 	.opcode = 0x0f,	.d_size = 2 },
+	{ .name = "aff", 	.opcode = 0x10,	.d_size = 0 }
 };
 
 int
@@ -53,7 +54,22 @@ int
 }
 
 int
-	asm_get_paramtype(char *param, int *value)
+	asm_get_dsize(char	*opname)
+{
+	int i;
+
+	i = 0;
+	while (i < 16)
+	{
+		if (ft_strcmp(g_op_dict[i].name, opname) == 0)
+			return (g_op_dict[i].d_size);
+		i++;
+	}
+	return (-1);
+}
+
+int
+	asm_get_paramtype(char *opname, char *param, int *value, int *size)
 {
 	char *temp;
 	if (ft_re_match("^r\\d+$", param) == 0)
@@ -61,11 +77,13 @@ int
 		temp = ft_re_capture("\\d+", param);
 		*value = ft_atoi(temp);
 		free(temp);
+		*size = 1;
 		return (T_REG);
 	}
 	else if (ft_re_match("^%:\\w+$", param) == 0)
 	{
 		*value = 0;
+		*size = 2;
 		return (T_IND);
 	}
 	else if (ft_re_match("^%\\d+$", param) == 0)
@@ -73,6 +91,7 @@ int
 		temp = ft_re_capture("\\d+", param);
 		*value = ft_atoi(temp);
 		free(temp);
+		*size = asm_get_dsize(opname);
 		return (T_DIR);
 	}
 	else
@@ -103,13 +122,17 @@ int
 	op.opname = opname;
 	op.opcode = asm_get_opcode(opname);
 	op.func = func;
+	op.size = 0;
 	while (param_tab[op.param_c])
 	{
 		par.str = param_tab[op.param_c];
-		par.type = asm_get_paramtype(param_tab[op.param_c], &(par.value));
+		par.type = asm_get_paramtype( op.opname, param_tab[op.param_c],
+			&(par.value), &(par.size));
 		op.params[op.param_c] = par;
 		op.param_c++;
+		op.size += par.size;
 	}
+	op.size += (op.param_c > 1) ? 2 : 1;
 	a->ops[a->op_c] = op;
 	return (0);
 }

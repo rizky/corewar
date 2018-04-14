@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 19:07:59 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:49:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ void
 {
 	int	i;
 	int	j;
+	int	size;
 
 	i = 0;
 	while (i < a->op_c)
 	{
 		if (a->ops[i].func != NULL)
 			ft_printfln("%s", a->ops[i].func);
-		ft_printf("\t%s\t", a->ops[i].opname);
+		ft_printf("(%-3d)\t%s\t", a->ops[i].size, a->ops[i].opname);
 		j = 0;
 		while (j < a->ops[i].param_c)
 		{
@@ -33,9 +34,11 @@ void
 		ft_printf("\n");
 		ft_printf("\t%d\t", a->ops[i].opcode);
 		j = 0;
+		size = 0;
 		while (j < a->ops[i].param_c)
 		{
 			ft_printf("%d\t", a->ops[i].params[j].value);
+			size += a->ops[i].params[j].size;
 			j++;
 		}
 		ft_printf("\n");
