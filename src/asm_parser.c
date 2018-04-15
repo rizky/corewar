@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 12:35:56 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 12:38:56 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_parsing(t_asm *a, header_t *h)
 //	ft_check_instructions(a);
 	while (a->file[a->i])
 	{
-		ft_get_op(a);
+		asm_get_op(a);
 		a->op_c++;
 		a->i++;
 	}

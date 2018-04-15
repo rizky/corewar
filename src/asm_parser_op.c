@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 12:35:43 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 12:38:56 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int
 }
 
 int
-	ft_get_op(t_asm *a)
+	asm_get_op(t_asm *a)
 {
 	char	*label;
 	char	*opstr;

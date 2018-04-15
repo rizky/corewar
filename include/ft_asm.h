@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 12:34:15 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 12:38:56 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int				ft_parsing(t_asm *a, header_t *h);
 int				ft_get_name(t_asm *a, header_t *h);
 int				ft_get_comment(t_asm *a, header_t *h);
 int				ft_check_instructions(t_asm *a);
-int				ft_get_op(t_asm *a);
+int				asm_get_op(t_asm *a);
 int				ft_error(int errcode, int status);
 
 int				ft_file_is_empty(char *file);
