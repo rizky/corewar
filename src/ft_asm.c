@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 08:33:07 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/15 13:01:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
 		if (errnum == SOURCEFILE)
 			ft_dprintf(2, "Can't read source file %s\n", av[ac - 1]);
 		else
-			return (ft_error(errnum, -1));
+			return (ft_error(errnum, -1, NULL));
 		return (-1);
 	}
 	return (0);

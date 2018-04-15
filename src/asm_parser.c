@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 12:38:56 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 13:04:15 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		asm_get_indvalue(t_asm *a, char *label)
 	return (-1);
 }
 
-void	asm_copulate_indvalue(t_asm *a)
+int		asm_copulate_indvalue(t_asm *a)
 {
 	int	i;
 	int	j;
@@ -40,12 +40,17 @@ void	asm_copulate_indvalue(t_asm *a)
 		while (j < a->ops[i].param_c)
 		{
 			if (a->ops[i].params[j].type == T_IND)
+			{
 				a->ops[i].params[j].value =
 				asm_get_indvalue(a, a->ops[i].params[j].str) - a->ops[i].offset;
+				if (a->ops[i].params[j].value == -1)
+					return (ft_error(LABEL_MISSING, -1, a->ops[i].params[j].str));
+			}
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
 int		ft_parsing(t_asm *a, header_t *h)
@@ -61,11 +66,13 @@ int		ft_parsing(t_asm *a, header_t *h)
 //	ft_check_instructions(a);
 	while (a->file[a->i])
 	{
-		asm_get_op(a);
+		if (asm_get_op(a) == -1)
+			return (-1);
 		a->op_c++;
 		a->i++;
 	}
-	asm_copulate_indvalue(a);
+	if (asm_copulate_indvalue(a) == -1)
+		return (-1);
 	asm_print(a);
 	return (0);
 }

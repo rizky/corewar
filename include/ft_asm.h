@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 12:38:56 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 13:00:11 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define NAME_LEN		6
 # define COMMENT_LEN	8
 # define OP				9
+# define LABEL_MISSING	10
 
 typedef struct	s_param
 {
@@ -61,7 +62,7 @@ int				ft_get_name(t_asm *a, header_t *h);
 int				ft_get_comment(t_asm *a, header_t *h);
 int				ft_check_instructions(t_asm *a);
 int				asm_get_op(t_asm *a);
-int				ft_error(int errcode, int status);
+int				ft_error(int errcode, int status, char *line);
 
 int				ft_file_is_empty(char *file);
 int				ft_line_is_empty(t_asm *a);

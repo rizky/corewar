@@ -6,14 +6,16 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 20:50:43 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 13:03:16 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int		ft_error(int errnum, int status)
+int		ft_error(int errnum, int status, char *line)
 {
+	if (line)
+		ft_dprintf(2, "%s\n", line);
 	if (errnum == NEWLINE)
 	{
 		ft_dprintf(2, "Syntax error - unexpected end of input ");
@@ -30,6 +32,8 @@ int		ft_error(int errnum, int status)
 	else if (errnum == COMMENT_LEN)
 		ft_dprintf(2, "Error - maximum comment length exceeded\n");
 	else if (errnum == OP)
-		ft_dprintf(2, "operation: Operation is invalid\n");
+		ft_dprintf(2, "Operation: Operation is invalid\n");
+	else if (errnum == LABEL_MISSING)
+		ft_dprintf(2, "Label: Undefined Label\n");
 	return (status);
 }

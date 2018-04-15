@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_check_instructions.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 10:22:53 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 11:37:25 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/15 13:00:20 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		ft_get_labels(t_asm *a)
 	if ((count = ft_count_labels(a)) == -1)
 		return (-1);
 	if ((a->labels = (char**)malloc(sizeof(char*) * count + 1)) == NULL)
-		return (ft_error(MALLOC, -1));
+		return (ft_error(MALLOC, -1, NULL));
 	while (a->file[i])
 	{
 		if (ft_is_label(a->file[i]))
