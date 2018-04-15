@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 11:47:58 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/15 12:35:56 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int		asm_get_indvalue(t_asm *a, char *func)
+int		asm_get_indvalue(t_asm *a, char *label)
 {
 	int		i;
 	char	*str;
 
 	i = 0;
-	str = ft_re_capture("\\w+", func);
+	str = ft_re_capture("\\w+", label);
 	while (i < a->op_c)
 	{
-		if (a->ops[i].func && ft_strcmp(a->ops[i].func, str) == 0)
+		if (a->ops[i].label && ft_strcmp(a->ops[i].label, str) == 0)
 			return (a->ops[i].offset);
 		i++;
 	}

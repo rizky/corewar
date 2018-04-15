@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 11:47:28 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/15 12:34:15 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct	s_op
 	int			size;
 	t_param		params[3];
 	int			param_c;
-	char		*func;
+	char		*label;
 	int			offset;
 }				t_op;
 
