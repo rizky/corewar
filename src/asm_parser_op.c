@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 13:01:02 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 13:13:52 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int
 	op.param_c = 0;
 	op.opname = opname;
 	op.opcode = asm_get_opcode(opname);
+	if (op.opcode == -1)
+		return (ft_error(OP, -1, a->file[a->i]));
 	op.label = label;
 	op.size = 0;
 	op.offset = a->size;
