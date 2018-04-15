@@ -56,3 +56,4 @@ asm *
 corewar
 .cache_exists
 *.cor
+text

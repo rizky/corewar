@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 17:47:08 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:56:05 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void
 	ft_printfln("Name : \"%s\"", a.name);
 	ft_printfln("Comment : \"%s\"", a.comment);
 }
+
 void
 	asm_print(t_asm a)
 {
@@ -45,5 +46,18 @@ void
 		while (++j < a.ops[i].param_c)
 			ft_printf("%-18d", a.ops[i].params[j].value);
 		ft_printf("\n\n");
+	}
+}
+
+void
+	asm_print_memory(t_array *binary)
+{
+	int i;
+
+	i = 0;
+	while (i < (int)binary->size)
+	{
+		ft_printf("%c", ((char*)binary->data)[i]);
+		i++;
 	}
 }

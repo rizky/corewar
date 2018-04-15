@@ -6,24 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 17:45:44 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 18:16:29 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-
-void
-	asm_print_memory(t_array *binary)
-{
-	int i;
-
-	i = 0;
-	while (i < (int)binary->size)
-	{
-		ft_printf("%c", ((char*)binary->data)[i]);
-		i++;
-	}
-}
 
 char
 	*asm_to_big_endian(int value)
@@ -52,40 +39,6 @@ void
 }
 
 void
-	asm_append_name(t_array *binary, char *str)
-{
-	int i;
-
-	fta_append(binary, str, ft_strlen(str));
-	i = ft_strlen(str);
-	while (i < PROG_NAME_LENGTH)
-	{
-		fta_append_char(binary, 0x00);
-		i++;
-	}
-}
-
-void
-	asm_append_comment(t_array *binary, char *str)
-{
-	int i;
-
-	i = 0;
-	while (i < 8)
-	{
-		fta_append_char(binary, 0x00);
-		i++;
-	}
-	fta_append(binary, str, ft_strlen(str));
-	i = ft_strlen(str) + 8;
-	while (i < COMMENT_LENGTH)
-	{
-		fta_append_char(binary, 0x00);
-		i++;
-	}
-}
-
-void
 	asm_compiler(t_asm a)
 {
 	t_array	binary;
@@ -93,6 +46,7 @@ void
 	binary = NEW_ARRAY(char);
 	asm_append_magic_nbr(&binary);
 	asm_append_name(&binary, a.name);
+	asm_append_programsize(&binary, 34);
 	asm_append_comment(&binary, a.comment);
 	asm_print_memory(&binary);
 }

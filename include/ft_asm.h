@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 17:47:18 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 18:10:23 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,17 @@ int				ft_free_tab(char **tab, int status);
 
 int				asm_parser_op(t_asm *a);
 void			asm_print(t_asm a);
+void			asm_print_memory(t_array *binary);
 void			asm_compiler(t_asm a);
 
 int				asm_get_paramtype(int opcode, char *param, int *value, int *size);
 int				asm_get_indvalue(t_asm *a, char *label);
 int				asm_populate_indvalue(t_asm *a);
 int				asm_calculate_oc(t_param params[3], int param_c);
+
+void			asm_append_name(t_array *binary, char *str);
+void			asm_append_comment(t_array *binary, char *str);
+void			asm_append_programsize(t_array *binary, int size);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
