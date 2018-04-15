@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 13:26:58 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 13:34:27 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int
 		par.str = param_tab[op.param_c];
 		par.type = asm_get_paramtype(op.opcode, param_tab[op.param_c],
 			&(par.value), &(par.size));
+		if (par.type == -1)
+			return (ft_error(OP, -1, a->file[a->i]));
 		op.params[op.param_c] = par;
 		op.param_c++;
 		op.size += par.size;
