@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 20:51:33 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 08:33:07 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static int	ft_read_sourcefile(int ac, char **av, t_asm *a)
 
 static int	ft_filename_extension(char *file)
 {
-	if (file[ft_strlen(file) - 1] != 's' && file[ft_strlen(file) - 2] != '.')
-		return (0);
-	return (1);
+	if (file[ft_strlen(file) - 1] == 's' && file[ft_strlen(file) - 2] == '.')
+		return (1);
+	return (0);
 }
 
 static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
