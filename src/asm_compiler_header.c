@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 18:08:15 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 18:53:33 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 20:17:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void
 {
 	char	*nullbyte;
 
-	nullbyte = asm_to_big_endian(0x0);
+	nullbyte = asm_to_big_endian(0x0, 4);
 	fta_append(binary, nullbyte, 4);
 	free(nullbyte);
 }
@@ -57,7 +57,7 @@ void
 {
 	char	*psize;
 
-	psize = asm_to_big_endian(size);
+	psize = asm_to_big_endian(size, 4);
 	fta_append(binary, psize, 4);
 	free(psize);
 }

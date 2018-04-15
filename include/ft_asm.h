@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 18:52:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 20:17:37 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int				asm_parser_op(t_asm *a);
 void			asm_print(t_asm a);
 int				asm_print_memory(t_array *binary, char *path);
 void			asm_compiler(t_asm a);
-char			*asm_to_big_endian(int value);
+char			*asm_to_big_endian(int value, int size);
 
 int				asm_get_paramtype(int opcode, char *param, int *value, int *size);
 int				asm_get_indvalue(t_asm *a, char *label);

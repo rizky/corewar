@@ -6,23 +6,25 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 18:28:32 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 20:42:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
 char
-	*asm_to_big_endian(int value)
+	*asm_to_big_endian(int value, int size)
 {
 	t_array	result;
 	int		i;
+	int		bits;
 
 	i = 0;
 	result = NEW_ARRAY(char);
-	while (i < 32)
+	bits = size * 8;
+	while (i <= bits - 8)
 	{
-		fta_append_char(&result, (value << i & 0xff000000) >> 24);
+		fta_append_char(&result, value >> (bits - 8 - i));
 		i = i + 8;
 	}
 	return (result.data);
@@ -33,20 +35,50 @@ void
 {
 	char	*magic_nbr;
 
-	magic_nbr = asm_to_big_endian(COREWAR_EXEC_MAGIC);
+	magic_nbr = asm_to_big_endian(COREWAR_EXEC_MAGIC, 4);
 	fta_append(binary, magic_nbr, 4);
 	free(magic_nbr);
+}
+
+void
+	asm_append_op(t_array *binary, t_op op)
+{
+	char	*str;
+	int		i;
+
+	str = asm_to_big_endian(op.opcode, 1);
+	fta_append(binary, str, 1);
+	free(str);
+	if (op.oc > 0)
+	{
+		str = asm_to_big_endian(op.oc, 1);
+		fta_append(binary, str, 1);
+		free(str);
+	}
+	i = 0;
+	while (i < op.param_c)
+	{
+		str = asm_to_big_endian(op.params[i].value, op.params[i].size);
+		fta_append(binary, str, op.params[i].size);
+		free(str);
+		i++;
+	}
 }
 
 void
 	asm_compiler(t_asm a)
 {
 	t_array	binary;
+	int	i;
 
 	binary = NEW_ARRAY(char);
 	asm_append_magic_nbr(&binary);
 	asm_append_name(&binary, a.name);
-	asm_append_programsize(&binary, 34);
+	asm_append_programsize(&binary, a.size);
 	asm_append_comment(&binary, a.comment);
+	i = -1;
+	while (++i < a.op_c)
+		asm_append_op(&binary, a.ops[i]);
 	asm_print_memory(&binary, a.path);
+	
 }
