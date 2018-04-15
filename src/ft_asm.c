@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 13:01:53 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:48:03 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ int			main(int ac, char **av)
 		return (-1);
 	if (ft_parsing(&a, &h) == -1)
 		return (ft_free_tab(a.file, -1));
-//	ft_compilation();
-//	ft_print_tab(a.file);
+	// asm_print(a);
+	asm_compiler(a);
+	//ft_print_tab(a.file);
 	ft_free_tab(a.file, 0);
 	return (0);
 }
