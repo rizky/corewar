@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 18:10:23 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 18:29:17 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct	s_op
 typedef struct	s_asm
 {
 	int			i;
+	char		*path;
 	char		*name;
 	char		*comment;
 	char		**file;
@@ -107,7 +108,7 @@ int				ft_free_tab(char **tab, int status);
 
 int				asm_parser_op(t_asm *a);
 void			asm_print(t_asm a);
-void			asm_print_memory(t_array *binary);
+int				asm_print_memory(t_array *binary, char *path);
 void			asm_compiler(t_asm a);
 
 int				asm_get_paramtype(int opcode, char *param, int *value, int *size);

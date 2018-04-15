@@ -55,5 +55,7 @@ asm
 asm *
 corewar
 .cache_exists
-*.cor
 text
+*cor
+*.cor
+resources/champs/ex1.cor

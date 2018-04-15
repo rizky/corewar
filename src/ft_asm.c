@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 17:48:03 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 18:31:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	ft_read_sourcefile(int ac, char **av, t_asm *a)
 
 	if ((fd = open(av[ac - 1], O_RDONLY)) == -1)
 		return (SOURCEFILE);
+	a->path = av[ac - 1];
 	file[0] = ft_strnew(0);
 	while ((ret = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
@@ -83,7 +84,7 @@ int			main(int ac, char **av)
 		return (-1);
 	if (ft_parsing(&a, &h) == -1)
 		return (ft_free_tab(a.file, -1));
-	// asm_print(a);
+	asm_print(a);
 	asm_compiler(a);
 	//ft_print_tab(a.file);
 	ft_free_tab(a.file, 0);

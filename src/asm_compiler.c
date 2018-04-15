@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 18:16:29 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 18:28:32 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void
 	asm_append_name(&binary, a.name);
 	asm_append_programsize(&binary, 34);
 	asm_append_comment(&binary, a.comment);
-	asm_print_memory(&binary);
+	asm_print_memory(&binary, a.path);
 }
