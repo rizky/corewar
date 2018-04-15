@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 13:13:52 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 13:26:58 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int
 	t_param	par;
 
 	ft_skip_empty_lines(a);
-	if (ft_re_match("^\\w+:[ \t]*\\w+[ \t]+.*", a->file[a->i]) == -1)
+	if (ft_re_match("^[\\w_\\d]+:[ \t]*\\w+[ \t]+.*", a->file[a->i]) == -1)
 		if (ft_re_match("^\\w+[ \t]+.*", a->file[a->i]) == -1)
 			return (ft_error(OP, -1, a->file[a->i]));
 	label = ft_re_capture("\\w+", a->file[a->i]);

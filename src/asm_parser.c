@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 13:04:15 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 13:28:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		asm_get_indvalue(t_asm *a, char *label)
 	char	*str;
 
 	i = 0;
-	str = ft_re_capture("\\w+", label);
+	str = ft_re_capture("[\\w_\\d]+", label);
 	while (i < a->op_c)
 	{
 		if (a->ops[i].label && ft_strcmp(a->ops[i].label, str) == 0)
@@ -32,6 +32,7 @@ int		asm_copulate_indvalue(t_asm *a)
 {
 	int	i;
 	int	j;
+	int	offset;
 
 	i = 0;
 	while (i < a->op_c)
@@ -41,10 +42,11 @@ int		asm_copulate_indvalue(t_asm *a)
 		{
 			if (a->ops[i].params[j].type == T_IND)
 			{
+				offset = asm_get_indvalue(a, a->ops[i].params[j].str);
+				if (offset == -1)
+					return (ft_error(LABEL_MISSING, -1, a->ops[i].params[j].str));
 				a->ops[i].params[j].value =
 				asm_get_indvalue(a, a->ops[i].params[j].str) - a->ops[i].offset;
-				if (a->ops[i].params[j].value == -1)
-					return (ft_error(LABEL_MISSING, -1, a->ops[i].params[j].str));
 			}
 			j++;
 		}
