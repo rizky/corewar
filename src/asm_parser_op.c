@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 16:22:02 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:27:34 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,14 @@ int
 	asm_get_op(t_asm *a)
 {
 	t_op	op;
+	char	*temp;
 
 	ft_skip_empty_lines(a);
 	if (ft_re_match("^[\\w_\\d]+:[ \t]*\\w+[ \t]+.*", a->file[a->i]) == -1)
 		if (ft_re_match("^\\w+[ \t]+.*", a->file[a->i]) == -1)
 			return (ft_error(OP, -1, a->file[a->i]));
-	op.label = ft_re_capture("\\w+", a->file[a->i]);
+	temp = ft_re_capture("\\w+:", a->file[a->i]);
+	op.label = ft_re_capture("\\w+", temp);
 	op.param_c = 0;
 	op.opname = asm_get_opname(a->file[a->i]);
 	op.opcode = asm_get_opcode(op.opname);
@@ -150,5 +152,6 @@ int
 	op.size += (op.param_c > 1) ? 2 : 1;
 	a->ops[a->op_c] = op;
 	a->size += op.size;
+	free(temp);
 	return (0);
 }
