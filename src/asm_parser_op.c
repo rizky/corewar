@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 14:54:58 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 15:16:36 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,37 @@ int
 		return (-1);
 }
 
+char
+	*asm_get_opname(char *line)
+{
+	char	*opstr;
+	char	*opname;
+	opstr = ft_re_capture("\\w+[ \t]+.*", line);
+	opname = ft_re_capture("\\w+", opstr);
+	free(opstr);
+	return (opname);
+}
+
+char
+	*asm_get_opparam(char *line)
+{
+	char	*opstr;
+	char	*opparam;
+	char	*temp;
+
+	opstr = ft_re_capture("\\w+[ \t]+.*", line);
+	temp = ft_re_capture("[\t ][^ \t]+", opstr);
+	opparam = ft_re_capture("[^ \t]+", temp);
+	free(opstr);
+	free(temp);
+	return (opparam);
+}
+
 int
 	asm_get_op(t_asm *a)
 {
-	char	*label;
-	char	*opstr;
-	char	*opname;
-	char	*param;
 	char	**param_tab;
+	char	*param;
 	t_op	op;
 	t_param	par;
 
@@ -100,27 +123,19 @@ int
 	if (ft_re_match("^[\\w_\\d]+:[ \t]*\\w+[ \t]+.*", a->file[a->i]) == -1)
 		if (ft_re_match("^\\w+[ \t]+.*", a->file[a->i]) == -1)
 			return (ft_error(OP, -1, a->file[a->i]));
-	label = ft_re_capture("\\w+", a->file[a->i]);
-	opstr = ft_re_capture("\\w+[ \t]+.*", a->file[a->i]);
-	opname = ft_re_capture("\\w+", opstr);
-	param = ft_re_capture("[^ \t]+", ft_re_capture("[\t ][^ \t]+", opstr));
+	op.label = ft_re_capture("\\w+", a->file[a->i]);
+	param = asm_get_opparam(a->file[a->i]);
 	param_tab = ft_strsplit(param, ',');
 	op.param_c = 0;
-	op.opname = opname;
-	op.opcode = asm_get_opcode(opname);
-	if (op.opcode == -1)
-		return (ft_error(OP, -1, a->file[a->i]));
-	op.label = label;
+	op.opname = asm_get_opname(a->file[a->i]);
+	op.opcode = asm_get_opcode(op.opname);
 	op.size = 0;
 	op.offset = a->size;
 	while (param_tab[op.param_c])
 	{
 		par.str = param_tab[op.param_c];
-		
 		par.type = asm_get_paramtype(op.opcode, par.str,
 			&(par.value), &(par.size));
-		if (par.type == -1)
-			return (ft_error(OP_PARAM, -1, a->file[a->i]));
 		op.params[op.param_c] = par;
 		op.param_c++;
 		op.size += par.size;
