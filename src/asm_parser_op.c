@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 12:25:49 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 12:27:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ typedef struct	s_op_dict
 }				t_op_dict;
 
 static	t_op_dict g_op_dict[17] = {
-	{ .name = "\0",		.opcode = 0x00,	.d_size = 0 },
-    { .name = "live", 	.opcode = 0x01,	.d_size = 4 },
-    { .name = "ld", 	.opcode = 0x02,	.d_size = 4 },
-    { .name = "st", 	.opcode = 0x03,	.d_size = 0 },
-    { .name = "add", 	.opcode = 0x04,	.d_size = 0 },
-	{ .name = "sub", 	.opcode = 0x05,	.d_size = 0 },
-	{ .name = "and", 	.opcode = 0x06,	.d_size = 4 },
-	{ .name = "or", 	.opcode = 0x07,	.d_size = 4 },
-	{ .name = "xor", 	.opcode = 0x08,	.d_size = 4 },
-	{ .name = "zjmp", 	.opcode = 0x09,	.d_size = 2 },
-	{ .name = "ldi", 	.opcode = 0x0a,	.d_size = 2 },
-	{ .name = "sti", 	.opcode = 0x0b,	.d_size = 2 },
-	{ .name = "fork", 	.opcode = 0x0c,	.d_size = 2 },
-	{ .name = "lld", 	.opcode = 0x0d,	.d_size = 4 },
-	{ .name = "lldi", 	.opcode = 0x0e,	.d_size = 2 },
-	{ .name = "lfork", 	.opcode = 0x0f,	.d_size = 2 },
-	{ .name = "aff", 	.opcode = 0x10,	.d_size = 0 }
+	{ .name = "\0", .opcode = 0x00, .d_size = 0 },
+	{ .name = "live", .opcode = 0x01, .d_size = 4 },
+	{ .name = "ld", .opcode = 0x02, .d_size = 4 },
+	{ .name = "st", .opcode = 0x03, .d_size = 0 },
+	{ .name = "add", .opcode = 0x04, .d_size = 0 },
+	{ .name = "sub", .opcode = 0x05, .d_size = 0 },
+	{ .name = "and", .opcode = 0x06, .d_size = 4 },
+	{ .name = "or", .opcode = 0x07, .d_size = 4 },
+	{ .name = "xor", .opcode = 0x08, .d_size = 4 },
+	{ .name = "zjmp", .opcode = 0x09, .d_size = 2 },
+	{ .name = "ldi", .opcode = 0x0a, .d_size = 2 },
+	{ .name = "sti", .opcode = 0x0b, .d_size = 2 },
+	{ .name = "fork", .opcode = 0x0c, .d_size = 2 },
+	{ .name = "lld", .opcode = 0x0d, .d_size = 4 },
+	{ .name = "lldi", .opcode = 0x0e, .d_size = 2 },
+	{ .name = "lfork", .opcode = 0x0f, .d_size = 2 },
+	{ .name = "aff", .opcode = 0x10, .d_size = 0 }
 };
 
 int
