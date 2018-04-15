@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 18:46:36 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 20:47:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	free(cor);
 	i = 0;
+	ft_printfln("Writing output program to %s", cor);
 	while (i < (int)binary->size)
 	{
 		ft_dprintf(fd, "%c", ((char*)binary->data)[i]);
