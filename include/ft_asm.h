@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 11:44:31 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/15 11:47:28 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#ifndef FT_ASM_H
+# define FT_ASM_H
 
 # include "libft.h"
 # include "op.h"

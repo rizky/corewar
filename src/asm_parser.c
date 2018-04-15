@@ -6,14 +6,13 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 11:44:46 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/15 11:47:58 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int
-	asm_get_indvalue(t_asm *a, char *func)
+int		asm_get_indvalue(t_asm *a, char *func)
 {
 	int		i;
 	char	*str;
@@ -29,8 +28,7 @@ int
 	return (-1);
 }
 
-void
-	asm_copulate_indvalue(t_asm *a)
+void	asm_copulate_indvalue(t_asm *a)
 {
 	int	i;
 	int	j;
