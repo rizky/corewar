@@ -6,14 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 17:22:58 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:36:02 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
 int
-	asm_get_opcode(char *opname)
+	asm_parser_opcode(char *opname)
 {
 	int i;
 
@@ -28,7 +28,7 @@ int
 }
 
 char
-	*asm_get_opname(char *line)
+	*asm_parser_opname(char *line)
 {
 	char	*opstr;
 	char	*opname;
@@ -39,7 +39,7 @@ char
 }
 
 void
-	asm_get_opparam(char *line, t_op *op)
+	asm_parser_opparam(char *line, t_op *op)
 {
 	char	*opstr;
 	char	*opparam;
@@ -66,7 +66,7 @@ void
 }
 
 int
-	asm_get_op(t_asm *a)
+	asm_parser_op(t_asm *a)
 {
 	t_op	op;
 	char	*temp;
@@ -78,11 +78,11 @@ int
 	temp = ft_re_capture("\\w+:", a->file[a->i]);
 	op.label = ft_re_capture("\\w+", temp);
 	op.param_c = 0;
-	op.opname = asm_get_opname(a->file[a->i]);
-	op.opcode = asm_get_opcode(op.opname);
+	op.opname = asm_parser_opname(a->file[a->i]);
+	op.opcode = asm_parser_opcode(op.opname);
 	op.size = 0;
 	op.offset = a->size;
-	asm_get_opparam(a->file[a->i], &op);
+	asm_parser_opparam(a->file[a->i], &op);
 	op.oc = asm_calculate_oc(op.params, op.param_c);
 	op.size += (op.param_c > 1) ? 2 : 1;
 	a->ops[a->op_c] = op;

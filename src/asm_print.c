@@ -6,21 +6,27 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 17:11:53 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:31:40 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
+static void
+	asm_print_header(t_asm *a)
+{
+	ft_printfln("Dumping annotated program on standard output");
+	ft_printfln("Program size : %d bytes", a->size);
+	ft_printfln("Name : \"%s\"", a->name);
+	ft_printfln("Comment : \"%s\"", a->comment);
+}
 void
 	asm_print(t_asm *a)
 {
 	int	i;
 	int	j;
 
-	ft_printfln("Dumping annotated program on standard output");
-	ft_printfln("Program size : %d bytes", a->size);
-	ft_printf("Name : \"%s\"\nComment : \"%s\"\n", a->name, a->comment);
+	asm_print_header(a);
 	i = -1;
 	while (++i < a->op_c)
 	{
