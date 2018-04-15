@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 20:42:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 20:44:56 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void
 	str = asm_to_big_endian(op.opcode, 1);
 	fta_append(binary, str, 1);
 	free(str);
-	if (op.oc > 0)
+	if (op.param_c > 1)
 	{
 		str = asm_to_big_endian(op.oc, 1);
 		fta_append(binary, str, 1);
