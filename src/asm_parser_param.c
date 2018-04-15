@@ -6,14 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 22:47:33 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:29:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
 int
-	asm_get_indvalue(t_asm *a, char *label)
+	asm_get_indval(t_asm *a, char *label)
 {
 	int		i;
 	char	*str;
@@ -22,8 +22,8 @@ int
 	str = ft_re_capture("[\\w_\\d]+", label);
 	while (i < a->op_c)
 	{
-		if (ARRAY_DATA(a->ops, i).label && ft_strcmp(ARRAY_DATA(a->ops, i).label, str) == 0)
-			return (ARRAY_DATA(a->ops, i).offset);
+		if (ARRAY(a->ops, i).label && ft_strcmp(ARRAY(a->ops, i).label, str) == 0)
+			return (ARRAY(a->ops, i).offset);
 		i++;
 	}
 	return (-1);
@@ -40,15 +40,17 @@ int
 	while (i < a->op_c)
 	{
 		j = 0;
-		while (j < ARRAY_DATA(a->ops, i).param_c)
+		while (j < ARRAY(a->ops, i).param_c)
 		{
-			if (ARRAY_DATA(a->ops, i).params[j].type == T_DIR && ARRAY_DATA(a->ops, i).params[j].value == -1)
+			if (ARRAY(a->ops, i).params[j].type == T_DIR &&
+				ARRAY(a->ops, i).params[j].value == -1)
 			{
-				offset = asm_get_indvalue(a, ARRAY_DATA(a->ops, i).params[j].str);
+				offset = asm_get_indval(a, ARRAY(a->ops, i).params[j].str);
 				if (offset == -1)
-					return (ft_error(LABEL_MISSING, -1, ARRAY_DATA(a->ops, i).params[j].str));
-				ARRAY_DATA(a->ops, i).params[j].value =
-				asm_get_indvalue(a, ARRAY_DATA(a->ops, i).params[j].str) - ARRAY_DATA(a->ops, i).offset;
+					return (ft_error(LABEL_MISSING, -1, ARRAY(a->ops, i).params[j].str));
+				ARRAY(a->ops, i).params[j].value =
+				asm_get_indval(a, ARRAY(a->ops, i).params[j].str) -
+								ARRAY(a->ops, i).offset;
 			}
 			j++;
 		}

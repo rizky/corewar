@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 23:20:22 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:26:58 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int
 	int i;
 
 	i = 0;
-	if (ARRAY_DATA(a->ops, a->op_c).opcode == -1)
+	if (ARRAY(a->ops, a->op_c).opcode == -1)
 		return (ft_error(OP, -1, a->file[a->i]));
-	while (i < ARRAY_DATA(a->ops, a->op_c).param_c)
+	while (i < ARRAY(a->ops, a->op_c).param_c)
 	{
-		if (ARRAY_DATA(a->ops, a->op_c).params[i].type == -1)
+		if (ARRAY(a->ops, a->op_c).params[i].type == -1)
 			return (ft_error(OP_PARAM, -1, a->file[a->i]));
 		i++;
 	}

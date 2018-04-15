@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 23:18:31 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:30:34 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,22 @@ void
 	i = -1;
 	while (++i < a.op_c)
 	{
-		if (ARRAY_DATA(a.ops, i).label != NULL)
-			ft_printf("%-5d      :\t%s:\n", ARRAY_DATA(a.ops, i).offset, ARRAY_DATA(a.ops, i).label);
+		if (ARRAY(a.ops, i).label != NULL)
+			ft_printf("%-5d      :\t%s:\n", ARRAY(a.ops, i).offset,
+			ARRAY(a.ops, i).label);
 		ft_printf("%-5d(%-3d) :\t    %-10s",
-		ARRAY_DATA(a.ops, i).offset, ARRAY_DATA(a.ops, i).size, ARRAY_DATA(a.ops, i).opname);
+		ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size, ARRAY(a.ops, i).opname);
 		j = -1;
-		while (++j < ARRAY_DATA(a.ops, i).param_c)
-			ft_printf("%-18s", ARRAY_DATA(a.ops, i).params[j].str);
+		while (++j < ARRAY(a.ops, i).param_c)
+			ft_printf("%-18s", ARRAY(a.ops, i).params[j].str);
 		ft_printf("\n");
-		(ARRAY_DATA(a.ops, i).param_c > 1) ?
-		ft_printf("         \t    %-4d%-6d", ARRAY_DATA(a.ops, i).opcode, ARRAY_DATA(a.ops, i).oc) :
-		ft_printf("         \t    %-10d", ARRAY_DATA(a.ops, i).opcode);
+		(ARRAY(a.ops, i).param_c > 1) ?
+		ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
+			ARRAY(a.ops, i).oc) :
+		ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
 		j = -1;
-		while (++j < ARRAY_DATA(a.ops, i).param_c)
-			ft_printf("%-18d", ARRAY_DATA(a.ops, i).params[j].value);
+		while (++j < ARRAY(a.ops, i).param_c)
+			ft_printf("%-18d", ARRAY(a.ops, i).params[j].value);
 		ft_printf("\n\n");
 	}
 }

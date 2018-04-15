@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 23:06:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:28:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define OP_PARAM		11
 # define LABEL_MISSING	12
 
-# define ARRAY_DATA(D, I) ((t_op*)(D)->data)[I]
+# define ARRAY(D, I) ((t_op*)(D)->data)[I]
 
 typedef struct	s_op_dict
 {
@@ -115,7 +115,7 @@ void			asm_compiler(t_asm a);
 char			*asm_to_big_endian(int value, int size);
 
 int				asm_get_paramtype(int opcode, char *param, int *value, int *size);
-int				asm_get_indvalue(t_asm *a, char *label);
+int				asm_get_indval(t_asm *a, char *label);
 int				asm_populate_indvalue(t_asm *a);
 int				asm_calculate_oc(t_param params[3], int param_c);
 
