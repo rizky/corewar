@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 20:51:26 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 11:44:46 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int
 	i = 0;
 	str = ft_re_capture("\\w+", func);
 	while (i < a->op_c)
-	{	
+	{
 		if (a->ops[i].func && ft_strcmp(a->ops[i].func, str) == 0)
 			return (a->ops[i].offset);
 		i++;
@@ -42,7 +42,8 @@ void
 		while (j < a->ops[i].param_c)
 		{
 			if (a->ops[i].params[j].type == T_IND)
-				a->ops[i].params[j].value = asm_get_indvalue(a, a->ops[i].params[j].str) - a->ops[i].offset;
+				a->ops[i].params[j].value =
+				asm_get_indvalue(a, a->ops[i].params[j].str) - a->ops[i].offset;
 			j++;
 		}
 		i++;
@@ -59,6 +60,7 @@ int		ft_parsing(t_asm *a, header_t *h)
 	if (ft_get_comment(a, h) == -1)
 		return (-1);
 	a->i++;
+//	ft_check_instructions(a);
 	while (a->file[a->i])
 	{
 		ft_get_op(a);

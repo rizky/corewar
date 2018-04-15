@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 20:50:24 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 11:44:31 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_asm
 	char		*name;
 	char		*comment;
 	char		**file;
+	char		**labels;
 	t_op		ops[1000];
 	int			op_c;
 	int			size;
@@ -58,6 +59,7 @@ typedef struct	s_asm
 int				ft_parsing(t_asm *a, header_t *h);
 int				ft_get_name(t_asm *a, header_t *h);
 int				ft_get_comment(t_asm *a, header_t *h);
+int				ft_check_instructions(t_asm *a);
 int				ft_get_op(t_asm *a);
 int				ft_error(int errcode, int status);
 
@@ -71,4 +73,7 @@ int				ft_free(char *str, int status);
 int				ft_free_tab(char **tab, int status);
 
 void			asm_print(t_asm *a);
+
+char			*ft_strcdup(const char *s1, const char c);
+
 #endif
