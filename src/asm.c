@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/12 08:36:14 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/15 12:03:31 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@
 ** Only accepts files with filename extension .s
 */
 
-static char	**ft_read_sourcefile(int ac, char **av)
+static int	ft_read_sourcefile(int ac, char **av, t_asm *a)
 {
 	int		fd;
 	int		ret;
 	char	buf[BUFF_SIZE + 1];
 	char	*file[2];
-	char	**sourcefile;
 
 	if ((fd = open(av[ac - 1], O_RDONLY)) == -1)
-		return (NULL);
+		return (SOURCEFILE);
 	file[0] = ft_strnew(0);
 	while ((ret = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
@@ -36,20 +35,27 @@ static char	**ft_read_sourcefile(int ac, char **av)
 		free(file[1]);
 	}
 	close(fd);
-	sourcefile = ft_strsplit(file[0], '\n');
+	if (ft_file_is_empty(file[0]))
+		return (ft_free(file[0], EMPTY));
+	if (file[0][ft_strlen(file[0]) - 1] != '\n')
+		return (ft_free(file[0], NEWLINE));
+	if ((a->file = ft_strsplit(file[0], '\n')) == NULL)
+		return (ft_free(file[0], MALLOC));
 	free(file[0]);
-	return (sourcefile);
+	return (0);
 }
 
 static int	ft_filename_extension(char *file)
 {
-	if (file[ft_strlen(file) - 1] != 's' && file[ft_strlen(file) - 2] != '.')
-		return (0);
-	return (1);
+	if (file[ft_strlen(file) - 1] == 's' && file[ft_strlen(file) - 2] == '.')
+		return (1);
+	return (0);
 }
 
 static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
 {
+	int errnum;
+
 	ft_bzero(a, sizeof(t_asm));
 	ft_bzero(h, sizeof(header_t));
 	if (ac < 2 || !ft_filename_extension(av[ac - 1]))
@@ -57,9 +63,12 @@ static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
 		ft_dprintf(2, "Usage: %s <sourcefile.s>\n", av[0]);
 		return (-1);
 	}
-	if ((a->file = ft_read_sourcefile(ac, av)) == NULL)
+	if ((errnum = ft_read_sourcefile(ac, av, a)) > 0)
 	{
-		ft_dprintf(2, "Can't read source file %s\n", av[ac - 1]);
+		if (errnum == SOURCEFILE)
+			ft_dprintf(2, "Can't read source file %s\n", av[ac - 1]);
+		else
+			return (ft_error(errnum, -1));
 		return (-1);
 	}
 	return (0);

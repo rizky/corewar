@@ -1,24 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   helper_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/12 08:35:05 by fpetras          ###   ########.fr       */
+/*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
+/*   Updated: 2018/04/15 12:04:24 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		ft_parsing(t_asm *a, header_t *h)
+void	ft_print_tab(char **tab)
 {
-	ft_handle_comments(a->file);
-	ft_trim_file(a->file);
-	if (ft_get_name(a, h) == -1 || ft_get_comment(a, h) == -1)
-		return (-1);
-	ft_printf("name: %s\n", h->prog_name);
-	ft_printf("comment: %s\n", h->comment);
-	return (0);
+	int i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("%s\n", tab[i]);
+		i++;
+	}
+}
+
+int		ft_free_tab(char **tab, int status)
+{
+	int i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return (status);
+}
+
+int		ft_free(char *str, int status)
+{
+	free(str);
+	return (status);
 }
