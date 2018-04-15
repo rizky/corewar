@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 18:08:15 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 20:17:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:14:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 void
 	asm_append_nullbyte(t_array *binary)
 {
-	char	*nullbyte;
-
-	nullbyte = asm_to_big_endian(0x0, 4);
-	fta_append(binary, nullbyte, 4);
-	free(nullbyte);
+	fta_append_free(binary, asm_to_big_endian(0x0, 4), 4);
 }
 
 void
@@ -55,9 +51,5 @@ void
 void
 	asm_append_programsize(t_array *binary, int size)
 {
-	char	*psize;
-
-	psize = asm_to_big_endian(size, 4);
-	fta_append(binary, psize, 4);
-	free(psize);
+	fta_append_free(binary, asm_to_big_endian(size, 4), 4);
 }

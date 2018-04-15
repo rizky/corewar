@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 20:44:56 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:15:19 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,21 @@ char
 void
 	asm_append_magic_nbr(t_array *binary)
 {
-	char	*magic_nbr;
-
-	magic_nbr = asm_to_big_endian(COREWAR_EXEC_MAGIC, 4);
-	fta_append(binary, magic_nbr, 4);
-	free(magic_nbr);
+	fta_append_free(binary, asm_to_big_endian(COREWAR_EXEC_MAGIC, 4), 4);
 }
 
 void
 	asm_append_op(t_array *binary, t_op op)
 {
-	char	*str;
 	int		i;
 
-	str = asm_to_big_endian(op.opcode, 1);
-	fta_append(binary, str, 1);
-	free(str);
+	fta_append_free(binary, asm_to_big_endian(op.opcode, 1), 1);
 	if (op.param_c > 1)
-	{
-		str = asm_to_big_endian(op.oc, 1);
-		fta_append(binary, str, 1);
-		free(str);
-	}
-	i = 0;
-	while (i < op.param_c)
-	{
-		str = asm_to_big_endian(op.params[i].value, op.params[i].size);
-		fta_append(binary, str, op.params[i].size);
-		free(str);
-		i++;
-	}
+		fta_append_free(binary, asm_to_big_endian(op.oc, 1), 1);
+	i = -1;
+	while (++i < op.param_c)
+		fta_append_free(binary, asm_to_big_endian(op.params[i].value,
+					op.params[i].size), op.params[i].size);
 }
 
 void
