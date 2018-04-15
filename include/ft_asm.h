@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 13:39:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 14:56:39 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ int				ft_parsing(t_asm *a, header_t *h);
 int				ft_get_name(t_asm *a, header_t *h);
 int				ft_get_comment(t_asm *a, header_t *h);
 int				ft_check_instructions(t_asm *a);
-int				asm_get_op(t_asm *a);
-int				ft_error(int errcode, int status, char *line);
+int				ft_get_labels(t_asm *a);
+int				ft_is_label(char *line);
+int				ft_get_op(t_asm *a);
 
+int				ft_error(int errcode, int status, char *line);
 int				ft_file_is_empty(char *file);
 int				ft_line_is_empty(t_asm *a);
 void			ft_skip_empty_lines(t_asm *a);
@@ -74,8 +76,10 @@ void			ft_print_tab(char **tab);
 int				ft_free(char *str, int status);
 int				ft_free_tab(char **tab, int status);
 
+int				asm_get_op(t_asm *a);
 void			asm_print(t_asm *a);
 
+int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
 
 #endif
