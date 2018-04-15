@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 20:51:17 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 12:24:28 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ typedef struct	s_op_dict
 	int			d_size;
 }				t_op_dict;
 
-static	t_op_dict g_op_dict[16] = {
+static	t_op_dict g_op_dict[17] = {
+	{ .name = "\0",		.opcode = 0x00,	.d_size = 0 },
     { .name = "live", 	.opcode = 0x01,	.d_size = 4 },
     { .name = "ld", 	.opcode = 0x02,	.d_size = 4 },
     { .name = "st", 	.opcode = 0x03,	.d_size = 0 },
@@ -43,8 +44,8 @@ int
 {
 	int i;
 
-	i = 0;
-	while (i < 16)
+	i = 1;
+	while (i < 17)
 	{
 		if (ft_strcmp(g_op_dict[i].name, opname) == 0)
 			return (g_op_dict[i].opcode);
@@ -54,22 +55,7 @@ int
 }
 
 int
-	asm_get_dsize(char	*opname)
-{
-	int i;
-
-	i = 0;
-	while (i < 16)
-	{
-		if (ft_strcmp(g_op_dict[i].name, opname) == 0)
-			return (g_op_dict[i].d_size);
-		i++;
-	}
-	return (-1);
-}
-
-int
-	asm_get_paramtype(char *opname, char *param, int *value, int *size)
+	asm_get_paramtype(int opcode, char *param, int *value, int *size)
 {
 	char *temp;
 	if (ft_re_match("^r\\d+$", param) == 0)
@@ -91,7 +77,7 @@ int
 		temp = ft_re_capture("\\d+", param);
 		*value = ft_atoi(temp);
 		free(temp);
-		*size = asm_get_dsize(opname);
+		*size = g_op_dict[opcode].d_size;
 		return (T_DIR);
 	}
 	else
@@ -127,7 +113,7 @@ int
 	while (param_tab[op.param_c])
 	{
 		par.str = param_tab[op.param_c];
-		par.type = asm_get_paramtype( op.opname, param_tab[op.param_c],
+		par.type = asm_get_paramtype(op.opcode, param_tab[op.param_c],
 			&(par.value), &(par.size));
 		op.params[op.param_c] = par;
 		op.param_c++;
