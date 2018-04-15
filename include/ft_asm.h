@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 20:17:37 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:06:27 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define OP_NAME		10
 # define OP_PARAM		11
 # define LABEL_MISSING	12
+
+# define ARRAY_DATA(D, I) ((t_op*)(D)->data)[I]
 
 typedef struct	s_op_dict
 {
@@ -83,7 +85,7 @@ typedef struct	s_asm
 	char		*comment;
 	char		**file;
 	char		**labels;
-	t_op		ops[1000];
+	t_array		*ops;
 	int			op_c;
 	int			size;
 }				t_asm;

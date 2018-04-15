@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 17:36:02 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:08:22 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int
 	asm_parser_opparam(a->file[a->i], &op);
 	op.oc = asm_calculate_oc(op.params, op.param_c);
 	op.size += (op.param_c > 1) ? 2 : 1;
-	a->ops[a->op_c] = op;
+	fta_append(a->ops, &op, 1);
 	a->size += op.size;
 	free(temp);
 	return (0);
