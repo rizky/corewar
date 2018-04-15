@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 15:44:37 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 15:47:30 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int
 }
 
 int
-	asm_copulate_indvalue(t_asm *a)
+	asm_populate_indvalue(t_asm *a)
 {
 	int	i;
 	int	j;
