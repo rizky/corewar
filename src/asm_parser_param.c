@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 16:22:14 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:58:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ int
 }
 
 int
-	asm_calculate_oc(t_param params[3])
+	asm_calculate_oc(t_param params[3], int param_c)
 {
+	while(param_c < 3)
+	{
+		params[param_c].type = 0;
+		param_c++;
+	}
 	return (params[0].type << 6 | params[1].type << 4 | params[2].type << 2);
 }

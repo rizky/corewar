@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 16:34:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:57:47 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int
 	op.size = 0;
 	op.offset = a->size;
 	asm_get_opparam(a->file[a->i], &op);
-	op.oc = asm_calculate_oc(op.params);
+	op.oc = asm_calculate_oc(op.params, op.param_c);
 	op.size += (op.param_c > 1) ? 2 : 1;
 	a->ops[a->op_c] = op;
 	a->size += op.size;
