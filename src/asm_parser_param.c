@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 15:47:30 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:22:14 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int
 		j = 0;
 		while (j < a->ops[i].param_c)
 		{
-			if (a->ops[i].params[j].type == T_IND)
+			if (a->ops[i].params[j].type == T_DIR && a->ops[i].params[j].value == -1)
 			{
 				offset = asm_get_indvalue(a, a->ops[i].params[j].str);
 				if (offset == -1)
@@ -55,4 +55,10 @@ int
 		i++;
 	}
 	return (0);
+}
+
+int
+	asm_calculate_oc(t_param params[3])
+{
+	return (params[0].type << 6 | params[1].type << 4 | params[2].type << 2);
 }

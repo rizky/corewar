@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 15:47:39 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:01:10 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void			asm_print(t_asm *a);
 
 int				asm_get_indvalue(t_asm *a, char *label);
 int				asm_populate_indvalue(t_asm *a);
+int				asm_calculate_oc(t_param params[3]);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);

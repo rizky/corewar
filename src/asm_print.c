@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 12:36:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:04:45 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void
 		while (++j < a->ops[i].param_c)
 			ft_printf("%-18s", a->ops[i].params[j].str);
 		ft_printf("\n");
-		ft_printf("         \t    %-10d", a->ops[i].opcode);
+		if (a->ops[i].param_c > 1)
+			ft_printf("         \t    %-4d%-6d", a->ops[i].opcode, asm_calculate_oc(a->ops[i].params));
+		else
+			ft_printf("         \t    %-10d", a->ops[i].opcode);
 		j = -1;
 		while (++j < a->ops[i].param_c)
 			ft_printf("%-18d", a->ops[i].params[j].value);

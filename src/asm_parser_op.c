@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 15:29:43 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:22:02 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ int
 		*size = 1;
 		return (T_REG);
 	}
-	else if (ft_re_match("^%:\\w+$", param) == 0)
+	else if (ft_re_match("^%:[\\w_\\d]+$", param) == 0)
 	{
-		*value = 0;
-		*size = 2;
-		return (T_IND);
+		*value = -1;
+		*size = g_op_dict[opcode].d_size;
+		return (T_DIR);
 	}
 	else if (ft_re_match("^%[-+]*\\d+$", param) == 0)
 	{
@@ -80,6 +80,14 @@ int
 		free(temp);
 		*size = g_op_dict[opcode].d_size;
 		return (T_DIR);
+	}
+	else if (ft_re_match("^[-+]*\\d+$", param) == 0)
+	{
+		temp = ft_re_capture("[-+]*\\d+", param);
+		*value = ft_atoi(temp);
+		free(temp);
+		*size = 2;
+		return (T_IND);
 	}
 	else
 		return (-1);
