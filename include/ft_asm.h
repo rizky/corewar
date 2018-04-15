@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 16:59:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:23:07 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,34 @@
 # define OP_NAME		10
 # define OP_PARAM		11
 # define LABEL_MISSING	12
+
+typedef struct	s_op_dict
+{
+	char		*name;
+	int			opcode;
+	int			d_size;
+}				t_op_dict;
+
+static	t_op_dict g_op_dict[17] = {
+	{ .name = "\0", .opcode = 0x00, .d_size = 0 },
+	{ .name = "live", .opcode = 0x01, .d_size = 4 },
+	{ .name = "ld", .opcode = 0x02, .d_size = 4 },
+	{ .name = "st", .opcode = 0x03, .d_size = 0 },
+	{ .name = "add", .opcode = 0x04, .d_size = 0 },
+	{ .name = "sub", .opcode = 0x05, .d_size = 0 },
+	{ .name = "and", .opcode = 0x06, .d_size = 4 },
+	{ .name = "or", .opcode = 0x07, .d_size = 4 },
+	{ .name = "xor", .opcode = 0x08, .d_size = 4 },
+	{ .name = "zjmp", .opcode = 0x09, .d_size = 2 },
+	{ .name = "ldi", .opcode = 0x0a, .d_size = 2 },
+	{ .name = "sti", .opcode = 0x0b, .d_size = 2 },
+	{ .name = "fork", .opcode = 0x0c, .d_size = 2 },
+	{ .name = "lld", .opcode = 0x0d, .d_size = 4 },
+	{ .name = "lldi", .opcode = 0x0e, .d_size = 2 },
+	{ .name = "lfork", .opcode = 0x0f, .d_size = 2 },
+	{ .name = "aff", .opcode = 0x10, .d_size = 0 }
+};
+
 typedef struct	s_param
 {
 	char		*str;
@@ -80,6 +108,7 @@ int				ft_free_tab(char **tab, int status);
 int				asm_get_op(t_asm *a);
 void			asm_print(t_asm *a);
 
+int				asm_get_paramtype(int opcode, char *param, int *value, int *size);
 int				asm_get_indvalue(t_asm *a, char *label);
 int				asm_populate_indvalue(t_asm *a);
 int				asm_calculate_oc(t_param params[3], int param_c);

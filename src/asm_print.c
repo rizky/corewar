@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 16:38:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:11:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void
 	while (++i < a->op_c)
 	{
 		if (a->ops[i].label != NULL)
-			ft_printfln("%-5d      :\t%s", a->ops[i].offset, a->ops[i].label);
+			ft_printfln("%-5d      :\t%s:", a->ops[i].offset, a->ops[i].label);
 		ft_printf("%-5d(%-3d) :\t    %-10s",
 		a->ops[i].offset, a->ops[i].size, a->ops[i].opname);
 		j = -1;
