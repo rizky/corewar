@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 16:01:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:34:24 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_op
 {
 	char		*opname;
 	int			opcode;
+	int			oc;
 	int			size;
 	t_param		params[3];
 	int			param_c;

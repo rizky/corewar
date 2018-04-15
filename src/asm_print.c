@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 16:04:45 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:38:10 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void
 
 	ft_printfln("Dumping annotated program on standard output");
 	ft_printfln("Program size : %d bytes", a->size);
-	ft_printfln("Name : \"%s\"", a->name);
-	ft_printfln("Comment : \"%s\"", a->comment);
+	ft_printf("Name : \"%s\"\nComment : \"%s\"\n", a->name, a->comment);
 	i = -1;
 	while (++i < a->op_c)
 	{
@@ -33,10 +32,9 @@ void
 		while (++j < a->ops[i].param_c)
 			ft_printf("%-18s", a->ops[i].params[j].str);
 		ft_printf("\n");
-		if (a->ops[i].param_c > 1)
-			ft_printf("         \t    %-4d%-6d", a->ops[i].opcode, asm_calculate_oc(a->ops[i].params));
-		else
-			ft_printf("         \t    %-10d", a->ops[i].opcode);
+		(a->ops[i].param_c > 1) ?
+		ft_printf("         \t    %-4d%-6d", a->ops[i].opcode, a->ops[i].oc) :
+		ft_printf("         \t    %-10d", a->ops[i].opcode);
 		j = -1;
 		while (++j < a->ops[i].param_c)
 			ft_printf("%-18d", a->ops[i].params[j].value);
