@@ -1,4 +1,4 @@
-.name           "42Just a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner ProgramJust a basic Winner Program"
+.name           "ner ProgramJust a basic Winner Program"
 .comment        "Just a basic Winner Program"
 
 #live %42
