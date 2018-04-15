@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/15 14:05:56 by fpetras          ###   ########.fr        #
+#    Updated: 2018/04/15 15:45:31 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ NAME_CW:= corewar
 FILE_A:= ft_asm
 FILE_CW:= ft_corewar 
 FILES:= asm_parser asm_parser_header \
+		asm_parser_op asm_parser_param \
 		asm_check_instructions \
 		asm_labels \
-		asm_parser_op \
 		asm_error \
 		asm_helper_1 asm_helper_2 \
 		asm_print \
