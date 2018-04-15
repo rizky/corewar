@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 13:00:11 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 13:39:21 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@
 # define NAME_LEN		6
 # define COMMENT_LEN	8
 # define OP				9
-# define LABEL_MISSING	10
-
+# define OP_NAME		10
+# define OP_PARAM		11
+# define LABEL_MISSING	12
 typedef struct	s_param
 {
 	char		*str;

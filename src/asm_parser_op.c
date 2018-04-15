@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 13:34:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 14:54:58 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int
 		*size = 2;
 		return (T_IND);
 	}
-	else if (ft_re_match("^%\\d+$", param) == 0)
+	else if (ft_re_match("^%[-+]*\\d+$", param) == 0)
 	{
-		temp = ft_re_capture("\\d+", param);
+		temp = ft_re_capture("[-+]*\\d+", param);
 		*value = ft_atoi(temp);
 		free(temp);
 		*size = g_op_dict[opcode].d_size;
@@ -103,7 +103,7 @@ int
 	label = ft_re_capture("\\w+", a->file[a->i]);
 	opstr = ft_re_capture("\\w+[ \t]+.*", a->file[a->i]);
 	opname = ft_re_capture("\\w+", opstr);
-	param = ft_re_capture("[^ \t]+", ft_re_capture("\t[^ \t]+", opstr));
+	param = ft_re_capture("[^ \t]+", ft_re_capture("[\t ][^ \t]+", opstr));
 	param_tab = ft_strsplit(param, ',');
 	op.param_c = 0;
 	op.opname = opname;
@@ -116,10 +116,11 @@ int
 	while (param_tab[op.param_c])
 	{
 		par.str = param_tab[op.param_c];
-		par.type = asm_get_paramtype(op.opcode, param_tab[op.param_c],
+		
+		par.type = asm_get_paramtype(op.opcode, par.str,
 			&(par.value), &(par.size));
 		if (par.type == -1)
-			return (ft_error(OP, -1, a->file[a->i]));
+			return (ft_error(OP_PARAM, -1, a->file[a->i]));
 		op.params[op.param_c] = par;
 		op.param_c++;
 		op.size += par.size;
