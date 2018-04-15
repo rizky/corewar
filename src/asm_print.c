@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/14 20:51:29 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 09:22:17 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void
 	{
 		if (a->ops[i].func != NULL)
 			ft_printfln("%-5d      :\t%s", a->ops[i].offset, a->ops[i].func);
-		ft_printf("%-5d(%-3d) :\t    %-10s", a->ops[i].offset, a->ops[i].size, a->ops[i].opname);
+		ft_printf("%-5d(%-3d) :\t    %-10s",
+		a->ops[i].offset, a->ops[i].size, a->ops[i].opname);
 		j = 0;
 		while (j < a->ops[i].param_c)
 		{

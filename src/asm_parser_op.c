@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 12:24:28 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 12:25:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	t_op_dict g_op_dict[17] = {
 };
 
 int
-	asm_get_opcode(char	*opname)
+	asm_get_opcode(char *opname)
 {
 	int i;
 
@@ -58,6 +58,7 @@ int
 	asm_get_paramtype(int opcode, char *param, int *value, int *size)
 {
 	char *temp;
+
 	if (ft_re_match("^r\\d+$", param) == 0)
 	{
 		temp = ft_re_capture("\\d+", param);
