@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 14:50:07 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 18:35:01 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		ft_get_name(t_asm *a)
 	int tmp;
 
 	ft_skip_empty_lines(a);
+	if (a->file[a->i] == NULL)
+		return (ft_error(HEADER, -1, a->file[a->i]));
 	tmp = a->i;
 	if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\".+\"",
 		a->file[a->i])) == NULL)
