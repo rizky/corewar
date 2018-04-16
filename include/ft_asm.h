@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 10:47:45 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:16:17 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct	s_param
 	int			type;
 	int			size;
 	int			value;
+	int			is_label;
 }				t_param;
 
 typedef struct	s_op
@@ -122,7 +123,7 @@ int				asm_print_memory(t_array *binary, char *path);
 void			asm_compiler(t_asm a);
 char			*asm_to_big_endian(int value, int size);
 
-int				asm_get_paramtype(int opcode, char *param, int *value, int *size);
+int				asm_get_paramtype(int opcode, t_param *param);
 int				asm_get_directval(t_asm *a, char *label);
 int				asm_populate_directval(t_asm *a);
 int				asm_calculate_oc(t_param params[3], int param_c);

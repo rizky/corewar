@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 09:36:30 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:14:19 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ void
 		if ((*op).param_c < 3)
 		{
 			par.str = param_tab[(*op).param_c];
-			par.type = asm_get_paramtype((*op).opcode, par.str,
-				&(par.value), &(par.size));
+			par.type = asm_get_paramtype((*op).opcode, &par);
 			(*op).params[(*op).param_c] = par;
 			(*op).size += par.size;
 		}

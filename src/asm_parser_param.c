@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 09:47:44 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:17:00 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int
 		while (j < ARRAY(a->ops, i).param_c)
 		{
 			if (ARRAY(a->ops, i).params[j].type == T_DIR &&
-				ARRAY(a->ops, i).params[j].value == -1)
+				ARRAY(a->ops, i).params[j].is_label)
 			{
 				offset = asm_get_directval(a, ARRAY(a->ops, i).params[j].str);
 				if (offset == -1)
@@ -83,28 +83,29 @@ static int
 }
 
 int
-	asm_get_paramtype(int opcode, char *param, int *value, int *size)
+	asm_get_paramtype(int opcode, t_param *param)
 {
-	if (ft_re_match("^r\\d+$", param) == 0)
+	if (ft_re_match("^r\\d+$", (*param).str) == 0)
 	{
-		*value = asm_get_paramval(param, "\\d+");
-		*size = 1;
+		(*param).value = asm_get_paramval((*param).str, "\\d+");
+		(*param).size = 1;
 		return (T_REG);
 	}
-	else if (ft_re_match("^%:[\\w_\\d]+$", param) == 0 ||
-			ft_re_match("^%[-+]*\\d+$", param) == 0)
+	else if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 ||
+			ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
 	{
-		if (ft_re_match("^%:[\\w_\\d]+$", param) == 0 )
-			*value = -1;
-		else if (ft_re_match("^%[-+]*\\d+$", param) == 0)
-			*value = asm_get_paramval(param, "[-+]*\\d+");
-		*size = g_op_dict[opcode].d_size;
+		(*param).is_label = 0;
+		if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 )
+			(*param).is_label = 1;
+		else if (ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
+			(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
+		(*param).size = g_op_dict[opcode].d_size;
 		return (T_DIR);
 	}
-	else if (ft_re_match("^[-+]*\\d+$", param) == 0)
+	else if (ft_re_match("^[-+]*\\d+$", (*param).str) == 0)
 	{
-		*value = asm_get_paramval(param, "[-+]*\\d+");
-		*size = 2;
+		(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
+		(*param).size = 2;
 		return (T_IND);
 	}
 	else
