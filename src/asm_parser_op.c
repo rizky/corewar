@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 23:08:22 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:45:45 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void
 	param_tab = ft_strsplit(opparam, ',');
 	while (param_tab[(*op).param_c])
 	{
+
 		par.str = param_tab[(*op).param_c]; //registre
 		par.type = asm_get_paramtype((*op).opcode, par.str,
 			&(par.value), &(par.size));
 		(*op).params[(*op).param_c] = par;
 		(*op).param_c++;
-		(*op).size += par.size;
 	}
 	free(opstr);
 	free(temp);

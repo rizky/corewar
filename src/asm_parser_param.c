@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 23:29:18 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:47:10 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../libft/include/libft.h"
 
 int
-	asm_get_indval(t_asm *a, char *label)
+	asm_get_directval(t_asm *a, char *label)
 {
 	int		i;
 	char	*str;
@@ -23,7 +23,8 @@ int
 	str = ft_re_capture("[\\w_\\d]+", label);
 	while (i < a->op_c)
 	{
-		if (ARRAY(a->ops, i).label && ft_strcmp(ARRAY(a->ops, i).label, str) == 0)
+		if (ARRAY(a->ops, i).label &&
+			ft_strcmp(ARRAY(a->ops, i).label, str) == 0)
 			return (ARRAY(a->ops, i).offset);
 		i++;
 	}
@@ -31,7 +32,7 @@ int
 }
 
 int
-	asm_populate_indvalue(t_asm *a)
+	asm_populate_directval(t_asm *a)
 {
 	int	i;
 	int	j;
@@ -44,13 +45,13 @@ int
 		while (j < ARRAY(a->ops, i).param_c)
 		{
 			if (ARRAY(a->ops, i).params[j].type == T_DIR &&
-				ARRAY(a->ops, i).params[j].value == -1)
+				ARRAY(a->ops, i).params[j].is_label)
 			{
-				offset = asm_get_indval(a, ARRAY(a->ops, i).params[j].str);
+				offset = asm_get_directval(a, ARRAY(a->ops, i).params[j].str);
 				if (offset == -1)
 					return (ft_error(LABEL_MISSING, -1, ARRAY(a->ops, i).params[j].str));
 				ARRAY(a->ops, i).params[j].value =
-				asm_get_indval(a, ARRAY(a->ops, i).params[j].str) -
+				asm_get_directval(a, ARRAY(a->ops, i).params[j].str) -
 								ARRAY(a->ops, i).offset;
 			}
 			j++;
@@ -84,28 +85,29 @@ static int
 }
 
 int
-	asm_get_paramtype(int opcode, char *param, int *value, int *size)
+	asm_get_paramtype(int opcode, t_param *param)
 {
-	if (ft_re_match("^r\\d+$", param) == 0)
+	if (ft_re_match("^r\\d+$", (*param).str) == 0)
 	{
-		*value = asm_get_paramval(param, "\\d+");
-		*size = 1;
+		(*param).value = asm_get_paramval((*param).str, "\\d+");
+		(*param).size = 1;
 		return (T_REG);
 	}
-	else if (ft_re_match("^%:[\\w_\\d]+$", param) == 0 ||
-			ft_re_match("^%[-+]*\\d+$", param) == 0)
+	else if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 ||
+			ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
 	{
-		if (ft_re_match("^%:[\\w_\\d]+$", param) == 0 )
-			*value = -1;
-		else if (ft_re_match("^%[-+]*\\d+$", param) == 0)
-			*value = asm_get_paramval(param, "[-+]*\\d+");
-		*size = g_op_dict[opcode].d_size;
+		(*param).is_label = 0;
+		if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0)
+			(*param).is_label = 1;
+		else if (ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
+			(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
+		(*param).size = g_op_dict[opcode].d_size;
 		return (T_DIR);
 	}
-	else if (ft_re_match("^[-+]*\\d+$", param) == 0)
+	else if (ft_re_match("^[-+]*\\d+$", (*param).str) == 0)
 	{
-		*value = asm_get_paramval(param, "[-+]*\\d+");
-		*size = 2;
+		(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
+		(*param).size = 2;
 		return (T_IND);
 	}
 	else

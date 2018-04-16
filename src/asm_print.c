@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 23:30:34 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:47:57 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,51 @@ static void
 	ft_dprintf(2, "Dumping annotated program on standard output\n");
 	ft_dprintf(2, "Program size : %d bytes\n", a.size);
 	ft_dprintf(2, "Name : \"%s\"\n", a.name);
-	ft_dprintf(2, "Comment : \"%s\"\n", a.comment);
+	ft_dprintf(2, "Comment : \"%s\"\n\n", a.comment);
+}
+
+void
+	asm_print_big_endian(int value, int size)
+{
+	int		i;
+	int		bits;
+
+	i = 0;
+	bits = size * 8;
+	while (i <= bits - 8)
+	{
+		ft_printf("%-3d ", (unsigned char)(value >> (bits - 8 - i)));
+		i = i + 8;
+	}
+	while (i < 32)
+	{
+		ft_printf("    ");
+		i = i + 8;
+	}
+	ft_printf("  ");
+}
+
+void
+	asm_print_op(t_asm a, int i)
+{
+	int	j;
+
+	(ARRAY(a.ops, i).param_c > 1) ?
+	ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
+		ARRAY(a.ops, i).oc) :
+	ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
+	j = -1;
+	while (++j < ARRAY(a.ops, i).param_c)
+		asm_print_big_endian(ARRAY(a.ops, i).params[j].value,
+			ARRAY(a.ops, i).params[j].size);
+	ft_printf("\n");
+	(ARRAY(a.ops, i).param_c > 1) ?
+	ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
+		ARRAY(a.ops, i).oc) :
+	ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
+	j = -1;
+	while (++j < ARRAY(a.ops, i).param_c)
+		ft_printf("%-18d", ARRAY(a.ops, i).params[j].value);
 }
 
 void
@@ -50,13 +94,7 @@ void
 			length += ft_strlen(ARRAY(a.ops, i).params[j].str);
 		}
 		ft_printf("\n");
-		(ARRAY(a.ops, i).param_c > 1) ?
-		ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
-			ARRAY(a.ops, i).oc) :
-		ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
-		j = -1;
-		while (++j < ARRAY(a.ops, i).param_c)
-			ft_printf("%-18d", ARRAY(a.ops, i).params[j].value);
+		asm_print_op(a, i);
 		ft_printf("\n\n");
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 23:28:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 14:34:17 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@
 # define OP				9
 # define OP_NAME		10
 # define OP_PARAM		11
-# define LABEL_MISSING	12
+# define OP_EMPTY		12
+# define LABEL_MISSING	13
 
 # define ARRAY(D, I) ((t_op*)(D)->data)[I]
 
+# define OPT_A 0
+# define OPT_M 1
+
+# define OPT_NUM 2
+# define OPT_STR "am"
 typedef struct	s_op_dict
 {
 	char		*name;
@@ -64,6 +70,7 @@ typedef struct	s_param
 	int			type;
 	int			size;
 	int			value;
+	int			is_label;
 }				t_param;
 
 typedef struct	s_op
@@ -87,14 +94,14 @@ typedef struct	s_asm
 	char		**file;
 	char		**labels;
 	t_array		*ops;
-	int			op_c;
+	int				op_c;
 	int			size;
 	int			start;
 }				t_asm;
 
-int				ft_parsing(t_asm *a, header_t *h);
-int				ft_get_name(t_asm *a, header_t *h);
-int				ft_get_comment(t_asm *a, header_t *h);
+int				ft_parsing(t_asm *a);
+int				ft_get_name(t_asm *a);
+int				ft_get_comment(t_asm *a);
 int				ft_check_instructions(t_asm *a);
 int				ft_get_labels(t_asm *a);
 int				ft_is_label(char *line);
@@ -109,6 +116,7 @@ void			ft_trim_file(char **file);
 void			ft_print_tab(char **tab);
 int				ft_free(char *str, int status);
 int				ft_free_tab(char **tab, int status);
+int				ft_free_asm(t_asm *a, int status);
 
 int				asm_parser_op(t_asm *a);
 void			asm_print(t_asm a);
@@ -116,14 +124,14 @@ int				asm_print_memory(t_array *binary, char *path);
 void			asm_compiler(t_asm a);
 char			*asm_to_big_endian(int value, int size);
 
-int				asm_get_paramtype(int opcode, char *param, int *value, int *size);
-int				asm_get_indval(t_asm *a, char *label);
-int				asm_populate_indvalue(t_asm *a);
+int				asm_get_paramtype(int opcode, t_param *param);
+int				asm_get_directval(t_asm *a, char *label);
+int				asm_populate_directval(t_asm *a);
 int				asm_calculate_oc(t_param params[3], int param_c);
 
 void			asm_append_name(t_array *binary, char *str);
 void			asm_append_comment(t_array *binary, char *str);
-void			asm_append_programsize(t_array *binary, int size);
+void			asm_append_size(t_array *binary, int size);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);

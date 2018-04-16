@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 23:22:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 13:14:40 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 ** Only accepts files with filename extension .s
 */
 
-static int	ft_read_sourcefile(int ac, char **av, t_asm *a)
+static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 {
 	int		fd;
 	int		ret;
 	char	buf[BUFF_SIZE + 1];
 	char	*file[2];
 
-	if ((fd = open(av[ac - 1], O_RDONLY)) == -1)
+	if ((fd = open(av[i], O_RDONLY)) == -1)
 		return (SOURCEFILE);
-	a->path = av[ac - 1];
+	a->path = av[i];
 	file[0] = ft_strnew(0);
 	while ((ret = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
@@ -54,21 +54,20 @@ static int	ft_filename_extension(char *file)
 	return (0);
 }
 
-static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
+static int	ft_init(int ac, char **av, t_asm *a, int i)
 {
 	int errnum;
 
 	ft_bzero(a, sizeof(t_asm));
-	ft_bzero(h, sizeof(header_t));
-	if (ac < 2 || !ft_filename_extension(av[ac - 1]))
+	if (ac < 2 || !ft_filename_extension(av[i]))
 	{
 		ft_dprintf(2, "Usage: %s <sourcefile.s>\n", av[0]);
 		return (-1);
 	}
-	if ((errnum = ft_read_sourcefile(ac, av, a)) > 0)
+	if ((errnum = ft_read_sourcefile(i, av, a)) > 0)
 	{
 		if (errnum == SOURCEFILE)
-			ft_dprintf(2, "Can't read source file %s\n", av[ac - 1]);
+			ft_dprintf(2, "Can't read source file %s\n", av[i]);
 		else
 			return (ft_error(errnum, -1, NULL));
 		return (-1);
@@ -76,11 +75,34 @@ static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
 	return (0);
 }
 
+static int	asm_getoptions(char **av, int opt[OPT_NUM])
+{
+	int			i;
+	int			j;
+	const char	*c_opt = OPT_STR;
+	int			c;
+
+	c = 0;
+	ft_bzero(opt, 2 * sizeof(int));
+	i = 0;
+	while (av[++i] && av[i][0] == '-')
+	{
+		j = 0;
+		while (av[i][++j])
+			if ((c = is_in(av[i][j], c_opt)) != -1)
+				opt[c] = 1;
+			else
+				return (i);
+	}
+	return (i);
+}
+
 int			main(int ac, char **av)
 {
-	t_asm		a;
-	header_t	h;
-	t_array		ops;
+	t_asm	a;
+	t_array	ops;
+	int		i;
+	int		opt[OPT_NUM];
 
 	if (ft_init(ac, av, &a, &h) == -1)
 		return (-1);
