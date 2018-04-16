@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 14:33:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:52:58 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void
 		ft_dprintf(2, "Label: Undefined Label\n");
 	else if (errnum == OP_EMPTY)
 		ft_dprintf(2, "Operation: No operation found\n");
+	else if (errnum == OP_PARAM_TYPE)
+		ft_dprintf(2, "Operation: Parameter type is invalid\n");
 }
 
 int

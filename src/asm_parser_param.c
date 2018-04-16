@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 15:04:41 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:34:27 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int
 		j = 0;
 		while (j < ARRAY(a->ops, i).param_c)
 		{
-			if (ARRAY(a->ops, i).params[j].type == DIR_CODE &&
+			if (ARRAY(a->ops, i).params[j].type == T_DIR &&
 				ARRAY(a->ops, i).params[j].is_label)
 			{
 				offset = asm_get_directval(a, ARRAY(a->ops, i).params[j].str);
@@ -63,12 +63,16 @@ int
 int
 	asm_calculate_oc(t_param params[3], int param_c)
 {
+	const int	param_code[5] = {0, REG_CODE, DIR_CODE, 0 , IND_CODE};
+
 	while (param_c < 3)
 	{
 		params[param_c].type = 0;
 		param_c++;
 	}
-	return (params[0].type << 6 | params[1].type << 4 | params[2].type << 2);
+	return (param_code[params[0].type] << 6 |
+			param_code[params[1].type] << 4 |
+			param_code[params[2].type] << 2);
 }
 
 static int
@@ -90,7 +94,7 @@ int
 	{
 		(*param).value = asm_get_paramval((*param).str, "\\d+");
 		(*param).size = 1;
-		return (REG_CODE);
+		return (T_REG);
 	}
 	else if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 ||
 			ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
@@ -101,13 +105,13 @@ int
 		else if (ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
 			(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
 		(*param).size = g_op_dict[opcode].d_size;
-		return (DIR_CODE);
+		return (T_DIR);
 	}
 	else if (ft_re_match("^[-+]*\\d+$", (*param).str) == 0)
 	{
 		(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
 		(*param).size = 2;
-		return (IND_CODE);
+		return (T_IND);
 	}
 	else
 		return (-1);

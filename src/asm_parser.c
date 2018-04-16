@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 14:44:23 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:53:14 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int		asm_check_op(t_asm *a)
 	{
 		if (ARRAY(a->ops, a->op_c).params[i].type == -1)
 			return (ft_error(OP_PARAM, -1, a->file[a->i]));
+		if ((ARRAY(a->ops, a->op_c).params[i].type &
+			g_op_dict[ARRAY(a->ops, a->op_c).opcode].p_type[i]) !=
+			ARRAY(a->ops, a->op_c).params[i].type)
+			return (ft_error(OP_PARAM_TYPE, -1, a->file[a->i]));
 		i++;
 	}
 	return (0);
