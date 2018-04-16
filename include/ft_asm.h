@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 09:25:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:47:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void			asm_compiler(t_asm a);
 char			*asm_to_big_endian(int value, int size);
 
 int				asm_get_paramtype(int opcode, char *param, int *value, int *size);
-int				asm_get_indval(t_asm *a, char *label);
-int				asm_populate_indvalue(t_asm *a);
+int				asm_get_directval(t_asm *a, char *label);
+int				asm_populate_directval(t_asm *a);
 int				asm_calculate_oc(t_param params[3], int param_c);
 
 void			asm_append_name(t_array *binary, char *str);

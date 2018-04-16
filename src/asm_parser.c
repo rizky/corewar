@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 09:43:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:47:20 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		ft_parsing(t_asm *a, header_t *h)
 		a->op_c++;
 		a->i++;
 	}
-	if (asm_populate_indvalue(a) == -1)
+	if (asm_populate_directval(a) == -1)
 		return (-1);
 	return (0);
 }
