@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft/include/libft.h"
 
 char	*ft_strcdup(const char *s1, const char c)
 {

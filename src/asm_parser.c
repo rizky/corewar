@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_asm.h"
+#include "../include/ft_asm.h"
 
 int
 	asm_check_op(t_asm *a)
@@ -29,17 +29,75 @@ int
 	return (0);
 }
 
+static int	ft_name_cmd(char *line)
+{
+	if (!ft_strnequ(line, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) ||
+		(!ft_isspace(line[ft_strlen(NAME_CMD_STRING)]) &&
+		 line[ft_strlen(NAME_CMD_STRING)] != '\"'))
+		return (0);
+	return (1);
+}
+
+static int	ft_comment_cmd(char *line)
+{
+	if (!ft_strnequ(line, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) ||
+		(!ft_isspace(line[ft_strlen(COMMENT_CMD_STRING)]) &&
+		 line[ft_strlen(COMMENT_CMD_STRING)] != '\"'))
+		return (0);
+	return (1);
+}
+
+
+int ft_get_name_comment(t_asm *a, header_t *h)
+{
+	int tmp;
+	int j;
+
+	j = 0;
+	ft_skip_empty_lines(a);
+	if (ft_comment_cmd(a->file[a->i]))
+	{
+		tmp = ft_get_comment(a, h);
+		ft_skip_empty_lines(a);
+		a->i++;
+	}
+	else if (ft_name_cmd(a->file[a->i]))
+	{
+		tmp = ft_get_name(a, h);
+		ft_skip_empty_lines(a);
+		a->i++;
+	}
+	else if (!a->name && !a->comment)
+		tmp = ft_error(HEADER, -1, NULL);
+	else if (!a->name)
+		tmp = ft_error(NAME, -1, NULL);
+	else if (!a->comment)
+		tmp = ft_error(COMMENT, -1, NULL);
+	else
+		tmp = ft_error(OTHER, -1, NULL);
+	ft_skip_empty_lines(a);
+	if (a->name && a->comment && !ft_strchr(LABEL_CHARS, a->file[a->i][0]))
+	{
+		tmp = ft_printf("Error line %i\n", a->i + 1);
+		exit (1);
+	}
+	return (tmp);
+}
+
+
 int		ft_parsing(t_asm *a, header_t *h)
 {
 	ft_handle_comments(a->file);
 	ft_trim_file(a->file);
+//	if (/*ft_get_name(a, h) == -1 || */ft_get_name_comment(a, h) == -1 || ft_get_name_comment(a, h) == -1 )
+//		return (-1);
 	if (ft_get_name(a, h) == -1)
 		return (-1);
 	a->i++;
 	if (ft_get_comment(a, h) == -1)
 		return (-1);
 	a->i++;
-//	ft_check_instructions(a);
+	ft_check_instructions(a);
 	while (a->file[a->i])
 	{
 		asm_get_op(a);

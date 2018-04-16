@@ -1,0 +1,3 @@
+/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles/42_corewar.dir

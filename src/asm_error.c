@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_asm.h"
+#include "../include/ft_asm.h"
+#include "../libft/include/libft.h"
 
 int		ft_error(int errnum, int status, char *line)
 {

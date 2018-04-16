@@ -10,9 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/include/libft.h"
+#include "../include/../libft/include/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+
+void	aux(int n, int b, char *ans, int *p)
+{
+	char	base[] = "0123456789ABCDEF";
+
+	if (n <= -b || b <= n)
+		aux(n / b, b, ans, p);
+	ans[(*p)++] = base[ABS(n % b)];
+}
+
+char	*ft_itoa_base(int value, int base)
+{
+	char	*ans;
+	int		p;
+
+	if (base < 2 || 16 < base
+		|| !(ans = (char *)malloc(sizeof(char) * 35)))
+		return (NULL);
+	p = 0;
+	if (base == 10 && value < 0)
+		ans[p++] = '-';
+	aux(value, base, ans, &p);
+	ans[p] = '\0';
+	return (ans);
+}
+
 
 typedef struct		s_param
 {
@@ -423,21 +450,21 @@ void	ft_parse(t_code **list, char *line)
 	}
 }
 
-int		main()
-{
-	int		fd;
-	char	*line;
-	t_code	*list;
-
-	list = NULL;
-	fd = open("test.s", O_RDONLY);
-	while (get_next_line(fd, &line))
-	{
-		ft_parse(&list, line);
-		free(line);
-	}
-	close(fd);
-	ft_reverse_list(&list);
-	ft_convert(&list);
-	return (0);
-}
+//int		main()
+//{
+//	int		fd;
+//	char	*line;
+//	t_code	*list;
+//
+//	list = NULL;
+//	fd = open("test.s", O_RDONLY);
+//	while (get_next_line(fd, &line))
+//	{
+//		ft_parse(&list, line);
+//		free(line);
+//	}
+//	close(fd);
+//	ft_reverse_list(&list);
+//	ft_convert(&list);
+//	return (0);
+//}

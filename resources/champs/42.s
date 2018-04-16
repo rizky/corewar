@@ -1,4 +1,4 @@
-.name           "42Just a "
+.name           ""
 .comment        "Just a basic Winner Program"
 
 entree:   live %42

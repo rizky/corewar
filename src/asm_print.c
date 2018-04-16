@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_asm.h"
+#include "../include/ft_asm.h"
+#include "../libft/include/libft.h"
 
 void
 	asm_print(t_asm *a)

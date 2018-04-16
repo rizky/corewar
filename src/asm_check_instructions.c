@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_asm.h"
+#include "../include/ft_asm.h"
+#include "../libft/include/libft.h"
 
 char *opcode[17] =
 {
@@ -74,16 +75,16 @@ int		ft_check_opcode(t_asm *a)
 	{
 		j = 0;
 		ft_skip_empty_lines(a);
-		if (ft_is_label(a->file[i]))
+		if (ft_is_label(a->file[i])) //label au debut de la ligne
 			j = ft_strcspn(a->file[i], ":") + 1;
-		j += ft_skip_spaces_tabs(&a->file[i][j]);
+		j += ft_skip_spaces_tabs(&a->file[i][j]); //va jusqu'a loperation
 		if (a->file[i][j])
 		{
-			if ((op = ft_check_opcode2(&a->file[i][j])) == -1)
+			if ((op = ft_check_opcode2(&a->file[i][j])) == -1) //check si le debut du test est un op
 				return (-1);
 			j += ft_strlen(opcode[op]) + 1;
 			j += ft_skip_spaces_tabs(&a->file[i][j]);
-			ft_check_parameters(&a->file[i][j]);
+			ft_check_parameters(&a->file[i][j]); //apres lop check les params
 		}
 		i++;
 	}

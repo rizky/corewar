@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_asm.h"
+#include "../include/ft_asm.h"
+#include "../libft/include/libft.h"
 
 typedef struct	s_op_dict
 {
@@ -98,8 +99,8 @@ char
 {
 	char	*opstr;
 	char	*opname;
-	opstr = ft_re_capture("\\w+[ \t]+.*", line);
-	opname = ft_re_capture("\\w+", opstr);
+	opstr = ft_re_capture("\\w+[ \t]+.*", line); //capture par le label mais apres
+	opname = ft_re_capture("\\w+", opstr); //chope sti
 	free(opstr);
 	return (opname);
 }
@@ -113,13 +114,13 @@ void
 	char	**param_tab;
 	t_param	par;
 
-	opstr = ft_re_capture("\\w+[ \t]+.*", line);
-	temp = ft_re_capture("[\t ][^ \t]+", opstr);
-	opparam = ft_re_capture("[^ \t]+", temp);
+	opstr = ft_re_capture("\\w+[ \t]+.*", line); //sans le labal
+	temp = ft_re_capture("[\t ][^ \t]+", opstr); //registre
+	opparam = ft_re_capture("[^ \t]+", temp); //registre aussi
 	param_tab = ft_strsplit(opparam, ',');
 	while (param_tab[(*op).param_c])
 	{
-		par.str = param_tab[(*op).param_c];
+		par.str = param_tab[(*op).param_c]; //registre
 		par.type = asm_get_paramtype((*op).opcode, par.str,
 			&(par.value), &(par.size));
 		(*op).params[(*op).param_c] = par;
@@ -144,8 +145,9 @@ int
 	temp = ft_re_capture("\\w+:", a->file[a->i]);
 	op.label = ft_re_capture("\\w+", temp);
 	op.param_c = 0;
-	op.opname = asm_get_opname(a->file[a->i]);
-	op.opcode = asm_get_opcode(op.opname);
+	op.opname = asm_get_opname(a->file[a->i]); //chope sti
+	if ((op.opcode = asm_get_opcode(op.opname)) == -1) //chope le code correspondant
+		return (ft_error);
 	op.size = 0;
 	op.offset = a->size;
 	asm_get_opparam(a->file[a->i], &op);

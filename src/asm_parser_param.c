@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_asm.h"
+#include "../include/ft_asm.h"
+#include "../libft/include/libft.h"
 
 int
 	asm_get_indvalue(t_asm *a, char *label)

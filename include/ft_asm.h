@@ -13,7 +13,7 @@
 #ifndef FT_ASM_H
 # define FT_ASM_H
 
-# include "libft.h"
+# include "../libft/include/libft.h"
 # include "op.h"
 
 # define SOURCEFILE		1
@@ -27,6 +27,12 @@
 # define OP_NAME		10
 # define OP_PARAM		11
 # define LABEL_MISSING	12
+# define NAME			1
+
+# define COMMENT		3
+
+# define OTHER			5
+
 typedef struct	s_param
 {
 	char		*str;

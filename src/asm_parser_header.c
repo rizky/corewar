@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_asm.h"
+#include "../include/ft_asm.h"
+#include "../libft/include/libft.h"
 
 /*
 ** To-do: protect ft_re_match_capture in libft (can cause segfault right now)
@@ -40,6 +41,8 @@ int
 	if (ft_strlen(a->name) > PROG_NAME_LENGTH)
 		return (ft_error(NAME_LEN, -1, a->file[a->i]));
 	ft_memcpy(h->prog_name, a->name, ft_strlen(a->name) + 1);
+	if (!a->name[0])
+		return (-1);
 	return (0);
 }
 
@@ -62,5 +65,7 @@ int
 	if (ft_strlen(a->comment) > COMMENT_LENGTH)
 		return (ft_error(COMMENT_LEN, -1, a->file[a->i]));
 	ft_memcpy(h->comment, a->comment, ft_strlen(a->comment) + 1);
+	if (!a->comment[0])
+		return (-1);
 	return (0);
 }
