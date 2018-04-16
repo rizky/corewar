@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 18:20:52 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 21:14:42 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,7 @@ int
 	else if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 ||
 			ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
 	{
-		if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0)
-			(*param).is_label = 1;
-		else if (ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
+		(ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0)? (*param).is_label = 1:
 			(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
 		(*param).size = g_op_dict[opcode].d_size;
 		return (T_DIR);
@@ -109,9 +107,7 @@ int
 	else if (ft_re_match("^:[\\w_\\d]+$", (*param).str) == 0 ||
 			ft_re_match("^[-+]*\\d+$", (*param).str) == 0)
 	{
-		if (ft_re_match(":[\\w_\\d]+$", (*param).str) == 0)
-			(*param).is_label = 1;
-		else if (ft_re_match("[-+]*\\d+$", (*param).str) == 0)
+		(ft_re_match(":[\\w_\\d]+$", (*param).str) == 0)? (*param).is_label = 1:
 			(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
 		(*param).size = 2;
 		return (T_IND);

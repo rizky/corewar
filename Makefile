@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/16 20:37:36 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/16 21:04:48 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,4 +121,5 @@ test: $(NAME)
 	./asm -a resources/valid/maxidef.s > out1 && ./resources/vm_champs/asm -a resources/valid/maxidef.s > out2 && diff out1 out2
 	./asm -a resources/valid/slider2.s > out1 && ./resources/vm_champs/asm -a resources/valid/slider2.s > out2 && diff out1 out2
 	./asm -a resources/valid/turtle.s > out1 && ./resources/vm_champs/asm -a resources/valid/turtle.s > out2 && diff out1 out2
+
 .PHONY: all clean fclean re test norme test_ch test_pw debug check
