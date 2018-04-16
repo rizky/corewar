@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 09:10:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:34:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		ft_error(int errnum, int status, char *line)
 {
 	if (line)
-		ft_dprintf(2, "%s\n", line);
+		ft_dprintf(2, "%*w%s%w\n", RED, line);
 	if (errnum == NEWLINE)
 	{
 		ft_dprintf(2, "Syntax error - unexpected end of input ");
