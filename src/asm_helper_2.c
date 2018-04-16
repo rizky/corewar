@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_helper_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 11:49:16 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/16 13:13:52 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,4 @@ int		ft_free(char *str, int status)
 {
 	free(str);
 	return (status);
-}
-
-int		asm_getoptions(char **av, int opt[OPT_NUM])
-{
-	int			i;
-	int			j;
-	const char	*c_opt = "am";
-	int			c;
-
-	c = 0;
-	ft_bzero(opt, 2 * sizeof(int));
-	i = 0;
-	while (av[++i] && av[i][0] == '-')
-	{
-		j = 0;
-		while (av[i][++j])
-			if ((c = is_in(av[i][j], c_opt)) != -1)
-				opt[c] = 1;
-			else
-				return (i);
-	}
-	return (i);
 }

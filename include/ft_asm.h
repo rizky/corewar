@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 13:09:25 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 13:14:04 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define OPT_M 1
 
 # define OPT_NUM 2
-
+# define OPT_STR "am"
 typedef struct	s_op_dict
 {
 	char		*name;
@@ -114,7 +114,6 @@ void			ft_print_tab(char **tab);
 int				ft_free(char *str, int status);
 int				ft_free_tab(char **tab, int status);
 int				ft_free_asm(t_asm *a, int status);
-int				asm_getoptions(char **av, int opt[OPT_NUM]);
 
 int				asm_parser_op(t_asm *a);
 void			asm_print(t_asm a);

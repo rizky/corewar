@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 13:09:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 13:14:40 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,28 @@ static int	ft_init(int ac, char **av, t_asm *a, int i)
 		return (-1);
 	}
 	return (0);
+}
+
+static int	asm_getoptions(char **av, int opt[OPT_NUM])
+{
+	int			i;
+	int			j;
+	const char	*c_opt = OPT_STR;
+	int			c;
+
+	c = 0;
+	ft_bzero(opt, 2 * sizeof(int));
+	i = 0;
+	while (av[++i] && av[i][0] == '-')
+	{
+		j = 0;
+		while (av[i][++j])
+			if ((c = is_in(av[i][j], c_opt)) != -1)
+				opt[c] = 1;
+			else
+				return (i);
+	}
+	return (i);
 }
 
 int			main(int ac, char **av)
