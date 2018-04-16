@@ -117,6 +117,7 @@ int		ft_parsing(t_asm *a)
 	a->i++;
 //	ft_check_instructions(a);
 	ft_skip_empty_lines(a);
+	a->start = a->i;
 	while (a->file[a->i])
 	{
 		if (asm_parser_op(a) == -1)
@@ -127,6 +128,8 @@ int		ft_parsing(t_asm *a)
 		a->i++;
 		ft_skip_empty_lines(a);
 	}
+	if (check_ops(a) == -1)
+		exit(1);
 	if (a->size == 0)
 		return (ft_error(OP_EMPTY, -1, NULL));
 	if (asm_populate_directval(a) == -1)

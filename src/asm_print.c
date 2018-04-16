@@ -111,45 +111,44 @@ int		ft_simple_len(char *str)
 	return (len);
 }
 
-int		ft_line_is_empty2(t_asm a)
+int		ft_line_is_empty2(t_asm *a)
 {
 	int j;
 
 	j = 0;
-	while (a.file[a.i][j])
+	while (a->file[a->i][j])
 	{
-		if (!ft_isspace(a.file[a.i][j]))
+		if (!ft_isspace(a->file[a->i][j]))
 			return (0);
 		j++;
 	}
 	return (1);
 }
 
-int 	check_ops(t_asm a)
+int 	check_ops(t_asm *a)
 {
 	int	i;
 	int	j;
 	int length;
 
-	length = 0;
 	i = -1;
-	a.i = a.start;
-	while (++i < a.op_c)
+	a->i = a->start;
+	while (++i < a->op_c)
 	{
 		length = 0;
-		if (ARRAY(a.ops, i).label != NULL)
-			length += ft_strlen(ARRAY(a.ops, i).label) + 1;
-		length += ft_strlen(ARRAY(a.ops, i).opname);
+		if (ARRAY(a->ops, i).label != NULL)
+			length += ft_strlen(ARRAY(a->ops, i).label) + 1;
+		length += ft_strlen(ARRAY(a->ops, i).opname);
 		j = -1;
-		while (++j < ARRAY(a.ops, i).param_c)
-			length += ft_strlen(ARRAY(a.ops, i).params[j].str);
+		while (++j < ARRAY(a->ops, i).param_c)
+			length += ft_strlen(ARRAY(a->ops, i).params[j].str);
 
-		length += ARRAY(a.ops, i).param_c - 1;
-		if (length != ft_simple_len(a.file[a.i]))
+		length += ARRAY(a->ops, i).param_c - 1;
+		if (length != ft_simple_len(a->file[a->i]))
 			return (-1);
-		a.i++;
-		while (a.file[a.i] && ft_line_is_empty2(a) && a.file[a.i + 1])
-			a.i++;
+		a->i++;
+		while (a->file[a->i] && ft_line_is_empty2(a) && a->file[a->i + 1])
+			a->i++;
 	}
 	return (0);
 }
