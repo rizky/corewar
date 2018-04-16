@@ -60,7 +60,7 @@ static int	ft_init(int ac, char **av, t_asm *a, int i)
 	ft_bzero(a, sizeof(t_asm));
 	if (ac < 2 || !ft_filename_extension(av[i]))
 	{
-		ft_dprintf(2, "Usage: %s <sourcefile.s>\n", av[0]);
+		ft_dprintf(2, "Usage: %s [-a | -m] <sourcefile.s>\n", av[0]);
 		return (-1);
 	}
 	if ((errnum = ft_read_sourcefile(i, av, a)) > 0)
