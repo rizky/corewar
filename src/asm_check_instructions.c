@@ -96,7 +96,7 @@ int		ft_check_instructions(t_asm *a)
 	int start;
 
 	ft_skip_empty_lines(a);
-	start = a->i;
+	a->start = a->i;
 	if (ft_get_labels(a) == -1 || ft_check_opcode(a) == -1)
 	{
 		ft_dprintf(2, "Error - invalid instruction\n");

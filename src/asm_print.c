@@ -6,39 +6,139 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 16:38:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:30:34 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_asm.h"
 #include "../libft/include/libft.h"
 
+static void
+	asm_print_header(t_asm a)
+{
+	ft_dprintf(2, "Dumping annotated program on standard output\n");
+	ft_dprintf(2, "Program size : %d bytes\n", a.size);
+	ft_dprintf(2, "Name : \"%s\"\n", a.name);
+	ft_dprintf(2, "Comment : \"%s\"\n", a.comment);
+}
+
 void
-	asm_print(t_asm *a)
+	asm_print(t_asm a)
 {
 	int	i;
 	int	j;
+	int length;
 
-	ft_printfln("Dumping annotated program on standard output");
-	ft_printfln("Program size : %d bytes", a->size);
-	ft_printf("Name : \"%s\"\nComment : \"%s\"\n", a->name, a->comment);
+	length = 0;
+	asm_print_header(a);
 	i = -1;
-	while (++i < a->op_c)
+	while (++i < a.op_c)
 	{
-		if (a->ops[i].label != NULL)
-			ft_printfln("%-5d      :\t%s", a->ops[i].offset, a->ops[i].label);
+		if (ARRAY(a.ops, i).label != NULL)
+		{
+			ft_printf("%-5d      :\t%s:\n", ARRAY(a.ops, i).offset,
+					  ARRAY(a.ops, i).label);
+			length += ft_strlen(ARRAY(a.ops, i).label);
+		}
 		ft_printf("%-5d(%-3d) :\t    %-10s",
-		a->ops[i].offset, a->ops[i].size, a->ops[i].opname);
+		ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size, ARRAY(a.ops, i).opname);
+		length += ft_strlen(ARRAY(a.ops, i).opname);
 		j = -1;
-		while (++j < a->ops[i].param_c)
-			ft_printf("%-18s", a->ops[i].params[j].str);
+		while (++j < ARRAY(a.ops, i).param_c)
+		{
+			ft_printf("%-18s", ARRAY(a.ops, i).params[j].str);
+			length += ft_strlen(ARRAY(a.ops, i).params[j].str);
+		}
 		ft_printf("\n");
-		(a->ops[i].param_c > 1) ?
-		ft_printf("         \t    %-4d%-6d", a->ops[i].opcode, a->ops[i].oc) :
-		ft_printf("         \t    %-10d", a->ops[i].opcode);
+		(ARRAY(a.ops, i).param_c > 1) ?
+		ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
+			ARRAY(a.ops, i).oc) :
+		ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
 		j = -1;
-		while (++j < a->ops[i].param_c)
-			ft_printf("%-18d", a->ops[i].params[j].value);
+		while (++j < ARRAY(a.ops, i).param_c)
+			ft_printf("%-18d", ARRAY(a.ops, i).params[j].value);
 		ft_printf("\n\n");
 	}
+}
+
+int		ft_simple_len(char *str)
+{
+	char	*c;
+	int		len;
+
+	len = 0;
+	c = str;
+	while (*c != '\0')
+	{
+		c++;
+		if (*c != ' ' && *c != '\t')
+			len++;
+	}
+	return (len);
+}
+
+int		ft_line_is_empty2(t_asm a)
+{
+	int j;
+
+	j = 0;
+	while (a.file[a.i][j])
+	{
+		if (!ft_isspace(a.file[a.i][j]))
+			return (0);
+		j++;
+	}
+	return (1);
+}
+
+int 	check_ops(t_asm a)
+{
+	int	i;
+	int	j;
+	int length;
+
+	length = 0;
+	i = -1;
+	a.i = a.start;
+	while (++i < a.op_c)
+	{
+		length = 0;
+		if (ARRAY(a.ops, i).label != NULL)
+			length += ft_strlen(ARRAY(a.ops, i).label) + 1;
+		length += ft_strlen(ARRAY(a.ops, i).opname);
+		j = -1;
+		while (++j < ARRAY(a.ops, i).param_c)
+			length += ft_strlen(ARRAY(a.ops, i).params[j].str);
+
+		length += ARRAY(a.ops, i).param_c - 1;
+		if (length != ft_simple_len(a.file[a.i]))
+			return (-1);
+		a.i++;
+		while (a.file[a.i] && ft_line_is_empty2(a) && a.file[a.i + 1])
+			a.i++;
+	}
+	return (0);
+}
+
+int
+	asm_print_memory(t_array *binary, char *path)
+{
+	int		i;
+	int		fd;
+	char	*cor;
+
+	cor = malloc(sizeof(char) * (ft_strlen(path) + 3));
+	if (cor == NULL)
+		return (-1);
+	ft_bzero(cor, ft_strlen(path) + 3);
+	cor = ft_strncpy(cor, path, ft_strlen(path) - 1);
+	cor = ft_strcat(cor, "cor");
+	fd = open(cor, O_RDWR | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	ft_printfln("Writing output program to %s", cor);
+	i = -1;
+	while (++i < (int)binary->size)
+		ft_dprintf(fd, "%c", ((char*)binary->data)[i]);
+	free(cor);
+	return (0);
 }

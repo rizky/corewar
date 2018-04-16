@@ -138,7 +138,7 @@ class norme:
                     self.nb_funcline = self.nb_funcline + 1
                     if self.nb_funcline >= 26:
                         self.note += 1
-                        self.print_error('Function has more than 25 lines')
+                        self.print_error('Function has more than 25 lines ('+ str(self.nb_funcline) +')')
 
     def check_cfunc(self):
         if is_commented(self.line) == False:

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 15:47:17 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:26:58 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int
 	int i;
 
 	i = 0;
-	if (a->ops[a->op_c].opcode == -1)
+	if (ARRAY(a->ops, a->op_c).opcode == -1)
 		return (ft_error(OP, -1, a->file[a->i]));
-	while (i < a->ops[a->op_c].param_c)
+	while (i < ARRAY(a->ops, a->op_c).param_c)
 	{
-		if (a->ops[a->op_c].params[i].type == -1)
+		if (ARRAY(a->ops, a->op_c).params[i].type == -1)
 			return (ft_error(OP_PARAM, -1, a->file[a->i]));
 		i++;
 	}
@@ -70,11 +70,11 @@ int ft_get_name_comment(t_asm *a, header_t *h)
 	else if (!a->name && !a->comment)
 		tmp = ft_error(HEADER, -1, NULL);
 	else if (!a->name)
-		tmp = ft_error(NAME, -1, NULL);
+		tmp = ft_error(HEADER, -1, NULL);
 	else if (!a->comment)
-		tmp = ft_error(COMMENT, -1, NULL);
+		tmp = ft_error(HEADER, -1, NULL);
 	else
-		tmp = ft_error(OTHER, -1, NULL);
+		tmp = ft_error(HEADER, -1, NULL);
 	ft_skip_empty_lines(a);
 	if (a->name && a->comment && !ft_strchr(LABEL_CHARS, a->file[a->i][0]))
 	{
@@ -97,10 +97,10 @@ int		ft_parsing(t_asm *a, header_t *h)
 	if (ft_get_comment(a, h) == -1)
 		return (-1);
 	a->i++;
-	ft_check_instructions(a);
+	ft_check_instructions(a); //regarde toutes les operations
 	while (a->file[a->i])
 	{
-		asm_get_op(a);
+		asm_parser_op(a);
 		if (asm_check_op(a) == -1)
 			return (-1);
 		a->op_c++;
@@ -108,6 +108,5 @@ int		ft_parsing(t_asm *a, header_t *h)
 	}
 	if (asm_populate_indvalue(a) == -1)
 		return (-1);
-	asm_print(a);
 	return (0);
 }
