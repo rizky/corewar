@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 23:22:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:25:29 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ int			main(int ac, char **av)
 	ops = NEW_ARRAY(t_op);
 	a.ops = &ops;
 	if (ft_parsing(&a, &h) == -1)
-		return (ft_free_tab(a.file, -1));
+		return (ft_free_asm(&a, -1));
 	asm_print(a);
 	asm_compiler(a);
 	//ft_print_tab(a.file);
-	ft_free_tab(a.file, 0);
+	ft_free_asm(&a, 0);
 	return (0);
 }

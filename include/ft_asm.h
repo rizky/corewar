@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 09:17:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:25:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void			ft_trim_file(char **file);
 void			ft_print_tab(char **tab);
 int				ft_free(char *str, int status);
 int				ft_free_tab(char **tab, int status);
+int				ft_free_asm(t_asm *a, int status);
 
 int				asm_parser_op(t_asm *a);
 void			asm_print(t_asm a);
