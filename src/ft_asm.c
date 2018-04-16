@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 10:46:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 10:58:32 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 ** Only accepts files with filename extension .s
 */
 
-static int	ft_read_sourcefile(int ac, char **av, t_asm *a)
+static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 {
 	int		fd;
 	int		ret;
 	char	buf[BUFF_SIZE + 1];
 	char	*file[2];
 
-	if ((fd = open(av[ac - 1], O_RDONLY)) == -1)
+	if ((fd = open(av[i], O_RDONLY)) == -1)
 		return (SOURCEFILE);
-	a->path = av[ac - 1];
+	a->path = av[i];
 	file[0] = ft_strnew(0);
 	while ((ret = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
@@ -56,22 +56,28 @@ static int	ft_filename_extension(char *file)
 static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
 {
 	int errnum;
+	int	i;
 
 	ft_bzero(a, sizeof(t_asm));
 	ft_bzero(h, sizeof(header_t));
-	asm_getoptions(av, a->opt);
-	if (ac < 2 || !ft_filename_extension(av[ac - 1]))
+	i = asm_getoptions(av, a->opt);
+	i = (a->opt[OPT_M]) ? i: ac - 1;
+	while (i < ac)
 	{
-		ft_dprintf(2, "Usage: %s <sourcefile.s>\n", av[0]);
-		return (-1);
-	}
-	if ((errnum = ft_read_sourcefile(ac, av, a)) > 0)
-	{
-		if (errnum == SOURCEFILE)
-			ft_dprintf(2, "Can't read source file %s\n", av[ac - 1]);
-		else
-			return (ft_error(errnum, -1, NULL));
-		return (-1);
+		if (ac < 2 || !ft_filename_extension(av[i]))
+		{
+			ft_dprintf(2, "Usage: %s <sourcefile.s>\n", av[0]);
+			return (-1);
+		}
+		if ((errnum = ft_read_sourcefile(i, av, a)) > 0)
+		{
+			if (errnum == SOURCEFILE)
+				ft_dprintf(2, "Can't read source file %s\n", av[i]);
+			else
+				return (ft_error(errnum, -1, NULL));
+			return (-1);
+		}
+		i++;
 	}
 	return (0);
 }
