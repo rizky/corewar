@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 15:31:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:08:05 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,17 @@ void
 		if (ARRAY(a.ops, i).label != NULL)
 			ft_printf("%-5d      :\t%s:\n", ARRAY(a.ops, i).offset,
 			ARRAY(a.ops, i).label);
-		ft_printf("%-5d(%-3d) :\t    %-10s",
-		ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size, ARRAY(a.ops, i).opname);
-		j = -1;
-		while (++j < ARRAY(a.ops, i).param_c)
-			ft_printf("%-18s", ARRAY(a.ops, i).params[j].str);
-		ft_printf("\n");
-		asm_print_op(a, i);
-		ft_printf("\n\n");
+		if (ARRAY(a.ops, i).opcode != 0)
+		{
+			ft_printf("%-5d(%-3d) :\t    %-10s",
+			ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size, ARRAY(a.ops, i).opname);
+			j = -1;
+			while (++j < ARRAY(a.ops, i).param_c)
+				ft_printf("%-18s", ARRAY(a.ops, i).params[j].str);
+			ft_printf("\n");
+			asm_print_op(a, i);
+			ft_printf("\n\n");
+		}
 	}
 }
 

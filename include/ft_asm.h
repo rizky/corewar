@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 16:04:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:51:47 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "zjmp", .opcode = 0x09, .d_size = 2,
 		{T_DIR, 0, 0} },
 	{ .name = "ldi", .opcode = 0x0a, .d_size = 2,
-		{T_REG | T_IND | T_DIR, T_IND | T_DIR, T_REG} },
+		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG} },
 	{ .name = "sti", .opcode = 0x0b, .d_size = 2,
-		{T_REG, T_REG | T_IND | T_DIR, T_IND | T_DIR} },
+		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG} },
 	{ .name = "fork", .opcode = 0x0c, .d_size = 2,
 		{T_DIR, 0, 0} },
 	{ .name = "lld", .opcode = 0x0d, .d_size = 4,

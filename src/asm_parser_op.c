@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 15:17:53 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:06:29 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int
 {
 	int i;
 
+	if (!opname)
+		return (0);
 	i = 1;
 	while (i < 17)
 	{
@@ -52,7 +54,7 @@ void
 	temp = ft_re_capture("[\t ][^ \t]+", opstr);
 	opparam = ft_re_capture("[^ \t]+", temp);
 	param_tab = ft_strsplit(opparam, SEPARATOR_CHAR);
-	while (param_tab[(*op).param_c])
+	while (param_tab && param_tab[(*op).param_c])
 	{
 		if ((*op).param_c < 3)
 		{
@@ -77,7 +79,8 @@ int
 	ft_skip_empty_lines(a);
 	if (ft_re_match("^[\\w_\\d]+:[ \t]*\\w+[ \t]+.*", a->file[a->i]) == -1)
 		if (ft_re_match("^\\w+[ \t]+.*", a->file[a->i]) == -1)
-			return (ft_error(OP, -1, a->file[a->i]));
+			if (ft_re_match("^\\w+.*", a->file[a->i]) == -1)
+				return (ft_error(OP, -1, a->file[a->i]));
 	temp = ft_re_capture("\\w+:", a->file[a->i]);
 	op.label = ft_re_capture("\\w+", temp);
 	op.param_c = 0;
@@ -87,7 +90,8 @@ int
 	op.offset = a->size;
 	asm_parser_opparam(a->file[a->i], &op);
 	op.oc = asm_calculate_oc(op.params, op.param_c);
-	op.size += (op.param_c > 1) ? 2 : 1;
+	if (op.opcode > 0)
+		op.size += (op.param_c > 1) ? 2 : 1;
 	fta_append(a->ops, &op, 1);
 	a->size += op.size;
 	free(temp);
