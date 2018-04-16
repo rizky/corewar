@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 10:25:58 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:47:57 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void
 	bits = size * 8;
 	while (i <= bits - 8)
 	{
-		ft_printf("%-3d ", (unsigned char)(value >> (bits - 8 - i)) );
+		ft_printf("%-3d ", (unsigned char)(value >> (bits - 8 - i)));
 		i = i + 8;
 	}
 	while (i < 32)
@@ -64,6 +64,7 @@ void
 	while (++j < ARRAY(a.ops, i).param_c)
 		ft_printf("%-18d", ARRAY(a.ops, i).params[j].value);
 }
+
 void
 	asm_print(t_asm a)
 {

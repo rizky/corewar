@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 11:14:19 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:45:45 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char
 {
 	char	*opstr;
 	char	*opname;
+
 	opstr = ft_re_capture("\\w+[ \t]+.*", line);
 	opname = ft_re_capture("\\w+", opstr);
 	free(opstr);

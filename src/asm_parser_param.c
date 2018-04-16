@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 11:17:00 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:47:10 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int
 	str = ft_re_capture("[\\w_\\d]+", label);
 	while (i < a->op_c)
 	{
-		if (ARRAY(a->ops, i).label && ft_strcmp(ARRAY(a->ops, i).label, str) == 0)
+		if (ARRAY(a->ops, i).label &&
+			ft_strcmp(ARRAY(a->ops, i).label, str) == 0)
 			return (ARRAY(a->ops, i).offset);
 		i++;
 	}
@@ -95,7 +96,7 @@ int
 			ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
 	{
 		(*param).is_label = 0;
-		if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 )
+		if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0)
 			(*param).is_label = 1;
 		else if (ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
 			(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");

@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 11:40:18 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/16 11:44:52 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		asm_check_op(t_asm *a)
 	i = 0;
 	if (ARRAY(a->ops, a->op_c).opcode == -1)
 		return (ft_error(OP_NAME, -1, a->file[a->i]));
-	if (ARRAY(a->ops, a->op_c).param_c == 0 || ARRAY(a->ops, a->op_c).param_c > 3)
+	if (ARRAY(a->ops, a->op_c).param_c == 0 ||
+		ARRAY(a->ops, a->op_c).param_c > 3)
 		return (ft_error(OP_PARAM, -1, a->file[a->i]));
 	while (i < ARRAY(a->ops, a->op_c).param_c)
 	{

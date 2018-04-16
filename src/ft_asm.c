@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 11:39:46 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/16 11:48:13 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ft_init(int ac, char **av, t_asm *a)
 
 	ft_bzero(a, sizeof(t_asm));
 	i = asm_getoptions(av, a->opt);
-	i = (a->opt[OPT_M]) ? i: ac - 1;
+	i = (a->opt[OPT_M]) ? i : ac - 1;
 	while (i < ac)
 	{
 		if (ac < 2 || !ft_filename_extension(av[i]))
