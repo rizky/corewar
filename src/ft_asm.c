@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 10:26:08 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 10:46:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
 
 	ft_bzero(a, sizeof(t_asm));
 	ft_bzero(h, sizeof(header_t));
+	asm_getoptions(av, a->opt);
 	if (ac < 2 || !ft_filename_extension(av[ac - 1]))
 	{
 		ft_dprintf(2, "Usage: %s <sourcefile.s>\n", av[0]);
@@ -87,8 +88,10 @@ int			main(int ac, char **av)
 	a.ops = &ops;
 	if (ft_parsing(&a, &h) == -1)
 		return (ft_free_asm(&a, -1));
-	asm_print(a);
-	asm_compiler(a);
+	if (a.opt[OPT_A])
+		asm_print(a);
+	else
+		asm_compiler(a);
 	ft_free_asm(&a, 0);
 	return (0);
 }

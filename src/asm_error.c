@@ -6,13 +6,23 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 09:34:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 10:51:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int		ft_error(int errnum, int status, char *line)
+static void
+	ft_error_2(int errnum)
+{
+	if (errnum == OP_PARAM)
+		ft_dprintf(2, "Operation: Parameter is invalid\n");
+	else if (errnum == LABEL_MISSING)
+		ft_dprintf(2, "Label: Undefined Label\n");
+}
+
+int
+	ft_error(int errnum, int status, char *line)
 {
 	if (line)
 		ft_dprintf(2, "%*w%s%w\n", RED, line);
@@ -35,9 +45,7 @@ int		ft_error(int errnum, int status, char *line)
 		ft_dprintf(2, "Operation: Operation is invalid\n");
 	else if (errnum == OP_NAME)
 		ft_dprintf(2, "Operation: Operation does not exist\n");
-	else if (errnum == OP_PARAM)
-		ft_dprintf(2, "Operation: Parameter is invalid\n");
-	else if (errnum == LABEL_MISSING)
-		ft_dprintf(2, "Label: Undefined Label\n");
+	else
+		ft_error_2(errnum);
 	return (status);
 }
