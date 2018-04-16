@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 22:23:16 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 23:22:59 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int
 	op.opcode = asm_parser_opcode(op.opname);
 	op.size = 0;
 	op.offset = a->size;
+	if (ft_re_match(",[ \t]*$", a->file[a->i]) != -1)
+		return (ft_error(OP, -1, a->file[a->i]));
 	asm_parser_opparam(a->file[a->i], &op);
 	op.oc = asm_calculate_oc(op.params, op.param_c);
 	if (op.opcode > 0)
