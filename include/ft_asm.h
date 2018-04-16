@@ -37,6 +37,7 @@
 
 # define OPT_NUM 2
 # define OPT_STR "am"
+
 typedef struct	s_op_dict
 {
 	char		*name;
@@ -54,7 +55,7 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "ld", .opcode = 0x02, .d_size = 4, .param_c = 2,
 		{T_DIR | T_IND, T_REG, 0} },
 	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2,
-		{T_REG, T_REG| T_IND, 0} },
+		{T_REG, T_REG | T_IND, 0} },
 	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3,
 		{T_REG, T_REG, T_REG} },
 	{ .name = "sub", .opcode = 0x05, .d_size = 0, .param_c = 3,
@@ -113,7 +114,7 @@ typedef struct	s_asm
 	char		**file;
 	char		**labels;
 	t_array		*ops;
-	int				op_c;
+	int			op_c;
 	int			size;
 }				t_asm;
 
