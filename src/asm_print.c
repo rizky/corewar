@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 10:09:43 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 10:21:40 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,27 @@ void
 }
 
 void
+	asm_print_op(t_asm a, int i)
+{
+	int	j;
+	(ARRAY(a.ops, i).param_c > 1) ?
+	ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
+		ARRAY(a.ops, i).oc) :
+	ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
+	j = -1;
+	while (++j < ARRAY(a.ops, i).param_c)
+		asm_print_big_endian(ARRAY(a.ops, i).params[j].value,
+			ARRAY(a.ops, i).params[j].size);
+	ft_printf("\n");
+	(ARRAY(a.ops, i).param_c > 1) ?
+	ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
+		ARRAY(a.ops, i).oc) :
+	ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
+	j = -1;
+	while (++j < ARRAY(a.ops, i).param_c)
+		ft_printf("%-18d", ARRAY(a.ops, i).params[j].value);
+}
+void
 	asm_print(t_asm a)
 {
 	int	i;
@@ -61,21 +82,7 @@ void
 		while (++j < ARRAY(a.ops, i).param_c)
 			ft_printf("%-18s", ARRAY(a.ops, i).params[j].str);
 		ft_printf("\n");
-		(ARRAY(a.ops, i).param_c > 1) ?
-		ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
-			ARRAY(a.ops, i).oc) :
-		ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
-		j = -1;
-		while (++j < ARRAY(a.ops, i).param_c)
-			asm_print_big_endian(ARRAY(a.ops, i).params[j].value, ARRAY(a.ops, i).params[j].size);
-		ft_printf("\n");
-		(ARRAY(a.ops, i).param_c > 1) ?
-		ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
-			ARRAY(a.ops, i).oc) :
-		ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
-		j = -1;
-		while (++j < ARRAY(a.ops, i).param_c)
-			ft_printf("%-18d", ARRAY(a.ops, i).params[j].value);
+		asm_print_op(a, i);
 		ft_printf("\n\n");
 	}
 }
