@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 09:17:53 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 10:25:45 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void
 	asm_compiler(t_asm a)
 {
 	t_array	binary;
-	int	i;
+	int		i;
 
 	binary = NEW_ARRAY(char);
 	asm_append_magic_nbr(&binary);

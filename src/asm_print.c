@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 10:21:40 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 10:25:58 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void
 	asm_print_op(t_asm a, int i)
 {
 	int	j;
+
 	(ARRAY(a.ops, i).param_c > 1) ?
 	ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
 		ARRAY(a.ops, i).oc) :
