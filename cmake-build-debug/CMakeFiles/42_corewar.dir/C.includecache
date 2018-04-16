@@ -564,11 +564,25 @@ stdlib.h
 ../include/libft.h
 /Users/macos/Documents/42-corewar/libft/include/libft.h
 
-/Users/macos/Documents/42-corewar/src/asm_check_instructions.c
+/Users/macos/Documents/42-corewar/src/asm_checker_labels.c
 ../include/ft_asm.h
 /Users/macos/Documents/42-corewar/include/ft_asm.h
 ../libft/include/libft.h
 /Users/macos/Documents/42-corewar/libft/include/libft.h
+
+/Users/macos/Documents/42-corewar/src/asm_checker_op.c
+../include/ft_asm.h
+/Users/macos/Documents/42-corewar/include/ft_asm.h
+../libft/include/libft.h
+/Users/macos/Documents/42-corewar/libft/include/libft.h
+
+/Users/macos/Documents/42-corewar/src/asm_compiler.c
+../include/ft_asm.h
+/Users/macos/Documents/42-corewar/include/ft_asm.h
+
+/Users/macos/Documents/42-corewar/src/asm_compiler_header.c
+../include/ft_asm.h
+/Users/macos/Documents/42-corewar/include/ft_asm.h
 
 /Users/macos/Documents/42-corewar/src/asm_error.c
 ../include/ft_asm.h
@@ -583,12 +597,6 @@ stdlib.h
 /Users/macos/Documents/42-corewar/libft/include/libft.h
 
 /Users/macos/Documents/42-corewar/src/asm_helper_2.c
-../include/ft_asm.h
-/Users/macos/Documents/42-corewar/include/ft_asm.h
-../libft/include/libft.h
-/Users/macos/Documents/42-corewar/libft/include/libft.h
-
-/Users/macos/Documents/42-corewar/src/asm_labels.c
 ../include/ft_asm.h
 /Users/macos/Documents/42-corewar/include/ft_asm.h
 ../libft/include/libft.h

@@ -3120,32 +3120,113 @@ libft/src/get_next_line.c.s:
 	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.s
 .PHONY : libft/src/get_next_line.c.s
 
-src/asm_check_instructions.o: src/asm_check_instructions.c.o
+src/asm_checker_labels.o: src/asm_checker_labels.c.o
 
-.PHONY : src/asm_check_instructions.o
+.PHONY : src/asm_checker_labels.o
 
 # target to build an object file
-src/asm_check_instructions.c.o:
-	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o
-.PHONY : src/asm_check_instructions.c.o
+src/asm_checker_labels.c.o:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o
+.PHONY : src/asm_checker_labels.c.o
 
-src/asm_check_instructions.i: src/asm_check_instructions.c.i
+src/asm_checker_labels.i: src/asm_checker_labels.c.i
 
-.PHONY : src/asm_check_instructions.i
+.PHONY : src/asm_checker_labels.i
 
 # target to preprocess a source file
-src/asm_check_instructions.c.i:
-	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.i
-.PHONY : src/asm_check_instructions.c.i
+src/asm_checker_labels.c.i:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.i
+.PHONY : src/asm_checker_labels.c.i
 
-src/asm_check_instructions.s: src/asm_check_instructions.c.s
+src/asm_checker_labels.s: src/asm_checker_labels.c.s
 
-.PHONY : src/asm_check_instructions.s
+.PHONY : src/asm_checker_labels.s
 
 # target to generate assembly for a file
-src/asm_check_instructions.c.s:
-	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.s
-.PHONY : src/asm_check_instructions.c.s
+src/asm_checker_labels.c.s:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.s
+.PHONY : src/asm_checker_labels.c.s
+
+src/asm_checker_op.o: src/asm_checker_op.c.o
+
+.PHONY : src/asm_checker_op.o
+
+# target to build an object file
+src/asm_checker_op.c.o:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o
+.PHONY : src/asm_checker_op.c.o
+
+src/asm_checker_op.i: src/asm_checker_op.c.i
+
+.PHONY : src/asm_checker_op.i
+
+# target to preprocess a source file
+src/asm_checker_op.c.i:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_checker_op.c.i
+.PHONY : src/asm_checker_op.c.i
+
+src/asm_checker_op.s: src/asm_checker_op.c.s
+
+.PHONY : src/asm_checker_op.s
+
+# target to generate assembly for a file
+src/asm_checker_op.c.s:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_checker_op.c.s
+.PHONY : src/asm_checker_op.c.s
+
+src/asm_compiler.o: src/asm_compiler.c.o
+
+.PHONY : src/asm_compiler.o
+
+# target to build an object file
+src/asm_compiler.c.o:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_compiler.c.o
+.PHONY : src/asm_compiler.c.o
+
+src/asm_compiler.i: src/asm_compiler.c.i
+
+.PHONY : src/asm_compiler.i
+
+# target to preprocess a source file
+src/asm_compiler.c.i:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_compiler.c.i
+.PHONY : src/asm_compiler.c.i
+
+src/asm_compiler.s: src/asm_compiler.c.s
+
+.PHONY : src/asm_compiler.s
+
+# target to generate assembly for a file
+src/asm_compiler.c.s:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_compiler.c.s
+.PHONY : src/asm_compiler.c.s
+
+src/asm_compiler_header.o: src/asm_compiler_header.c.o
+
+.PHONY : src/asm_compiler_header.o
+
+# target to build an object file
+src/asm_compiler_header.c.o:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o
+.PHONY : src/asm_compiler_header.c.o
+
+src/asm_compiler_header.i: src/asm_compiler_header.c.i
+
+.PHONY : src/asm_compiler_header.i
+
+# target to preprocess a source file
+src/asm_compiler_header.c.i:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.i
+.PHONY : src/asm_compiler_header.c.i
+
+src/asm_compiler_header.s: src/asm_compiler_header.c.s
+
+.PHONY : src/asm_compiler_header.s
+
+# target to generate assembly for a file
+src/asm_compiler_header.c.s:
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.s
+.PHONY : src/asm_compiler_header.c.s
 
 src/asm_error.o: src/asm_error.c.o
 
@@ -3227,33 +3308,6 @@ src/asm_helper_2.s: src/asm_helper_2.c.s
 src/asm_helper_2.c.s:
 	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_helper_2.c.s
 .PHONY : src/asm_helper_2.c.s
-
-src/asm_labels.o: src/asm_labels.c.o
-
-.PHONY : src/asm_labels.o
-
-# target to build an object file
-src/asm_labels.c.o:
-	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_labels.c.o
-.PHONY : src/asm_labels.c.o
-
-src/asm_labels.i: src/asm_labels.c.i
-
-.PHONY : src/asm_labels.i
-
-# target to preprocess a source file
-src/asm_labels.c.i:
-	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_labels.c.i
-.PHONY : src/asm_labels.c.i
-
-src/asm_labels.s: src/asm_labels.c.s
-
-.PHONY : src/asm_labels.s
-
-# target to generate assembly for a file
-src/asm_labels.c.s:
-	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_labels.c.s
-.PHONY : src/asm_labels.c.s
 
 src/asm_parser.o: src/asm_parser.c.o
 
@@ -3840,9 +3894,18 @@ help:
 	@echo "... libft/src/get_next_line.o"
 	@echo "... libft/src/get_next_line.i"
 	@echo "... libft/src/get_next_line.s"
-	@echo "... src/asm_check_instructions.o"
-	@echo "... src/asm_check_instructions.i"
-	@echo "... src/asm_check_instructions.s"
+	@echo "... src/asm_checker_labels.o"
+	@echo "... src/asm_checker_labels.i"
+	@echo "... src/asm_checker_labels.s"
+	@echo "... src/asm_checker_op.o"
+	@echo "... src/asm_checker_op.i"
+	@echo "... src/asm_checker_op.s"
+	@echo "... src/asm_compiler.o"
+	@echo "... src/asm_compiler.i"
+	@echo "... src/asm_compiler.s"
+	@echo "... src/asm_compiler_header.o"
+	@echo "... src/asm_compiler_header.i"
+	@echo "... src/asm_compiler_header.s"
 	@echo "... src/asm_error.o"
 	@echo "... src/asm_error.i"
 	@echo "... src/asm_error.s"
@@ -3852,9 +3915,6 @@ help:
 	@echo "... src/asm_helper_2.o"
 	@echo "... src/asm_helper_2.i"
 	@echo "... src/asm_helper_2.s"
-	@echo "... src/asm_labels.o"
-	@echo "... src/asm_labels.i"
-	@echo "... src/asm_labels.s"
 	@echo "... src/asm_parser.o"
 	@echo "... src/asm_parser.i"
 	@echo "... src/asm_parser.s"

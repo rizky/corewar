@@ -872,7 +872,7 @@ CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o
  /Users/macos/Documents/42-corewar/libft/include/get_next_line.h
  /Users/macos/Documents/42-corewar/libft/include/libft.h
  /Users/macos/Documents/42-corewar/libft/src/get_next_line.c
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o
  /Users/macos/Documents/42-corewar/include/ft_asm.h
  /Users/macos/Documents/42-corewar/include/op.h
  /Users/macos/Documents/42-corewar/libft/include/ft_array.h
@@ -882,7 +882,40 @@ CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o
  /Users/macos/Documents/42-corewar/libft/include/ft_wchar.h
  /Users/macos/Documents/42-corewar/libft/include/get_next_line.h
  /Users/macos/Documents/42-corewar/libft/include/libft.h
- /Users/macos/Documents/42-corewar/src/asm_check_instructions.c
+ /Users/macos/Documents/42-corewar/src/asm_checker_labels.c
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o
+ /Users/macos/Documents/42-corewar/include/ft_asm.h
+ /Users/macos/Documents/42-corewar/include/op.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_array.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_date.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_printf.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_re.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_wchar.h
+ /Users/macos/Documents/42-corewar/libft/include/get_next_line.h
+ /Users/macos/Documents/42-corewar/libft/include/libft.h
+ /Users/macos/Documents/42-corewar/src/asm_checker_op.c
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o
+ /Users/macos/Documents/42-corewar/include/ft_asm.h
+ /Users/macos/Documents/42-corewar/include/op.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_array.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_date.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_printf.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_re.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_wchar.h
+ /Users/macos/Documents/42-corewar/libft/include/get_next_line.h
+ /Users/macos/Documents/42-corewar/libft/include/libft.h
+ /Users/macos/Documents/42-corewar/src/asm_compiler.c
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o
+ /Users/macos/Documents/42-corewar/include/ft_asm.h
+ /Users/macos/Documents/42-corewar/include/op.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_array.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_date.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_printf.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_re.h
+ /Users/macos/Documents/42-corewar/libft/include/ft_wchar.h
+ /Users/macos/Documents/42-corewar/libft/include/get_next_line.h
+ /Users/macos/Documents/42-corewar/libft/include/libft.h
+ /Users/macos/Documents/42-corewar/src/asm_compiler_header.c
 CMakeFiles/42_corewar.dir/src/asm_error.c.o
  /Users/macos/Documents/42-corewar/include/ft_asm.h
  /Users/macos/Documents/42-corewar/include/op.h
@@ -916,17 +949,6 @@ CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o
  /Users/macos/Documents/42-corewar/libft/include/get_next_line.h
  /Users/macos/Documents/42-corewar/libft/include/libft.h
  /Users/macos/Documents/42-corewar/src/asm_helper_2.c
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o
- /Users/macos/Documents/42-corewar/include/ft_asm.h
- /Users/macos/Documents/42-corewar/include/op.h
- /Users/macos/Documents/42-corewar/libft/include/ft_array.h
- /Users/macos/Documents/42-corewar/libft/include/ft_date.h
- /Users/macos/Documents/42-corewar/libft/include/ft_printf.h
- /Users/macos/Documents/42-corewar/libft/include/ft_re.h
- /Users/macos/Documents/42-corewar/libft/include/ft_wchar.h
- /Users/macos/Documents/42-corewar/libft/include/get_next_line.h
- /Users/macos/Documents/42-corewar/libft/include/libft.h
- /Users/macos/Documents/42-corewar/src/asm_labels.c
 CMakeFiles/42_corewar.dir/src/asm_parser.c.o
  /Users/macos/Documents/42-corewar/include/ft_asm.h
  /Users/macos/Documents/42-corewar/include/op.h

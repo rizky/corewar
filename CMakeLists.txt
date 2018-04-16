@@ -124,11 +124,15 @@ add_executable(42_corewar
         libft/src/ft_wchar/wide_char.c
         libft/src/ft_date.c
         libft/src/get_next_line.c
-        src/asm_check_instructions.c
+        src/asm_checker_labels.c
+        src/asm_checker_labels.c~HEAD
+        src/asm_checker_op.c
+        src/asm_checker_op.c~HEAD
+        src/asm_compiler.c
+        src/asm_compiler_header.c
         src/asm_error.c
         src/asm_helper_1.c
         src/asm_helper_2.c
-        src/asm_labels.c
         src/asm_parser.c
         src/asm_parser_header.c
         src/asm_parser_op.c

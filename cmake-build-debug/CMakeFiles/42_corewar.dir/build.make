@@ -2721,33 +2721,105 @@ CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o.provides: CMakeFiles/42_co
 CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o.provides.build: CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o
 
 
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: CMakeFiles/42_corewar.dir/flags.make
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../src/asm_check_instructions.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_112) "Building C object CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o   -c /Users/macos/Documents/42-corewar/src/asm_check_instructions.c
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: CMakeFiles/42_corewar.dir/flags.make
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../src/asm_checker_labels.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_112) "Building C object CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o   -c /Users/macos/Documents/42-corewar/src/asm_checker_labels.c
 
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/macos/Documents/42-corewar/src/asm_check_instructions.c > CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.i
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/macos/Documents/42-corewar/src/asm_checker_labels.c > CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.i
 
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/macos/Documents/42-corewar/src/asm_check_instructions.c -o CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.s
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/macos/Documents/42-corewar/src/asm_checker_labels.c -o CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.s
 
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o.requires:
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o.requires:
 
-.PHONY : CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o.requires
+.PHONY : CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o.requires
 
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o.provides: CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o.requires
-	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o.provides.build
-.PHONY : CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o.provides
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o.provides: CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o.requires
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o.provides.build
+.PHONY : CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o.provides
 
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o.provides.build: CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o.provides.build: CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o
+
+
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: CMakeFiles/42_corewar.dir/flags.make
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../src/asm_checker_op.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_113) "Building C object CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o   -c /Users/macos/Documents/42-corewar/src/asm_checker_op.c
+
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/42_corewar.dir/src/asm_checker_op.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/macos/Documents/42-corewar/src/asm_checker_op.c > CMakeFiles/42_corewar.dir/src/asm_checker_op.c.i
+
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/42_corewar.dir/src/asm_checker_op.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/macos/Documents/42-corewar/src/asm_checker_op.c -o CMakeFiles/42_corewar.dir/src/asm_checker_op.c.s
+
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o.requires:
+
+.PHONY : CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o.requires
+
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o.provides: CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o.requires
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o.provides.build
+.PHONY : CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o.provides
+
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o.provides.build: CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o
+
+
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: CMakeFiles/42_corewar.dir/flags.make
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../src/asm_compiler.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_114) "Building C object CMakeFiles/42_corewar.dir/src/asm_compiler.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_compiler.c.o   -c /Users/macos/Documents/42-corewar/src/asm_compiler.c
+
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/42_corewar.dir/src/asm_compiler.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/macos/Documents/42-corewar/src/asm_compiler.c > CMakeFiles/42_corewar.dir/src/asm_compiler.c.i
+
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/42_corewar.dir/src/asm_compiler.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/macos/Documents/42-corewar/src/asm_compiler.c -o CMakeFiles/42_corewar.dir/src/asm_compiler.c.s
+
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o.requires:
+
+.PHONY : CMakeFiles/42_corewar.dir/src/asm_compiler.c.o.requires
+
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o.provides: CMakeFiles/42_corewar.dir/src/asm_compiler.c.o.requires
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_compiler.c.o.provides.build
+.PHONY : CMakeFiles/42_corewar.dir/src/asm_compiler.c.o.provides
+
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o.provides.build: CMakeFiles/42_corewar.dir/src/asm_compiler.c.o
+
+
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: CMakeFiles/42_corewar.dir/flags.make
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../src/asm_compiler_header.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_115) "Building C object CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o   -c /Users/macos/Documents/42-corewar/src/asm_compiler_header.c
+
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/macos/Documents/42-corewar/src/asm_compiler_header.c > CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.i
+
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/macos/Documents/42-corewar/src/asm_compiler_header.c -o CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.s
+
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o.requires:
+
+.PHONY : CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o.requires
+
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o.provides: CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o.requires
+	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o.provides.build
+.PHONY : CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o.provides
+
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o.provides.build: CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o
 
 
 CMakeFiles/42_corewar.dir/src/asm_error.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/asm_error.c.o: ../src/asm_error.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_113) "Building C object CMakeFiles/42_corewar.dir/src/asm_error.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_116) "Building C object CMakeFiles/42_corewar.dir/src/asm_error.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_error.c.o   -c /Users/macos/Documents/42-corewar/src/asm_error.c
 
 CMakeFiles/42_corewar.dir/src/asm_error.c.i: cmake_force
@@ -2771,7 +2843,7 @@ CMakeFiles/42_corewar.dir/src/asm_error.c.o.provides.build: CMakeFiles/42_corewa
 
 CMakeFiles/42_corewar.dir/src/asm_helper_1.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/asm_helper_1.c.o: ../src/asm_helper_1.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_114) "Building C object CMakeFiles/42_corewar.dir/src/asm_helper_1.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_117) "Building C object CMakeFiles/42_corewar.dir/src/asm_helper_1.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_helper_1.c.o   -c /Users/macos/Documents/42-corewar/src/asm_helper_1.c
 
 CMakeFiles/42_corewar.dir/src/asm_helper_1.c.i: cmake_force
@@ -2795,7 +2867,7 @@ CMakeFiles/42_corewar.dir/src/asm_helper_1.c.o.provides.build: CMakeFiles/42_cor
 
 CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o: ../src/asm_helper_2.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_115) "Building C object CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_118) "Building C object CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o   -c /Users/macos/Documents/42-corewar/src/asm_helper_2.c
 
 CMakeFiles/42_corewar.dir/src/asm_helper_2.c.i: cmake_force
@@ -2817,33 +2889,9 @@ CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o.provides: CMakeFiles/42_corewar.d
 CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o.provides.build: CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o
 
 
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: CMakeFiles/42_corewar.dir/flags.make
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../src/asm_labels.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_116) "Building C object CMakeFiles/42_corewar.dir/src/asm_labels.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_labels.c.o   -c /Users/macos/Documents/42-corewar/src/asm_labels.c
-
-CMakeFiles/42_corewar.dir/src/asm_labels.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/42_corewar.dir/src/asm_labels.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/macos/Documents/42-corewar/src/asm_labels.c > CMakeFiles/42_corewar.dir/src/asm_labels.c.i
-
-CMakeFiles/42_corewar.dir/src/asm_labels.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/42_corewar.dir/src/asm_labels.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/macos/Documents/42-corewar/src/asm_labels.c -o CMakeFiles/42_corewar.dir/src/asm_labels.c.s
-
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o.requires:
-
-.PHONY : CMakeFiles/42_corewar.dir/src/asm_labels.c.o.requires
-
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o.provides: CMakeFiles/42_corewar.dir/src/asm_labels.c.o.requires
-	$(MAKE) -f CMakeFiles/42_corewar.dir/build.make CMakeFiles/42_corewar.dir/src/asm_labels.c.o.provides.build
-.PHONY : CMakeFiles/42_corewar.dir/src/asm_labels.c.o.provides
-
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o.provides.build: CMakeFiles/42_corewar.dir/src/asm_labels.c.o
-
-
 CMakeFiles/42_corewar.dir/src/asm_parser.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/asm_parser.c.o: ../src/asm_parser.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_117) "Building C object CMakeFiles/42_corewar.dir/src/asm_parser.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_119) "Building C object CMakeFiles/42_corewar.dir/src/asm_parser.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_parser.c.o   -c /Users/macos/Documents/42-corewar/src/asm_parser.c
 
 CMakeFiles/42_corewar.dir/src/asm_parser.c.i: cmake_force
@@ -2867,7 +2915,7 @@ CMakeFiles/42_corewar.dir/src/asm_parser.c.o.provides.build: CMakeFiles/42_corew
 
 CMakeFiles/42_corewar.dir/src/asm_parser_header.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/asm_parser_header.c.o: ../src/asm_parser_header.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_118) "Building C object CMakeFiles/42_corewar.dir/src/asm_parser_header.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_120) "Building C object CMakeFiles/42_corewar.dir/src/asm_parser_header.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_parser_header.c.o   -c /Users/macos/Documents/42-corewar/src/asm_parser_header.c
 
 CMakeFiles/42_corewar.dir/src/asm_parser_header.c.i: cmake_force
@@ -2891,7 +2939,7 @@ CMakeFiles/42_corewar.dir/src/asm_parser_header.c.o.provides.build: CMakeFiles/4
 
 CMakeFiles/42_corewar.dir/src/asm_parser_op.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/asm_parser_op.c.o: ../src/asm_parser_op.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_119) "Building C object CMakeFiles/42_corewar.dir/src/asm_parser_op.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_121) "Building C object CMakeFiles/42_corewar.dir/src/asm_parser_op.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_parser_op.c.o   -c /Users/macos/Documents/42-corewar/src/asm_parser_op.c
 
 CMakeFiles/42_corewar.dir/src/asm_parser_op.c.i: cmake_force
@@ -2915,7 +2963,7 @@ CMakeFiles/42_corewar.dir/src/asm_parser_op.c.o.provides.build: CMakeFiles/42_co
 
 CMakeFiles/42_corewar.dir/src/asm_parser_param.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/asm_parser_param.c.o: ../src/asm_parser_param.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_120) "Building C object CMakeFiles/42_corewar.dir/src/asm_parser_param.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_122) "Building C object CMakeFiles/42_corewar.dir/src/asm_parser_param.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_parser_param.c.o   -c /Users/macos/Documents/42-corewar/src/asm_parser_param.c
 
 CMakeFiles/42_corewar.dir/src/asm_parser_param.c.i: cmake_force
@@ -2939,7 +2987,7 @@ CMakeFiles/42_corewar.dir/src/asm_parser_param.c.o.provides.build: CMakeFiles/42
 
 CMakeFiles/42_corewar.dir/src/asm_print.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/asm_print.c.o: ../src/asm_print.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_121) "Building C object CMakeFiles/42_corewar.dir/src/asm_print.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_123) "Building C object CMakeFiles/42_corewar.dir/src/asm_print.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/asm_print.c.o   -c /Users/macos/Documents/42-corewar/src/asm_print.c
 
 CMakeFiles/42_corewar.dir/src/asm_print.c.i: cmake_force
@@ -2963,7 +3011,7 @@ CMakeFiles/42_corewar.dir/src/asm_print.c.o.provides.build: CMakeFiles/42_corewa
 
 CMakeFiles/42_corewar.dir/src/ft_asm.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/ft_asm.c.o: ../src/ft_asm.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_122) "Building C object CMakeFiles/42_corewar.dir/src/ft_asm.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_124) "Building C object CMakeFiles/42_corewar.dir/src/ft_asm.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/ft_asm.c.o   -c /Users/macos/Documents/42-corewar/src/ft_asm.c
 
 CMakeFiles/42_corewar.dir/src/ft_asm.c.i: cmake_force
@@ -2987,7 +3035,7 @@ CMakeFiles/42_corewar.dir/src/ft_asm.c.o.provides.build: CMakeFiles/42_corewar.d
 
 CMakeFiles/42_corewar.dir/src/ft_convert_op.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/ft_convert_op.c.o: ../src/ft_convert_op.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_123) "Building C object CMakeFiles/42_corewar.dir/src/ft_convert_op.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_125) "Building C object CMakeFiles/42_corewar.dir/src/ft_convert_op.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/ft_convert_op.c.o   -c /Users/macos/Documents/42-corewar/src/ft_convert_op.c
 
 CMakeFiles/42_corewar.dir/src/ft_convert_op.c.i: cmake_force
@@ -3011,7 +3059,7 @@ CMakeFiles/42_corewar.dir/src/ft_convert_op.c.o.provides.build: CMakeFiles/42_co
 
 CMakeFiles/42_corewar.dir/src/ft_strcdup.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/ft_strcdup.c.o: ../src/ft_strcdup.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_124) "Building C object CMakeFiles/42_corewar.dir/src/ft_strcdup.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_126) "Building C object CMakeFiles/42_corewar.dir/src/ft_strcdup.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/ft_strcdup.c.o   -c /Users/macos/Documents/42-corewar/src/ft_strcdup.c
 
 CMakeFiles/42_corewar.dir/src/ft_strcdup.c.i: cmake_force
@@ -3035,7 +3083,7 @@ CMakeFiles/42_corewar.dir/src/ft_strcdup.c.o.provides.build: CMakeFiles/42_corew
 
 CMakeFiles/42_corewar.dir/src/ft_strcspn.c.o: CMakeFiles/42_corewar.dir/flags.make
 CMakeFiles/42_corewar.dir/src/ft_strcspn.c.o: ../src/ft_strcspn.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_125) "Building C object CMakeFiles/42_corewar.dir/src/ft_strcspn.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_127) "Building C object CMakeFiles/42_corewar.dir/src/ft_strcspn.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/42_corewar.dir/src/ft_strcspn.c.o   -c /Users/macos/Documents/42-corewar/src/ft_strcspn.c
 
 CMakeFiles/42_corewar.dir/src/ft_strcspn.c.i: cmake_force
@@ -3170,11 +3218,13 @@ CMakeFiles/42_corewar.dir/src/ft_strcspn.c.o.provides.build: CMakeFiles/42_corew
 "CMakeFiles/42_corewar.dir/libft/src/ft_wchar/wide_char.c.o" \
 "CMakeFiles/42_corewar.dir/libft/src/ft_date.c.o" \
 "CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o" \
-"CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o" \
+"CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o" \
+"CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o" \
+"CMakeFiles/42_corewar.dir/src/asm_compiler.c.o" \
+"CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o" \
 "CMakeFiles/42_corewar.dir/src/asm_error.c.o" \
 "CMakeFiles/42_corewar.dir/src/asm_helper_1.c.o" \
 "CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o" \
-"CMakeFiles/42_corewar.dir/src/asm_labels.c.o" \
 "CMakeFiles/42_corewar.dir/src/asm_parser.c.o" \
 "CMakeFiles/42_corewar.dir/src/asm_parser_header.c.o" \
 "CMakeFiles/42_corewar.dir/src/asm_parser_op.c.o" \
@@ -3299,11 +3349,13 @@ CMakeFiles/42_corewar.dir/src/ft_strcspn.c.o.provides.build: CMakeFiles/42_corew
 42_corewar: CMakeFiles/42_corewar.dir/libft/src/ft_wchar/wide_char.c.o
 42_corewar: CMakeFiles/42_corewar.dir/libft/src/ft_date.c.o
 42_corewar: CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o
-42_corewar: CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o
+42_corewar: CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o
+42_corewar: CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o
+42_corewar: CMakeFiles/42_corewar.dir/src/asm_compiler.c.o
+42_corewar: CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o
 42_corewar: CMakeFiles/42_corewar.dir/src/asm_error.c.o
 42_corewar: CMakeFiles/42_corewar.dir/src/asm_helper_1.c.o
 42_corewar: CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o
-42_corewar: CMakeFiles/42_corewar.dir/src/asm_labels.c.o
 42_corewar: CMakeFiles/42_corewar.dir/src/asm_parser.c.o
 42_corewar: CMakeFiles/42_corewar.dir/src/asm_parser_header.c.o
 42_corewar: CMakeFiles/42_corewar.dir/src/asm_parser_op.c.o
@@ -3315,7 +3367,7 @@ CMakeFiles/42_corewar.dir/src/ft_strcspn.c.o.provides.build: CMakeFiles/42_corew
 42_corewar: CMakeFiles/42_corewar.dir/src/ft_strcspn.c.o
 42_corewar: CMakeFiles/42_corewar.dir/build.make
 42_corewar: CMakeFiles/42_corewar.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_126) "Linking C executable 42_corewar"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/macos/Documents/42-corewar/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_128) "Linking C executable 42_corewar"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/42_corewar.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -3434,11 +3486,13 @@ CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/libft/src/ft_str/f
 CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/libft/src/ft_wchar/wide_char.c.o.requires
 CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/libft/src/ft_date.c.o.requires
 CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o.requires
-CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o.requires
+CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o.requires
+CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o.requires
+CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_compiler.c.o.requires
+CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o.requires
 CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_error.c.o.requires
 CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_helper_1.c.o.requires
 CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o.requires
-CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_labels.c.o.requires
 CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_parser.c.o.requires
 CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_parser_header.c.o.requires
 CMakeFiles/42_corewar.dir/requires: CMakeFiles/42_corewar.dir/src/asm_parser_op.c.o.requires

@@ -6,17 +6,29 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 13:38:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 14:33:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_asm.h"
 #include "../libft/include/libft.h"
 
-int		ft_error(int errnum, int status, char *line)
+static void
+	ft_error_2(int errnum)
+{
+	if (errnum == OP_PARAM)
+		ft_dprintf(2, "Operation: Parameter is invalid\n");
+	else if (errnum == LABEL_MISSING)
+		ft_dprintf(2, "Label: Undefined Label\n");
+	else if (errnum == OP_EMPTY)
+		ft_dprintf(2, "Operation: No operation found\n");
+}
+
+int
+	ft_error(int errnum, int status, char *line)
 {
 	if (line)
-		ft_dprintf(2, "%s\n", line);
+		ft_dprintf(2, "%*w%s%w\n", RED, line);
 	if (errnum == NEWLINE)
 	{
 		ft_dprintf(2, "Syntax error - unexpected end of input ");
@@ -35,10 +47,8 @@ int		ft_error(int errnum, int status, char *line)
 	else if (errnum == OP)
 		ft_dprintf(2, "Operation: Operation is invalid\n");
 	else if (errnum == OP_NAME)
-		ft_dprintf(2, "Operation: Operation Name is invalid\n");
-	else if (errnum == OP_PARAM)
-		ft_dprintf(2, "Operation: Parameter is invalid\n");
-	else if (errnum == LABEL_MISSING)
-		ft_dprintf(2, "Label: Undefined Label\n");
+		ft_dprintf(2, "Operation: Operation does not exist\n");
+	else
+		ft_error_2(errnum);
 	return (status);
 }

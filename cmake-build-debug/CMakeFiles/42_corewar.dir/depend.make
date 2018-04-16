@@ -872,16 +872,49 @@ CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o: ../libft/include/get_next
 CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o: ../libft/include/libft.h
 CMakeFiles/42_corewar.dir/libft/src/get_next_line.c.o: ../libft/src/get_next_line.c
 
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../include/ft_asm.h
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../include/op.h
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../libft/include/ft_array.h
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../libft/include/ft_date.h
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../libft/include/ft_printf.h
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../libft/include/ft_re.h
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../libft/include/ft_wchar.h
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../libft/include/get_next_line.h
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../libft/include/libft.h
-CMakeFiles/42_corewar.dir/src/asm_check_instructions.c.o: ../src/asm_check_instructions.c
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../include/ft_asm.h
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../include/op.h
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../libft/include/ft_array.h
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../libft/include/ft_date.h
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../libft/include/ft_printf.h
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../libft/include/ft_re.h
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../libft/include/ft_wchar.h
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../libft/include/get_next_line.h
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../libft/include/libft.h
+CMakeFiles/42_corewar.dir/src/asm_checker_labels.c.o: ../src/asm_checker_labels.c
+
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../include/ft_asm.h
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../include/op.h
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../libft/include/ft_array.h
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../libft/include/ft_date.h
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../libft/include/ft_printf.h
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../libft/include/ft_re.h
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../libft/include/ft_wchar.h
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../libft/include/get_next_line.h
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../libft/include/libft.h
+CMakeFiles/42_corewar.dir/src/asm_checker_op.c.o: ../src/asm_checker_op.c
+
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../include/ft_asm.h
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../include/op.h
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../libft/include/ft_array.h
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../libft/include/ft_date.h
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../libft/include/ft_printf.h
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../libft/include/ft_re.h
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../libft/include/ft_wchar.h
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../libft/include/get_next_line.h
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../libft/include/libft.h
+CMakeFiles/42_corewar.dir/src/asm_compiler.c.o: ../src/asm_compiler.c
+
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../include/ft_asm.h
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../include/op.h
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../libft/include/ft_array.h
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../libft/include/ft_date.h
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../libft/include/ft_printf.h
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../libft/include/ft_re.h
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../libft/include/ft_wchar.h
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../libft/include/get_next_line.h
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../libft/include/libft.h
+CMakeFiles/42_corewar.dir/src/asm_compiler_header.c.o: ../src/asm_compiler_header.c
 
 CMakeFiles/42_corewar.dir/src/asm_error.c.o: ../include/ft_asm.h
 CMakeFiles/42_corewar.dir/src/asm_error.c.o: ../include/op.h
@@ -915,17 +948,6 @@ CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o: ../libft/include/ft_wchar.h
 CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o: ../libft/include/get_next_line.h
 CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o: ../libft/include/libft.h
 CMakeFiles/42_corewar.dir/src/asm_helper_2.c.o: ../src/asm_helper_2.c
-
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../include/ft_asm.h
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../include/op.h
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../libft/include/ft_array.h
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../libft/include/ft_date.h
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../libft/include/ft_printf.h
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../libft/include/ft_re.h
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../libft/include/ft_wchar.h
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../libft/include/get_next_line.h
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../libft/include/libft.h
-CMakeFiles/42_corewar.dir/src/asm_labels.c.o: ../src/asm_labels.c
 
 CMakeFiles/42_corewar.dir/src/asm_parser.c.o: ../include/ft_asm.h
 CMakeFiles/42_corewar.dir/src/asm_parser.c.o: ../include/op.h

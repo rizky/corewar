@@ -440,7 +440,22 @@
 		<Unit filename="/Users/macos/Documents/42-corewar/libft/src/get_next_line.c">
 			<Option target="42_corewar"/>
 		</Unit>
-		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_check_instructions.c">
+		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_checker_labels.c">
+			<Option target="42_corewar"/>
+		</Unit>
+		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_checker_labels.c~HEAD">
+			<Option target="42_corewar"/>
+		</Unit>
+		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_checker_op.c">
+			<Option target="42_corewar"/>
+		</Unit>
+		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_checker_op.c~HEAD">
+			<Option target="42_corewar"/>
+		</Unit>
+		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_compiler.c">
+			<Option target="42_corewar"/>
+		</Unit>
+		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_compiler_header.c">
 			<Option target="42_corewar"/>
 		</Unit>
 		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_error.c">
@@ -450,9 +465,6 @@
 			<Option target="42_corewar"/>
 		</Unit>
 		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_helper_2.c">
-			<Option target="42_corewar"/>
-		</Unit>
-		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_labels.c">
 			<Option target="42_corewar"/>
 		</Unit>
 		<Unit filename="/Users/macos/Documents/42-corewar/src/asm_parser.c">

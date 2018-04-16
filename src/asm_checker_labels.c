@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_asm.h"
+#include "../include/ft_asm.h"
+#include "../libft/include/libft.h"
 
 int		ft_is_label(char *line)
 {
@@ -39,7 +40,7 @@ int		ft_count_labels(t_asm *a)
 	{
 		if (a->file[i][0] == LABEL_CHAR)
 			return (-1);
-		if (ft_is_label(a->file[i]))
+		if (ft_is_label(a->file[i])) //regarde si on a un  : dans le debut de ligne
 			labels++;
 		i++;
 	}
@@ -54,15 +55,15 @@ int		ft_get_labels(t_asm *a)
 
 	i = a->i;
 	j = 0;
-	if ((count = ft_count_labels(a)) == -1)
+	if ((count = ft_count_labels(a)) == -1) //compte les labels dans le fichier
 		return (-1);
 	if ((a->labels = (char**)malloc(sizeof(char*) * count + 1)) == NULL)
 		return (ft_error(MALLOC, -1, a->file[i]));
 	while (a->file[i])
 	{
-		if (ft_is_label(a->file[i]))
+		if (ft_is_label(a->file[i])) //regarde si il y a un : dans le debut de la ligne
 		{
-			a->labels[j] = ft_strcdup(a->file[i], LABEL_CHAR);
+			a->labels[j] = ft_strcdup(a->file[i], LABEL_CHAR); //dup le nom du label
 			j++;
 		}
 		i++;

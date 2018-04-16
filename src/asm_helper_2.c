@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 20:50:49 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 13:13:52 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ void	ft_print_tab(char **tab)
 		ft_printf("%s\n", tab[i]);
 		i++;
 	}
+}
+
+int		ft_free_asm(t_asm *a, int status)
+{
+	fta_clear(a->ops);
+	ft_free_tab(a->file, status);
+	return (status);
 }
 
 int		ft_free_tab(char **tab, int status)
