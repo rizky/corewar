@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 23:27:37 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:14:20 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void
 	i = -1;
 	while (++i < a.op_c)
 		asm_append_op(&binary, ARRAY(a.ops, i));
-	asm_print_memory(&binary, a.path);	
+	asm_print_memory(&binary, a.path);
 }

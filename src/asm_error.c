@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 13:38:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:10:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_error(int errnum, int status, char *line)
 	else if (errnum == OP)
 		ft_dprintf(2, "Operation: Operation is invalid\n");
 	else if (errnum == OP_NAME)
-		ft_dprintf(2, "Operation: Operation Name is invalid\n");
+		ft_dprintf(2, "Operation: Operation does not exist\n");
 	else if (errnum == OP_PARAM)
 		ft_dprintf(2, "Operation: Parameter is invalid\n");
 	else if (errnum == LABEL_MISSING)
