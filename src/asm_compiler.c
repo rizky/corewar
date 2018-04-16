@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 17:07:47 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 21:29:02 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void
 {
 	int		i;
 
+	if (op.opcode == 0)
+		return ;
 	fta_append_free(binary, asm_to_big_endian(op.opcode, 1), 1);
 	if (op.param_c > 1)
 		fta_append_free(binary, asm_to_big_endian(op.oc, 1), 1);
@@ -63,7 +65,6 @@ void
 	asm_append_comment(&binary, a.comment);
 	i = -1;
 	while (++i < a.op_c)
-		if (ARRAY(a.ops, i).opcode != 0)
-			asm_append_op(&binary, ARRAY(a.ops, i));
+		asm_append_op(&binary, ARRAY(a.ops, i));
 	asm_print_memory(&binary, a.path);
 }

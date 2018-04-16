@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 18:20:52 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 22:25:30 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static int
 	int		value;
 
 	temp = ft_re_capture(pattern, param);
+	if (temp == NULL)
+		return (0);
 	value = ft_atoi(temp);
 	free(temp);
 	return (value);
@@ -99,20 +101,16 @@ int
 	else if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 ||
 			ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
 	{
-		if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0)
-			(*param).is_label = 1;
-		else if (ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
-			(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
+		(ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0)? (*param).is_label = 1: 0;
+		(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
 		(*param).size = g_op_dict[opcode].d_size;
 		return (T_DIR);
 	}
 	else if (ft_re_match("^:[\\w_\\d]+$", (*param).str) == 0 ||
 			ft_re_match("^[-+]*\\d+$", (*param).str) == 0)
 	{
-		if (ft_re_match(":[\\w_\\d]+$", (*param).str) == 0)
-			(*param).is_label = 1;
-		else if (ft_re_match("[-+]*\\d+$", (*param).str) == 0)
-			(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
+		(ft_re_match(":[\\w_\\d]+$", (*param).str) == 0)? (*param).is_label = 1: 0;
+		(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
 		(*param).size = 2;
 		return (T_IND);
 	}
