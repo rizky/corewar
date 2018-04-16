@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 17:06:29 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:48:21 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int
 	t_op	op;
 	char	*temp;
 
-	ft_skip_empty_lines(a);
 	if (ft_re_match("^[\\w_\\d]+:[ \t]*\\w+[ \t]+.*", a->file[a->i]) == -1)
 		if (ft_re_match("^\\w+[ \t]+.*", a->file[a->i]) == -1)
 			if (ft_re_match("^\\w+.*", a->file[a->i]) == -1)

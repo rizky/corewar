@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:45:37 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/14 20:50:39 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:49:19 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		ft_line_is_empty(t_asm *a)
 
 void	ft_skip_empty_lines(t_asm *a)
 {
-	while (a->file[a->i] && ft_line_is_empty(a) && a->file[a->i + 1])
+	while (a->file[a->i] && ft_line_is_empty(a))
 		a->i++;
 }
 

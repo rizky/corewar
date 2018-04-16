@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 17:12:54 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:48:51 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		ft_parsing(t_asm *a)
 		return (-1);
 	a->i++;
 //	ft_check_instructions(a);
+	ft_skip_empty_lines(a);
 	while (a->file[a->i])
 	{
 		if (asm_parser_op(a) == -1)
@@ -57,6 +58,7 @@ int		ft_parsing(t_asm *a)
 			return (-1);
 		a->op_c++;
 		a->i++;
+		ft_skip_empty_lines(a);
 	}
 	if (a->size == 0)
 		return (ft_error(OP_EMPTY, -1, NULL));
