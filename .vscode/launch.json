@@ -10,7 +10,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/asm",
-			"args": ["resources/errors/no_code.s"],
+			"args": ["resources/errors/extra.s"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

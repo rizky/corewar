@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 11:47:57 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/16 19:29:02 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 static void
 	asm_print_header(t_asm a)
 {
-	ft_dprintf(2, "Dumping annotated program on standard output\n");
-	ft_dprintf(2, "Program size : %d bytes\n", a.size);
-	ft_dprintf(2, "Name : \"%s\"\n", a.name);
-	ft_dprintf(2, "Comment : \"%s\"\n\n", a.comment);
+	ft_printf("Dumping annotated program on standard output\n");
+	ft_printf("Program size : %d bytes\n", a.size);
+	ft_printf("Name : \"%s\"\n", a.name);
+	ft_printf("Comment : \"%s\"\n\n", a.comment);
 }
 
 void
@@ -49,18 +49,18 @@ void
 	int	j;
 
 	(ARRAY(a.ops, i).param_c > 1) ?
-	ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
+	ft_printf("                    %-4d%-6d", ARRAY(a.ops, i).opcode,
 		ARRAY(a.ops, i).oc) :
-	ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
+	ft_printf("                    %-10d", ARRAY(a.ops, i).opcode);
 	j = -1;
 	while (++j < ARRAY(a.ops, i).param_c)
 		asm_print_big_endian(ARRAY(a.ops, i).params[j].value,
 			ARRAY(a.ops, i).params[j].size);
 	ft_printf("\n");
 	(ARRAY(a.ops, i).param_c > 1) ?
-	ft_printf("         \t    %-4d%-6d", ARRAY(a.ops, i).opcode,
+	ft_printf("                    %-4d%-6d", ARRAY(a.ops, i).opcode,
 		ARRAY(a.ops, i).oc) :
-	ft_printf("         \t    %-10d", ARRAY(a.ops, i).opcode);
+	ft_printf("                    %-10d", ARRAY(a.ops, i).opcode);
 	j = -1;
 	while (++j < ARRAY(a.ops, i).param_c)
 		ft_printf("%-18d", ARRAY(a.ops, i).params[j].value);
@@ -79,23 +79,19 @@ void
 	while (++i < a.op_c)
 	{
 		if (ARRAY(a.ops, i).label != NULL)
+			ft_printf("%-5d      :    %s:\n", ARRAY(a.ops, i).offset,
+			ARRAY(a.ops, i).label);
+		if (ARRAY(a.ops, i).opcode != 0)
 		{
-			ft_printf("%-5d      :\t%s:\n", ARRAY(a.ops, i).offset,
-					  ARRAY(a.ops, i).label);
-			length += ft_strlen(ARRAY(a.ops, i).label);
+			ft_printf("%-5d(%-3d) :        %-10s",
+			ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size, ARRAY(a.ops, i).opname);
+			j = -1;
+			while (++j < ARRAY(a.ops, i).param_c)
+				ft_printf("%-18s", ARRAY(a.ops, i).params[j].str);
+			ft_printf("\n");
+			asm_print_op(a, i);
+			ft_printf("\n\n");
 		}
-		ft_printf("%-5d(%-3d) :\t    %-10s",
-		ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size, ARRAY(a.ops, i).opname);
-		length += ft_strlen(ARRAY(a.ops, i).opname);
-		j = -1;
-		while (++j < ARRAY(a.ops, i).param_c)
-		{
-			ft_printf("%-18s", ARRAY(a.ops, i).params[j].str);
-			length += ft_strlen(ARRAY(a.ops, i).params[j].str);
-		}
-		ft_printf("\n");
-		asm_print_op(a, i);
-		ft_printf("\n\n");
 	}
 }
 
