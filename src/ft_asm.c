@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 10:58:32 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:39:46 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ static int	ft_filename_extension(char *file)
 	return (0);
 }
 
-static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
+static int	ft_init(int ac, char **av, t_asm *a)
 {
 	int errnum;
 	int	i;
 
 	ft_bzero(a, sizeof(t_asm));
-	ft_bzero(h, sizeof(header_t));
 	i = asm_getoptions(av, a->opt);
 	i = (a->opt[OPT_M]) ? i: ac - 1;
 	while (i < ac)
@@ -85,14 +84,13 @@ static int	ft_init(int ac, char **av, t_asm *a, header_t *h)
 int			main(int ac, char **av)
 {
 	t_asm		a;
-	header_t	h;
 	t_array		ops;
 
-	if (ft_init(ac, av, &a, &h) == -1)
+	if (ft_init(ac, av, &a) == -1)
 		return (-1);
 	ops = NEW_ARRAY(t_op);
 	a.ops = &ops;
-	if (ft_parsing(&a, &h) == -1)
+	if (ft_parsing(&a) == -1)
 		return (ft_free_asm(&a, -1));
 	if (a.opt[OPT_A])
 		asm_print(a);

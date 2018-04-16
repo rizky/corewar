@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 10:51:25 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:40:18 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int
-	asm_check_op(t_asm *a)
+int		asm_check_op(t_asm *a)
 {
 	int i;
 
@@ -31,14 +30,14 @@ int
 	return (0);
 }
 
-int		ft_parsing(t_asm *a, header_t *h)
+int		ft_parsing(t_asm *a)
 {
 	ft_handle_comments(a->file);
 	ft_trim_file(a->file);
-	if (ft_get_name(a, h) == -1)
+	if (ft_get_name(a) == -1)
 		return (-1);
 	a->i++;
-	if (ft_get_comment(a, h) == -1)
+	if (ft_get_comment(a) == -1)
 		return (-1);
 	a->i++;
 //	ft_check_instructions(a);

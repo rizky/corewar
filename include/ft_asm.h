@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 11:16:17 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 11:39:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ typedef struct	s_asm
 	int			size;
 }				t_asm;
 
-int				ft_parsing(t_asm *a, header_t *h);
-int				ft_get_name(t_asm *a, header_t *h);
-int				ft_get_comment(t_asm *a, header_t *h);
+int				ft_parsing(t_asm *a);
+int				ft_get_name(t_asm *a);
+int				ft_get_comment(t_asm *a);
 int				ft_check_instructions(t_asm *a);
 int				ft_get_labels(t_asm *a);
 int				ft_is_label(char *line);
