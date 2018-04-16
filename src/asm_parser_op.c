@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 17:48:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 18:04:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void
 	t_param	par;
 
 	opstr = ft_re_capture("\\w+[ \t]+.*", line);
-	temp = ft_re_capture("[\t ][^ \t]+", opstr);
-	opparam = ft_re_capture("[^ \t]+", temp);
+	temp = ft_re_capture("[\t ].+", opstr);
+	opparam = ft_re_capture(".+", temp);
 	param_tab = ft_strsplit(opparam, SEPARATOR_CHAR);
 	while (param_tab && param_tab[(*op).param_c])
 	{
 		if ((*op).param_c < 3)
 		{
-			par.str = param_tab[(*op).param_c];
+			par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
 			par.type = asm_get_paramtype((*op).opcode, &par);
 			(*op).params[(*op).param_c] = par;
 			(*op).size += par.size;
