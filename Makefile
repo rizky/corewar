@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/16 20:29:01 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/16 20:37:36 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,16 +110,15 @@ norm2:
 	@sh ./norm/norm.sh
 
 test: $(NAME)
-	{ ./asm -a resources/champs/ex.s 4<&- | { ./resources/vm_champs/asm -a resources/champs/ex.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/champs/42.s 4<&- | { ./resources/vm_champs/asm -a resources/champs/42.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/valid/bee_gees.s 4<&- | { ./resources/vm_champs/asm -a resources/valid/bee_gees.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/valid/bigzork.s 4<&- | { ./resources/vm_champs/asm -a resources/valid/bigzork.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/valid/fluttershy.s 4<&- | { ./resources/vm_champs/asm -a resources/valid/fluttershy.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/valid/helltrain.s 4<&- | { ./resources/vm_champs/asm -a resources/valid/helltrain.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/valid/jumper.s 4<&- | { ./resources/vm_champs/asm -a resources/valid/jumper.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/valid/bigzork.s 4<&- | { ./resources/vm_champs/asm -a resources/valid/bigzork.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/valid/maxidef.s 4<&- | { ./resources/vm_champs/asm -a resources/valid/maxidef.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/valid/slider2.s 4<&- | { ./resources/vm_champs/asm -a resources/valid/slider2.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-	{ ./asm -a resources/valid/turtle.s 4<&- | { ./resources/vm_champs/asm -a resources/valid/turtle.s 3<&- | diff /dev/fd/3 -; } 3<&0 <&4 4<&-; } 4<&0
-
+	./asm -a resources/champs/ex.s > out1 && ./resources/vm_champs/asm -a resources/champs/ex.s > out2 && diff out1 out2
+	./asm -a resources/champs/42.s > out1 && ./resources/vm_champs/asm -a resources/champs/42.s > out2 && diff out1 out2
+	./asm -a resources/valid/bee_gees.s > out1 && ./resources/vm_champs/asm -a resources/valid/bee_gees.s > out2 && diff out1 out2
+	./asm -a resources/valid/bigzork.s > out1 && ./resources/vm_champs/asm -a resources/valid/bigzork.s > out2 && diff out1 out2
+	./asm -a resources/valid/fluttershy.s > out1 && ./resources/vm_champs/asm -a resources/valid/fluttershy.s > out2 && diff out1 out2
+	./asm -a resources/valid/helltrain.s > out1 && ./resources/vm_champs/asm -a resources/valid/helltrain.s > out2 && diff out1 out2
+	./asm -a resources/valid/jumper.s > out1 && ./resources/vm_champs/asm -a resources/valid/jumper.s > out2 && diff out1 out2
+	./asm -a resources/valid/bigzork.s > out1 && ./resources/vm_champs/asm -a resources/valid/bigzork.s > out2 && diff out1 out2
+	./asm -a resources/valid/maxidef.s > out1 && ./resources/vm_champs/asm -a resources/valid/maxidef.s > out2 && diff out1 out2
+	./asm -a resources/valid/slider2.s > out1 && ./resources/vm_champs/asm -a resources/valid/slider2.s > out2 && diff out1 out2
+	./asm -a resources/valid/turtle.s > out1 && ./resources/vm_champs/asm -a resources/valid/turtle.s > out2 && diff out1 out2
 .PHONY: all clean fclean re test norme test_ch test_pw debug check
