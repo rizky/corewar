@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 22:16:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 22:23:16 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int
 		if (ft_re_match("^\\w+[ \t]+.*", a->file[a->i]) == -1)
 			if (ft_re_match("^[\\w_\\d]+:[ \t]*$", a->file[a->i]) == -1)
 				return (ft_error(OP, -1, a->file[a->i]));
+	if (ft_re_match(",,", a->file[a->i]) != -1)
+		return (ft_error(OP, -1, a->file[a->i]));
 	temp = ft_re_capture("\\w+:", a->file[a->i]);
 	op.label = ft_re_capture("\\w+", temp);
 	op.param_c = 0;
