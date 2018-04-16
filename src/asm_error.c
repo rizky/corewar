@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_asm.h"
-#include "../libft/include/libft.h"
+#include "ft_asm.h"
+#include "libft.h"
 
 static void
 	ft_error_2(int errnum)

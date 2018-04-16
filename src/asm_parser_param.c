@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_asm.h"
-#include "../libft/include/libft.h"
+#include "ft_asm.h"
+#include "libft.h"
 
 int
 	asm_get_directval(t_asm *a, char *label)

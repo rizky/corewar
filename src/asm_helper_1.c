@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_asm.h"
-#include "../libft/include/libft.h"
+#include "ft_asm.h"
+#include "libft.h"
 
 int		ft_file_is_empty(char *file)
 {

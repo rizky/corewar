@@ -1,5 +1,5 @@
-.comment "just a basic living prog"
-.name "truc"
+.comment ""
+.name ""
 
 
 l2:		sti r1,%:live,%1

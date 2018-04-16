@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_asm.h"
+#include "ft_asm.h"
 
 char
 	*asm_to_big_endian(int value, int size)

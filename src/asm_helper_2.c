@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_asm.h"
-#include "../libft/include/libft.h"
+#include "ft_asm.h"
+#include "libft.h"
 
 void	ft_print_tab(char **tab)
 {
