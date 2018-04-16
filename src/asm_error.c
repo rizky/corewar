@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 10:51:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 14:33:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void
 		ft_dprintf(2, "Operation: Parameter is invalid\n");
 	else if (errnum == LABEL_MISSING)
 		ft_dprintf(2, "Label: Undefined Label\n");
+	else if (errnum == OP_EMPTY)
+		ft_dprintf(2, "Operation: No operation found\n");
 }
 
 int

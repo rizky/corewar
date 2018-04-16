@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 13:14:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 14:34:17 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define OP				9
 # define OP_NAME		10
 # define OP_PARAM		11
-# define LABEL_MISSING	12
+# define OP_EMPTY		12
+# define LABEL_MISSING	13
 
 # define ARRAY(D, I) ((t_op*)(D)->data)[I]
 

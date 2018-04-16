@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 11:44:52 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/16 14:44:23 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int		ft_parsing(t_asm *a)
 		a->op_c++;
 		a->i++;
 	}
+	if (a->size == 0)
+		return (ft_error(OP_EMPTY, -1, NULL));
 	if (asm_populate_directval(a) == -1)
 		return (-1);
 	return (0);
