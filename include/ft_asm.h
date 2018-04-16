@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 16:51:47 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:54:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "lld", .opcode = 0x0d, .d_size = 4,
 		{T_IND | T_DIR, T_REG, 0} },
 	{ .name = "lldi", .opcode = 0x0e, .d_size = 2,
-		{T_REG | T_IND | T_DIR, T_IND | T_DIR, T_REG} },
+		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG} },
 	{ .name = "lfork", .opcode = 0x0f, .d_size = 2,
 		{T_DIR, 0, 0} },
 	{ .name = "aff", .opcode = 0x10, .d_size = 0,
