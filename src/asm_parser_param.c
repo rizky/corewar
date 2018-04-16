@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 11:47:10 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/16 15:04:41 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int
 		j = 0;
 		while (j < ARRAY(a->ops, i).param_c)
 		{
-			if (ARRAY(a->ops, i).params[j].type == T_DIR &&
+			if (ARRAY(a->ops, i).params[j].type == DIR_CODE &&
 				ARRAY(a->ops, i).params[j].is_label)
 			{
 				offset = asm_get_directval(a, ARRAY(a->ops, i).params[j].str);
@@ -90,7 +90,7 @@ int
 	{
 		(*param).value = asm_get_paramval((*param).str, "\\d+");
 		(*param).size = 1;
-		return (T_REG);
+		return (REG_CODE);
 	}
 	else if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 ||
 			ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
@@ -101,13 +101,13 @@ int
 		else if (ft_re_match("^%[-+]*\\d+$", (*param).str) == 0)
 			(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
 		(*param).size = g_op_dict[opcode].d_size;
-		return (T_DIR);
+		return (DIR_CODE);
 	}
 	else if (ft_re_match("^[-+]*\\d+$", (*param).str) == 0)
 	{
 		(*param).value = asm_get_paramval((*param).str, "[-+]*\\d+");
 		(*param).size = 2;
-		return (T_IND);
+		return (IND_CODE);
 	}
 	else
 		return (-1);

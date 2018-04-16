@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/04/15 16:01:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:16:56 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef char	t_arg_type;
 
 #define T_REG					1
 #define T_DIR					2
-#define T_IND					3
+#define T_IND					4
 #define T_LAB					8
 
 /*

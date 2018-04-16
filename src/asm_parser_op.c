@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 11:45:45 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/16 15:17:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void
 	opstr = ft_re_capture("\\w+[ \t]+.*", line);
 	temp = ft_re_capture("[\t ][^ \t]+", opstr);
 	opparam = ft_re_capture("[^ \t]+", temp);
-	param_tab = ft_strsplit(opparam, ',');
+	param_tab = ft_strsplit(opparam, SEPARATOR_CHAR);
 	while (param_tab[(*op).param_c])
 	{
 		if ((*op).param_c < 3)
