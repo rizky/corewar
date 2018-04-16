@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 11:48:13 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/16 13:09:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,49 +53,50 @@ static int	ft_filename_extension(char *file)
 	return (0);
 }
 
-static int	ft_init(int ac, char **av, t_asm *a)
+static int	ft_init(int ac, char **av, t_asm *a, int i)
 {
 	int errnum;
-	int	i;
 
 	ft_bzero(a, sizeof(t_asm));
-	i = asm_getoptions(av, a->opt);
-	i = (a->opt[OPT_M]) ? i : ac - 1;
-	while (i < ac)
+	if (ac < 2 || !ft_filename_extension(av[i]))
 	{
-		if (ac < 2 || !ft_filename_extension(av[i]))
-		{
-			ft_dprintf(2, "Usage: %s <sourcefile.s>\n", av[0]);
-			return (-1);
-		}
-		if ((errnum = ft_read_sourcefile(i, av, a)) > 0)
-		{
-			if (errnum == SOURCEFILE)
-				ft_dprintf(2, "Can't read source file %s\n", av[i]);
-			else
-				return (ft_error(errnum, -1, NULL));
-			return (-1);
-		}
-		i++;
+		ft_dprintf(2, "Usage: %s <sourcefile.s>\n", av[0]);
+		return (-1);
+	}
+	if ((errnum = ft_read_sourcefile(i, av, a)) > 0)
+	{
+		if (errnum == SOURCEFILE)
+			ft_dprintf(2, "Can't read source file %s\n", av[i]);
+		else
+			return (ft_error(errnum, -1, NULL));
+		return (-1);
 	}
 	return (0);
 }
 
 int			main(int ac, char **av)
 {
-	t_asm		a;
-	t_array		ops;
+	t_asm	a;
+	t_array	ops;
+	int		i;
+	int		opt[OPT_NUM];
 
-	if (ft_init(ac, av, &a) == -1)
-		return (-1);
-	ops = NEW_ARRAY(t_op);
-	a.ops = &ops;
-	if (ft_parsing(&a) == -1)
-		return (ft_free_asm(&a, -1));
-	if (a.opt[OPT_A])
-		asm_print(a);
-	else
-		asm_compiler(a);
-	ft_free_asm(&a, 0);
+	i = asm_getoptions(av, opt);
+	i = (opt[OPT_M]) ? i : ac - 1;
+	while (i < ac)
+	{
+		if (ft_init(ac, av, &a, i) == -1)
+			return (-1);
+		ops = NEW_ARRAY(t_op);
+		a.ops = &ops;
+		if (ft_parsing(&a) == -1)
+			return (ft_free_asm(&a, -1));
+		if (opt[OPT_A])
+			asm_print(a);
+		else
+			asm_compiler(a);
+		ft_free_asm(&a, 0);
+		i++;
+	}
 	return (0);
 }

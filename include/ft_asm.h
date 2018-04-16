@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 11:39:21 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/16 13:09:25 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ typedef struct	s_asm
 	char		**file;
 	char		**labels;
 	t_array		*ops;
-	int			opt[OPT_NUM];
-	int			op_c;
+	int				op_c;
 	int			size;
 }				t_asm;
 
