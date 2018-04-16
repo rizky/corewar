@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 09:14:20 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:17:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void
 	binary = NEW_ARRAY(char);
 	asm_append_magic_nbr(&binary);
 	asm_append_name(&binary, a.name);
-	asm_append_programsize(&binary, a.size);
+	asm_append_size(&binary, a.size);
 	asm_append_comment(&binary, a.comment);
 	i = -1;
 	while (++i < a.op_c)

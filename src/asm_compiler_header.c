@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 18:08:15 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/15 21:14:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:17:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void
 }
 
 void
-	asm_append_programsize(t_array *binary, int size)
+	asm_append_size(t_array *binary, int size)
 {
 	fta_append_free(binary, asm_to_big_endian(size, 4), 4);
 }

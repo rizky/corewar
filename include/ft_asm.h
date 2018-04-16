@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 23:28:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 09:17:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int				asm_calculate_oc(t_param params[3], int param_c);
 
 void			asm_append_name(t_array *binary, char *str);
 void			asm_append_comment(t_array *binary, char *str);
-void			asm_append_programsize(t_array *binary, int size);
+void			asm_append_size(t_array *binary, int size);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
