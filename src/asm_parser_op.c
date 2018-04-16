@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 21:57:36 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/16 22:16:10 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void
 	{
 		if ((*op).param_c < 3)
 		{
-			par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
+			if (ft_re_match("[ \t]*[^ \t]+[ \t]+[^ \t]+[ \t]*", param_tab[(*op).param_c]) == 0)
+				par.str = "invalid";
+			else
+				par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
 			par.type = asm_get_paramtype((*op).opcode, &par);
 			(*op).params[(*op).param_c] = par;
 			(*op).size += par.size;
