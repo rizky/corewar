@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 10:07:36 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 10:41:53 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,6 @@ test: $(NAME)
 	./asm -a resources/valid/flipped_name_comment.s > out1 && ./resources/vm_champs/asm -a resources/valid/flipped_name_comment.s > out2 && diff out1 out2
 	./asm -a resources/valid/empty_namecomment.s > out1 && ./resources/vm_champs/asm -a resources/valid/empty_namecomment.s > out2 && diff out1 out2
 	./asm -a resources/valid/end_comment.s > out1 && ./resources/vm_champs/asm -a resources/valid/end_comment.s > out2 && diff out1 out2
-	./asm -a resources/valid/no_space_between_op_and_param.s > out1 && ./resources/vm_champs/asm -a resources/valid/no_space_between_op_and_param.s > out2 && diff out1 out2
 	
 	./asm -a resources/errors/bad_param_type.s 2>&1 ; true
 	./asm -a resources/errors/double_commas.s 2>&1 ; true
@@ -140,6 +139,9 @@ test: $(NAME)
 	./asm -a resources/errors/double_comments.s 2>&1 ; true
 	./asm -a resources/errors/double_names.s 2>&1 ; true
 	./asm -a resources/errors/null_name.s 2>&1 ; true
+
+	./asm -a resources/valid/no_space_between_op_and_param.s > out1 && ./resources/vm_champs/asm -a resources/valid/no_space_between_op_and_param.s > out2 && diff out1 out2
+
 
 	
 

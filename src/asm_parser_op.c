@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 10:29:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 10:34:07 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void
 		}
 		(*op).param_c++;
 	}
-	ft_strtab_free(param_tab);
+	if (param_tab)
+		ft_strtab_free(param_tab);
 	free(opstr);
 	free(temp);
 	free(opparam);

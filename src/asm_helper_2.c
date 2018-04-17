@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 10:32:25 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 10:41:28 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int		ft_free_asm(t_asm *a, int status)
 	int	i;
 	int	j;
 
-	free(a->name);
-	free(a->comment);
+	(a->name && (a->name)[0] != '\0')? free(a->name): 0;
+	(a->comment && (a->comment)[0] != '\0')? free(a->comment): 0;
 	fta_clear(a->ops);
 	ft_free_tab(a->file, status);
 	i = -1;
