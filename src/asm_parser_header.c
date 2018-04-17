@@ -17,31 +17,66 @@
 ** To-do: protect ft_re_match_capture in libft (can cause segfault right now)
 */
 
-int		ft_get_name(t_asm *a)
-{
-	int tmp;
+//int		ft_get_name(t_asm *a)
+//{
+//	int tmp;
+//
+//	ft_skip_empty_lines(a);
+//	if (a->file[a->i] == NULL)
+//		return (ft_error(HEADER, -1, a->file[a->i]));
+//	tmp = a->i;
+//	if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"",
+//		a->file[a->i])) == NULL)
+//	{
+//		a->i++;
+//		ft_skip_empty_lines(a);
+//		if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"",
+//			a->file[a->i])) == NULL)
+//			return (ft_error(HEADER, -1, a->file[a->i]));
+//	}
+//	a->i = tmp;
+//	if (ft_strlen(a->name) == 0)
+//		a->name = "\0";
+//	else
+//		a->name = ft_re_capture("[^\"]+", a->name);
+//	if (a->name && ft_strlen(a->name) > PROG_NAME_LENGTH)
+//		return (ft_error(NAME_LEN, -1, a->file[a->i]));
+//	return (0);
+//}
 
-	ft_skip_empty_lines(a);
-	if (a->file[a->i] == NULL)
-		return (ft_error(HEADER, -1, a->file[a->i]));
-	tmp = a->i;
-	if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"",
-		a->file[a->i])) == NULL)
-	{
-		a->i++;
-		ft_skip_empty_lines(a);
-		if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"",
-			a->file[a->i])) == NULL)
-			return (ft_error(HEADER, -1, a->file[a->i]));
-	}
-	a->i = tmp;
-	if (ft_strlen(a->name) == 0)
-		a->name = "\0";
-	else
-		a->name = ft_re_capture("[^\"]+", a->name);
-	if (a->name && ft_strlen(a->name) > PROG_NAME_LENGTH)
-		return (ft_error(NAME_LEN, -1, a->file[a->i]));
-	return (0);
+int		ft_get_name(t_asm *a) {
+    int prev;
+    int tmp;
+    char *new;
+
+    ft_skip_empty_lines(a);
+    tmp = a->i;
+    prev = tmp - 1;
+    while (!ft_re_capture("^.name.*", a->file[tmp]))
+        tmp++;
+    a->i = tmp;
+    while (!ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp]))
+    {
+        new = ft_strjoin(a->file[tmp], "\n");
+        free(a->file[tmp]);
+        a->file[tmp] = new;
+        new = ft_strjoin(a->file[tmp], a->file[a->i + 1]);
+        free(a->file[tmp]);
+        a->file[tmp] = new;
+        a->i++;
+    }
+    if (a->i > a->header_end)
+        a->header_end = a->i;
+    if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp])) == NULL)
+        if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[prev])) == NULL)
+            return (ft_error(HEADER, -1, a->file[tmp]));
+    if (ft_strlen(a->name) == 0)
+        a->name = "\0";
+    else
+        a->name = ft_re_capture("[^\"]+", a->name);
+    if (a->name && ft_strlen(a->name) > PROG_NAME_LENGTH)
+        return (ft_error(PROG_NAME_LENGTH, -1, a->file[tmp]));
+    return (0);
 }
 
 int		ft_get_comment(t_asm *a) {
@@ -52,13 +87,21 @@ int		ft_get_comment(t_asm *a) {
     tmp = a->i;
     prev = tmp - 1;
     ft_skip_empty_lines(a);
+    while (!ft_re_capture("^.comment.*", a->file[tmp]))
+        tmp++;
+    a->i = tmp;
     while (!ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp]))
     {
+        new = ft_strjoin(a->file[tmp], "\n");
+        free(a->file[tmp]);
+        a->file[tmp] = new;
         new = ft_strjoin(a->file[tmp], a->file[a->i + 1]);
         free(a->file[tmp]);
         a->file[tmp] = new;
         a->i++;
     }
+    if (a->i > a->header_end)
+        a->header_end = a->i;
 	if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp])) == NULL)
 		if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[prev])) == NULL)
 			return (ft_error(HEADER, -1, a->file[tmp]));

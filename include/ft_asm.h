@@ -118,6 +118,7 @@ typedef struct	s_asm
 	int			op_c;
 	int			size;
 	int			start;
+	int			header_end;
 }				t_asm;
 
 int				ft_parsing(t_asm *a);

@@ -59,63 +59,19 @@ static int	ft_comment_cmd(char *line)
 	return (1);
 }
 
-
-//int ft_get_name_comment(t_asm *a, header_t *h)
-//{
-//	int tmp;
-//	int j;
-//
-//	j = 0;
-//	ft_skip_empty_lines(a);
-//	if (ft_comment_cmd(a->file[a->i]))
-//	{
-//		tmp = ft_get_comment(a, h);
-//		ft_skip_empty_lines(a);
-//		a->i++;
-//	}
-//	else if (ft_name_cmd(a->file[a->i]))
-//	{
-//		tmp = ft_get_name(a, h);
-//		ft_skip_empty_lines(a);
-//		a->i++;
-//	}
-//	else if (!a->name && !a->comment)
-//		tmp = ft_error(HEADER, -1, NULL);
-//	else if (!a->name)
-//		tmp = ft_error(HEADER, -1, NULL);
-//	else if (!a->comment)
-//		tmp = ft_error(HEADER, -1, NULL);
-//	else
-//		tmp = ft_error(HEADER, -1, NULL);
-//	ft_skip_empty_lines(a);
-//	if (a->name && a->comment && !ft_strchr(LABEL_CHARS, a->file[a->i][0]))
-//	{
-//		tmp = ft_printf("Error line %i\n", a->i + 1);
-//		exit (1);
-//	}
-//	return (tmp);
-//}
-
-
-//int		ft_parsing(t_asm *a, header_t *h)
-//{
-//	ft_handle_comments(a->file);
-//	ft_trim_file(a->file);
-////	if (/*ft_get_name(a, h) == -1 || */ft_get_name_comment(a, h) == -1 || ft_get_name_comment(a, h) == -1 )
-////		return (-1);
-//	if (ft_get_name(a, h) == -1)
-
 int		ft_parsing(t_asm *a)
 {
 	ft_handle_comments(a->file);
 	ft_trim_file(a->file);
 	if (ft_get_name(a) == -1)
 		return (-1);
-	a->i++;
+	a->i = 0;
 	if (ft_get_comment(a) == -1)
 		return (-1);
-	a->i++;
-//	ft_check_instructions(a);
+	a->i = a->header_end + 1;
+    //ft_printf("name:\"%s\"\n", a->name);
+    //ft_printf("comment:\"%s\"\n", a->comment);
+    //	ft_check_instructions(a);
 	ft_skip_empty_lines(a);
 	a->start = a->i;
 	while (a->file[a->i])
