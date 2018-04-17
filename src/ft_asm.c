@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 12:10:27 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/17 13:18:17 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@
 static int	ft_end_of_input(char *file)
 {
 	int		i;
+	char	comment[2];
 	char	*line;
 
 	if (file[ft_strlen(file) - 1] != '\n')
 	{
 		i = 0;
+		comment[0] = COMMENT_CHAR;
+		comment[1] = '\0';
 		line = ft_strrchr(file, '\n') + 1;
-		line[ft_strcspn(line, "#")] = '\0';
+		line[ft_strcspn(line, comment)] = '\0';
 		line[ft_strcspn(line, ";")] = '\0';
 		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 			i++;
