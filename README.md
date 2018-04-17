@@ -3,10 +3,14 @@ Manage GIT Submodule
 git pull && git submodule init && git submodule update && git submodule status
 git submodule update --recursive --remote
 
-Run Test
+Usage
 
-`./asm resources/champs/ex1.s && hexdump -C resources/champs/ex1.cor`
-`./resources/vm_champs/asm resources/champs/ex1.s && hexdump -C resources/champs/ex1.cor`
+- Run Test Case  
+`make test`
 
-`./asm resources/valid/bigzork.s && hexdump -C resources/valid/bigzork.cor`
-`./resources/vm_champs/asm resources/valid/bigzork.s && hexdump -C resources/valid/bigzork.cor`
+- Run Test Leak  
+`make test_leak`
+
+- Run Norm  
+`make norm` 
+`make norm2`
