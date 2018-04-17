@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 12:00:05 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/17 12:11:27 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int				ft_is_label(char *line);
 int				ft_get_op(t_asm *a);
 
 int				ft_error(int errcode, int status, char *line);
-int				ft_file_extension(char *file);
+int				ft_filename_extension(char *file);
 int				ft_file_is_empty(char *file);
 int				ft_line_is_empty(t_asm *a);
 void			ft_skip_empty_lines(t_asm *a);
