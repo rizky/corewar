@@ -1,5 +1,5 @@
-.name"zork"
-.comment "I'M ALIIIIVE*!@$%^&*()_+~`=-{}[|\/?><.,]"
+.name"]"
+.comment "]"
 
 #"]" cause error in name and comment
 #r_asm accepts it

@@ -1,6 +1,6 @@
 .name "zork
-
-
+f
+f
 asd"
 .comment "I'M ALIIIIVE
 as"

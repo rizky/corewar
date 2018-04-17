@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 13:41:01 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 18:00:58 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,6 @@ FILES:= asm_parser asm_parser_header \
 		asm_helper_1 asm_helper_2 asm_helper_3 \
 		asm_helper_4 \
 		asm_print \
-
-FTREPATH:= libft/src/ft_re/
-FTRE:= ft_re ft_re_match_1 ft_re_match_2 ft_re_match_3 ft_re_match_4
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -68,7 +65,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(OBJ_A)
 	@cd $(LFTDIR) && $(MAKE)
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(SRC_RE) $(LFLAGS) $(SRCPATH)$(FILE_A).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRCPATH)$(FILE_A).c -o $(NAME)
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(NAME_CW): $(OBJ) $(OBJ_CW)
@@ -104,7 +101,7 @@ re: fclean
 	@$(MAKE) all
 
 debug: $(NAME)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(SRC_RE) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
 
 norm:
 	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
@@ -131,6 +128,7 @@ test: $(NAME)
 	./asm -a resources/valid/end_comment.s > out1 && ./resources/vm_champs/asm -a resources/valid/end_comment.s > out2 && diff out1 out2
 	./asm -a resources/valid/hash_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/hash_at_header.s > out2 && diff out1 out2 ; true
 	./asm -a resources/valid/no_space_between_op_and_param.s > out1 && ./resources/vm_champs/asm -a resources/valid/no_space_between_op_and_param.s > out2 && diff out1 out2 ; true
+	./asm -a resources/valid/sq_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/sq_at_header.s > out2 && diff out1 out2 ; true
 	
 	./asm -a resources/errors/bad_param_type.s 2>&1 ; true
 	./asm -a resources/errors/double_commas.s 2>&1 ; true
@@ -146,7 +144,6 @@ test: $(NAME)
 	./asm -a resources/errors/double_names.s 2>&1 ; true
 	./asm -a resources/errors/null_name.s 2>&1 ; true
 	
-	./asm -a resources/valid/sq_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/sq_at_header.s > out2 && diff out1 out2 ; true
 	./asm -a resources/valid/nl_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header.s > out2 && diff out1 out2 ; true
 
 test_leak:
