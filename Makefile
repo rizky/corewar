@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 11:29:04 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 12:11:34 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,9 +145,10 @@ test: $(NAME)
 	./asm -a resources/errors/double_names.s 2>&1 ; true
 	./asm -a resources/errors/null_name.s 2>&1 ; true
 
-	./asm -a resources/valid/no_space_between_op_and_param.s > out1 && ./resources/vm_champs/asm -a resources/valid/no_space_between_op_and_param.s > out2 && diff out1 out2
-	./asm -a resources/valid/sq_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/sq_at_header.s > out2 && diff out1 out2
-	./asm -a resources/valid/nl_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header.s > out2 && diff out1 out2
+	./asm -a resources/valid/no_space_between_op_and_param.s > out1 && ./resources/vm_champs/asm -a resources/valid/no_space_between_op_and_param.s > out2 && diff out1 out2 ; true
+	./asm -a resources/valid/sq_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/sq_at_header.s > out2 && diff out1 out2 ; true
+	./asm -a resources/valid/hash_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/hash_at_header.s > out2 && diff out1 out2 ; true
+	./asm -a resources/valid/nl_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header.s > out2 && diff out1 out2 ; true
 
 test_leak:
 	valgrind ./asm -a resources/champs/ex.s 2>&1 | grep "definitely lost"
