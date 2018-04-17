@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 12:11:34 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 12:12:54 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ FILES:= asm_parser asm_parser_header \
 		asm_compiler asm_compiler_header \
 		asm_checker_op asm_checker_labels \
 		asm_error \
-		asm_helper_1 asm_helper_2 \
+		asm_helper_1 asm_helper_2 asm_helper_3 \
 		asm_print \
 		ft_strcspn \
 		ft_strcdup

@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 11:50:37 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/17 12:10:27 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,6 @@ static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 	if ((a->file = ft_strsplit(file[0], '\n')) == NULL)
 		return (ft_free(file[0], MALLOC));
 	free(file[0]);
-	return (0);
-}
-
-static int	ft_filename_extension(char *file)
-{
-	if (file[ft_strlen(file) - 1] == 's' && file[ft_strlen(file) - 2] == '.')
-		return (1);
 	return (0);
 }
 

@@ -6,11 +6,18 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:45:37 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 17:49:19 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 11:59:25 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
+
+int		ft_filename_extension(char *file)
+{
+	if (file[ft_strlen(file) - 1] == 's' && file[ft_strlen(file) - 2] == '.')
+		return (1);
+	return (0);
+}
 
 int		ft_file_is_empty(char *file)
 {
@@ -44,39 +51,4 @@ void	ft_skip_empty_lines(t_asm *a)
 {
 	while (a->file[a->i] && ft_line_is_empty(a))
 		a->i++;
-}
-
-void	ft_handle_comments(char **file)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (file[i])
-	{
-		j = 0;
-		while (file[i][j])
-		{
-			if (file[i][j] == COMMENT_CHAR || file[i][j] == ';')
-				file[i][j] = '\0';
-			j++;
-		}
-		i++;
-	}
-}
-
-void	ft_trim_file(char **file)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (file[i])
-	{
-		tmp = ft_strtrim(file[i]);
-		free(file[i]);
-		file[i] = ft_strdup(tmp);
-		free(tmp);
-		i++;
-	}
 }
