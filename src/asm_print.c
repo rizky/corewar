@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 08:09:59 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 11:43:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void
 {
 	int	j;
 
-	(g_op_dict[ARRAY(a.ops, i).opcode].is_oc)?
+	(g_op_dict[ARRAY(a.ops, i).opcode].is_oc) ?
 	ft_printf("                    %-4d%-6d", ARRAY(a.ops, i).opcode,
 		ARRAY(a.ops, i).oc) :
 	ft_printf("                    %-10d", ARRAY(a.ops, i).opcode);
@@ -56,7 +56,7 @@ void
 		asm_print_big_endian(ARRAY(a.ops, i).params[j].value,
 			ARRAY(a.ops, i).params[j].size);
 	ft_printf("\n");
-	(g_op_dict[ARRAY(a.ops, i).opcode].is_oc)?
+	(g_op_dict[ARRAY(a.ops, i).opcode].is_oc) ?
 	ft_printf("                    %-4d%-6d", ARRAY(a.ops, i).opcode,
 		ARRAY(a.ops, i).oc) :
 	ft_printf("                    %-10d", ARRAY(a.ops, i).opcode);
@@ -81,7 +81,8 @@ void
 		if (ARRAY(a.ops, i).opcode != 0)
 		{
 			ft_printf("%-5d(%-3d) :        %-10s",
-			ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size, ARRAY(a.ops, i).opname);
+			ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size,
+			ARRAY(a.ops, i).opname);
 			j = -1;
 			while (++j < ARRAY(a.ops, i).param_c)
 				ft_printf("%-18s", ARRAY(a.ops, i).params[j].str);

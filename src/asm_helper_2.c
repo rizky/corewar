@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_helper_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 10:41:28 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 11:36:48 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int		ft_free_asm(t_asm *a, int status)
 	int	i;
 	int	j;
 
-	(a->name && (a->name)[0] != '\0')? free(a->name): 0;
-	(a->comment && (a->comment)[0] != '\0')? free(a->comment): 0;
+	(a->name && (a->name)[0] != '\0') ? free(a->name) : 0;
+	(a->comment && (a->comment)[0] != '\0') ? free(a->comment) : 0;
 	fta_clear(a->ops);
 	ft_free_tab(a->file, status);
 	i = -1;

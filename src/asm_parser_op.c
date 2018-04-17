@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 10:34:07 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 11:42:05 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void
 	{
 		if ((*op).param_c < 3)
 		{
-			if (ft_re_match("[ \t]*[^ \t]+[ \t]+[^ \t]+[ \t]*", param_tab[(*op).param_c]) == 0)
+			if (ft_re_match("[ \t]*[^ \t]+[ \t]+[^ \t]+[ \t]*",
+				param_tab[(*op).param_c]) == 0)
 				par.str = "invalid";
 			else
 				par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
