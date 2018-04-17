@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 13:13:52 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 10:32:25 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,26 @@ void	ft_print_tab(char **tab)
 
 int		ft_free_asm(t_asm *a, int status)
 {
+	int	i;
+	int	j;
+
+	free(a->name);
+	free(a->comment);
 	fta_clear(a->ops);
 	ft_free_tab(a->file, status);
+	i = -1;
+	while (++i < a->op_c)
+	{
+		if (ARRAY(a->ops, i).label != NULL)
+			free(ARRAY(a->ops, i).label);
+		if (ARRAY(a->ops, i).opcode != 0)
+		{
+			free(ARRAY(a->ops, i).opname);
+			j = -1;
+			while (++j < ARRAY(a->ops, i).param_c)
+				free(ARRAY(a->ops, i).params[j].str);
+		}
+	}
 	return (status);
 }
 
