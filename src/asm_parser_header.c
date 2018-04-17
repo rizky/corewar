@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 10:27:24 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 11:11:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int
 	char *temp;
 
 	ft_skip_empty_lines(a);
-	if (ft_re_match("^.name[ \t]+\"[^\"]*\"$", a->file[a->i]) != 0)
+	if (ft_re_match("^.name[ \t]*\"[^\"]*\"$", a->file[a->i]) != 0)
 		return (-1);
 	if (a->name != NULL)
 		return (-1);
-	temp = ft_re_capture("\".+\"", a->file[a->i]);
+	temp = ft_re_capture("\".*\"", a->file[a->i]);
 	a->name = ft_re_capture("[^\"]+", temp);
 	(!a->name)? a->name = "\0": 0;
 	free(temp);
@@ -35,11 +35,11 @@ int
 	char *temp;
 
 	ft_skip_empty_lines(a);
-	if (ft_re_match("^.comment[ \t]+\"[^\"]*\"$", a->file[a->i]) != 0)
+	if (ft_re_match("^.comment[ \t]*\"[^\"]*\"$", a->file[a->i]) != 0)
 		return (-1);
 	if (a->comment != NULL)
 		return (-1);
-	temp = ft_re_capture("\".+\"", a->file[a->i]);
+	temp = ft_re_capture("\".*\"", a->file[a->i]);
 	a->comment = ft_re_capture("[^\"]+", temp);
 	(!a->comment)? a->comment = "\0": 0;
 	free(temp);
