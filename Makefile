@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 23:06:07 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 23:12:28 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -152,21 +152,21 @@ test: $(NAME)
 	
 
 test_leak:
-	valgrind ./asm -a resources/champs/ex.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/champs/42.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/bee_gees.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/fluttershy.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/helltrain.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/jumper.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/maxidef.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/slider2.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/turtle.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/aff_no_OCP.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/flipped_name_comment.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/empty_namecomment.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
-	valgrind ./asm -a resources/valid/end_comment.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/champs/ex.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/champs/42.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/bee_gees.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/fluttershy.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/helltrain.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/jumper.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/maxidef.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/slider2.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/turtle.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/aff_no_OCP.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/flipped_name_comment.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/empty_namecomment.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/valid/end_comment.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 	
 
 .PHONY: all clean fclean re test norme test_ch test_pw debug check
