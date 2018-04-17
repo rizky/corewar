@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 22:36:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 23:25:45 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ static int
 int
 	asm_get_paramtype(int opcode, t_param *param)
 {
-	(*param).is_label = 0;
 	if (ft_re_match("^r\\d+$", (*param).str) == 0)
 	{
 		(*param).value = asm_get_paramval((*param).str, "\\d+");
@@ -106,7 +105,8 @@ int
 	else if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 ||
 			ft_re_match("^%-?\\d+$", (*param).str) == 0)
 	{
-		(ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0) ? (*param).is_label = 1 : 0;
+		(ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0) ?
+			(*param).is_label = 1 : 0;
 		(*param).value = asm_get_paramval((*param).str, "-?\\d+");
 		(*param).size = g_op_dict[opcode].d_size;
 		return (T_DIR);

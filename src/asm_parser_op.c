@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 13:29:13 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 23:26:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void
 				par.str = "invalid";
 			else
 				par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
+			par.is_label = 0;
 			par.type = asm_get_paramtype((*op).opcode, &par);
 			(*op).params[(*op).param_c] = par;
 			(*op).size += par.size;

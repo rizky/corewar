@@ -18,7 +18,7 @@ norme=$(getScriptPath)"/norm.py"
 
 echo "------------------------------ Checking the norm ------------------------------"
 echo "Checking *.c files..."
-files=`find ./ -type f \( -name "*.c" ! -name "*op.c" \)`
+files=`find ./ -type f \( -name "*.c" \)`
 python $norme $files
 echo "\nChecking *.h files..."
 files=`find ./ -type f -name "*.h"`
