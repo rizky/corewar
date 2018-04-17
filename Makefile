@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 10:53:15 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 11:29:04 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ FILES:= asm_parser asm_parser_header \
 		asm_print \
 		ft_strcspn \
 		ft_strcdup
+
+FTREPATH:= libft/src/ft_re/
+FTRE:= ft_re ft_re_match_1 ft_re_match_2 ft_re_match_3 ft_re_match_4
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -56,6 +59,8 @@ SRC_A:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILE_A)))
 OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 OBJ_A:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILE_A)))
 OBJ_CW:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILE_CW)))
+
+SRC_RE+=$(addprefix $(FTREPATH),$(addsuffix .c,$(FTRE)))
 # ==================
 CCHF:=.cache_exists
 
@@ -64,7 +69,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(OBJ_A)
 	@cd $(LFTDIR) && $(MAKE)
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRCPATH)$(FILE_A).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(SRC_RE) $(LFLAGS) $(SRCPATH)$(FILE_A).c -o $(NAME)
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(NAME_CW): $(OBJ) $(OBJ_CW)
@@ -100,7 +105,7 @@ re: fclean
 	@$(MAKE) all
 
 debug: $(NAME)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(SRC_RE) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
 
 norm:
 	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
@@ -144,7 +149,22 @@ test: $(NAME)
 	./asm -a resources/valid/sq_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/sq_at_header.s > out2 && diff out1 out2
 	./asm -a resources/valid/nl_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header.s > out2 && diff out1 out2
 
-
+test_leak:
+	valgrind ./asm -a resources/champs/ex.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/champs/42.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/bee_gees.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/fluttershy.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/helltrain.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/jumper.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/maxidef.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/slider2.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/turtle.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/aff_no_OCP.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/flipped_name_comment.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/empty_namecomment.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/valid/end_comment.s 2>&1 | grep "definitely lost"
 	
 
 .PHONY: all clean fclean re test norme test_ch test_pw debug check
