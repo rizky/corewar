@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 12:34:34 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 13:29:13 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char
 	char	*opstr;
 	char	*opname;
 
-	opstr = ft_re_capture("\\w+[ \t]+.*", line);
+	opstr = ft_re_capture("\\w+[ \t%]+.*", line);
 	opname = ft_re_capture("\\w+", opstr);
 	free(opstr);
 	return (opname);
@@ -51,7 +51,12 @@ void
 	t_param	par;
 
 	opstr = ft_re_capture("\\w+[ \t]+.*", line);
-	temp = ft_re_capture("[\t ].+", opstr);
+	temp = ft_re_capture("[\t ]+.+", opstr);
+	if (temp == NULL)
+	{
+		opstr = ft_re_capture("\\w+[ \t]*.*", line);
+		temp = ft_re_capture("%.+", opstr);
+	}
 	opparam = ft_re_capture(".+", temp);
 	param_tab = ft_strsplit(opparam, SEPARATOR_CHAR);
 	while (param_tab && param_tab[(*op).param_c])
@@ -83,7 +88,7 @@ int
 	char	*temp;
 
 	if (ft_re_match("^[\\w_\\d]+:[ \t]*\\w+[ \t]+.*", a->file[a->i]) == -1)
-		if (ft_re_match("^\\w+[ \t]+.*", a->file[a->i]) == -1)
+		if (ft_re_match("^\\w+[ \t]*.*", a->file[a->i]) == -1)
 			if (ft_re_match("^[\\w_\\d]+:[ \t]*$", a->file[a->i]) == -1)
 				return (ft_error(OP, -1, a->file[a->i]));
 	if (ft_re_match(",,", a->file[a->i]) != -1 ||
