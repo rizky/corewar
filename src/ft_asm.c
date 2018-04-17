@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 13:14:40 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 08:30:15 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@
 ** Always tries to use the last argument
 ** Only accepts files with filename extension .s
 */
+
+static int	ft_end_of_input(char *file)
+{
+	int end;
+
+	end = ft_strlen(file) - 1;
+	if (file[end] != '\n')
+	{
+		while (end > 0 && (file[end] == ' ' || file[end] == '\t' || file[end] == '#'))
+			end--;
+		if (file[end] == '\n')
+			return (0);
+		return (1);
+	}
+	return (0);
+}
 
 static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 {
@@ -38,7 +54,7 @@ static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 	close(fd);
 	if (ft_file_is_empty(file[0]))
 		return (ft_free(file[0], EMPTY));
-	if (file[0][ft_strlen(file[0]) - 1] != '\n')
+	if (ft_end_of_input(file[0]))
 		return (ft_free(file[0], NEWLINE));
 	if ((a->file = ft_strsplit(file[0], '\n')) == NULL)
 		return (ft_free(file[0], MALLOC));
