@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 08:30:15 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/17 08:39:35 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_end_of_input(char *file)
 	end = ft_strlen(file) - 1;
 	if (file[end] != '\n')
 	{
-		while (end > 0 && (file[end] == ' ' || file[end] == '\t' || file[end] == '#'))
+		while (end > 0 && (file[end] == ' ' || file[end] == '\t' || file[end] == COMMENT_CHAR || file[end] == ';'))
 			end--;
 		if (file[end] == '\n')
 			return (0);
