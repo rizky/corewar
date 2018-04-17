@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 08:06:47 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 08:26:23 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,5 +133,7 @@ test: $(NAME)
 	./asm -a resources/param_error/double_operation_on_single_line.s 2>&1 ; true
 	./asm -a resources/param_error/no_space_between_op_and_param.s 2>&1 ; true
 	./asm -a resources/param_error/REG100.s 2>&1 ; true
+	./asm -a resources/errors/double_comments.s 2>&1 ; true
+	./asm -a resources/errors/double_names.s 2>&1 ; true
 
 .PHONY: all clean fclean re test norme test_ch test_pw debug check

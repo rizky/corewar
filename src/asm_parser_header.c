@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 18:35:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 08:23:42 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int		ft_get_name(t_asm *a)
 	{
 		a->i++;
 		ft_skip_empty_lines(a);
-		if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\".+\"",
-			a->file[a->i])) == NULL)
+		if (ft_re_match("^.name[ \t]*\"[^\"]*\"$", a->file[a->i]) == 0)
 			return (ft_error(HEADER, -1, a->file[a->i]));
 	}
 	a->i = tmp;
@@ -51,8 +50,7 @@ int		ft_get_comment(t_asm *a)
 	ft_skip_empty_lines(a);
 	if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
 		"\".+\"", a->file[a->i])) == NULL)
-		if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
-			"\".+\"", a->file[prev])) == NULL)
+		if (ft_re_match("^.comment[ \t]*\"[^\"]*\"$", a->file[prev]) == 0)
 			return (ft_error(HEADER, -1, a->file[a->i]));
 	if (ft_strlen(a->comment) == 0)
 		a->comment = "\0";
