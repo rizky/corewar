@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 18:00:58 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 18:35:55 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -147,21 +147,21 @@ test: $(NAME)
 	./asm -a resources/valid/nl_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header.s > out2 && diff out1 out2 ; true
 
 test_leak:
-	valgrind ./asm -a resources/champs/ex.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/champs/42.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/bee_gees.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/fluttershy.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/helltrain.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/jumper.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/maxidef.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/slider2.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/turtle.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/aff_no_OCP.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/flipped_name_comment.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/empty_namecomment.s 2>&1 | grep "definitely lost"
-	valgrind ./asm -a resources/valid/end_comment.s 2>&1 | grep "definitely lost"
+	valgrind ./asm -a resources/champs/ex.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/champs/42.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/bee_gees.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/fluttershy.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/helltrain.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/jumper.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/bigzork.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/maxidef.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/slider2.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/turtle.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/aff_no_OCP.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/flipped_name_comment.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/empty_namecomment.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
+	valgrind ./asm -a resources/valid/end_comment.s 2>&1 | grep -oE 'definitely.*|indirectly.*'
 	
 
 .PHONY: all clean fclean re test norme test_ch test_pw debug check
