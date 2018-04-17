@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 09:08:55 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/17 09:49:09 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,19 @@
 
 static int	ft_end_of_input(char *file)
 {
-	int end;
-	int comment;
+	int i;
+	char *line;
 
-	end = ft_strlen(file) - 1;
-	comment = 0;
-	if (file[end] != '\n')
+	if (file[ft_strlen(file) - 1] != '\n')
 	{
-		while (end > 0 && file[end] != '\n' && file[end] != COMMENT_CHAR && file[end] != ';')
-		{
-			if (file[end] != ' ' && file[end] != '\t')
-				comment = 1;
-			end--;
-		}
-		if (file[end] == '\n')
-		{
-			if (comment == 1)
-				return (1);
-			else
-				return (0);
-		}
-		end--;
-		while (end > 0 && (file[end] == ' ' || file[end] == '\t' || file[end] == COMMENT_CHAR || file[end] == ';'))
-			end--;
-		if (file[end] == '\n')
-			return (0);
-		return (1);
+		i = 0;
+		line = ft_strrchr(file, '\n') + 1;
+		line[ft_strcspn(line, "#")] = '\0';
+		line[ft_strcspn(line, ";")] = '\0';
+		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+			i++;
+		if (line[i] != '\0')
+			return (1);
 	}
 	return (0);
 }
