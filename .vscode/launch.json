@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/asm",
-			"args": ["resources/errors/null_name.s"],
+			"args": ["resources/valid/no_space_between_op_and_param.s"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
