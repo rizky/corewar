@@ -51,7 +51,7 @@ int		ft_get_comment(t_asm *a)
 	prev = a->i - 1;
 	ft_skip_empty_lines(a);
 	if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
-		"\".+\"", a->file[a->i])) == NULL)
+		"\".*\"", a->file[a->i])) == NULL)
 		if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
 			"\".*\"", a->file[prev])) == NULL)
 			return (ft_error(HEADER, -1, a->file[a->i]));
