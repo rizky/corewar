@@ -17,41 +17,13 @@
 ** To-do: protect ft_re_match_capture in libft (can cause segfault right now)
 */
 
-//int		ft_get_name(t_asm *a)
-//{
-//	int tmp;
-//
-//	ft_skip_empty_lines(a);
-//	if (a->file[a->i] == NULL)
-//		return (ft_error(HEADER, -1, a->file[a->i]));
-//	tmp = a->i;
-//	if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"",
-//		a->file[a->i])) == NULL)
-//	{
-//		a->i++;
-//		ft_skip_empty_lines(a);
-//		if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"",
-//			a->file[a->i])) == NULL)
-//			return (ft_error(HEADER, -1, a->file[a->i]));
-//	}
-//	a->i = tmp;
-//	if (ft_strlen(a->name) == 0)
-//		a->name = "\0";
-//	else
-//		a->name = ft_re_capture("[^\"]+", a->name);
-//	if (a->name && ft_strlen(a->name) > PROG_NAME_LENGTH)
-//		return (ft_error(NAME_LEN, -1, a->file[a->i]));
-//	return (0);
-//}
-
-int		ft_get_name(t_asm *a) {
-    int prev;
+int ft_find_name(t_asm *a)
+{
     int tmp;
     char *new;
 
-    ft_skip_empty_lines(a);
     tmp = a->i;
-    prev = tmp - 1;
+    ft_skip_empty_lines(a);
     while (!ft_re_capture("^.name.*", a->file[tmp]))
         tmp++;
     a->i = tmp;
@@ -67,6 +39,16 @@ int		ft_get_name(t_asm *a) {
     }
     if (a->i > a->header_end)
         a->header_end = a->i;
+    return (tmp);
+}
+
+int		ft_get_name(t_asm *a)
+{
+    int prev;
+    int tmp;
+
+    prev = a->i - 1;
+    tmp = ft_find_name(a);
     if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp])) == NULL)
         if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[prev])) == NULL)
             return (ft_error(HEADER, -1, a->file[tmp]));
@@ -79,13 +61,12 @@ int		ft_get_name(t_asm *a) {
     return (0);
 }
 
-int		ft_get_comment(t_asm *a) {
-    int prev;
+int ft_find_comment(t_asm *a)
+{
     int tmp;
     char *new;
 
     tmp = a->i;
-    prev = tmp - 1;
     ft_skip_empty_lines(a);
     while (!ft_re_capture("^.comment.*", a->file[tmp]))
         tmp++;
@@ -102,6 +83,16 @@ int		ft_get_comment(t_asm *a) {
     }
     if (a->i > a->header_end)
         a->header_end = a->i;
+    return (tmp);
+}
+
+int		ft_get_comment(t_asm *a)
+{
+    int prev;
+    int tmp;
+
+    prev = tmp - 1;
+    tmp = ft_find_comment(a);
 	if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp])) == NULL)
 		if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[prev])) == NULL)
 			return (ft_error(HEADER, -1, a->file[tmp]));

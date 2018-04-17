@@ -68,10 +68,9 @@ int		ft_parsing(t_asm *a)
 	a->i = 0;
 	if (ft_get_comment(a) == -1)
 		return (-1);
+    ft_printf("name : %s\n", a->name);
+    ft_printf("comment : %s\n", a->comment);
 	a->i = a->header_end + 1;
-    //ft_printf("name:\"%s\"\n", a->name);
-    //ft_printf("comment:\"%s\"\n", a->comment);
-    //	ft_check_instructions(a);
 	ft_skip_empty_lines(a);
 	a->start = a->i;
 	while (a->file[a->i])
