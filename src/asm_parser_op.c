@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 23:26:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 23:33:32 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@ char
 	return (opname);
 }
 
-void
-	asm_parser_opparam(char *line, t_op *op)
+static char
+	**asm_parser_opparam_tab(char *line)
 {
 	char	*opstr;
 	char	*opparam;
 	char	*temp;
 	char	**param_tab;
-	t_param	par;
 
 	opstr = ft_re_capture("\\w+[ \t]+.*", line);
 	temp = ft_re_capture("[\t ]+.+", opstr);
@@ -59,6 +58,19 @@ void
 	}
 	opparam = ft_re_capture(".+", temp);
 	param_tab = ft_strsplit(opparam, SEPARATOR_CHAR);
+	free(opstr);
+	free(temp);
+	free(opparam);
+	return (param_tab);
+}
+
+void
+	asm_parser_opparam(char *line, t_op *op)
+{
+	char	**param_tab;
+	t_param	par;
+
+	param_tab = asm_parser_opparam_tab(line);
 	while (param_tab && param_tab[(*op).param_c])
 	{
 		if ((*op).param_c < 3)
@@ -77,9 +89,6 @@ void
 	}
 	if (param_tab)
 		ft_strtab_free(param_tab);
-	free(opstr);
-	free(temp);
-	free(opparam);
 }
 
 int
