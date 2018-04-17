@@ -142,8 +142,8 @@ int 	check_ops(t_asm *a)
 		j = -1;
 		while (++j < ARRAY(a->ops, i).param_c)
 			length += ft_strlen(ARRAY(a->ops, i).params[j].str);
-
-		length += ARRAY(a->ops, i).param_c - 1;
+		if (ARRAY(a->ops, i).param_c >= 2)
+			length += ARRAY(a->ops, i).param_c - 1;
 		if (length != ft_simple_len(a->file[a->i]))
 			return (-1);
 		a->i++;
