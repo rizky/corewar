@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 23:12:28 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 23:21:14 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ FILES:= asm_parser asm_parser_header \
 		asm_helper_4 \
 		asm_print \
 
-FTREPATH:= libft/src/ft_re/
-FTRE:= ft_re ft_re_match_1 ft_re_match_2 ft_re_match_3 ft_re_match_4
+# FTREPATH:= libft/src/ft_re/
+# FTRE:= ft_re ft_re_match_1 ft_re_match_2 ft_re_match_3 ft_re_match_4
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -59,7 +59,7 @@ OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 OBJ_A:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILE_A)))
 OBJ_CW:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILE_CW)))
 
-SRC_RE+=$(addprefix $(FTREPATH),$(addsuffix .c,$(FTRE)))
+# SRC_RE+=$(addprefix $(FTREPATH),$(addsuffix .c,$(FTRE)))
 # ==================
 CCHF:=.cache_exists
 
@@ -68,7 +68,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(OBJ_A)
 	@cd $(LFTDIR) && $(MAKE)
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(SRC_RE) $(LFLAGS) $(SRCPATH)$(FILE_A).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRCPATH)$(FILE_A).c -o $(NAME)
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(NAME_CW): $(OBJ) $(OBJ_CW)
@@ -104,7 +104,7 @@ re: fclean
 	@$(MAKE) all
 
 debug: $(NAME)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(SRC_RE) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
 
 norm:
 	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
