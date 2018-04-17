@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 10:45:18 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 11:48:55 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,13 @@ int
 			{
 				offset = asm_get_directval(a, ARRAY(a->ops, i).params[j].str);
 				if (offset == -1)
-					return (ft_error(LABEL_MISSING, -1, ARRAY(a->ops, i).params[j].str));
+				{
+					return (ft_error(LABEL_MISSING, -1,
+						ARRAY(a->ops, i).params[j].str));
+				}
 				ARRAY(a->ops, i).params[j].value =
-				asm_get_directval(a, ARRAY(a->ops, i).params[j].str) -
-								ARRAY(a->ops, i).offset;
+					asm_get_directval(a, ARRAY(a->ops, i).params[j].str) -
+					ARRAY(a->ops, i).offset;
 			}
 			j++;
 		}
@@ -66,7 +69,7 @@ int
 int
 	asm_calculate_oc(t_param params[3], int param_c)
 {
-	const int	param_code[5] = {0, REG_CODE, DIR_CODE, 0 , IND_CODE};
+	const int	param_code[5] = {0, REG_CODE, DIR_CODE, 0, IND_CODE};
 
 	while (param_c < 3)
 	{
@@ -106,9 +109,9 @@ int
 			ft_re_match("^%\\d+$", (*param).str) == 0 ||
 			ft_re_match("^%-\\d+$", (*param).str) == 0)
 	{
-		(ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0)? (*param).is_label = 1: 0;
-		(*param).value = (ft_re_match("^%\\d+$", (*param).str) == 0)?
-		asm_get_paramval((*param).str, "\\d+"):
+		(ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0) ? (*param).is_label = 1 : 0;
+		(*param).value = (ft_re_match("^%\\d+$", (*param).str) == 0) ?
+		asm_get_paramval((*param).str, "\\d+") :
 		asm_get_paramval((*param).str, "-\\d+");
 		(*param).size = g_op_dict[opcode].d_size;
 		return (T_DIR);
@@ -117,9 +120,9 @@ int
 			ft_re_match("^\\d+$", (*param).str) == 0 ||
 			ft_re_match("^-\\d+$", (*param).str) == 0)
 	{
-		(ft_re_match(":[\\w_\\d]+$", (*param).str) == 0)? (*param).is_label = 1: 0;
-		(*param).value = (ft_re_match("^\\d+$", (*param).str) == 0)?
-		asm_get_paramval((*param).str, "\\d+"):
+		(ft_re_match(":[\\w_\\d]+$", (*param).str) == 0) ? (*param).is_label = 1 : 0;
+		(*param).value = (ft_re_match("^\\d+$", (*param).str) == 0) ?
+		asm_get_paramval((*param).str, "\\d+") :
 		asm_get_paramval((*param).str, "-\\d+");
 		(*param).size = 2;
 		return (T_IND);

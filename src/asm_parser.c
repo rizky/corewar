@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 09:01:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 11:39:00 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		asm_check_op(t_asm *a)
 			ARRAY(a->ops, a->op_c).params[i].type)
 			return (ft_error(OP_PARAM_TYPE, -1, a->file[a->i]));
 		if (ARRAY(a->ops, a->op_c).params[i].type == T_REG &&
-			ARRAY(a->ops, a->op_c).params[i].value >99)
+			ARRAY(a->ops, a->op_c).params[i].value > 99)
 			return (ft_error(OP_PARAM_TYPE, -1, a->file[a->i]));
 		i++;
 	}
@@ -65,9 +65,7 @@ int		ft_parsing(t_asm *a)
 	ft_skip_empty_lines(a);
 	while (a->file[a->i])
 	{
-		if (asm_parser_op(a) == -1)
-			return (-1);
-		if (asm_check_op(a) == -1)
+		if (asm_parser_op(a) == -1 || asm_check_op(a) == -1)
 			return (-1);
 		a->op_c++;
 		a->i++;
