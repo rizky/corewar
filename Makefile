@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 13:30:56 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 13:41:01 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,8 @@ FILES:= asm_parser asm_parser_header \
 		asm_checker_op asm_checker_labels \
 		asm_error \
 		asm_helper_1 asm_helper_2 asm_helper_3 \
+		asm_helper_4 \
 		asm_print \
-		ft_strcspn \
-		ft_strcdup
 
 FTREPATH:= libft/src/ft_re/
 FTRE:= ft_re ft_re_match_1 ft_re_match_2 ft_re_match_3 ft_re_match_4
@@ -115,7 +114,7 @@ norm2:
 	@sh ./norm/norm.sh
 
 test: $(NAME)
-	./asm -a resources/champs/ex.s > out1 && ./resources/vm_champs/asm -a resources/champs/ex.s > out2 && diff out1 out2
+	./asm -a resources/champs/ex.s > out1 && ./resources/vm_champs/asm -a resources/champs/ex.s > out2 && diff out1 out2;
 	./asm -a resources/champs/42.s > out1 && ./resources/vm_champs/asm -a resources/champs/42.s > out2 && diff out1 out2
 	./asm -a resources/valid/bee_gees.s > out1 && ./resources/vm_champs/asm -a resources/valid/bee_gees.s > out2 && diff out1 out2
 	./asm -a resources/valid/bigzork.s > out1 && ./resources/vm_champs/asm -a resources/valid/bigzork.s > out2 && diff out1 out2

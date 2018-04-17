@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 11:48:55 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/17 13:38:05 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int
 	int	j;
 	int	offset;
 
-	i = 0;
-	while (i < a->op_c)
+	i = -1;
+	while (++i < a->op_c)
 	{
-		j = 0;
-		while (j < ARRAY(a->ops, i).param_c)
+		j = -1;
+		while (++j < ARRAY(a->ops, i).param_c)
 		{
 			if (ARRAY(a->ops, i).params[j].is_label)
 			{
@@ -59,9 +59,7 @@ int
 					asm_get_directval(a, ARRAY(a->ops, i).params[j].str) -
 					ARRAY(a->ops, i).offset;
 			}
-			j++;
 		}
-		i++;
 	}
 	return (0);
 }
