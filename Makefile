@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 08:26:23 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/17 09:04:30 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,6 +122,8 @@ test: $(NAME)
 	./asm -a resources/valid/slider2.s > out1 && ./resources/vm_champs/asm -a resources/valid/slider2.s > out2 && diff out1 out2
 	./asm -a resources/valid/turtle.s > out1 && ./resources/vm_champs/asm -a resources/valid/turtle.s > out2 && diff out1 out2
 	./asm -a resources/valid/aff_no_OCP.s > out1 && ./resources/vm_champs/asm -a resources/valid/aff_no_OCP.s > out2 && diff out1 out2
+	./asm -a resources/valid/flipped_name_comment.s > out1 && ./resources/vm_champs/asm -a resources/valid/flipped_name_comment.s > out2 && diff out1 out2
+	./asm -a resources/valid/empty_namecomment.s > out1 && ./resources/vm_champs/asm -a resources/valid/empty_namecomment.s > out2 && diff out1 out2
 	./asm -a resources/errors/bad_param_type.s 2>&1 ; true
 	./asm -a resources/errors/double_commas.s 2>&1 ; true
 	./asm -a resources/errors/extra.s 2>&1 ; true
@@ -135,5 +137,6 @@ test: $(NAME)
 	./asm -a resources/param_error/REG100.s 2>&1 ; true
 	./asm -a resources/errors/double_comments.s 2>&1 ; true
 	./asm -a resources/errors/double_names.s 2>&1 ; true
+	./asm -a resources/errors/null_name.s 2>&1 ; true
 
 .PHONY: all clean fclean re test norme test_ch test_pw debug check

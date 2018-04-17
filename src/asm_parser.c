@@ -6,11 +6,20 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 21:46:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 09:01:38 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
+
+int		asm_check_header(t_asm *a)
+{
+	if (a->name == NULL)
+		return (ft_error(HEADER, -1, NULL));
+	if (a->comment == NULL)
+		return (ft_error(HEADER, -1, NULL));
+	return (0);
+}
 
 int		asm_check_op(t_asm *a)
 {
@@ -45,13 +54,14 @@ int		ft_parsing(t_asm *a)
 {
 	ft_handle_comments(a->file);
 	ft_trim_file(a->file);
-	if (ft_get_name(a) == -1)
-		return (-1);
+	if (ft_get_name(a) == -1 && ft_get_comment(a) == -1)
+		return (ft_error(HEADER, -1, a->file[a->i]));
 	a->i++;
-	if (ft_get_comment(a) == -1)
-		return (-1);
+	if (ft_get_comment(a) == -1 && ft_get_name(a) == -1)
+		return (ft_error(HEADER, -1, a->file[a->i]));
 	a->i++;
-//	ft_check_instructions(a);
+	if (asm_check_header(a) == -1)
+		return (-1);
 	ft_skip_empty_lines(a);
 	while (a->file[a->i])
 	{
