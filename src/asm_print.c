@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 19:29:02 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 08:09:59 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void
 {
 	int	j;
 
-	(ARRAY(a.ops, i).param_c > 1) ?
+	(g_op_dict[ARRAY(a.ops, i).opcode].is_oc)?
 	ft_printf("                    %-4d%-6d", ARRAY(a.ops, i).opcode,
 		ARRAY(a.ops, i).oc) :
 	ft_printf("                    %-10d", ARRAY(a.ops, i).opcode);
@@ -56,7 +56,7 @@ void
 		asm_print_big_endian(ARRAY(a.ops, i).params[j].value,
 			ARRAY(a.ops, i).params[j].size);
 	ft_printf("\n");
-	(ARRAY(a.ops, i).param_c > 1) ?
+	(g_op_dict[ARRAY(a.ops, i).opcode].is_oc)?
 	ft_printf("                    %-4d%-6d", ARRAY(a.ops, i).opcode,
 		ARRAY(a.ops, i).oc) :
 	ft_printf("                    %-10d", ARRAY(a.ops, i).opcode);

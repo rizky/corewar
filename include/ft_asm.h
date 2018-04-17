@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 17:57:43 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 08:07:14 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,43 +44,44 @@ typedef struct	s_op_dict
 	int			opcode;
 	int			d_size;
 	int			param_c;
+	int			is_oc;
 	int			p_type[3];
 }				t_op_dict;
 
 static	t_op_dict g_op_dict[17] = {
-	{ .name = "\0", .opcode = 0x00, .d_size = 0, .param_c = 0,
+	{ .name = "\0", .opcode = 0x00, .d_size = 0, .param_c = 0, .is_oc = 0,
 		{0, 0, 0} },
-	{ .name = "live", .opcode = 0x01, .d_size = 4, .param_c = 1,
+	{ .name = "live", .opcode = 0x01, .d_size = 4, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0} },
-	{ .name = "ld", .opcode = 0x02, .d_size = 4, .param_c = 2,
+	{ .name = "ld", .opcode = 0x02, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_DIR | T_IND, T_REG, 0} },
-	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2,
+	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2, .is_oc = 1,
 		{T_REG, T_REG | T_IND, 0} },
-	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3,
+	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG} },
-	{ .name = "sub", .opcode = 0x05, .d_size = 0, .param_c = 3,
+	{ .name = "sub", .opcode = 0x05, .d_size = 0, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG} },
-	{ .name = "and", .opcode = 0x06, .d_size = 4, .param_c = 3,
+	{ .name = "and", .opcode = 0x06, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG} },
-	{ .name = "or", .opcode = 0x07, .d_size = 4, .param_c = 3,
+	{ .name = "or", .opcode = 0x07, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG} },
-	{ .name = "xor", .opcode = 0x08, .d_size = 4, .param_c = 3,
+	{ .name = "xor", .opcode = 0x08, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG} },
-	{ .name = "zjmp", .opcode = 0x09, .d_size = 2, .param_c = 1,
+	{ .name = "zjmp", .opcode = 0x09, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0} },
-	{ .name = "ldi", .opcode = 0x0a, .d_size = 2, .param_c = 3,
+	{ .name = "ldi", .opcode = 0x0a, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG} },
-	{ .name = "sti", .opcode = 0x0b, .d_size = 2, .param_c = 3,
+	{ .name = "sti", .opcode = 0x0b, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG} },
-	{ .name = "fork", .opcode = 0x0c, .d_size = 2, .param_c = 1,
+	{ .name = "fork", .opcode = 0x0c, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0} },
-	{ .name = "lld", .opcode = 0x0d, .d_size = 4, .param_c = 2,
+	{ .name = "lld", .opcode = 0x0d, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_IND | T_DIR, T_REG, 0} },
-	{ .name = "lldi", .opcode = 0x0e, .d_size = 2, .param_c = 3,
+	{ .name = "lldi", .opcode = 0x0e, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG} },
-	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1,
+	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0} },
-	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1,
+	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
 		{T_REG, 0, 0} }
 };
 
