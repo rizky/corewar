@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 23:26:44 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/17 10:45:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ int
 	{
 		if (ARRAY(a->ops, i).label &&
 			ft_strcmp(ARRAY(a->ops, i).label, str) == 0)
+		{
+			free(str);
 			return (ARRAY(a->ops, i).offset);
+		}
 		i++;
 	}
+	free(str);
 	return (-1);
 }
 
