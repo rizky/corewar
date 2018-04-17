@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/asm",
-			"args": ["resources/champs/42.s"],
+			"args": ["resources/valid/sq_at_header.s"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
