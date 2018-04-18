@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 11:43:21 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 09:23:17 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,7 @@ int
 	ft_bzero(cor, ft_strlen(path) + 3);
 	cor = ft_strncpy(cor, path, ft_strlen(path) - 1);
 	cor = ft_strcat(cor, "cor");
-	fd = open(cor, O_RDWR | O_CREAT | O_TRUNC,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	fd = open(cor, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	ft_printfln("Writing output program to %s", cor);
 	i = -1;
 	while (++i < (int)binary->size)
