@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 11:43:21 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 09:32:26 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void
 {
 	ft_printf("Dumping annotated program on standard output\n");
 	ft_printf("Program size : %d bytes\n", a.size);
-	ft_printf("Name : \"%s\"\n", a.name);
-	ft_printf("Comment : \"%s\"\n\n", a.comment);
+	ft_printf("Name : %s\n", a.name);
+	ft_printf("Comment : %s\n\n", a.comment);
 }
 
 void

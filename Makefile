@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 08:49:24 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 09:36:01 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -150,6 +150,7 @@ test: $(NAME)
 	@if [[ $$(./asm -a resources/errors/double_comments.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
 	@if [[ $$(./asm -a resources/errors/double_names.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
 	@if [[ $$(./asm -a resources/errors/null_name.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
+	@if [[ $$(./asm -a resources/errors/nl_at_header_error.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
 	
 	
 
@@ -169,6 +170,7 @@ test_leak:
 	@valgrind ./asm -a resources/valid/flipped_name_comment.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 	@valgrind ./asm -a resources/valid/empty_namecomment.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 	@valgrind ./asm -a resources/valid/end_comment.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
-	
+	@valgrind ./asm -a resources/valid/nl_at_header.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm -a resources/errors/nl_at_header_error.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 
 .PHONY: all clean fclean re test norme test_ch test_pw debug check
