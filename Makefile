@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 15:38:30 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 15:57:57 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FILES:= asm_parser asm_parser_header \
 		asm_print \
 		asm_error \
 		asm_free \
-		asm_helper_1 asm_helper_2 asm_helper_3
+		asm_helper_1 asm_helper_2 asm_helper_3 asm_helper_4
 
 # FTREPATH:= libft/src/ft_re/
 # FTRE:= ft_re ft_re_match_1 ft_re_match_2 ft_re_match_3 ft_re_match_4
