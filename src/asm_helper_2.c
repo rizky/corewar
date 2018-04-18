@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:57:53 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 14:46:00 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 14:54:24 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	ft_skip_header(char **file)
 		while (file[i][++j])
 			(file[i][j] == '\"') ? quotes++ : 0;
 		if (quotes == 4)
-			return (i);
+			return (i + 1);
 	}
 	return (0);
 }
