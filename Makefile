@@ -6,14 +6,12 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 09:52:36 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 09:58:51 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= asm
-NAME_CW:= corewar
-FILE_A:= ft_asm
-FILE_CW:= ft_corewar 
+FILE:= ft_asm
 FILES:= asm_parser asm_parser_header \
 		asm_parser_op asm_parser_param \
 		asm_compiler asm_compiler_header \
@@ -53,11 +51,7 @@ EOC:="\033[0;0m"
 
 # ------ Auto ------
 SRC:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
-SRC_CW:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILE_CW)))
-SRC_A:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILE_A)))
 OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
-OBJ_A:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILE_A)))
-OBJ_CW:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILE_CW)))
 
 # SRC_RE+=$(addprefix $(FTREPATH),$(addsuffix .c,$(FTRE)))
 # ==================
@@ -65,17 +59,11 @@ CCHF:=.cache_exists
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(OBJ_A)
+$(NAME): $(OBJ)
 	@echo $(PURPLE) " - Compiling libft/src/* to libft/obj/*" $(PURPLE)
 	@cd $(LFTDIR) && $(MAKE)
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRCPATH)$(FILE_A).c -o $(NAME)
-	@echo $(GREEN) " - OK" $(EOC)
-
-$(NAME_CW): $(OBJ) $(OBJ_CW)
-	@cd $(LFTDIR) && $(MAKE)
-	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRC_CW) -o $(NAME_CW)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRCPATH)$(FILE).c -o $(NAME)
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c | $(CCHF)
@@ -96,9 +84,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f $(NAME_CW)
 	@rm -rf $(NAME).dSYM/
-	@rm -rf $(NAME_CW).dSYM/
 	@cd $(LFTDIR) && $(MAKE) fclean
 
 re: fclean
@@ -106,7 +92,7 @@ re: fclean
 
 debug: $(NAME)
 	@echo $(CYAN) " - Compiling debug asm" $(EOC)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE).c -o $(NAME)
 
 norm:
 	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
