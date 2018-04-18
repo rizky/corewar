@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 09:58:51 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 10:02:21 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,9 @@ FILE:= ft_asm
 FILES:= asm_parser asm_parser_header \
 		asm_parser_op asm_parser_param \
 		asm_compiler asm_compiler_header \
-		asm_checker_op asm_checker_labels \
-		asm_error \
-		asm_helper_1 asm_helper_2 asm_helper_3 \
-		asm_helper_4 \
 		asm_print \
+		asm_error \
+		asm_helper_1 asm_helper_2 asm_helper_3 asm_helper_4
 
 # FTREPATH:= libft/src/ft_re/
 # FTRE:= ft_re ft_re_match_1 ft_re_match_2 ft_re_match_3 ft_re_match_4
@@ -142,7 +140,7 @@ test: $(NAME)
 	
 	
 
-test_leak:
+test_leaks:
 	@valgrind ./asm -a resources/champs/ex.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 	@valgrind ./asm -a resources/champs/42.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 	@valgrind ./asm -a resources/valid/bee_gees.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
@@ -161,4 +159,4 @@ test_leak:
 	@valgrind ./asm -a resources/valid/nl_at_header.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 	@valgrind ./asm -a resources/errors/nl_at_header_error.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 
-.PHONY: all clean fclean re test norme test_ch test_pw debug check
+.PHONY: all clean fclean re debug norm norm2 test test_leaks
