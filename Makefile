@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 15:26:01 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 15:34:21 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,7 @@ tests_error: all
 T_DIR_VALID = tests/valid/
 T_DIR_VALID_2 = tests/valid2/
 T_FILES_VALID:=$(shell cd $(T_DIR_VALID); ls  | egrep '^.*.s$$' | sort -f )
-T_FILES_BIN:=$(shell cd $(T_DIR_VALID); ls | egrep '^.*.s$$' | cut -f 1 -d '.' | sort -f )
+T_FILES_BIN:=$(shell cd $(T_DIR_VALID); ls | egrep '^.*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 
 test_bin : all
 	@./asm $(T_DIR_VALID)$(X).s > /dev/null ; true
