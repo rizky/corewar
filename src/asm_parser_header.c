@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 12:48:16 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 14:26:04 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	asm_get_content_nl(t_asm *a, char **content_str)
 	}
 	fta_append_char(&content, '\n');
 	fta_append(&content, a->file[a->i], ft_strlen(a->file[a->i]));
+	fta_append_char(&content, '\0');
 	*content_str = (char *)content.data;
 	return (1);
 }
