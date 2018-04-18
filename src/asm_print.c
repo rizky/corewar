@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 20:45:41 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 19:29:02 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 09:38:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void
 {
 	ft_printf("Dumping annotated program on standard output\n");
 	ft_printf("Program size : %d bytes\n", a.size);
-	ft_printf("Name : \"%s\"\n", a.name);
-	ft_printf("Comment : \"%s\"\n\n", a.comment);
+	ft_printf("Name : %s\n", a.name);
+	ft_printf("Comment : %s\n\n", a.comment);
 }
 
 void
@@ -48,7 +48,7 @@ void
 {
 	int	j;
 
-	(ARRAY(a.ops, i).param_c > 1) ?
+	(g_op_dict[ARRAY(a.ops, i).opcode].is_oc) ?
 	ft_printf("                    %-4d%-6d", ARRAY(a.ops, i).opcode,
 		ARRAY(a.ops, i).oc) :
 	ft_printf("                    %-10d", ARRAY(a.ops, i).opcode);
@@ -57,7 +57,7 @@ void
 		asm_print_big_endian(ARRAY(a.ops, i).params[j].value,
 			ARRAY(a.ops, i).params[j].size);
 	ft_printf("\n");
-	(ARRAY(a.ops, i).param_c > 1) ?
+	(g_op_dict[ARRAY(a.ops, i).opcode].is_oc) ?
 	ft_printf("                    %-4d%-6d", ARRAY(a.ops, i).opcode,
 		ARRAY(a.ops, i).oc) :
 	ft_printf("                    %-10d", ARRAY(a.ops, i).opcode);
@@ -84,7 +84,8 @@ void
 		if (ARRAY(a.ops, i).opcode != 0)
 		{
 			ft_printf("%-5d(%-3d) :        %-10s",
-			ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size, ARRAY(a.ops, i).opname);
+			ARRAY(a.ops, i).offset, ARRAY(a.ops, i).size,
+			ARRAY(a.ops, i).opname);
 			j = -1;
 			while (++j < ARRAY(a.ops, i).param_c)
 				ft_printf("%-18s", ARRAY(a.ops, i).params[j].str);
@@ -166,8 +167,7 @@ int
 	ft_bzero(cor, ft_strlen(path) + 3);
 	cor = ft_strncpy(cor, path, ft_strlen(path) - 1);
 	cor = ft_strcat(cor, "cor");
-	fd = open(cor, O_RDWR | O_CREAT | O_TRUNC,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	fd = open(cor, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	ft_printfln("Writing output program to %s", cor);
 	i = -1;
 	while (++i < (int)binary->size)

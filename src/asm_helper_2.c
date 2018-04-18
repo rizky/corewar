@@ -3,51 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   asm_helper_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 13:13:52 by rnugroho         ###   ########.fr       */
+/*   Created: 2018/04/17 11:57:53 by fpetras           #+#    #+#             */
+/*   Updated: 2018/04/18 14:54:24 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 #include "libft.h"
 
-void	ft_print_tab(char **tab)
+static int	ft_inside_quotes(char *line, int j)
 {
 	int i;
+	int quotes;
+	int inside;
 
 	i = 0;
-	while (tab[i])
+	quotes = 0;
+	inside = 0;
+	while (line[i])
 	{
-		ft_printf("%s\n", tab[i]);
+		if (line[i] == '\"')
+			quotes++;
+		if (i == j && quotes == 1)
+			inside = 1;
+		i++;
+	}
+	if (quotes == 2 && inside == 1)
+		return (1);
+	return (0);
+}
+
+void		ft_handle_comments(char **file)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (file[i])
+	{
+		j = 0;
+		while (file[i][j])
+		{
+			if (file[i][j] == COMMENT_CHAR || file[i][j] == ';')
+			{
+				if ((ft_strstr(file[i], NAME_CMD_STRING) ||
+					ft_strstr(file[i], COMMENT_CMD_STRING)) &&
+					ft_inside_quotes(file[i], j))
+					;
+				else
+					file[i][j] = '\0';
+			}
+			j++;
+		}
 		i++;
 	}
 }
 
-int		ft_free_asm(t_asm *a, int status)
+static int	ft_skip_header(char **file)
 {
-	fta_clear(a->ops);
-	ft_free_tab(a->file, status);
-	return (status);
+	int		i;
+	int		j;
+	int		quotes;
+	char	*tmp;
+
+	i = -1;
+	quotes = 0;
+	while (file[++i])
+	{
+		j = -1;
+		if (ft_strstr(file[i], NAME_CMD_STRING) ||
+			ft_strstr(file[i], COMMENT_CMD_STRING))
+		{
+			tmp = ft_strdup(ft_strchr(file[i], '.'));
+			free(file[i]);
+			file[i] = tmp;
+		}
+		while (file[i][++j])
+			(file[i][j] == '\"') ? quotes++ : 0;
+		if (quotes == 4)
+			return (i + 1);
+	}
+	return (0);
 }
 
-int		ft_free_tab(char **tab, int status)
+void		ft_trim_file(char **file)
 {
-	int i;
+	int		i;
+	char	*tmp;
 
-	i = 0;
-	while (tab[i])
+	i = ft_skip_header(file);
+	while (file[i])
 	{
-		free(tab[i]);
+		tmp = ft_strtrim(file[i]);
+		free(file[i]);
+		file[i] = ft_strdup(tmp);
+		free(tmp);
 		i++;
 	}
-	free(tab);
-	return (status);
-}
-
-int		ft_free(char *str, int status)
-{
-	free(str);
-	return (status);
 }

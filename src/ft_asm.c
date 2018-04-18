@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/16 13:14:40 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 09:14:28 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,28 @@
 ** Always tries to use the last argument
 ** Only accepts files with filename extension .s
 */
+
+static int	ft_end_of_input(char *file)
+{
+	int		i;
+	char	comment[2];
+	char	*line;
+
+	if (file[ft_strlen(file) - 1] != '\n')
+	{
+		i = 0;
+		comment[0] = COMMENT_CHAR;
+		comment[1] = '\0';
+		line = ft_strrchr(file, '\n') + 1;
+		line[ft_strcspn(line, comment)] = '\0';
+		line[ft_strcspn(line, ";")] = '\0';
+		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+			i++;
+		if (line[i] != '\0')
+			return (1);
+	}
+	return (0);
+}
 
 static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 {
@@ -39,18 +61,11 @@ static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 	close(fd);
 	if (ft_file_is_empty(file[0]))
 		return (ft_free(file[0], EMPTY));
-	if (file[0][ft_strlen(file[0]) - 1] != '\n')
+	if (ft_end_of_input(file[0]))
 		return (ft_free(file[0], NEWLINE));
 	if ((a->file = ft_strsplit_keep_empty(file[0], '\n')) == NULL)
 		return (ft_free(file[0], MALLOC));
 	free(file[0]);
-	return (0);
-}
-
-static int	ft_filename_extension(char *file)
-{
-	if (file[ft_strlen(file) - 1] == 's' && file[ft_strlen(file) - 2] == '.')
-		return (1);
 	return (0);
 }
 
@@ -61,7 +76,11 @@ static int	ft_init(int ac, char **av, t_asm *a, int i)
 	ft_bzero(a, sizeof(t_asm));
 	if (ac < 2 || !ft_filename_extension(av[i]))
 	{
-		ft_dprintf(2, "Usage: %s [-a | -m] <sourcefile.s>\n", av[0]);
+		ft_dprintf(2, "usage: %s [-a] sourcefile.s\n", av[0]);
+		ft_dprintf(2, "       %s [-a] [-m] sourcefile.s ...\n", av[0]);
+		ft_dprintf(2, "    -a : Prints a stripped and annotated version");
+		ft_dprintf(2, " of the code\n");
+		ft_dprintf(2, "    -m : Allows processing of multiple files\n");
 		return (-1);
 	}
 	if ((errnum = ft_read_sourcefile(i, av, a)) > 0)
@@ -108,6 +127,8 @@ int			main(int ac, char **av)
 	i = (opt[OPT_M]) ? i : ac - 1;
 	while (i < ac)
 	{
+		(opt[OPT_M] && i > asm_getoptions(av, opt)) ? ft_printf("\n") : 0;
+		opt[OPT_M] ? ft_printf("\t%*w%s%w\n", 3, av[i]) : 0;
 		if (ft_init(ac, av, &a, i) == -1)
 			return (-1);
 		ops = NEW_ARRAY(t_op);

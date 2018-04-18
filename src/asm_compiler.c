@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 21:29:02 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 10:24:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-char
-	*asm_to_big_endian(int value, int size)
+char		*asm_to_big_endian(int value, int size)
 {
 	t_array	result;
 	int		i;
@@ -30,14 +29,12 @@ char
 	return (result.data);
 }
 
-void
-	asm_append_magic_nbr(t_array *binary)
+static void	asm_append_magic_nbr(t_array *binary)
 {
 	fta_append_free(binary, asm_to_big_endian(COREWAR_EXEC_MAGIC, 4), 4);
 }
 
-void
-	asm_append_op(t_array *binary, t_op op)
+static void	asm_append_op(t_array *binary, t_op op)
 {
 	int		i;
 
@@ -52,8 +49,7 @@ void
 					op.params[i].size), op.params[i].size);
 }
 
-void
-	asm_compiler(t_asm a)
+void		asm_compiler(t_asm a)
 {
 	t_array	binary;
 	int		i;

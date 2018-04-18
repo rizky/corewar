@@ -6,14 +6,14 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 10:22:53 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/15 14:34:51 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 08:26:11 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 #include "libft.h"
 
-char *opcode[17] =
+char *g_opcode[17] =
 {
 	"live",
 	"ld",
@@ -55,9 +55,9 @@ int		ft_check_opcode2(char *line)
 	int i;
 
 	i = 0;
-	while (opcode[i])
+	while (g_opcode[i])
 	{
-		if (ft_strncmp(line, opcode[i], ft_strlen(opcode[i])) == 0)
+		if (ft_strncmp(line, g_opcode[i], ft_strlen(g_opcode[i])) == 0)
 			return (i);
 		i++;
 	}
@@ -82,7 +82,7 @@ int		ft_check_opcode(t_asm *a)
 		{
 			if ((op = ft_check_opcode2(&a->file[i][j])) == -1) //check si le debut du test est un op
 				return (-1);
-			j += ft_strlen(opcode[op]) + 1;
+			j += ft_strlen(g_opcode[op]) + 1;
 			j += ft_skip_spaces_tabs(&a->file[i][j]);
 			ft_check_parameters(&a->file[i][j]); //apres lop check les params
 		}
@@ -102,7 +102,8 @@ int		ft_check_instructions(t_asm *a)
 		ft_dprintf(2, "Error - invalid instruction\n");
 		return (-1);
 	}
-//	ft_print_tab(a->labels);
+	if (0)
+		ft_print_tab(a->labels);
 	ft_free_tab(a->labels, 0);
 	return (0);
 }
