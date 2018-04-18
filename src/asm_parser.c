@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 23:13:58 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 23:25:01 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	asm_check_op(t_asm *a)
 
 	i = 0;
 	if (ARRAY(a->ops, a->op_c).label != NULL &&
-		ft_re_match("^[\\w_\\d]+$", ARRAY(a->ops, a->op_c).label) != 0)
+		ft_re_match("^[abcdefghijklmnopqrstuvwxyz_0123456789]+$", ARRAY(a->ops, a->op_c).label) != 0)
 		return (ft_error(LABEL_INVALID, -1, a->file[a->i]));
 	if (ARRAY(a->ops, a->op_c).label != NULL &&
 		ARRAY(a->ops, a->op_c).opcode == 0)
