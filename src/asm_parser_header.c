@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 09:37:41 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 09:43:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int
 	fta_append_char(&content, '\n');
 	fta_append(&content, a->file[a->i], ft_strlen(temp));
 	*content_str = (char *)content.data;
-	fta_clear(&content);
 	return (1);
 }
 
