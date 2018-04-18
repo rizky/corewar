@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:57:53 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 12:28:19 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 14:54:24 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,39 @@ void		ft_handle_comments(char **file)
 	}
 }
 
+static int	ft_skip_header(char **file)
+{
+	int		i;
+	int		j;
+	int		quotes;
+	char	*tmp;
+
+	i = -1;
+	quotes = 0;
+	while (file[++i])
+	{
+		j = -1;
+		if (ft_strstr(file[i], NAME_CMD_STRING) ||
+			ft_strstr(file[i], COMMENT_CMD_STRING))
+		{
+			tmp = ft_strdup(ft_strchr(file[i], '.'));
+			free(file[i]);
+			file[i] = tmp;
+		}
+		while (file[i][++j])
+			(file[i][j] == '\"') ? quotes++ : 0;
+		if (quotes == 4)
+			return (i + 1);
+	}
+	return (0);
+}
+
 void		ft_trim_file(char **file)
 {
 	int		i;
 	char	*tmp;
 
-	i = 0;
+	i = ft_skip_header(file);
 	while (file[i])
 	{
 		tmp = ft_strtrim(file[i]);
