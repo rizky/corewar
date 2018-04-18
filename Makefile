@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 09:36:01 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 09:52:36 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,6 +136,7 @@ test: $(NAME)
 	@./asm -a resources/valid/no_space_between_op_and_param.s > out1 && ./resources/vm_champs/asm -a resources/valid/no_space_between_op_and_param.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
 	@./asm -a resources/valid/sq_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/sq_at_header.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
 	@./asm -a resources/valid/nl_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
+	@./asm -a resources/valid/nl_at_header_flipped.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header_flipped.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
 	@echo $(CYAN) " - Test Error Cases" $(EOC)
 	@if [[ $$(./asm -a resources/errors/bad_param_type.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
 	@if [[ $$(./asm -a resources/errors/double_commas.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
@@ -151,6 +152,7 @@ test: $(NAME)
 	@if [[ $$(./asm -a resources/errors/double_names.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
 	@if [[ $$(./asm -a resources/errors/null_name.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
 	@if [[ $$(./asm -a resources/errors/nl_at_header_error.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
+	@if [[ $$(./asm -a resources/errors/nl_at_header_unclosed.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
 	
 	
 
