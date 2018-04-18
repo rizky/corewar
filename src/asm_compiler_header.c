@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 18:08:15 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/16 09:17:49 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 14:16:39 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,36 @@ void
 void
 	asm_append_name(t_array *binary, char *str)
 {
-	int i;
+	int		i;
+	char	*temp;
 
-	fta_append(binary, str, ft_strlen(str));
+	temp = ft_re_capture("[^\"]+", str);
+	fta_append(binary, temp, ft_strlen(temp));
 	i = ft_strlen(str);
 	while (i < PROG_NAME_LENGTH)
 	{
 		fta_append_char(binary, 0x00);
 		i++;
 	}
+	free(temp);
 	asm_append_nullbyte(binary);
 }
 
 void
 	asm_append_comment(t_array *binary, char *str)
 {
-	int i;
+	int		i;
+	char	*temp;
 
-	fta_append(binary, str, ft_strlen(str));
+	temp = ft_re_capture("[^\"]+", str);
+	fta_append(binary, temp, ft_strlen(temp));
 	i = ft_strlen(str);
 	while (i < COMMENT_LENGTH)
 	{
 		fta_append_char(binary, 0x00);
 		i++;
 	}
+	free(temp);
 	asm_append_nullbyte(binary);
 }
 
