@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser_header.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 10:09:49 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 12:48:16 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	asm_get_content_nl(t_asm *a, char **content_str)
 		return (-1);
 	}
 	fta_append_char(&content, '\n');
-	fta_append(&content, a->file[a->i], ft_strlen(temp));
+	fta_append(&content, a->file[a->i], ft_strlen(a->file[a->i]));
 	*content_str = (char *)content.data;
 	return (1);
 }

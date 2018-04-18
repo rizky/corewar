@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 12:39:44 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 12:44:33 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@rm -rf $(NAME).dSYM/
 	@cd $(LFTDIR) && $(MAKE) fclean
+	@rm -f out1 out2
 
 re: fclean
 	@$(MAKE) all
