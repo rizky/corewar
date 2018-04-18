@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 10:22:53 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 11:35:25 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 08:26:11 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ int		ft_check_instructions(t_asm *a)
 		ft_dprintf(2, "Error - invalid instruction\n");
 		return (-1);
 	}
-//	ft_print_tab(a->labels);
+	if (0)
+		ft_print_tab(a->labels);
 	ft_free_tab(a->labels, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 23:25:45 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 08:24:59 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int
 	else if (ft_re_match("^:[\\w_\\d]+$", (*param).str) == 0 ||
 			ft_re_match("^-?\\d+$", (*param).str) == 0)
 	{
-		(ft_re_match(":[\\w_\\d]+$", (*param).str) == 0) ? (*param).is_label = 1 : 0;
+		!ft_re_match(":[\\w_\\d]+$", (*param).str) ? (*param).is_label = 1 : 0;
 		(*param).value = asm_get_paramval((*param).str, "-?\\d+");
 		(*param).size = 2;
 		return (T_IND);
