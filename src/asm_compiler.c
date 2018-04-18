@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/18 15:30:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 15:39:27 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void		asm_compiler(t_asm a)
 	while (++i < a.op_c)
 		asm_append_op(&binary, ARRAY(a.ops, i));
 	asm_print_memory(&binary, a.path);
+	fta_clear(&binary);
 }

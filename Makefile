@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 15:34:21 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 15:38:30 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,8 +124,8 @@ test_bin : all
 	@./asm $(T_DIR_VALID)$(X).s > /dev/null ; true
 	@./resources/vm_champs/asm $(T_DIR_VALID_2)$(X).s > /dev/null ; true
 	@if diff $(T_DIR_VALID)$(X).cor $(T_DIR_VALID_2)$(X).cor > /dev/null; \
-		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X).cor" $(EOC); \
+		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X).cor" $(EOC) ; \
 	fi
 
 tests_bin: all
@@ -135,7 +135,7 @@ tests_bin: all
 test_valid : all
 	@./asm -a $(T_DIR_VALID)$(X) > out1 2>> out1; true
 	@./resources/vm_champs/asm -a $(T_DIR_VALID)$(X) > out2; true
-	@if diff out1 out2; \
+	@if diff out1 out2 > /dev/null; \
 		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X)" $(EOC) ; \
 	fi
@@ -147,7 +147,7 @@ tests_valid: all
 tests: all tests_valid tests_error tests_bin
 
 test_leak: all
-	@valgrind ./asm -a $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 
 test_leaks:
 	@echo $(CYAN) " - Test Leaks" $(EOC)
