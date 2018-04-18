@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:45:37 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 08:14:02 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 11:23:59 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_file_is_empty(char *file)
 	i = 0;
 	while (file[i])
 	{
-		if (!ft_isspace(file[i]))
+		if (!ft_isspace(file[i]) && file[i] != COMMENT_CHAR && file[i] != ';')
 			return (0);
 		i++;
 	}
