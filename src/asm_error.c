@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 10:07:12 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 23:13:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	ft_error_2(int errnum)
 		ft_dprintf(2, "Error - Parameter type is invalid\n");
 	else if (errnum == LABEL_MISSING)
 		ft_dprintf(2, "Error - Label is undefined\n");
+	else if (errnum == LABEL_INVALID)
+		ft_dprintf(2, "Error - Label is invalid\n");
 }
 
 int			ft_error(int errnum, int status, char *line)
