@@ -158,5 +158,6 @@ void			asm_append_size(t_array *binary, int size);
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
 int 			check_ops(t_asm *a);
+char			**ft_strsplit_keep_empty(const char *str, char c);
 
 #endif
