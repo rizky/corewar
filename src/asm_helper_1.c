@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_helper_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:45:37 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 11:59:25 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 08:14:02 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_file_is_empty(char *file)
 	i = 0;
 	while (file[i])
 	{
-		if (file[i] != '\n')
+		if (!ft_isspace(file[i]))
 			return (0);
 		i++;
 	}
