@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/17 23:33:32 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 08:43:08 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,14 @@ void
 	t_param	par;
 
 	param_tab = asm_parser_opparam_tab(line);
+	(*op).param_c = 0;
 	while (param_tab && param_tab[(*op).param_c])
 	{
 		if ((*op).param_c < 3)
 		{
-			if (ft_re_match("[ \t]*[^ \t]+[ \t]+[^ \t]+[ \t]*",
-				param_tab[(*op).param_c]) == 0)
-				par.str = "invalid";
-			else
-				par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
+			par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
+			(ft_re_match("[ \t]*[^ \t]+[ \t]+[^ \t]+[ \t]*",
+				param_tab[(*op).param_c]) == 0) ? par.str = "invalid" : 0;
 			par.is_label = 0;
 			par.type = asm_get_paramtype((*op).opcode, &par);
 			(*op).params[(*op).param_c] = par;
@@ -106,7 +105,6 @@ int
 		return (ft_error(OP, -1, a->file[a->i]));
 	temp = ft_re_capture("\\w+:", a->file[a->i]);
 	op.label = ft_re_capture("\\w+", temp);
-	op.param_c = 0;
 	op.opname = asm_parser_opname(a->file[a->i]);
 	op.opcode = asm_parser_opcode(op.opname);
 	op.size = 0;

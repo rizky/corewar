@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/17 23:21:14 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 08:49:24 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ CCHF:=.cache_exists
 all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_A)
+	@echo $(PURPLE) " - Compiling libft/src/* to libft/obj/*" $(PURPLE)
 	@cd $(LFTDIR) && $(MAKE)
 	@echo $(CYAN) " - Compiling $@" $(RED)
 	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRCPATH)$(FILE_A).c -o $(NAME)
@@ -104,6 +105,7 @@ re: fclean
 	@$(MAKE) all
 
 debug: $(NAME)
+	@echo $(CYAN) " - Compiling debug asm" $(EOC)
 	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
 
 norm:
@@ -114,7 +116,7 @@ norm2:
 	@sh ./norm/norm.sh
 
 test: $(NAME)
-	@echo $(GREEN) "Test Cases" $(EOC)
+	@echo $(CYAN) " - Test Valid Cases" $(EOC)
 	@./asm -a resources/champs/ex.s > out1 && ./resources/vm_champs/asm -a resources/champs/ex.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
 	@./asm -a resources/champs/42.s > out1 && ./resources/vm_champs/asm -a resources/champs/42.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
 	@./asm -a resources/valid/bee_gees.s > out1 && ./resources/vm_champs/asm -a resources/valid/bee_gees.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
@@ -134,7 +136,7 @@ test: $(NAME)
 	@./asm -a resources/valid/no_space_between_op_and_param.s > out1 && ./resources/vm_champs/asm -a resources/valid/no_space_between_op_and_param.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
 	@./asm -a resources/valid/sq_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/sq_at_header.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
 	@./asm -a resources/valid/nl_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	
+	@echo $(CYAN) " - Test Error Cases" $(EOC)
 	@if [[ $$(./asm -a resources/errors/bad_param_type.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
 	@if [[ $$(./asm -a resources/errors/double_commas.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
 	@if [[ $$(./asm -a resources/errors/extra.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
