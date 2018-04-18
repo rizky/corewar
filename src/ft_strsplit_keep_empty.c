@@ -43,7 +43,7 @@ static	char	*ft_word(const char *str, char c, int *i)
     char	*s;
     int		k;
 
-    if (!(s = (char *)malloc(sizeof(s) * (ft_strlen2(str, c)))))
+    if (!(s = (char *)malloc(sizeof(s) * (ft_strlen2(str + *i, c)))))
         return (NULL);
     k = 0;
     while (str[*i] != c && str[*i])

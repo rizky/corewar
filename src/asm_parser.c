@@ -50,33 +50,30 @@ static int	asm_check_op(t_asm *a)
 	return (0);
 }
 
-int		ft_parsing(t_asm *a)
+int			ft_parsing(t_asm *a)
 {
-	ft_handle_comments(a->file);
-	ft_trim_file(a->file);
-	if (ft_get_name(a) == -1)
-		return (ft_error(HEADER, -1, a->file[a->i]));
-	a->i = 0;
-	if (ft_get_comment(a) == -1)
-		return (ft_error(HEADER, -1, a->file[a->i]));
-    ft_printf("name : %s\n", a->name);
-    ft_printf("comment : %s\n", a->comment);
-	a->i = a->header_end + 1;
-	ft_skip_empty_lines(a);
-	a->start = a->i;
-	while (a->file[a->i])
-	{
-		if (asm_parser_op(a) == -1 || asm_check_op(a) == -1)
-			return (-1);
-		a->op_c++;
-		a->i++;
-		ft_skip_empty_lines(a);
-	}
-	if (check_ops(a) == -1)
-		exit(1);
-	if (a->size == 0)
-		return (ft_error(OP_EMPTY, -1, NULL));
-	if (asm_populate_directval(a) == -1)
-		return (-1);
-	return (0);
+    ft_handle_comments(a->file);
+    ft_trim_file(a->file);
+    if (ft_get_name(a) == -1 && ft_get_comment(a) == -1)
+        return (ft_error(HEADER, -1, a->file[a->i]));
+    a->i++;
+    if (ft_get_comment(a) == -1 && ft_get_name(a) == -1)
+        return (ft_error(HEADER, -1, a->file[a->i]));
+    a->i++;
+    if (asm_check_header(a) == -1)
+        return (-1);
+    ft_skip_empty_lines(a);
+    while (a->file[a->i])
+    {
+        if (asm_parser_op(a) == -1 || asm_check_op(a) == -1)
+            return (-1);
+        a->op_c++;
+        a->i++;
+        ft_skip_empty_lines(a);
+    }
+    if (a->size == 0)
+        return (ft_error(OP_EMPTY, -1, NULL));
+    if (asm_populate_directval(a) == -1)
+        return (-1);
+    return (0);
 }

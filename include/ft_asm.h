@@ -156,5 +156,7 @@ int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
 int 			check_ops(t_asm *a);
 char			**ft_strsplit_keep_empty(const char *str, char c);
+int				ft_is_label(char *line);
+int		        ft_get_labels(t_asm *a);
 
 #endif
