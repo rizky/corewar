@@ -41,7 +41,7 @@ static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 		return (ft_free(file[0], EMPTY));
 	if (file[0][ft_strlen(file[0]) - 1] != '\n')
 		return (ft_free(file[0], NEWLINE));
-	if ((a->file = ft_strsplit(file[0], '\n')) == NULL)
+	if ((a->file = ft_strsplit_keep_empty(file[0], '\n')) == NULL)
 		return (ft_free(file[0], MALLOC));
 	free(file[0]);
 	return (0);
