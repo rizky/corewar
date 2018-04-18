@@ -2,7 +2,7 @@
 .comment "I'M ]ALIIIIVE"
 
 
-#hash(#) at the end + tab at the end of the file cause error,
+#hash(#) or semicolon (;) at the end + tab at the end of the file cause error,
 #r_asm does not sees this as error
 
 le_12:
