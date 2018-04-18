@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/18 14:51:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 21:53:41 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	asm_parser_opparam(char *line, t_op *op)
 		if ((*op).param_c < 3)
 		{
 			par.str = (ft_re_match("[ \t]*[^ \t]+[ \t]+[^ \t]+[ \t]*",
-				param_tab[(*op).param_c]) == 0) ? "invalid" :
+				param_tab[(*op).param_c]) == 0) ? ft_strdup("N/A") :
 				ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
 			par.is_label = 0;
 			par.type = asm_get_paramtype((*op).opcode, &par);
