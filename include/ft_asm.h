@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 10:24:40 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 15:57:34 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,13 @@ int				ft_free_asm(t_asm *a, int status);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
+<<<<<<< HEAD
 int 			check_ops(t_asm *a);
 char			**ft_strsplit_keep_empty(const char *str, char c);
 int				ft_is_label(char *line);
 int		        ft_get_labels(t_asm *a);
+=======
+char			**ft_strsplit2(const char *s1, const char c);
+>>>>>>> rizky
 
 #endif
