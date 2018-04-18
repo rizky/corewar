@@ -95,7 +95,9 @@ int			asm_parser_op(t_asm *a)
 		if (ft_re_match("^\\w+[^:][ \t]*.*", a->file[a->i]) == -1)
 			if (ft_re_match("^[\\w_\\d]+:[ \t]*$", a->file[a->i]) == -1)
 				return (ft_error(OP, -1, a->file[a->i]));
-	if (ft_re_match(",,", a->file[a->i]) != -1 ||
+    if (ft_re_match("^\\w+[^:][ \t]*$", a->file[a->i]) != -1)
+        return (ft_error(OP, -1, a->file[a->i]));
+    if (ft_re_match(",,", a->file[a->i]) != -1 ||
 		ft_re_match(",[ \t]*$", a->file[a->i]) != -1)
 		return (ft_error(OP, -1, a->file[a->i]));
 	temp = ft_re_capture("^[^% \t]+:", a->file[a->i]);
