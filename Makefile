@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 14:57:04 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 15:15:40 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,7 +116,21 @@ tests_error: all
 	@$(foreach x, $(T_FILES_ERROR), $(MAKE) X=$x test_error;)
 
 T_DIR_VALID = tests/valid/
+T_DIR_VALID_2 = tests/valid2/
 T_FILES_VALID:=$(shell cd $(T_DIR_VALID); ls  | egrep '^.*.s$$' | sort -f )
+T_FILES_BIN:=$(shell cd $(T_DIR_VALID); ls | egrep '^.*.s$$' | cut -f 1 -d '.' | sort -f )
+
+test_bin : all
+	./asm $(T_DIR_VALID)$(X).s ; true
+	./resources/vm_champs/asm $(T_DIR_VALID_2)$(X).s ; true
+	@if diff $(T_DIR_VALID)$(X).cor $(T_DIR_VALID_2)$(X).cor; \
+		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X)" $(EOC) ; \
+	fi
+
+tests_bin: all
+	@echo $(CYAN) " - Test Valid Cases" $(EOC)
+	@$(foreach x, $(T_FILES_BIN), $(MAKE) X=$x test_bin;)
 
 test_valid : all
 	@./asm -a $(T_DIR_VALID)$(X) > out1 2>> out1; true
