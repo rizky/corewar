@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_helper_4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mjozan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 15:55:41 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 15:57:44 by fpetras          ###   ########.fr       */
+/*   Created: 2018/04/18 15:55:41 by mjozan            #+#    #+#             */
+/*   Updated: 2018/04/18 16:39:24 by mjozan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*ft_word(const char *str, char c, int *i)
     char	*s;
     int		k;
 
-    if (!(s = (char *)malloc(sizeof(s) * (ft_strlen2(str, c)))))
+    if (!(s = (char *)malloc(sizeof(s) * (ft_strlen2(str + *i, c)))))
         return (NULL);
     k = 0;
     while (str[*i] != c && str[*i])
