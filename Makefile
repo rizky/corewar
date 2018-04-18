@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 21:39:43 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 22:29:32 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ T_DIR_ERROR = tests/error/
 T_FILES_ERROR:=$(shell cd $(T_DIR_ERROR); ls  | egrep '^.*.s$$' | sort -f )
 
 test_error : all
-	@if [[ $$(./asm -a $(T_DIR_ERROR)$(X) 2> /dev/null)  < 0 ]] ; \
+	@if [[ $$(./asm -a $(T_DIR_ERROR)$(X) $(SILENT) ) < 0 ]] ; \
 		then echo $(GREEN) " - [OK] $(T_DIR_ERROR)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_DIR_ERROR)$(X)" $(EOC) ; \
 	fi
@@ -144,7 +144,12 @@ tests_valid: all
 	@echo $(CYAN) " - Test Valid Cases" $(EOC)
 	@$(foreach x, $(T_FILES_VALID), $(MAKE) X=$x test_valid;)
 
-tests: all tests_valid tests_error tests_bin
+tests_v: all tests_valid tests_error tests_bin
+
+tests: 
+	@$(MAKE) tests_valid
+	@$(MAKE) tests_error SILENT='2> /dev/null'
+	@$(MAKE) tests_bin
 
 test_leak: all
 	@valgrind ./asm $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
@@ -154,4 +159,4 @@ test_leaks:
 	@$(foreach x, $(T_FILES_VALID), $(MAKE) X=$(T_DIR_VALID)$(x) test_leak;)
 	@$(foreach x, $(T_FILES_ERROR), $(MAKE) X=$(T_DIR_ERROR)$(x) test_leak;)
 
-.PHONY: all clean fclean re debug norm norm2 tests test_leaks test_leak tests_valid tests_error
+.PHONY: all clean fclean re debug norm norm2 tests test_leaks test_leak tests_valid tests_error tests_v
