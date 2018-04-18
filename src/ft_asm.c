@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 13:18:17 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 08:51:00 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ int			main(int ac, char **av)
 	i = (opt[OPT_M]) ? i : ac - 1;
 	while (i < ac)
 	{
+		(opt[OPT_M] && i > asm_getoptions(av, opt)) ? ft_printf("\n") : 0;
+		opt[OPT_M] ? ft_printf("\t%*w%s%w\n", 3, av[i]) : 0;
 		if (ft_init(ac, av, &a, i) == -1)
 			return (-1);
 		ops = NEW_ARRAY(t_op);
