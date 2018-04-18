@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 14:26:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 14:54:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int			ft_get_comment(t_asm *a)
 		else
 			return (-1);
 	}
+	if (a->comment != NULL)
+		return (-1);
 	a->comment = ft_re_capture("\".*\"", a->file[a->i]);
 	(!a->comment) ? a->comment = "\0" : 0;
 	return (0);
