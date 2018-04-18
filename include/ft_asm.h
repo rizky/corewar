@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 12:11:27 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 10:07:15 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@
 # define MALLOC			4
 # define HEADER			5
 # define NAME_LEN		6
-# define COMMENT_LEN	8
-# define OP				9
-# define OP_NAME		10
+# define COMMENT_LEN	7
+# define OP				8
+# define OP_NAME		9
+# define OP_EMPTY		10
 # define OP_PARAM		11
 # define OP_PARAM_TYPE	12
-# define OP_EMPTY		13
-# define LABEL_MISSING	14
-
-# define ARRAY(D, I) ((t_op*)(D)->data)[I]
+# define LABEL_MISSING	13
 
 # define OPT_A 0
 # define OPT_M 1
 
 # define OPT_NUM 2
 # define OPT_STR "am"
+
+# define ARRAY(D, I) ((t_op*)(D)->data)[I]
 
 typedef struct	s_op_dict
 {
@@ -122,10 +122,6 @@ typedef struct	s_asm
 int				ft_parsing(t_asm *a);
 int				ft_get_name(t_asm *a);
 int				ft_get_comment(t_asm *a);
-int				ft_check_instructions(t_asm *a);
-int				ft_get_labels(t_asm *a);
-int				ft_is_label(char *line);
-int				ft_get_op(t_asm *a);
 
 int				ft_error(int errcode, int status, char *line);
 int				ft_filename_extension(char *file);

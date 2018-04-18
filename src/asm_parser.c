@@ -6,13 +6,13 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 12:30:39 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 10:08:24 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int		asm_check_header(t_asm *a)
+static int	asm_check_header(t_asm *a)
 {
 	if (a->name == NULL)
 		return (ft_error(HEADER, -1, NULL));
@@ -21,7 +21,7 @@ int		asm_check_header(t_asm *a)
 	return (0);
 }
 
-int		asm_check_op(t_asm *a)
+static int	asm_check_op(t_asm *a)
 {
 	int i;
 
@@ -50,7 +50,7 @@ int		asm_check_op(t_asm *a)
 	return (0);
 }
 
-int		ft_parsing(t_asm *a)
+int			ft_parsing(t_asm *a)
 {
 	ft_handle_comments(a->file);
 	ft_trim_file(a->file);

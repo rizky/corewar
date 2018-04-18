@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser_header.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 09:43:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 10:09:49 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int
-	asm_get_content_nl(t_asm *a, char **content_str)
+static int	asm_get_content_nl(t_asm *a, char **content_str)
 {
 	t_array content;
 	char	*temp;
@@ -41,8 +40,7 @@ int
 	return (1);
 }
 
-int
-	ft_get_name(t_asm *a)
+int			ft_get_name(t_asm *a)
 {
 	ft_skip_empty_lines(a);
 	if (ft_re_match("^.name[ \t]*\"[^\"]*\"$", a->file[a->i]) != 0)
@@ -59,8 +57,7 @@ int
 	return (0);
 }
 
-int
-	ft_get_comment(t_asm *a)
+int			ft_get_comment(t_asm *a)
 {
 	ft_skip_empty_lines(a);
 	if (ft_re_match("^.comment[ \t]*\"[^\"]*\"$", a->file[a->i]) != 0)
