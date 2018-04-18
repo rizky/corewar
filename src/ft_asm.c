@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/17 13:18:17 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 09:14:28 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,11 @@ static int	ft_init(int ac, char **av, t_asm *a, int i)
 	ft_bzero(a, sizeof(t_asm));
 	if (ac < 2 || !ft_filename_extension(av[i]))
 	{
-		ft_dprintf(2, "Usage: %s [-a | -m] <sourcefile.s>\n", av[0]);
+		ft_dprintf(2, "usage: %s [-a] sourcefile.s\n", av[0]);
+		ft_dprintf(2, "       %s [-a] [-m] sourcefile.s ...\n", av[0]);
+		ft_dprintf(2, "    -a : Prints a stripped and annotated version");
+		ft_dprintf(2, " of the code\n");
+		ft_dprintf(2, "    -m : Allows processing of multiple files\n");
 		return (-1);
 	}
 	if ((errnum = ft_read_sourcefile(i, av, a)) > 0)
@@ -122,6 +126,8 @@ int			main(int ac, char **av)
 	i = (opt[OPT_M]) ? i : ac - 1;
 	while (i < ac)
 	{
+		(opt[OPT_M] && i > asm_getoptions(av, opt)) ? ft_printf("\n") : 0;
+		opt[OPT_M] ? ft_printf("\t%*w%s%w\n", 3, av[i]) : 0;
 		if (ft_init(ac, av, &a, i) == -1)
 			return (-1);
 		ops = NEW_ARRAY(t_op);
