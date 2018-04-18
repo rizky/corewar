@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 10:02:21 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 11:05:55 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,47 +99,6 @@ norm:
 norm2:
 	@sh ./norm/norm.sh
 
-test: $(NAME)
-	@echo $(CYAN) " - Test Valid Cases" $(EOC)
-	@./asm -a resources/champs/ex.s > out1 && ./resources/vm_champs/asm -a resources/champs/ex.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/champs/42.s > out1 && ./resources/vm_champs/asm -a resources/champs/42.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/bee_gees.s > out1 && ./resources/vm_champs/asm -a resources/valid/bee_gees.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/bigzork.s > out1 && ./resources/vm_champs/asm -a resources/valid/bigzork.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/fluttershy.s > out1 && ./resources/vm_champs/asm -a resources/valid/fluttershy.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/helltrain.s > out1 && ./resources/vm_champs/asm -a resources/valid/helltrain.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/jumper.s > out1 && ./resources/vm_champs/asm -a resources/valid/jumper.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/bigzork.s > out1 && ./resources/vm_champs/asm -a resources/valid/bigzork.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/maxidef.s > out1 && ./resources/vm_champs/asm -a resources/valid/maxidef.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/slider2.s > out1 && ./resources/vm_champs/asm -a resources/valid/slider2.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/turtle.s > out1 && ./resources/vm_champs/asm -a resources/valid/turtle.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/aff_no_OCP.s > out1 && ./resources/vm_champs/asm -a resources/valid/aff_no_OCP.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/flipped_name_comment.s > out1 && ./resources/vm_champs/asm -a resources/valid/flipped_name_comment.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/empty_namecomment.s > out1 && ./resources/vm_champs/asm -a resources/valid/empty_namecomment.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/end_comment.s > out1 && ./resources/vm_champs/asm -a resources/valid/end_comment.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/hash_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/hash_at_header.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/no_space_between_op_and_param.s > out1 && ./resources/vm_champs/asm -a resources/valid/no_space_between_op_and_param.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/sq_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/sq_at_header.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/nl_at_header.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@./asm -a resources/valid/nl_at_header_flipped.s > out1 && ./resources/vm_champs/asm -a resources/valid/nl_at_header_flipped.s > out2 && diff out1 out2 && echo $(GREEN) " - OK" $(EOC) ; true
-	@echo $(CYAN) " - Test Error Cases" $(EOC)
-	@if [[ $$(./asm -a resources/errors/bad_param_type.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/double_commas.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/extra.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/extra2.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/no_code.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/plus_minus.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/r100.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/comma_at_end_of_last_param.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/double_operation_on_single_line.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/REG100.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/double_comments.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/double_names.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/null_name.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/nl_at_header_error.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	@if [[ $$(./asm -a resources/errors/nl_at_header_unclosed.s 2> /dev/null)  < 0 ]] ; then echo $(GREEN) " - OK" $(EOC); else echo KO ; fi
-	
-	
-
 test_leaks:
 	@valgrind ./asm -a resources/champs/ex.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 	@valgrind ./asm -a resources/champs/42.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
@@ -159,4 +118,33 @@ test_leaks:
 	@valgrind ./asm -a resources/valid/nl_at_header.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 	@valgrind ./asm -a resources/errors/nl_at_header_error.s 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 
+# ----- TEST UNIT ------
+T_DIR_ERROR = tests/error/
+T_FILES_ERROR:=$(shell cd $(T_DIR_ERROR); ls  | egrep '^.*.s$$' | sort -n )
+
+test_error :
+	@if [[ $$(./asm -a $(T_DIR_ERROR)$(X) 2> /dev/null)  < 0 ]] ; \
+		then echo $(GREEN) " - [OK] $(T_DIR_ERROR)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_DIR_ERROR)$(X)" $(EOC) ; \
+	fi
+
+tests_error: all
+	@echo $(CYAN) " - Test Error Cases" $(EOC)
+	@$(foreach x, $(T_FILES_ERROR), $(MAKE) X=$x test_error;)
+
+T_DIR_VALID = tests/valid/
+T_FILES_VALID:=$(shell cd $(T_DIR_VALID); ls  | egrep '^.*.s$$' | sort -n )
+
+test_valid :
+	@if [[ $$(./asm -a $(T_DIR_VALID)$(X) > out1 && ./resources/vm_champs/asm -a $(T_DIR_VALID)$(X) > out2 && diff out1 out2) != 0 ]] ; \
+		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X)" $(EOC) ; \
+	fi
+
+tests_valid: all
+	@echo $(CYAN) " - Test Valid Cases" $(EOC)
+	@$(foreach x, $(T_FILES_VALID), $(MAKE) X=$x test_valid;)
+
+test: tests_valid tests_error
+	
 .PHONY: all clean fclean re debug norm norm2 test test_leaks
