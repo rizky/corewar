@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 15:15:40 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 15:26:01 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,15 +121,15 @@ T_FILES_VALID:=$(shell cd $(T_DIR_VALID); ls  | egrep '^.*.s$$' | sort -f )
 T_FILES_BIN:=$(shell cd $(T_DIR_VALID); ls | egrep '^.*.s$$' | cut -f 1 -d '.' | sort -f )
 
 test_bin : all
-	./asm $(T_DIR_VALID)$(X).s ; true
-	./resources/vm_champs/asm $(T_DIR_VALID_2)$(X).s ; true
-	@if diff $(T_DIR_VALID)$(X).cor $(T_DIR_VALID_2)$(X).cor; \
+	@./asm $(T_DIR_VALID)$(X).s > /dev/null ; true
+	@./resources/vm_champs/asm $(T_DIR_VALID_2)$(X).s > /dev/null ; true
+	@if diff $(T_DIR_VALID)$(X).cor $(T_DIR_VALID_2)$(X).cor > /dev/null; \
 		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X)" $(EOC) ; \
 	fi
 
 tests_bin: all
-	@echo $(CYAN) " - Test Valid Cases" $(EOC)
+	@echo $(CYAN) " - Test Binary Files" $(EOC)
 	@$(foreach x, $(T_FILES_BIN), $(MAKE) X=$x test_bin;)
 
 test_valid : all
@@ -144,7 +144,7 @@ tests_valid: all
 	@echo $(CYAN) " - Test Valid Cases" $(EOC)
 	@$(foreach x, $(T_FILES_VALID), $(MAKE) X=$x test_valid;)
 
-tests: all tests_valid tests_error
+tests: all tests_valid tests_error tests_bin
 
 test_leak: all
 	@valgrind ./asm -a $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'

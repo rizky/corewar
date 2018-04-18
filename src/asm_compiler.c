@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/18 10:24:21 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 15:30:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	asm_append_op(t_array *binary, t_op op)
 	if (op.opcode == 0)
 		return ;
 	fta_append_free(binary, asm_to_big_endian(op.opcode, 1), 1);
-	if (op.param_c > 1)
+	if (g_op_dict[op.opcode].is_oc)
 		fta_append_free(binary, asm_to_big_endian(op.oc, 1), 1);
 	i = -1;
 	while (++i < op.param_c)
