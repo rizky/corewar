@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/18 08:43:08 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/18 10:11:40 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int
-	asm_parser_opcode(char *opname)
+static int	asm_parser_opcode(char *opname)
 {
 	int i;
 
@@ -29,8 +28,7 @@ int
 	return (-1);
 }
 
-char
-	*asm_parser_opname(char *line)
+static char	*asm_parser_opname(char *line)
 {
 	char	*opstr;
 	char	*opname;
@@ -41,8 +39,7 @@ char
 	return (opname);
 }
 
-static char
-	**asm_parser_opparam_tab(char *line)
+static char	**asm_parser_opparam_tab(char *line)
 {
 	char	*opstr;
 	char	*opparam;
@@ -64,8 +61,7 @@ static char
 	return (param_tab);
 }
 
-void
-	asm_parser_opparam(char *line, t_op *op)
+static void	asm_parser_opparam(char *line, t_op *op)
 {
 	char	**param_tab;
 	t_param	par;
@@ -90,8 +86,7 @@ void
 		ft_strtab_free(param_tab);
 }
 
-int
-	asm_parser_op(t_asm *a)
+int			asm_parser_op(t_asm *a)
 {
 	t_op	op;
 	char	*temp;

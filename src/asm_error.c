@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:48:12 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 08:31:18 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 10:07:12 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	ft_error_2(int errnum)
 {
-	if (errnum == OP_PARAM)
-		ft_dprintf(2, "Error - Parameter is invalid\n");
-	else if (errnum == LABEL_MISSING)
-		ft_dprintf(2, "Error - Label is undefined\n");
-	else if (errnum == OP_EMPTY)
+	if (errnum == OP_EMPTY)
 		ft_dprintf(2, "Error - No operation found\n");
+	else if (errnum == OP_PARAM)
+		ft_dprintf(2, "Error - Parameter is invalid\n");
 	else if (errnum == OP_PARAM_TYPE)
 		ft_dprintf(2, "Error - Parameter type is invalid\n");
+	else if (errnum == LABEL_MISSING)
+		ft_dprintf(2, "Error - Label is undefined\n");
 }
 
 int			ft_error(int errnum, int status, char *line)
