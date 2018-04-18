@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 11:20:41 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 11:29:07 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,10 +117,12 @@ T_DIR_VALID = tests/valid/
 T_FILES_VALID:=$(shell cd $(T_DIR_VALID); ls  | egrep '^.*.s$$' | sort -n )
 
 test_valid : all
-	@if [[ $$(./asm -a $(T_DIR_VALID)$(X) > out1 && ./resources/vm_champs/asm -a $(T_DIR_VALID)$(X) > out2 && diff out1 out2) != 0 ]] ; \
+	@./asm -a $(T_DIR_VALID)$(X) > out1 && ./resources/vm_champs/asm -a $(T_DIR_VALID)$(X) > out2
+	@if diff out1 out2; \
 		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X)" $(EOC) ; \
 	fi
+	@rm -f out1 out2
 
 tests_valid:
 	@echo $(CYAN) " - Test Valid Cases" $(EOC)
