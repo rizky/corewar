@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/18 08:24:59 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 10:20:03 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int
-	asm_get_directval(t_asm *a, char *label)
+static int	asm_get_directval(t_asm *a, char *label)
 {
 	int		i;
 	char	*str;
@@ -34,8 +33,7 @@ int
 	return (-1);
 }
 
-int
-	asm_populate_directval(t_asm *a)
+int			asm_populate_directval(t_asm *a)
 {
 	int	i;
 	int	j;
@@ -64,8 +62,7 @@ int
 	return (0);
 }
 
-int
-	asm_calculate_oc(t_param params[3], int param_c)
+int			asm_calculate_oc(t_param params[3], int param_c)
 {
 	const int	param_code[5] = {0, REG_CODE, DIR_CODE, 0, IND_CODE};
 
@@ -79,8 +76,7 @@ int
 			param_code[params[2].type] << 2);
 }
 
-static int
-	asm_get_paramval(char *param, char *pattern)
+static int	asm_get_paramval(char *param, char *pattern)
 {
 	char	*temp;
 	int		value;
@@ -93,8 +89,7 @@ static int
 	return (value);
 }
 
-int
-	asm_get_paramtype(int opcode, t_param *param)
+int			asm_get_paramtype(int opcode, t_param *param)
 {
 	if (ft_re_match("^r\\d+$", (*param).str) == 0)
 	{

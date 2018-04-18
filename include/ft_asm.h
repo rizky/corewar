@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 10:07:15 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/18 10:24:40 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,20 @@ int				ft_parsing(t_asm *a);
 int				ft_get_name(t_asm *a);
 int				ft_get_comment(t_asm *a);
 
+int				asm_parser_op(t_asm *a);
+void			asm_compiler(t_asm a);
+void			asm_print(t_asm a);
+int				asm_print_memory(t_array *binary, char *path);
+char			*asm_to_big_endian(int value, int size);
+
+int				asm_get_paramtype(int opcode, t_param *param);
+int				asm_populate_directval(t_asm *a);
+int				asm_calculate_oc(t_param params[3], int param_c);
+
+void			asm_append_name(t_array *binary, char *str);
+void			asm_append_comment(t_array *binary, char *str);
+void			asm_append_size(t_array *binary, int size);
+
 int				ft_error(int errcode, int status, char *line);
 int				ft_filename_extension(char *file);
 int				ft_file_is_empty(char *file);
@@ -134,21 +148,6 @@ void			ft_print_tab(char **tab);
 int				ft_free(char *str, int status);
 int				ft_free_tab(char **tab, int status);
 int				ft_free_asm(t_asm *a, int status);
-
-int				asm_parser_op(t_asm *a);
-void			asm_print(t_asm a);
-int				asm_print_memory(t_array *binary, char *path);
-void			asm_compiler(t_asm a);
-char			*asm_to_big_endian(int value, int size);
-
-int				asm_get_paramtype(int opcode, t_param *param);
-int				asm_get_directval(t_asm *a, char *label);
-int				asm_populate_directval(t_asm *a);
-int				asm_calculate_oc(t_param params[3], int param_c);
-
-void			asm_append_name(t_array *binary, char *str);
-void			asm_append_comment(t_array *binary, char *str);
-void			asm_append_size(t_array *binary, int size);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
