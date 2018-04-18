@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 12:25:16 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 12:39:44 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,32 +103,32 @@ norm2:
 T_DIR_ERROR = tests/error/
 T_FILES_ERROR:=$(shell cd $(T_DIR_ERROR); ls  | egrep '^.*.s$$' | sort -f )
 
-test_error :
+test_error : all
 	@if [[ $$(./asm -a $(T_DIR_ERROR)$(X) 2> /dev/null)  < 0 ]] ; \
 		then echo $(GREEN) " - [OK] $(T_DIR_ERROR)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_DIR_ERROR)$(X)" $(EOC) ; \
 	fi
 
-tests_error:
+tests_error: all
 	@echo $(CYAN) " - Test Error Cases" $(EOC)
 	@$(foreach x, $(T_FILES_ERROR), $(MAKE) X=$x test_error;)
 
 T_DIR_VALID = tests/valid/
 T_FILES_VALID:=$(shell cd $(T_DIR_VALID); ls  | egrep '^.*.s$$' | sort -f )
 
-test_valid :
-	@./asm -a $(T_DIR_VALID)$(X) > out1 2> /dev/null; true
-	@./resources/vm_champs/asm -a $(T_DIR_VALID)$(X) > out2 2> /dev/null; true
-	@if diff out1 out2 1> /dev/null; \
+test_valid : all
+	@./asm -a $(T_DIR_VALID)$(X) > out1 2>> out1; true
+	@./resources/vm_champs/asm -a $(T_DIR_VALID)$(X) > out2; true
+	@if diff out1 out2; \
 		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X)" $(EOC) ; \
 	fi
 
-tests_valid:
+tests_valid: all
 	@echo $(CYAN) " - Test Valid Cases" $(EOC)
 	@$(foreach x, $(T_FILES_VALID), $(MAKE) X=$x test_valid;)
 
-test: all tests_valid tests_error
+tests: all tests_valid tests_error
 
 test_leak: all
 	@valgrind ./asm -a $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
@@ -138,4 +138,4 @@ test_leaks:
 	@$(foreach x, $(T_FILES_VALID), $(MAKE) X=$(T_DIR_VALID)$(x) test_leak;)
 	@$(foreach x, $(T_FILES_ERROR), $(MAKE) X=$(T_DIR_ERROR)$(x) test_leak;)
 
-.PHONY: all clean fclean re debug norm norm2 test test_leaks test_leak tests_valid tests_error
+.PHONY: all clean fclean re debug norm norm2 tests test_leaks test_leak tests_valid tests_error
