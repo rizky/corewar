@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 11:33:12 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/18 12:25:16 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,7 @@ norm2:
 
 # ----- TEST UNIT ------
 T_DIR_ERROR = tests/error/
-T_FILES_ERROR:=$(shell cd $(T_DIR_ERROR); ls  | egrep '^.*.s$$' | sort -n )
+T_FILES_ERROR:=$(shell cd $(T_DIR_ERROR); ls  | egrep '^.*.s$$' | sort -f )
 
 test_error :
 	@if [[ $$(./asm -a $(T_DIR_ERROR)$(X) 2> /dev/null)  < 0 ]] ; \
@@ -114,15 +114,15 @@ tests_error:
 	@$(foreach x, $(T_FILES_ERROR), $(MAKE) X=$x test_error;)
 
 T_DIR_VALID = tests/valid/
-T_FILES_VALID:=$(shell cd $(T_DIR_VALID); ls  | egrep '^.*.s$$' | sort -n )
+T_FILES_VALID:=$(shell cd $(T_DIR_VALID); ls  | egrep '^.*.s$$' | sort -f )
 
 test_valid :
-	@./asm -a $(T_DIR_VALID)$(X) > out1 && ./resources/vm_champs/asm -a $(T_DIR_VALID)$(X) > out2
-	@if diff out1 out2; \
+	@./asm -a $(T_DIR_VALID)$(X) > out1 2> /dev/null; true
+	@./resources/vm_champs/asm -a $(T_DIR_VALID)$(X) > out2 2> /dev/null; true
+	@if diff out1 out2 1> /dev/null; \
 		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X)" $(EOC) ; \
 	fi
-	@rm -f out1 out2
 
 tests_valid:
 	@echo $(CYAN) " - Test Valid Cases" $(EOC)
