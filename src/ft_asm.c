@@ -59,9 +59,9 @@ static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 		free(file[1]);
 	}
 	close(fd);
-	if (ft_file_is_empty(file[0]))
+	if (file[0] && ft_file_is_empty(file[0]))
 		return (ft_free(file[0], EMPTY));
-	if (ft_end_of_input(file[0]))
+	if (file[0] && ft_end_of_input(file[0]))
 		return (ft_free(file[0], NEWLINE));
 	if ((a->file = ft_strsplit2(file[0], '\n')) == NULL)
 		return (ft_free(file[0], MALLOC));
