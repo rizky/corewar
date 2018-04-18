@@ -27,7 +27,8 @@ int ft_find_name(t_asm *a)
     while (!ft_re_capture("^.name.*", a->file[tmp]))
         tmp++;
     a->i = tmp;
-    while (!ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp]))
+    while (!ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$",
+                                "\"[^\"]*\"", a->file[tmp]))
     {
         new = ft_strjoin(a->file[tmp], "\n");
         free(a->file[tmp]);
@@ -49,8 +50,10 @@ int		ft_get_name(t_asm *a)
 
     prev = a->i - 1;
     tmp = ft_find_name(a);
-    if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp])) == NULL)
-        if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[prev])) == NULL)
+    if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$",
+                                       "\"[^\"]*\"", a->file[tmp])) == NULL)
+        if ((a->name = ft_re_match_capture("^.name[ \t]*\"[^\"]*\"$",
+                                           "\"[^\"]*\"", a->file[prev])) == NULL)
             return (ft_error(HEADER, -1, a->file[tmp]));
     if (ft_strlen(a->name) == 0)
         a->name = "\0";
@@ -71,7 +74,8 @@ int ft_find_comment(t_asm *a)
     while (!ft_re_capture("^.comment.*", a->file[tmp]))
         tmp++;
     a->i = tmp;
-    while (!ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp]))
+    while (!ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
+                                "\"[^\"]*\"", a->file[tmp]))
     {
         new = ft_strjoin(a->file[tmp], "\n");
         free(a->file[tmp]);
@@ -93,8 +97,10 @@ int		ft_get_comment(t_asm *a)
 
     prev = tmp - 1;
     tmp = ft_find_comment(a);
-	if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[tmp])) == NULL)
-		if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$", "\"[^\"]*\"", a->file[prev])) == NULL)
+	if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
+                                          "\"[^\"]*\"", a->file[tmp])) == NULL)
+		if ((a->comment = ft_re_match_capture("^.comment[ \t]*\"[^\"]*\"$",
+                                              "\"[^\"]*\"", a->file[prev])) == NULL)
 			return (ft_error(HEADER, -1, a->file[tmp]));
 	if (ft_strlen(a->comment) == 0)
 		a->comment = "\0";
