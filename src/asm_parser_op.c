@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 11:42:57 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 11:54:36 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char
 	char	*opstr;
 	char	*opname;
 
-	opstr = ft_re_capture("\\w+[ \t%]+.*", line);
+	opstr = ft_re_capture(":[ \t]*\\w+[ \t]*.*", line);
 	opname = ft_re_capture("\\w+", opstr);
 	free(opstr);
 	return (opname);
@@ -98,7 +98,7 @@ int
 	t_op	op;
 	char	*temp;
 
-	if (ft_re_match("^[^:]+:[ \t]*\\w+[ \t]*.*", a->file[a->i]) == 0)
+	if (ft_re_match("^[^ \t%]+:[ \t]*\\w+[ \t]*.*", a->file[a->i]) == 0)
 	{
 		temp = ft_re_capture("^[^% \t]+:", a->file[a->i]);
 		op.label = ft_re_capture("[^:]+", temp);
