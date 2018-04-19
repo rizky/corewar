@@ -9,11 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/asm",
-<<<<<<< HEAD
 			"args": ["tests/error/op_extreme.s"],
-=======
-			"args": ["tests/error/param_direct_no_value.s"],
->>>>>>> fba1b982b8de8442abad039d1d219c8c31e1a02a
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
