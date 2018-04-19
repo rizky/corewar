@@ -90,21 +90,12 @@ int			asm_parser_op(t_asm *a)
 {
 	t_op	op;
 	char	*temp;
+	int		ret;
 
-	if (ft_re_match("^.+:[ \t]*\\w+[ \t]+.*", a->file[a->i]) == -1)
-		if (ft_re_match("^\\w+[^:][ \t]*.*", a->file[a->i]) == -1)
-			if (ft_re_match("^[\\w_\\d]+:[ \t]*$", a->file[a->i]) == -1)
-				return (ft_error(OP, -1, a->file[a->i]));
-    if (ft_re_match("^\\w+\\W+[ \t]*$", a->file[a->i]) != -1)
-		if (ft_re_match("^\\w+:[ \t]*$", a->file[a->i]) == -1)
-        return (ft_error(OP, -1, a->file[a->i]));
-    if (ft_re_match(",,", a->file[a->i]) != -1 ||
-		ft_re_match(",[ \t]*$", a->file[a->i]) != -1 ||
-			ft_re_match("^[ \t]*\\w+[ \t]*$", a->file[a->i]) != -1)
-		return (ft_error(OP, -1, a->file[a->i]));
+	ret = check_label_op(a);
 	temp = ft_re_capture("^[^% \t]+:", a->file[a->i]);
 	op.label = ft_re_capture("[^:]+", temp);
-	if((op.opname = asm_parser_opname(a->file[a->i])) == NULL &&
+	if ((op.opname = asm_parser_opname(a->file[a->i])) == NULL &&
 			ft_re_match("^.+:.+$", a->file[a->i]) != -1)
 		return (ft_error(OP, -1, a->file[a->i]));
 	op.opcode = asm_parser_opcode(op.opname);
@@ -117,5 +108,5 @@ int			asm_parser_op(t_asm *a)
 	fta_append(a->ops, &op, 1);
 	a->size += op.size;
 	free(temp);
-	return (0);
+	return (ret);
 }

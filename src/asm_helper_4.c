@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_asm.h"
 
 static int	ft_count_words(const char *str, char c)
 {
@@ -87,4 +88,20 @@ char		**ft_strsplit2(const char *str, const char c)
 	}
 	s[j] = NULL;
 	return (s);
+}
+
+int			check_label_op(t_asm *a)
+{
+	if (ft_re_match("^.+:[ \t]*\\w+[ \t]+.*", a->file[a->i]) == -1)
+		if (ft_re_match("^\\w+[^:][ \t]*.*", a->file[a->i]) == -1)
+			if (ft_re_match("^[\\w_\\d]+:[ \t]*$", a->file[a->i]) == -1)
+				return (ft_error(OP, -1, a->file[a->i]));
+	if (ft_re_match("^\\w+\\W+[ \t]*$", a->file[a->i]) != -1)
+		if (ft_re_match("^\\w+:[ \t]*$", a->file[a->i]) == -1)
+			return (ft_error(OP, -1, a->file[a->i]));
+	if (ft_re_match(",,", a->file[a->i]) != -1 ||
+		ft_re_match(",[ \t]*$", a->file[a->i]) != -1 ||
+		ft_re_match("^[ \t]*\\w+[ \t]*$", a->file[a->i]) != -1)
+		return (ft_error(OP, -1, a->file[a->i]));
+	return (0);
 }

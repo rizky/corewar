@@ -153,5 +153,8 @@ int				ft_free_asm(t_asm *a, int status);
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
 char			**ft_strsplit2(const char *s1, const char c);
+int				check_label_op(t_asm *a);
+int				ft_is_label(char *str);
+int				ft_get_labels(t_asm *a);
 
 #endif
