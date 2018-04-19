@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/19 10:39:25 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 14:02:23 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,9 +147,8 @@ int				ft_line_is_empty(t_asm *a);
 void			ft_skip_empty_lines(t_asm *a);
 void			ft_handle_comments(char **file);
 void			ft_trim_file(char **file);
-void			ft_print_tab(char **tab);
 int				ft_free(char *str, int status);
-int				ft_free_tab(char **tab, int status);
+int				ft_free_strtab(char **tab, int status);
 int				ft_free_asm(t_asm *a, int status);
 
 int				ft_strcspn(const char *s, const char *charset);

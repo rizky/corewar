@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 13:35:56 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 13:57:42 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ static int
 
 	param_tab = asm_parser_opparam_tab(line);
 	if (asm_wordcounter(line, SEPARATOR_CHAR) > 3)
-		return (ft_free_tab(param_tab, -1));
+		return (ft_free_strtab(param_tab, -1));
 	(*op).param_c = 0;
 	while (param_tab && param_tab[(*op).param_c])
 	{
 		if (ft_re_match("^[ \t]*[^\t ]+[ \t]*$",
 			param_tab[(*op).param_c]) == -1)
-			return (ft_free_tab(param_tab, -1));
+			return (ft_free_strtab(param_tab, -1));
 		par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
 		par.is_label = 0;
 		par.type = asm_get_paramtype((*op).opcode, &par);

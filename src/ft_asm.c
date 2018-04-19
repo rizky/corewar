@@ -6,14 +6,14 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/19 10:39:15 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 13:51:12 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
 /*
-** Always tries to use the last argument
+** Uses the last argument by default
 ** Only accepts files with filename extension .s
 */
 
