@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/19 09:54:37 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 10:39:25 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 
 # define OPT_NUM 2
 # define OPT_STR "am"
+
+# define YELLOW 3
 
 # define ARRAY(D, I) ((t_op*)(D)->data)[I]
 
