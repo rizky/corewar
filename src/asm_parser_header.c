@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser_header.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/19 12:39:30 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 13:32:43 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int			ft_get_name(t_asm *a)
 int			ft_get_comment(t_asm *a)
 {
 	ft_skip_empty_lines(a);
-	if (ft_re_match("^"COMMENT_CMD_STRING"[ \t]*\"[^\"]*\"$", a->file[a->i]) != 0)
+	if (ft_re_match("^"COMMENT_CMD_STRING"[ \t]*\"[^\"]*\"$",
+		a->file[a->i]) != 0)
 	{
 		if (ft_re_match("^"COMMENT_CMD_STRING"[ \t]*\".*$", a->file[a->i]) == 0)
 			return (asm_get_content_nl(a, &(a->comment)));
