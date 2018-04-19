@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 13:57:42 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 14:09:15 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static int
 	t_param	par;
 
 	param_tab = asm_parser_opparam_tab(line);
+	(*op).param_c = 0;
 	if (asm_wordcounter(line, SEPARATOR_CHAR) > 3)
 		return (ft_free_strtab(param_tab, -1));
-	(*op).param_c = 0;
 	while (param_tab && param_tab[(*op).param_c])
 	{
 		if (ft_re_match("^[ \t]*[^\t ]+[ \t]*$",
