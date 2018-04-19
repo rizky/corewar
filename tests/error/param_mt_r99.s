@@ -2,7 +2,7 @@
 .comment "just a basic living prog"
 
 l2:
-		sti r100,%:live,%1
-		and r1,%0,r1
+		sti r99,%:live,%1
+		and r101,%0,r100
 live:   live %1
 		zjmp %:live

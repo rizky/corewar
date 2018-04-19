@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 20:53:21 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 10:11:59 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 		return (ft_free(file[0], EMPTY));
 	if (file[0] && ft_end_of_input(file[0]))
 		return (ft_free(file[0], NEWLINE));
-	if ((a->file = ft_strsplit2(file[0], '\n')) == NULL)
+	if ((a->file = asm_strsplit(file[0], '\n')) == NULL)
 		return (ft_free(file[0], MALLOC));
 	return (ft_free(file[0], 0));
 }

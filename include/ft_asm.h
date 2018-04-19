@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 23:13:33 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 09:54:37 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,7 @@ int				ft_free_asm(t_asm *a, int status);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
-char			**ft_strsplit2(const char *s1, const char c);
-int				check_label_op(t_asm *a);
-int				ft_is_label(char *str);
-int				ft_get_labels(t_asm *a);
+int				asm_wordcounter(const char *str, char c);
+char			**asm_strsplit(char const *s, char c);
 
 #endif
