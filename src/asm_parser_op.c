@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 13:25:53 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 13:35:56 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static int
 	(*op).param_c = 0;
 	while (param_tab && param_tab[(*op).param_c])
 	{
-		if (ft_re_match("^[ \t]*[^\t ]+[ \t]*$", param_tab[(*op).param_c]) == -1)
+		if (ft_re_match("^[ \t]*[^\t ]+[ \t]*$",
+			param_tab[(*op).param_c]) == -1)
 			return (ft_free_tab(param_tab, -1));
 		par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
 		par.is_label = 0;
