@@ -1,7 +1,7 @@
 .name "Underscore"
 .comment "__UNDERSCORE_S__"
 
-first:
+F!*rst:
 	ld		%0, r2
 	zjmp	%:begin
 	zjmp	%-511
