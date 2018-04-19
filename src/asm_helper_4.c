@@ -3,88 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   asm_helper_4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjozan <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 15:55:41 by mjozan            #+#    #+#             */
-/*   Updated: 2018/04/18 22:11:14 by jyeo             ###   ########.fr       */
+/*   Created: 2017/11/14 16:46:15 by rnugroho          #+#    #+#             */
+/*   Updated: 2018/04/19 09:08:20 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_words(const char *str, char c)
+int
+	asm_wordcounter(const char *str, char c)
 {
-	int			word;
-	int			i;
+	int		i;
+	int		wcount;
+	int		state;
 
 	i = 0;
-	word = 1;
-	if (!str)
-		return (0);
+	wcount = 0;
+	state = 0;
 	while (str[i])
 	{
-		if (str[i] == c)
-			word++;
+		if (c == str[i])
+			wcount++;
 		i++;
 	}
-	if (str[0] != '\0')
-		word++;
-	return (word);
+	wcount++;
+	return (wcount);
 }
 
-static int	ft_strlen2(const char *str, char d)
+static char
+	**asm_word_extractor(const char *str,
+	char **strtab, size_t v[4], char c)
 {
-	const char	*c;
-	int			len;
-
-	len = 0;
-	c = str;
-	if (!str)
-		return (0);
-	while (*c != '\0' && *c != d)
+	while (v[0] <= ft_strlen(str))
 	{
-		c++;
-		len++;
+		if (c == str[v[0]] || str[v[0]] == '\0')
+		{
+			strtab[v[1]] = (char*)malloc(sizeof(char) * (v[2] + 1));
+			strtab[v[1]] = ft_strncpy(strtab[v[1]],
+										str + v[0] - v[2], v[2]);
+			strtab[v[1]][v[2]] = '\0';
+			v[1]++;
+			v[2] = 0;
+			v[3] = 0;
+		}
+		else
+		{
+			if (v[3] == 0)
+				v[3] = 1;
+			v[2]++;
+		}
+		v[0]++;
 	}
-	return (len);
+	strtab[asm_wordcounter(str, c)] = NULL;
+	return (strtab);
 }
 
-static char	*ft_word(const char *str, char c, int *i)
+char
+	**asm_strsplit(char const *s, char c)
 {
-	char		*s;
-	int			k;
+	char	**strtab;
+	size_t	v[4];
 
-	if (!(s = (char *)malloc(sizeof(s) * (ft_strlen2(str + *i, c)))))
+	if (!s)
 		return (NULL);
-	k = 0;
-	while (str[*i] != c && str[*i])
-	{
-		s[k] = str[*i];
-		k++;
-		*i += 1;
-	}
-	s[k] = '\0';
-	return (s);
+	v[0] = 0;
+	v[1] = 0;
+	v[2] = 0;
+	v[3] = 0;
+	strtab = (char**)malloc(sizeof(*strtab) * (asm_wordcounter(s, c) + 1));
+	if (!strtab)
+		return (NULL);
+	strtab = asm_word_extractor(s, strtab, v, c);
+	return (strtab);
 }
 
-char		**ft_strsplit2(const char *str, const char c)
+void
+	asm_strtab_free(char **strtab)
 {
-	int			i;
-	int			j;
-	int			wrd;
-	char		**s;
+	int		i;
 
-	i = 0;
-	j = 0;
-	wrd = ft_count_words(str, c);
-	if (!(s = (char **)malloc(sizeof(s) * (ft_count_words(str, c) + 2))))
-		return (NULL);
-	while (j < wrd && str[i])
-	{
-		s[j] = ft_word(str, c, &i);
-		i++;
-		j++;
-	}
-	s[j] = NULL;
-	return (s);
+	i = -1;
+	while (strtab[++i] != NULL)
+		free(strtab[i]);
+	free(strtab);
 }

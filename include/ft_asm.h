@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 23:13:33 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 09:08:38 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,6 @@ int				ft_free_asm(t_asm *a, int status);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
-char			**ft_strsplit2(const char *s1, const char c);
-
+int				asm_wordcounter(const char *str, char c);
+char			**asm_strsplit(char const *s, char c);
 #endif

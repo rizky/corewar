@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 08:50:18 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 09:07:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char
 		temp = ft_re_capture("%.+", opstr);
 	}
 	opparam = ft_re_capture(".+", temp);
-	param_tab = ft_strsplit(opparam, SEPARATOR_CHAR);
+	param_tab = asm_strsplit(opparam, SEPARATOR_CHAR);
 	free(opstr);
 	free(temp);
 	free(opparam);
@@ -71,7 +71,7 @@ static int
 	t_param	par;
 
 	param_tab = asm_parser_opparam_tab(line);
-	if (ft_wordcounter(line, SEPARATOR_CHAR) > 3)
+	if (asm_wordcounter(line, SEPARATOR_CHAR) > 3)
 		return (-1);
 	(*op).param_c = 0;
 	while (param_tab && param_tab[(*op).param_c])
