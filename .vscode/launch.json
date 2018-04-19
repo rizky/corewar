@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/asm",
-			"args": ["tests/valid/42.s"],
+			"args": ["tests/error/four_arg_malloc_free_pointer_error.s"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
