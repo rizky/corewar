@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 14:54:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 12:39:30 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static int	asm_get_content_nl(t_asm *a, char **content_str)
 int			ft_get_name(t_asm *a)
 {
 	ft_skip_empty_lines(a);
-	if (ft_re_match("^.name[ \t]*\"[^\"]*\"$", a->file[a->i]) != 0)
+	if (ft_re_match("^"NAME_CMD_STRING"[ \t]*\"[^\"]*\"$", a->file[a->i]) != 0)
 	{
-		if (ft_re_match("^.name[ \t]*\".*$", a->file[a->i]) == 0)
+		if (ft_re_match("^"NAME_CMD_STRING"[ \t]*\".*$", a->file[a->i]) == 0)
 			return (asm_get_content_nl(a, &(a->name)));
 		else
 			return (-1);
@@ -61,9 +61,9 @@ int			ft_get_name(t_asm *a)
 int			ft_get_comment(t_asm *a)
 {
 	ft_skip_empty_lines(a);
-	if (ft_re_match("^.comment[ \t]*\"[^\"]*\"$", a->file[a->i]) != 0)
+	if (ft_re_match("^"COMMENT_CMD_STRING"[ \t]*\"[^\"]*\"$", a->file[a->i]) != 0)
 	{
-		if (ft_re_match("^.comment[ \t]*\".*$", a->file[a->i]) == 0)
+		if (ft_re_match("^"COMMENT_CMD_STRING"[ \t]*\".*$", a->file[a->i]) == 0)
 			return (asm_get_content_nl(a, &(a->comment)));
 		else
 			return (-1);
