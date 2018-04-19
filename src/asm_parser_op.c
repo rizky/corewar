@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 11:54:36 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 12:58:43 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,47 +80,47 @@ static int
 	return (-1);
 }
 
-static char
-	*asm_parser_opname(char *line)
+static int
+	asm_parser_opnamelabel(char *line, t_op *op)
 {
-	char	*opstr;
-	char	*opname;
+	char	*temp;
 
-	opstr = ft_re_capture(":[ \t]*\\w+[ \t]*.*", line);
-	opname = ft_re_capture("\\w+", opstr);
-	free(opstr);
-	return (opname);
+	if (ft_re_match("^[^ \t%]+:[ \t]*\\w+[ \t]*.*", line) == 0)
+	{
+		temp = ft_re_capture("^[^% \t]+:", line);
+		(*op).label = ft_re_capture("[^:]+", temp);
+		free(temp);
+		temp = ft_re_capture(":[ \t]*\\w+[ \t]*.*", line);
+		(*op).opname = ft_re_capture("\\w+", temp);
+		free(temp);
+	}
+	else if (ft_re_match("^[^ \t%]+:[ \t]*$", line) == 0)
+	{
+		temp = ft_re_capture("^[^% \t]+:", line);
+		(*op).label = ft_re_capture("[^:]+", temp);
+		free(temp);
+	}
+	else if (ft_re_match("^\\w+[^:][ \t]*.*", line) == 0)
+	{
+		(*op).opname = ft_re_capture("^\\w+", line);
+	}
+	else
+		return (-1);
+	return (0);
 }
 
 int
 	asm_parser_op(t_asm *a)
 {
 	t_op	op;
-	char	*temp;
 
-	if (ft_re_match("^[^ \t%]+:[ \t]*\\w+[ \t]*.*", a->file[a->i]) == 0)
-	{
-		temp = ft_re_capture("^[^% \t]+:", a->file[a->i]);
-		op.label = ft_re_capture("[^:]+", temp);
-		free(temp);
-		op.opname = asm_parser_opname(a->file[a->i]);
-		op.opcode = asm_parser_opcode(op.opname);
-	}
-	else if (ft_re_match("^[^ \t%]+:[ \t]*$", a->file[a->i]) == 0)
-	{
-		temp = ft_re_capture("^[^% \t]+:", a->file[a->i]);
-		op.label = ft_re_capture("[^:]+", temp);
-		free(temp);
-		op.opcode = 0;
-	}
-	else if (ft_re_match("^\\w+[^:][ \t]*.*", a->file[a->i]) == 0)
-	{
-		op.label = NULL;
-		op.opname = ft_re_capture("^\\w+", a->file[a->i]);
-		op.opcode = asm_parser_opcode(op.opname);
-	}
-	else
+	op.label = NULL;
+	op.opcode = 0;
+	op.opname = NULL;
+	if (asm_parser_opnamelabel(a->file[a->i], &op) == -1)
 		return (ft_error(OP, -1, a->file[a->i]));
+	if (op.opname)
+		op.opcode = asm_parser_opcode(op.opname);
 	op.size = 0;
 	op.offset = a->size;
 	if (asm_parser_opparam(a->file[a->i], &op) == -1)
