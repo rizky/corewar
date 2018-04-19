@@ -6,40 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 09:53:24 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 11:11:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-
-static int
-	asm_parser_opcode(char *opname)
-{
-	int i;
-
-	if (!opname)
-		return (-1);
-	i = 1;
-	while (i < 17)
-	{
-		if (ft_strcmp(g_op_dict[i].name, opname) == 0)
-			return (g_op_dict[i].opcode);
-		i++;
-	}
-	return (-1);
-}
-
-static char
-	*asm_parser_opname(char *line)
-{
-	char	*opstr;
-	char	*opname;
-
-	opstr = ft_re_capture("\\w+[ \t%]+.*", line);
-	opname = ft_re_capture("\\w+", opstr);
-	free(opstr);
-	return (opname);
-}
 
 static char
 	**asm_parser_opparam_tab(char *line)
@@ -72,12 +43,12 @@ static int
 
 	param_tab = asm_parser_opparam_tab(line);
 	if (asm_wordcounter(line, SEPARATOR_CHAR) > 3)
-		return (-1);
+		return (ft_free_tab(param_tab, -1));
 	(*op).param_c = 0;
 	while (param_tab && param_tab[(*op).param_c])
 	{
 		if (ft_re_match("^[ \t]*[^\t ]+[ \t]*$", param_tab[(*op).param_c]) == -1)
-			return (-1);
+			return (ft_free_tab(param_tab, -1));
 		par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
 		par.is_label = 0;
 		par.type = asm_get_paramtype((*op).opcode, &par);
@@ -88,6 +59,35 @@ static int
 	if (param_tab)
 		ft_strtab_free(param_tab);
 	return (0);
+}
+
+static int
+	asm_parser_opcode(char *opname)
+{
+	int i;
+
+	if (!opname)
+		return (-1);
+	i = 1;
+	while (i < 17)
+	{
+		if (ft_strcmp(g_op_dict[i].name, opname) == 0)
+			return (g_op_dict[i].opcode);
+		i++;
+	}
+	return (-1);
+}
+
+static char
+	*asm_parser_opname(char *line)
+{
+	char	*opstr;
+	char	*opname;
+
+	opstr = ft_re_capture("\\w+[ \t%]+.*", line);
+	opname = ft_re_capture("\\w+", opstr);
+	free(opstr);
+	return (opname);
 }
 
 int
