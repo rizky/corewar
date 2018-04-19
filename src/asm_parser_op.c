@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 08:36:14 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 08:50:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,13 @@ static int
 	(*op).param_c = 0;
 	while (param_tab && param_tab[(*op).param_c])
 	{
-		if ((*op).param_c < 3)
-		{
-			par.str = (ft_re_match("[ \t]*[^ \t]+[ \t]+[^ \t]+[ \t]*",
-				param_tab[(*op).param_c]) == 0) ? ft_strdup("N/A") :
-				ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
-			par.is_label = 0;
-			par.type = asm_get_paramtype((*op).opcode, &par);
-			(*op).params[(*op).param_c] = par;
-			(*op).size += par.size;
-		}
+		if (ft_re_match("^[ \t]*[^\t ]+[ \t]*$", param_tab[(*op).param_c]) == -1)
+			return (-1);
+		par.str = ft_re_capture("[^\t ]+", param_tab[(*op).param_c]);
+		par.is_label = 0;
+		par.type = asm_get_paramtype((*op).opcode, &par);
+		(*op).params[(*op).param_c] = par;
+		(*op).size += par.size;
 		(*op).param_c++;
 	}
 	if (param_tab)
