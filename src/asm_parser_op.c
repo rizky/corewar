@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 09:07:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 11:23:26 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int
 	t_op	op;
 	char	*temp;
 
-	if (ft_re_match("^.+:[ \t]*\\w+[ \t]*.*", a->file[a->i]) == 0)
+	if (ft_re_match("^[^:]+:[ \t]*\\w+[ \t]*.*", a->file[a->i]) == 0)
 	{
 		temp = ft_re_capture("^[^% \t]+:", a->file[a->i]);
 		op.label = ft_re_capture("[^:]+", temp);
@@ -114,7 +114,7 @@ int
 	else if (ft_re_match("^\\w+[^:][ \t]*.*", a->file[a->i]) == 0)
 	{
 		op.label = NULL;
-		op.opname = asm_parser_opname(a->file[a->i]);
+		op.opname = ft_re_capture("^\\w+", a->file[a->i]);
 		op.opcode = asm_parser_opcode(op.opname);
 	}
 	else
