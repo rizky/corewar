@@ -52,4 +52,16 @@ Mkfile.old
 dkms.conf
 
 asm
+asm *
+!resources/vm_champs/asm
 corewar
+.cache_exists
+text
+*cor
+*.cor
+resources/champs/ex1.cor
+
+*cor
+out1
+out2
+*.DS_Store
