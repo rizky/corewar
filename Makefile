@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/18 22:29:32 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/19 07:59:14 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,7 +103,7 @@ norm2:
 
 # ----- TEST UNIT ------
 T_DIR_ERROR = tests/error/
-T_FILES_ERROR:=$(shell cd $(T_DIR_ERROR); ls  | egrep '^.*.s$$' | sort -f )
+T_FILES_ERROR:=$(shell cd $(T_DIR_ERROR); ls  | egrep '^$(T_FILE_ERROR).*.s$$' | sort -f )
 
 test_error : all
 	@if [[ $$(./asm -a $(T_DIR_ERROR)$(X) $(SILENT) ) < 0 ]] ; \
