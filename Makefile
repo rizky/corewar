@@ -6,13 +6,14 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/19 07:59:14 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/19 22:17:54 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= asm
 FILE:= ft_asm
-FILES:= asm_parser asm_parser_header \
+FTASMPATH:= ft_asm/
+FTASM:= asm_parser asm_parser_header \
 		asm_parser_op asm_parser_param \
 		asm_compiler asm_compiler_header \
 		asm_print \
@@ -20,8 +21,10 @@ FILES:= asm_parser asm_parser_header \
 		asm_free \
 		asm_helper_1 asm_helper_2 asm_helper_3 asm_helper_4
 
-# FTREPATH:= libft/src/ft_re/
-# FTRE:= ft_re ft_re_match_1 ft_re_match_2 ft_re_match_3 ft_re_match_4
+NAME_VM:= corewar
+FILE_VM:= ft_vm
+FTVMPATH:= ft_vm/
+FTVM:= vm_print
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -48,32 +51,47 @@ WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
 # ==================
 
-# ------ Auto ------
-SRC:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
-OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
+FILES_ASM:=$(addprefix $(FTASMPATH),$(FTASM))
+FILES_VM:=$(addprefix $(FTVMPATH),$(FTVM))
 
-# SRC_RE+=$(addprefix $(FTREPATH),$(addsuffix .c,$(FTRE)))
+# ------ Auto ------
+SRC_ASM:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_ASM)))
+OBJ_ASM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_ASM)))
+
+SRC_VM:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM)))
+OBJ_VM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM)))
 # ==================
 CCHF:=.cache_exists
 
-all: $(NAME)
+all: $(NAME) $(NAME_VM)
 
-$(NAME): $(OBJ)
-	@echo $(PURPLE) " - Compiling libft/src/* to libft/obj/*" $(PURPLE)
-	@cd $(LFTDIR) && $(MAKE)
+$(NAME): $(OBJ_ASM)
+	@$(MAKE) libft
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRCPATH)$(FILE).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) $(SRCPATH)$(FILE).c -o $(NAME)
+	@echo $(GREEN) " - OK" $(EOC)
+
+$(NAME_VM): $(OBJ_VM)
+	@$(MAKE) libft
+	@echo $(CYAN) " - Compiling $@" $(RED)
+	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) $(SRCPATH)$(FILE_VM).c -o $(NAME_VM)
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c | $(CCHF)
 	@echo $(PURPLE) " - Compiling $< into $@" $(EOC)
 	@$(COMPILER) $(CFLAGS) -c $< -o $@
 
+libft:
+	@echo $(PURPLE) " - Compiling libft/src/* to libft/obj/*" $(PURPLE)
+	@cd $(LFTDIR) && $(MAKE)
+
 %.c:
 	@echo $(RED)"Missing file : $@" $(EOC)
 
 $(CCHF):
 	@mkdir $(CCHPATH)
+	@mkdir $(CCHPATH)$(FTASMPATH)
+	@mkdir $(CCHPATH)$(FTVMPATH)
 	@touch $(CCHF)
 
 clean:
@@ -83,7 +101,9 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(NAME_VM)
 	@rm -rf $(NAME).dSYM/
+	@rm -rf $(NAME_VM).dSYM/
 	@cd $(LFTDIR) && $(MAKE) fclean
 	@rm -f out1 out2
 
@@ -101,62 +121,62 @@ norm:
 norm2:
 	@sh ./norm/norm.sh
 
-# ----- TEST UNIT ------
-T_DIR_ERROR = tests/error/
-T_FILES_ERROR:=$(shell cd $(T_DIR_ERROR); ls  | egrep '^$(T_FILE_ERROR).*.s$$' | sort -f )
+# ----- TEST UNIT ASM ------
+T_ASM_DIR_ERROR = tests/asm/error/
+T_ASM_FILES_ERROR:=$(shell cd $(T_ASM_DIR_ERROR); ls  | egrep '^$(T_FILE_ERROR).*.s$$' | sort -f )
 
-test_error : all
-	@if [[ $$(./asm -a $(T_DIR_ERROR)$(X) $(SILENT) ) < 0 ]] ; \
-		then echo $(GREEN) " - [OK] $(T_DIR_ERROR)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_DIR_ERROR)$(X)" $(EOC) ; \
+test_asm_error : all
+	@if [[ $$(./asm -a $(T_ASM_DIR_ERROR)$(X) $(SILENT) ) < 0 ]] ; \
+		then echo $(GREEN) " - [OK] $(T_ASM_DIR_ERROR)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_ASM_DIR_ERROR)$(X)" $(EOC) ; \
 	fi
 
-tests_error: all
+tests_asm_error: all
 	@echo $(CYAN) " - Test Error Cases" $(EOC)
-	@$(foreach x, $(T_FILES_ERROR), $(MAKE) X=$x test_error;)
+	@$(foreach x, $(T_ASM_FILES_ERROR), $(MAKE) X=$x test_asm_error;)
 
-T_DIR_VALID = tests/valid/
-T_DIR_VALID_2 = tests/valid2/
-T_FILES_VALID:=$(shell cd $(T_DIR_VALID); ls  | egrep '^.*.s$$' | sort -f )
-T_FILES_BIN:=$(shell cd $(T_DIR_VALID); ls | egrep '^.*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+T_ASM_DIR_VALID = tests/asm/valid/
+T_ASM_DIR_VALID_2 = tests/asm/valid2/
+T_ASM_FILES_VALID:=$(shell cd $(T_ASM_DIR_VALID); ls  | egrep '^.*.s$$' | sort -f )
+T_ASM_FILES_BIN:=$(shell cd $(T_ASM_DIR_VALID); ls | egrep '^.*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 
-test_bin : all
-	@./asm $(T_DIR_VALID)$(X).s > /dev/null ; true
-	@./resources/vm_champs/asm $(T_DIR_VALID_2)$(X).s > /dev/null ; true
-	@if diff $(T_DIR_VALID)$(X).cor $(T_DIR_VALID_2)$(X).cor > /dev/null; \
-		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X).cor" $(EOC); \
-		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X).cor" $(EOC) ; \
+test_asm_bin: asm
+	@./asm $(T_ASM_DIR_VALID)$(X).s $(SILENT) ; true
+	@./resources/vm_champs/asm $(T_ASM_DIR_VALID_2)$(X).s $(SILENT) ; true
+	@if diff $(T_ASM_DIR_VALID)$(X).cor $(T_ASM_DIR_VALID_2)$(X).cor $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_ASM_DIR_VALID)$(X).cor" $(EOC); \
+		else echo $(RED) " - [KO] $(T_ASM_DIR_VALID)$(X).cor" $(EOC) ; \
 	fi
 
-tests_bin: all
+tests_asm_bin: asm
 	@echo $(CYAN) " - Test Binary Files" $(EOC)
-	@$(foreach x, $(T_FILES_BIN), $(MAKE) X=$x test_bin;)
+	@$(foreach x, $(T_ASM_FILES_BIN), $(MAKE) X=$x test_asm_bin;)
 
-test_valid : all
-	@./asm -a $(T_DIR_VALID)$(X) > out1 2>> out1; true
-	@./resources/vm_champs/asm -a $(T_DIR_VALID)$(X) > out2; true
-	@if diff out1 out2 > /dev/null; \
-		then echo $(GREEN) " - [OK] $(T_DIR_VALID)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_DIR_VALID)$(X)" $(EOC) ; \
+test_asm_valid : asm
+	@./asm -a $(T_ASM_DIR_VALID)$(X) > out1 2>> out1; true
+	@./resources/vm_champs/asm -a $(T_ASM_DIR_VALID)$(X) > out2; true
+	@if diff out1 out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_ASM_DIR_VALID)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_ASM_DIR_VALID)$(X)" $(EOC) ; \
 	fi
 
-tests_valid: all
+tests_asm_valid: asm
 	@echo $(CYAN) " - Test Valid Cases" $(EOC)
-	@$(foreach x, $(T_FILES_VALID), $(MAKE) X=$x test_valid;)
+	@$(foreach x, $(T_ASM_FILES_VALID), $(MAKE) X=$x test_asm_valid;)
 
-tests_v: all tests_valid tests_error tests_bin
+tests_asm_v: asm tests_asm_valid tests_asm_error tests_asm_bin
 
-tests: 
-	@$(MAKE) tests_valid
-	@$(MAKE) tests_error SILENT='2> /dev/null'
-	@$(MAKE) tests_bin
+tests_asm:
+	@$(MAKE) tests_asm_valid SILENT='> /dev/null'
+	@$(MAKE) tests_asm_error SILENT='2> /dev/null'
+	@$(MAKE) tests_asm_bin SILENT='> /dev/null'
 
-test_leak: all
+test_asm_leak: asm
 	@valgrind ./asm $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 
-test_leaks:
+tests_asm_leak:
 	@echo $(CYAN) " - Test Leaks" $(EOC)
-	@$(foreach x, $(T_FILES_VALID), $(MAKE) X=$(T_DIR_VALID)$(x) test_leak;)
-	@$(foreach x, $(T_FILES_ERROR), $(MAKE) X=$(T_DIR_ERROR)$(x) test_leak;)
+	@$(foreach x, $(T_ASM_FILES_VALID), $(MAKE) X=$(T_ASM_DIR_VALID)$(x) test_asm_leak;)
+	@$(foreach x, $(T_ASM_FILES_ERROR), $(MAKE) X=$(T_ASM_DIR_ERROR)$(x) test_asm_leak;)
 
-.PHONY: all clean fclean re debug norm norm2 tests test_leaks test_leak tests_valid tests_error tests_v
+.PHONY: all clean fclean re debug norm norm2 tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft

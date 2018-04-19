@@ -8,7 +8,7 @@ Usage
 `make tests`
 
 - Run Test Leak  
-`make test_leaks`
+`make tests_leak`
 
 - Run Norm  
 `make norm` 
