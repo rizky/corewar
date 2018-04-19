@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:47:51 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 11:29:32 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 11:42:57 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static char
 	{
 		opstr = ft_re_capture("\\w+[ \t]*.*", line);
 		temp = ft_re_capture("%.+", opstr);
+		if (temp == NULL)
+			temp = ft_re_capture("-.+", opstr);
 	}
 	opparam = ft_re_capture(".+", temp);
 	param_tab = asm_strsplit(opparam, SEPARATOR_CHAR);
