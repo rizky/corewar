@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 15:57:34 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 14:02:23 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@
 # define OP_PARAM		11
 # define OP_PARAM_TYPE	12
 # define LABEL_MISSING	13
+# define LABEL_INVALID	14
 
 # define OPT_A 0
 # define OPT_M 1
 
 # define OPT_NUM 2
 # define OPT_STR "am"
+
+# define YELLOW 3
 
 # define ARRAY(D, I) ((t_op*)(D)->data)[I]
 
@@ -144,13 +147,13 @@ int				ft_line_is_empty(t_asm *a);
 void			ft_skip_empty_lines(t_asm *a);
 void			ft_handle_comments(char **file);
 void			ft_trim_file(char **file);
-void			ft_print_tab(char **tab);
 int				ft_free(char *str, int status);
-int				ft_free_tab(char **tab, int status);
+int				ft_free_strtab(char **tab, int status);
 int				ft_free_asm(t_asm *a, int status);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
-char			**ft_strsplit2(const char *s1, const char c);
+int				asm_wordcounter(const char *str, char c);
+char			**asm_strsplit(char const *s, char c);
 
 #endif

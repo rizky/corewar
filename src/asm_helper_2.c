@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:57:53 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 14:54:24 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 10:17:54 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ void		ft_handle_comments(char **file)
 		i++;
 	}
 }
+
+/*
+** Does not trim lines within multi-line name or comment
+*/
 
 static int	ft_skip_header(char **file)
 {

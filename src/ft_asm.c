@@ -6,14 +6,14 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 16:39:50 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 13:51:12 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
 /*
-** Always tries to use the last argument
+** Uses the last argument by default
 ** Only accepts files with filename extension .s
 */
 
@@ -49,7 +49,8 @@ static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 	if ((fd = open(av[i], O_RDONLY)) == -1)
 		return (SOURCEFILE);
 	a->path = av[i];
-	file[0] = ft_strnew(0);
+	if ((file[0] = ft_strnew(0)) == NULL)
+		return (MALLOC);
 	while ((ret = read(fd, &buf, BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
@@ -58,14 +59,13 @@ static int	ft_read_sourcefile(int i, char **av, t_asm *a)
 		free(file[1]);
 	}
 	close(fd);
-	if (ft_file_is_empty(file[0]))
+	if (file[0] && ft_file_is_empty(file[0]))
 		return (ft_free(file[0], EMPTY));
-	if (ft_end_of_input(file[0]))
+	if (file[0] && ft_end_of_input(file[0]))
 		return (ft_free(file[0], NEWLINE));
-	if ((a->file = ft_strsplit2(file[0], '\n')) == NULL)
+	if ((a->file = asm_strsplit(file[0], '\n')) == NULL)
 		return (ft_free(file[0], MALLOC));
-	free(file[0]);
-	return (0);
+	return (ft_free(file[0], 0));
 }
 
 static int	ft_init(int ac, char **av, t_asm *a, int i)
@@ -127,7 +127,7 @@ int			main(int ac, char **av)
 	while (i < ac)
 	{
 		(opt[OPT_M] && i > asm_getoptions(av, opt)) ? ft_printf("\n") : 0;
-		opt[OPT_M] ? ft_printf("\t%*w%s%w\n", 3, av[i]) : 0;
+		opt[OPT_M] ? ft_printf("\t%*w%s%w\n", YELLOW, av[i]) : 0;
 		if (ft_init(ac, av, &a, i) == -1)
 			return (-1);
 		ops = NEW_ARRAY(t_op);

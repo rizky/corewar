@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:11:09 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 14:48:14 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 13:58:40 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int		ft_free_asm(t_asm *a, int status)
 		}
 	}
 	fta_clear(a->ops);
-	ft_free_tab(a->file, status);
+	ft_free_strtab(a->file, 0);
 	return (status);
 }
 
-int		ft_free_tab(char **tab, int status)
+int		ft_free_strtab(char **tab, int status)
 {
 	int i;
 

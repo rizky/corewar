@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 16:40:58 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 15:55:30 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 13:47:00 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,4 @@ size_t	ft_strcspn(const char *s, const char *charset)
 		i++;
 	}
 	return (i);
-}
-
-void	ft_print_tab(char **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_printf("%s\n", tab[i]);
-		i++;
-	}
 }
