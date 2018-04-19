@@ -6,11 +6,16 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 16:46:15 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 09:08:20 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 10:17:16 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_asm.h"
+
+/*
+** Retains multiple empty lines
+** Necessary to handle multi-line name or comment
+*/
 
 int
 	asm_wordcounter(const char *str, char c)
@@ -33,8 +38,7 @@ int
 }
 
 static char
-	**asm_word_extractor(const char *str,
-	char **strtab, size_t v[4], char c)
+	**asm_word_extractor(const char *str, char **strtab, size_t v[4], char c)
 {
 	while (v[0] <= ft_strlen(str))
 	{
@@ -77,15 +81,4 @@ char
 		return (NULL);
 	strtab = asm_word_extractor(s, strtab, v, c);
 	return (strtab);
-}
-
-void
-	asm_strtab_free(char **strtab)
-{
-	int		i;
-
-	i = -1;
-	while (strtab[++i] != NULL)
-		free(strtab[i]);
-	free(strtab);
 }

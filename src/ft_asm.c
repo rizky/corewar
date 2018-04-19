@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 13:59:42 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/19 09:08:43 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 10:39:15 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int			main(int ac, char **av)
 	while (i < ac)
 	{
 		(opt[OPT_M] && i > asm_getoptions(av, opt)) ? ft_printf("\n") : 0;
-		opt[OPT_M] ? ft_printf("\t%*w%s%w\n", 3, av[i]) : 0;
+		opt[OPT_M] ? ft_printf("\t%*w%s%w\n", YELLOW, av[i]) : 0;
 		if (ft_init(ac, av, &a, i) == -1)
 			return (-1);
 		ops = NEW_ARRAY(t_op);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/19 09:08:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/19 10:39:25 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 
 # define OPT_NUM 2
 # define OPT_STR "am"
+
+# define YELLOW 3
 
 # define ARRAY(D, I) ((t_op*)(D)->data)[I]
 
@@ -154,4 +156,5 @@ int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
 int				asm_wordcounter(const char *str, char c);
 char			**asm_strsplit(char const *s, char c);
+
 #endif
