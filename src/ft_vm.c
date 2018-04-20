@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/20 16:43:44 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/20 16:50:45 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			main(int ac, char **av)
 	ft_bzero(&v, sizeof(t_vm));
 	if (ac < 2 || vm_options(av, &v) == -1)
 		return (vm_print_usage(av, -1));
-	else if (vm_get_champions(av) > 4)
+	else if (vm_get_champions(av) > MAX_PLAYERS)
 	{
 		ft_dprintf(2, "Too many champions\n");
 		return (-1);
