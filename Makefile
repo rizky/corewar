@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/20 09:47:11 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/20 11:47:07 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ HDRPATH:=include/
 CCHPATH:=obj/
 IFLAGS:=-I $(HDRPATH) -I $(LFTDIR)/include
 LFLAGS:=-L $(LFTDIR) -lft
-CFLAGS:=-Wall -Wextra $(IFLAGS)
+CFLAGS:=-Wall -Wextra -Werror $(IFLAGS)
 # ==================
 
 # ----- Colors -----
@@ -106,6 +106,7 @@ fclean: clean
 	@rm -rf $(NAME_VM).dSYM/
 	@cd $(LFTDIR) && $(MAKE) fclean
 	@rm -f out1 out2
+	@rm -f *.cor tests/asm/valid*/*.cor
 
 re: fclean
 	@$(MAKE) all
