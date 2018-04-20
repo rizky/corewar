@@ -6,22 +6,25 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/15 12:09:29 by fpetras          ###   ########.fr        #
+#    Updated: 2018/04/20 09:47:11 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= asm
-NAME_CW:= corewar
-FILE_A:= asm
-FILE_CW:= corewar
-FILES:= parser \
-		parser_header \
-		check_instructions \
-		parser_op \
-		error \
-		helper_1 helper_2 \
-		print \
-		ft_strcdup
+FILE:= ft_asm
+FTASMPATH:= ft_asm/
+FTASM:= asm_parser asm_parser_header \
+		asm_parser_op asm_parser_param \
+		asm_compiler asm_compiler_header \
+		asm_print \
+		asm_error \
+		asm_free \
+		asm_helper_1 asm_helper_2 asm_helper_3 asm_helper_4
+
+NAME_VM:= corewar
+FILE_VM:= ft_vm
+FTVMPATH:= ft_vm/
+FTVM:= vm_print
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -48,39 +51,47 @@ WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
 # ==================
 
+FILES_ASM:=$(addprefix $(FTASMPATH),$(FTASM))
+FILES_VM:=$(addprefix $(FTVMPATH),$(FTVM))
+
 # ------ Auto ------
-SRC:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
-SRC_CW:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILE_CW)))
-SRC_A:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILE_A)))
-OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
-OBJ_A:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILE_A)))
-OBJ_CW:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILE_CW)))
+SRC_ASM:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_ASM)))
+OBJ_ASM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_ASM)))
+
+SRC_VM:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM)))
+OBJ_VM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM)))
 # ==================
 CCHF:=.cache_exists
 
-all: $(NAME)
+all: $(NAME) $(NAME_VM)
 
-$(NAME): $(OBJ) $(OBJ_A)
-	@cd $(LFTDIR) && $(MAKE)
+$(NAME): $(OBJ_ASM)
+	@$(MAKE) libft
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRCPATH)$(FILE_A).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) $(SRCPATH)$(FILE).c -o $(NAME)
 	@echo $(GREEN) " - OK" $(EOC)
 
-$(NAME_CW): $(OBJ) $(OBJ_CW)
-	@cd $(LFTDIR) && $(MAKE)
+$(NAME_VM): $(OBJ_VM)
+	@$(MAKE) libft
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) $(SRC_CW) -o $(NAME_CW)
+	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) $(SRCPATH)$(FILE_VM).c -o $(NAME_VM)
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c | $(CCHF)
 	@echo $(PURPLE) " - Compiling $< into $@" $(EOC)
 	@$(COMPILER) $(CFLAGS) -c $< -o $@
 
+libft:
+	@echo $(PURPLE) " - Compiling libft/src/* to libft/obj/*" $(PURPLE)
+	@cd $(LFTDIR) && $(MAKE) -s
+
 %.c:
 	@echo $(RED)"Missing file : $@" $(EOC)
 
 $(CCHF):
 	@mkdir $(CCHPATH)
+	@mkdir $(CCHPATH)$(FTASMPATH)
+	@mkdir $(CCHPATH)$(FTVMPATH)
 	@touch $(CCHF)
 
 clean:
@@ -90,16 +101,18 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f $(NAME_CW)
+	@rm -f $(NAME_VM)
 	@rm -rf $(NAME).dSYM/
-	@rm -rf $(NAME_CW).dSYM/
+	@rm -rf $(NAME_VM).dSYM/
 	@cd $(LFTDIR) && $(MAKE) fclean
+	@rm -f out1 out2
 
 re: fclean
 	@$(MAKE) all
 
 debug: $(NAME)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE_A).c -o $(NAME)
+	@echo $(CYAN) " - Compiling debug asm" $(EOC)
+	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE).c -o $(NAME)
 
 norm:
 	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
@@ -108,4 +121,65 @@ norm:
 norm2:
 	@sh ./norm/norm.sh
 
-.PHONY: all clean fclean re test norme test_ch test_pw debug check
+# ----- TEST UNIT ASM ------
+T_ASM_DIR_ERROR = tests/asm/error/
+T_ASM_FILES_ERROR:=$(shell cd $(T_ASM_DIR_ERROR); ls  | egrep '^$(T_FILE_ERROR).*.s$$' | sort -f )
+
+test_asm_error : asm
+	@if [[ $$(./asm -a $(T_ASM_DIR_ERROR)$(X) $(SILENT) ) < 0 ]] ; \
+		then echo $(GREEN) " - [OK] $(T_ASM_DIR_ERROR)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_ASM_DIR_ERROR)$(X)" $(EOC) ; \
+	fi
+
+tests_asm_error: asm
+	@echo $(CYAN) " - Test Error Cases" $(EOC)
+	@$(foreach x, $(T_ASM_FILES_ERROR), $(MAKE) X=$x test_asm_error;)
+
+T_ASM_DIR_VALID = tests/asm/valid/
+T_ASM_DIR_VALID_2 = tests/asm/valid2/
+T_ASM_FILES_VALID:=$(shell cd $(T_ASM_DIR_VALID); ls  | egrep '^.*.s$$' | sort -f )
+T_ASM_FILES_BIN:=$(shell cd $(T_ASM_DIR_VALID); ls | egrep '^.*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+
+test_asm_bin: asm
+	@./asm $(T_ASM_DIR_VALID)$(X).s $(SILENT) ; true
+	@./resources/binaries/asm $(T_ASM_DIR_VALID_2)$(X).s $(SILENT) ; true
+	@if diff $(T_ASM_DIR_VALID)$(X).cor $(T_ASM_DIR_VALID_2)$(X).cor $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_ASM_DIR_VALID)$(X).cor" $(EOC); \
+		else echo $(RED) " - [KO] $(T_ASM_DIR_VALID)$(X).cor" $(EOC) ; \
+	fi
+
+tests_asm_bin: asm
+	@echo $(CYAN) " - Test Binary Files" $(EOC)
+	@$(foreach x, $(T_ASM_FILES_BIN), $(MAKE) X=$x test_asm_bin;)
+
+test_asm_valid : asm
+	@./asm -a $(T_ASM_DIR_VALID)$(X) > out1 2>> out1; true
+	@./resources/binaries/asm -a $(T_ASM_DIR_VALID)$(X) > out2; true
+	@if diff out1 out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_ASM_DIR_VALID)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_ASM_DIR_VALID)$(X)" $(EOC) ; \
+	fi
+
+tests_asm_valid: asm
+	@echo $(CYAN) " - Test Valid Cases" $(EOC)
+	@$(foreach x, $(T_ASM_FILES_VALID), $(MAKE) X=$x test_asm_valid;)
+
+tests_asm_v: asm tests_asm_valid tests_asm_error tests_asm_bin
+
+tests_asm: asm
+	@echo $(CYAN) " - Test Assembler" $(EOC)
+	@$(MAKE) tests_asm_valid SILENT='> /dev/null'
+	@$(MAKE) tests_asm_error SILENT='2> /dev/null'
+	@$(MAKE) tests_asm_bin SILENT='> /dev/null'
+
+test_asm_leak: asm
+	@valgrind ./asm $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+
+tests_asm_leak:
+	@echo $(CYAN) " - Test Leaks" $(EOC)
+	@$(foreach x, $(T_ASM_FILES_VALID), $(MAKE) X=$(T_ASM_DIR_VALID)$(x) test_asm_leak;)
+	@$(foreach x, $(T_ASM_FILES_ERROR), $(MAKE) X=$(T_ASM_DIR_ERROR)$(x) test_asm_leak;)
+
+tests: tests_asm
+
+.PHONY: all clean fclean re debug norm norm2 tests tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
