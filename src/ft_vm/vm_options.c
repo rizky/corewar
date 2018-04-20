@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/20 16:12:12 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/20 16:44:22 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 char	*g_options[OPT_NUM + 1] =
 {
-				"-d",
-				"-s",
-				"-v",
-				"-b",
-				"-n",
-				"-a",
-				0
+	"-d",
+	"-s",
+	"-v",
+	"-b",
+	"-n",
+	"-a",
+	0
 };
 
 int		vm_options(char **av, t_vm *v)
@@ -53,10 +53,10 @@ int		vm_options(char **av, t_vm *v)
 			(v->opt[OPT_B] && v->opt[OPT_N]))
 			return (-1);
 	}
-	i = -1;
-	while (++i < OPT_NUM)
-		ft_printf("%d: %d\n", i, v->opt[i]);
-	ft_printf("d_cy: %d s_cy: %d v_lvl: %d\n", v->d_cy, v->s_cy, v->v_lvl);
-	ft_printf("stealth: %d\n", v->stealth);
+//	i = -1;
+//	while (++i < OPT_NUM)
+//		ft_printf("%d: %d\n", i, v->opt[i]);
+//	ft_printf("d_cy: %d s_cy: %d v_lvl: %d\n", v->d_cy, v->s_cy, v->v_lvl);
+//	ft_printf("stealth: %d\n", v->stealth);
 	return (0);
 }
