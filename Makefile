@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/19 22:17:54 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/20 09:03:18 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,7 +142,7 @@ T_ASM_FILES_BIN:=$(shell cd $(T_ASM_DIR_VALID); ls | egrep '^.*.s$$' | rev | cut
 
 test_asm_bin: asm
 	@./asm $(T_ASM_DIR_VALID)$(X).s $(SILENT) ; true
-	@./resources/vm_champs/asm $(T_ASM_DIR_VALID_2)$(X).s $(SILENT) ; true
+	@./resources/binaries/asm $(T_ASM_DIR_VALID_2)$(X).s $(SILENT) ; true
 	@if diff $(T_ASM_DIR_VALID)$(X).cor $(T_ASM_DIR_VALID_2)$(X).cor $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_ASM_DIR_VALID)$(X).cor" $(EOC); \
 		else echo $(RED) " - [KO] $(T_ASM_DIR_VALID)$(X).cor" $(EOC) ; \
@@ -154,7 +154,7 @@ tests_asm_bin: asm
 
 test_asm_valid : asm
 	@./asm -a $(T_ASM_DIR_VALID)$(X) > out1 2>> out1; true
-	@./resources/vm_champs/asm -a $(T_ASM_DIR_VALID)$(X) > out2; true
+	@./resources/binaries/asm -a $(T_ASM_DIR_VALID)$(X) > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_ASM_DIR_VALID)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_ASM_DIR_VALID)$(X)" $(EOC) ; \
@@ -179,4 +179,6 @@ tests_asm_leak:
 	@$(foreach x, $(T_ASM_FILES_VALID), $(MAKE) X=$(T_ASM_DIR_VALID)$(x) test_asm_leak;)
 	@$(foreach x, $(T_ASM_FILES_ERROR), $(MAKE) X=$(T_ASM_DIR_ERROR)$(x) test_asm_leak;)
 
-.PHONY: all clean fclean re debug norm norm2 tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
+tests: tests_asm
+
+.PHONY: all clean fclean re debug norm norm2 tests tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
