@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/20 12:00:43 by fpetras          ###   ########.fr        #
+#    Updated: 2018/04/20 15:51:45 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ FTASM:= asm_parser asm_parser_header \
 NAME_VM:= corewar
 FILE_VM:= ft_vm
 FTVMPATH:= ft_vm/
-FTVM:= vm_print
+FTVM:=	vm_options \
+		vm_print
 
 # ----- Libft ------
 LFTDIR:=./libft
