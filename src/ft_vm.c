@@ -6,15 +6,19 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 21:51:40 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/20 11:58:40 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int			main(int ac, char **av)
+int		main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
+	if (ac < 2)
+	{
+		ft_dprintf(2, "usage: %s [options] champion1.cor ...\n", av[0]);
+		return (-1);
+	}
 	vm_print();
+	return (0);
 }

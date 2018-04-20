@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 21:50:29 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/20 11:54:51 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "libft.h"
 # include "op.h"
 
-void	vm_print();
+void	vm_print(void);
 
 #endif
