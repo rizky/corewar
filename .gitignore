@@ -53,7 +53,8 @@ dkms.conf
 
 asm
 asm *
-!resources/vm_champs/asm
+!resources/binaries/asm
+!tests/asm
 corewar
 .cache_exists
 text
