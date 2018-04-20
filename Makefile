@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/20 09:03:18 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/20 09:47:11 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ $(CCHPATH)%.o: $(SRCPATH)%.c | $(CCHF)
 
 libft:
 	@echo $(PURPLE) " - Compiling libft/src/* to libft/obj/*" $(PURPLE)
-	@cd $(LFTDIR) && $(MAKE)
+	@cd $(LFTDIR) && $(MAKE) -s
 
 %.c:
 	@echo $(RED)"Missing file : $@" $(EOC)
@@ -125,13 +125,13 @@ norm2:
 T_ASM_DIR_ERROR = tests/asm/error/
 T_ASM_FILES_ERROR:=$(shell cd $(T_ASM_DIR_ERROR); ls  | egrep '^$(T_FILE_ERROR).*.s$$' | sort -f )
 
-test_asm_error : all
+test_asm_error : asm
 	@if [[ $$(./asm -a $(T_ASM_DIR_ERROR)$(X) $(SILENT) ) < 0 ]] ; \
 		then echo $(GREEN) " - [OK] $(T_ASM_DIR_ERROR)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_ASM_DIR_ERROR)$(X)" $(EOC) ; \
 	fi
 
-tests_asm_error: all
+tests_asm_error: asm
 	@echo $(CYAN) " - Test Error Cases" $(EOC)
 	@$(foreach x, $(T_ASM_FILES_ERROR), $(MAKE) X=$x test_asm_error;)
 
@@ -166,7 +166,8 @@ tests_asm_valid: asm
 
 tests_asm_v: asm tests_asm_valid tests_asm_error tests_asm_bin
 
-tests_asm:
+tests_asm: asm
+	@echo $(CYAN) " - Test Assembler" $(EOC)
 	@$(MAKE) tests_asm_valid SILENT='> /dev/null'
 	@$(MAKE) tests_asm_error SILENT='2> /dev/null'
 	@$(MAKE) tests_asm_bin SILENT='> /dev/null'
