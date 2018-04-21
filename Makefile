@@ -6,14 +6,14 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/20 09:47:11 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/21 14:44:05 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= asm
-FILE:= ft_asm
 FTASMPATH:= ft_asm/
-FTASM:= asm_parser asm_parser_header \
+FTASM:= ft_asm \
+		asm_parser asm_parser_header \
 		asm_parser_op asm_parser_param \
 		asm_compiler asm_compiler_header \
 		asm_print \
@@ -22,9 +22,9 @@ FTASM:= asm_parser asm_parser_header \
 		asm_helper_1 asm_helper_2 asm_helper_3 asm_helper_4
 
 NAME_VM:= corewar
-FILE_VM:= ft_vm
 FTVMPATH:= ft_vm/
-FTVM:= vm_print
+FTVM:= 	ft_vm \
+		vm_print
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -60,6 +60,7 @@ OBJ_ASM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_ASM)))
 
 SRC_VM:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM)))
 OBJ_VM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM)))
+
 # ==================
 CCHF:=.cache_exists
 
@@ -68,13 +69,13 @@ all: $(NAME) $(NAME_VM)
 $(NAME): $(OBJ_ASM)
 	@$(MAKE) libft
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) $(SRCPATH)$(FILE).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) -o $(NAME)
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(NAME_VM): $(OBJ_VM)
 	@$(MAKE) libft
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) $(SRCPATH)$(FILE_VM).c -o $(NAME_VM)
+	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -o $(NAME_VM)
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c | $(CCHF)
