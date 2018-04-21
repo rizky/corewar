@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/20 07:33:42 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/21 11:13:05 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			main(int ac, char **av)
 		ft_dprintf(2, "Too many champions\n");
 		return (-1);
 	}
+	ft_printf("testing");
 	vm_print();
 	return (0);
 }
