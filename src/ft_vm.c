@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/20 16:50:45 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/20 07:33:42 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ static int	vm_get_champions(char **av)
 
 static int	vm_print_usage(char **av, int status)
 {
-	ft_dprintf(2, "usage: %s [-d N -s N -v N ", av[0]);
-	ft_dprintf(2, "| -b [--stealth] | -n [--stealth]] [-a] ");
-	ft_dprintf(2, "champion.cor ...\n");
+	ft_dprintf(2, "usage: %s [-dump nbr_cycles] [-n number] ", av[0]);
+	ft_dprintf(2, "champion1.cor ...\n");
 	return (status);
 }
 
