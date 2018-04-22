@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 21:21:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 21:23:08 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int
 void
 	vm_print_verbose(t_vm vm, int i)
 {
-	ft_printfln("magic: %d", vm.champ[i].header.magic);
+	ft_printfln("magic: %x", vm.champ[i].header.magic);
 	ft_printfln("name: %s", vm.champ[i].header.prog_name);
 	ft_printfln("size: %d", vm.champ[i].header.prog_size);
 	ft_printfln("comment: %s", vm.champ[i].header.comment);
