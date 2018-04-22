@@ -6,13 +6,9 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 14:53:22 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 20:19:29 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void	vm_print(t_vm vm)
-{
-	ft_printfln("%m", vm.op);
-}

@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/22 14:03:35 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/22 20:19:17 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ FTASM:= ft_asm \
 NAME_VM:= corewar
 FTVMPATH:= ft_vm/
 FTVM:=	ft_vm \
-		vm_options \
 		vm_print \
 		vm_error \
 
