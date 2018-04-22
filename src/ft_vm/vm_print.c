@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 21:00:44 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 21:16:58 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int
 	vm_print_usage(char **av, int status)
 {
-	ft_dprintf(2, "usage: %s [-dump nbr_cycles] [-n number] ", av[0]);
+	ft_dprintf(2, "usage: %s [-dump nbr_cycles] [[-n number] ", av[0]);
 	ft_dprintf(2, "champion1.cor ...\n");
 	return (status);
 }
