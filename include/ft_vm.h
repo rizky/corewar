@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 15:08:59 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 19:42:40 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,17 @@
 # include "libft.h"
 # include "op.h"
 
+# define OPT_D 0
+# define OPT_N 1
+
+# define OPT_NUM 2
+# define OPT_STR "dn"
+
 # define SOURCEFILE		1
 # define MALLOC			2
 # define INVALID_FILE	3
 # define CHAMP_MAX		4
+# define CODE_MAX		5
 
 typedef struct	s_vm
 {

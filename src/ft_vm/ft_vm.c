@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 15:14:47 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 20:02:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int
 	op_size = vm_binary_toint(buf, 4);
 	vm->header.prog_size = op_size;
 	if (op_size > CHAMP_MAX_SIZE)
-		return (vm_error(CHAMP_MAX, -1));
+		return (vm_error(CODE_MAX, -1));
 	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) <= 0)
 		return (vm_error(INVALID_FILE, -1));
 	ft_strncpy(vm->header.comment, buf, COMMENT_LENGTH + 4 + 1);
@@ -99,20 +99,56 @@ static int
 	return (0);
 }
 
+static int	vm_getoptions(char **av, int opt[OPT_NUM])
+{
+	int			i;
+	int			j;
+	int			k;
+	const char	*c_opt = OPT_STR;
+	int			c;
+
+	c = 0;
+	ft_bzero(opt, 2 * sizeof(int));
+	i = 0;
+	opt[OPT_N] = 1;
+	while (av[++i] && av[i][0] == '-')
+	{
+		j = 0;
+		k = 0;
+		while (av[i][++j])
+			if ((c = is_in(av[i][j], c_opt)) != -1)
+			{
+				if (!av[i + k + 1] || ft_atoi(av[i + k + 1]) == 0)
+					return (-1);
+				opt[c] = ft_atoi(av[i + ++k]);
+			}
+			else
+				return (i);
+		i += k;
+	}
+	return (i);
+}
+
 int
 	main(int ac, char **av)
 {
 	t_vm	vm;
+	int		i;
+	int		opt[OPT_NUM];
 
-	ft_bzero(&vm, sizeof(t_vm));
-	if (ac < 2 || vm_options(av, &vm) == -1)
+	if ((i = vm_getoptions(av, opt)) == -1)
 		return (vm_print_usage(av, -1));
-	else if (vm_get_champions(av) > MAX_PLAYERS)
+	ft_bzero(&vm, sizeof(t_vm));
+	if (opt[OPT_N] > 4)
+		return (vm_error(CHAMP_MAX, -1));
+	while (opt[OPT_N] > 0 || i < ac)
 	{
-		ft_dprintf(2, "Too many champions\n");
-		return (-1);
+		if (i >= ac || opt[OPT_N] == 0)
+			return (vm_print_usage(av, -1));
+		vm_read_binary(i, av, &vm);
+		vm_print_verbose(vm);
+		i++;
+		opt[OPT_N]--;
 	}
-	vm_read_binary(1, av, &vm);
-	vm_print_verbose(vm);
 	return (0);
 }
