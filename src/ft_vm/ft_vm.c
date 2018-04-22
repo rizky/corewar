@@ -6,28 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 20:51:14 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 20:53:39 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
-
-static void
-	vm_print_memory(char memory[MEM_SIZE])
-{
-	int		i;
-
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		if (i > 0 && i % 64 == 0)
-			ft_printf("\n");
-		if (i % 64 == 0)
-			ft_printf("0x%04x :", i);
-		ft_printf(" %02x", memory[i]);
-		i++;
-	}
-}
 
 int
 	main(int ac, char **av)

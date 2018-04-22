@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 20:43:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 20:53:15 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ int				vm_getoptions(char **av, int opt[OPT_NUM]);
 
 int				vm_binary_toint(char *bin, int size);
 int				vm_read_binary(int i, char **av, t_vm *vm);
-
+void			vm_print_memory(char memory[MEM_SIZE]);
 #endif
