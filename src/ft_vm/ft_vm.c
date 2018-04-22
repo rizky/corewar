@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 22:04:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 22:18:04 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void
 	ft_printfln("Introducing contestants...");
 	while (i < vm.champ_size)
 	{
-		ft_printfln("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !", i,
+		ft_printfln("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !", i + 1,
 		vm.champ[i].header.prog_size, vm.champ[i].header.prog_name,
 		vm.champ[i].header.comment);
 		ft_memcpy(&memory[i * MEM_SIZE / vm.champ_size], vm.champ[i].op,

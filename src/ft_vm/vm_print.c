@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 21:23:08 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 22:19:40 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ void
 		if (i > 0 && i % 64 == 0)
 			ft_printf("\n");
 		if (i % 64 == 0)
-			ft_printf("0x%04x :", i);
-		ft_printf(" %02x", memory[i]);
+			ft_printf("0x%04x : ", i);
+		ft_printf("%02x ", memory[i]);
 		i++;
 	}
+	ft_printf("\n");
 }
