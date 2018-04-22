@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 20:53:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 21:00:44 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void
 }
 
 void
-	vm_print_memory(char memory[MEM_SIZE])
+	vm_print_memory(unsigned char memory[MEM_SIZE])
 {
 	int		i;
 
