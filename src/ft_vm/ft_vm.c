@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 13:55:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 14:46:42 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,15 @@ static int
 	vm->path = av[i];
 	if ((ret = read(fd, &buf, 4)) > 0)
 		ft_printfln("%4m", buf);
+	if (vm_binary_toint(buf, 4) != -1473805)
+		return vm_error(MAGIC, -1);
 	if ((ret = read(fd, &buf, PROG_NAME_LENGTH + 4)) > 0)
 		ft_printfln("%*m", ft_strlen(buf), buf);
 	if ((ret = read(fd, &buf, 4) > 0))
 		ft_printfln("%4m", buf);
 	op_size = vm_binary_toint(buf, 4);
-	ft_printfln("%d\n", op_size);
+	if (op_size > CHAMP_MAX_SIZE)
+		return vm_error(CHAMP_MAX, -1);
 	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) > 0)
 		ft_printfln("%*m", ft_strlen(buf), buf);
 	if ((ret = read(fd, &buf, op_size)) > 0)
