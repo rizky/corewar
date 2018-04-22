@@ -6,13 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 13:39:03 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 13:55:10 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-static int	vm_get_champions(char **av)
+static int
+	vm_get_champions(char **av)
 {
 	int i;
 	int num;
@@ -27,18 +28,37 @@ static int	vm_get_champions(char **av)
 	return (num);
 }
 
-static int	vm_print_usage(char **av, int status)
+static int
+	vm_print_usage(char **av, int status)
 {
 	ft_dprintf(2, "usage: %s [-dump nbr_cycles] [-n number] ", av[0]);
 	ft_dprintf(2, "champion1.cor ...\n");
 	return (status);
 }
 
-static int	vm_read_binary(int i, char **av, t_vm *vm)
+static int
+	vm_binary_toint(char *bin, int size)
+{
+	int		i;
+	int		result;
+
+	i = 1;
+	result = 0;
+	while (i <= size)
+	{
+		result += bin[i - 1] << ((size - i) * 8);
+		i++;
+	}
+	return (result);
+}
+
+static int
+	vm_read_binary(int i, char **av, t_vm *vm)
 {
 	int		fd;
 	int		ret;
 	char	buf[COMMENT_LENGTH + 4];
+	int		op_size;
 
 	if ((fd = open(av[i], O_RDONLY)) == -1)
 		return (SOURCEFILE);
@@ -49,13 +69,18 @@ static int	vm_read_binary(int i, char **av, t_vm *vm)
 		ft_printfln("%*m", ft_strlen(buf), buf);
 	if ((ret = read(fd, &buf, 4) > 0))
 		ft_printfln("%4m", buf);
+	op_size = vm_binary_toint(buf, 4);
+	ft_printfln("%d\n", op_size);
 	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) > 0)
 		ft_printfln("%*m", ft_strlen(buf), buf);
+	if ((ret = read(fd, &buf, op_size)) > 0)
+		ft_printfln("%*m", op_size, buf);
 	close(fd);
 	return (0);
 }
 
-int			main(int ac, char **av)
+int
+	main(int ac, char **av)
 {
 	t_vm	vm;
 
