@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/22 12:11:50 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/22 12:57:10 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ HDRPATH:=include/
 CCHPATH:=obj/
 IFLAGS:=-I $(HDRPATH) -I $(LFTDIR)/include
 LFLAGS:=-L $(LFTDIR) -lft
-CFLAGS:=-Wall -Wextra -Werror $(IFLAGS)
+# CFLAGS:=-Wall -Wextra -Werror $(IFLAGS)
+CFLAGS:=-Wall -Wextra $(IFLAGS)
 # ==================
 
 # ----- Colors -----
@@ -113,9 +114,11 @@ fclean: clean
 re: fclean
 	@$(MAKE) all
 
-debug: $(NAME)
+debug: $(OBJ_ASM)
 	@echo $(CYAN) " - Compiling debug asm" $(EOC)
-	@$(COMPILER) $(CFLAGS) $(SRC) $(LFLAGS) -g $(SRCPATH)$(FILE).c -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) -g -o $(NAME)
+	@echo $(CYAN) " - Compiling debug vm" $(EOC)
+	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -g -o $(NAME_VM)
 
 norm:
 	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true

@@ -6,13 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/20 16:07:12 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/22 12:43:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void	vm_print(void)
+void	vm_print(t_vm vm)
 {
-	ft_printfln("This is Corewar!");
+	ft_printfln("%s", vm.binary);
 }
