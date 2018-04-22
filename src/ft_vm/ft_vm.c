@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 14:46:42 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 15:14:47 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,32 +52,49 @@ static int
 	return (result);
 }
 
+void
+	vm_print_verbose(t_vm vm)
+{
+	ft_printfln("magic: %d", vm.header.magic);
+	ft_printfln("name: %s", vm.header.prog_name);
+	ft_printfln("size: %d", vm.header.prog_size);
+	ft_printfln("comment: %s", vm.header.comment);
+	ft_printfln("%*m", vm.header.prog_size, vm.op);
+}
+
 static int
 	vm_read_binary(int i, char **av, t_vm *vm)
 {
-	int		fd;
-	int		ret;
-	char	buf[COMMENT_LENGTH + 4];
-	int		op_size;
+	int			fd;
+	int			ret;
+	char		buf[COMMENT_LENGTH + 4];
+	int			op_size;
 
 	if ((fd = open(av[i], O_RDONLY)) == -1)
 		return (SOURCEFILE);
 	vm->path = av[i];
-	if ((ret = read(fd, &buf, 4)) > 0)
-		ft_printfln("%4m", buf);
+	if ((ret = read(fd, &buf, 4)) <= 0)
+		return (vm_error(INVALID_FILE, -1));
+	vm->header.magic = vm_binary_toint(buf, 4);
 	if (vm_binary_toint(buf, 4) != -1473805)
-		return vm_error(MAGIC, -1);
-	if ((ret = read(fd, &buf, PROG_NAME_LENGTH + 4)) > 0)
-		ft_printfln("%*m", ft_strlen(buf), buf);
-	if ((ret = read(fd, &buf, 4) > 0))
-		ft_printfln("%4m", buf);
+		return (vm_error(INVALID_FILE, -1));
+	if ((ret = read(fd, &buf, PROG_NAME_LENGTH + 4)) <= 0)
+		return (vm_error(INVALID_FILE, -1));
+	ft_strncpy(vm->header.prog_name, buf, PROG_NAME_LENGTH + 4 + 1);
+	if ((ret = read(fd, &buf, 4) <= 0))
+		return (vm_error(INVALID_FILE, -1));
 	op_size = vm_binary_toint(buf, 4);
+	vm->header.prog_size = op_size;
 	if (op_size > CHAMP_MAX_SIZE)
-		return vm_error(CHAMP_MAX, -1);
-	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) > 0)
-		ft_printfln("%*m", ft_strlen(buf), buf);
-	if ((ret = read(fd, &buf, op_size)) > 0)
-		ft_printfln("%*m", op_size, buf);
+		return (vm_error(CHAMP_MAX, -1));
+	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) <= 0)
+		return (vm_error(INVALID_FILE, -1));
+	ft_strncpy(vm->header.comment, buf, COMMENT_LENGTH + 4 + 1);
+	if ((ret = read(fd, &buf, op_size)) <= 0)
+		return (vm_error(INVALID_FILE, -1));
+	vm->op = ft_memalloc(op_size + 1);
+	ft_memcpy(vm->op, buf, op_size + 1);
+	vm->op[op_size] = '\0';
 	close(fd);
 	return (0);
 }
@@ -96,6 +113,6 @@ int
 		return (-1);
 	}
 	vm_read_binary(1, av, &vm);
-	vm_print(vm);
+	vm_print_verbose(vm);
 	return (0);
 }

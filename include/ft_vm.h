@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 14:44:31 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 15:08:59 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define SOURCEFILE		1
 # define MALLOC			2
-# define MAGIC			3
+# define INVALID_FILE	3
 # define CHAMP_MAX		4
 
 typedef struct	s_vm
@@ -27,7 +27,8 @@ typedef struct	s_vm
 	int				dump;
 	int				cycles;
 	char			*players[MAX_PLAYERS + 2];
-	char			binary[CHAMP_MAX_SIZE];
+	t_header		header;
+	char			*op;
 }				t_vm;
 
 int				vm_options(char **av, t_vm *v);
