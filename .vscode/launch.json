@@ -21,10 +21,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": [
-					"-n",
-					"2",
-					"tests/asm/valid/ex.cor",
+			"args": ["tests/asm/valid/ex.cor",
 					"tests/asm/valid/ex1.cor"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

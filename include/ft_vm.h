@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 21:00:30 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 22:06:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include "op.h"
 
 # define OPT_D 0
-# define OPT_N 1
+# define OPT_V 1
 
 # define OPT_NUM 2
-# define OPT_STR "dn"
+# define OPT_STR "dv"
+# define OPT_STR_V "d"
 
 # define MALLOC			1
 # define INVALID_FILE	2
