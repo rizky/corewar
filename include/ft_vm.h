@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 20:19:07 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 20:27:23 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef struct	s_vm
 	int				champ_size;
 }				t_vm;
 
-void			vm_print(t_vm vm);
-int				vm_error(int errnum, int status);
+void			vm_print_verbose(t_vm vm, int i);
+int				vm_print_usage(char **av, int status);
 
+int				vm_error(int errnum, int status);
+int				vm_getoptions(char **av, int opt[OPT_NUM]);
 #endif

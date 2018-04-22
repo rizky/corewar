@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/22 20:19:17 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/22 20:29:53 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ FTVMPATH:= ft_vm/
 FTVM:=	ft_vm \
 		vm_print \
 		vm_error \
+		vm_helper_1
 
 # ----- Libft ------
 LFTDIR:=./libft

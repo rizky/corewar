@@ -6,19 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 20:22:18 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 20:29:33 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
-
-static int
-	vm_print_usage(char **av, int status)
-{
-	ft_dprintf(2, "usage: %s [-dump nbr_cycles] [-n number] ", av[0]);
-	ft_dprintf(2, "champion1.cor ...\n");
-	return (status);
-}
 
 static int
 	vm_binary_toint(char *bin, int size)
@@ -34,16 +26,6 @@ static int
 		i++;
 	}
 	return (result);
-}
-
-void
-	vm_print_verbose(t_vm vm, int i)
-{
-	ft_printfln("magic: %d", vm.champ[i].header.magic);
-	ft_printfln("name: %s", vm.champ[i].header.prog_name);
-	ft_printfln("size: %d", vm.champ[i].header.prog_size);
-	ft_printfln("comment: %s", vm.champ[i].header.comment);
-	ft_printfln("%*m", vm.champ[i].header.prog_size, vm.champ[i].op);
 }
 
 static int
@@ -87,32 +69,10 @@ static int
 	return (0);
 }
 
-static int	vm_getoptions(char **av, int opt[OPT_NUM])
+static
+	vm_print_memory(char memory[MEM_SIZE])
 {
-	int			i;
-	int			j;
-	int			k;
-	const char	*c_opt = OPT_STR;
-	int			c;
 
-	c = 0;
-	i = 0;
-	while (av[++i] && av[i][0] == '-')
-	{
-		j = 0;
-		k = 0;
-		while (av[i][++j])
-			if ((c = is_in(av[i][j], c_opt)) != -1)
-			{
-				if (!av[i + k + 1] || ft_atoi(av[i + k + 1]) == 0)
-					return (-1);
-				opt[c] = ft_atoi(av[i + ++k]);
-			}
-			else
-				return (i);
-		i += k;
-	}
-	return (i);
 }
 
 int
@@ -121,6 +81,7 @@ int
 	t_vm			vm;
 	int				i;
 	static	int		opt[OPT_NUM] = {0, 1};
+	char			memory[MEM_SIZE];
 
 	if ((i = vm_getoptions(av, opt)) == -1)
 		return (vm_print_usage(av, -1));
