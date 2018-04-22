@@ -6,26 +6,30 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 23:55:42 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 00:52:38 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
 void
-	vm_load_champs(t_vm vm, unsigned char memory[MEM_SIZE])
+	vm_load_champs(t_vm *vm, unsigned char memory[MEM_SIZE])
 {
-	int		i;
+	int			i;
+	t_process	p;
 
 	i = 0;
+	ft_bzero(&p, sizeof(t_process));
 	ft_printfln("Introducing contestants...");
-	while (i < vm.champ_size)
+	while (i < vm->champ_size)
 	{
 		ft_printfln("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !", i + 1,
-		vm.champ[i].header.prog_size, vm.champ[i].header.prog_name,
-		vm.champ[i].header.comment);
-		ft_memcpy(&memory[i * MEM_SIZE / vm.champ_size], vm.champ[i].op,
-				vm.champ[i].header.prog_size);
+		vm->champ[i].header.prog_size, vm->champ[i].header.prog_name,
+		vm->champ[i].header.comment);
+		ft_memcpy(&memory[i * MEM_SIZE / vm->champ_size], vm->champ[i].op,
+				vm->champ[i].header.prog_size);
+		p.offset = i * MEM_SIZE / vm->champ_size;
+		fta_append(vm->champ[i].processes, &p, 1);
 		i++;
 	}
 }
@@ -54,8 +58,8 @@ int
 	if (opt[OPT_V])
 		while (++i < vm.champ_size)
 			vm_print_verbose(vm, i);
-	vm_load_champs(vm, memory);
+	vm_load_champs(&vm, memory);
 	if (opt[OPT_D])
-		vm_print_memory(memory);
+		vm_print_memory_cursor(memory, vm);
 	return (0);
 }

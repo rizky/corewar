@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 23:08:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 00:26:24 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define OPT_D 0
 # define OPT_V 1
 
-# define OPT_NUM 2
+# define OPT_NUM 3
 # define OPT_STR "dv"
 # define OPT_STR_V "d"
 
@@ -30,6 +30,7 @@
 
 typedef struct	s_process
 {
+	int			offset;
 	int			pc;
 	int			live_nbr;
 }				t_process;
@@ -60,4 +61,5 @@ int				vm_getoptions(char **av, int opt[OPT_NUM]);
 int				vm_binary_toint(char *bin, int size);
 int				vm_read_binary(int i, char **av, t_vm *vm);
 void			vm_print_memory(unsigned char memory[MEM_SIZE]);
+void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);
 #endif

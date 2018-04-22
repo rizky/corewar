@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 22:19:40 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 01:04:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,45 @@ void
 		if (i % 64 == 0)
 			ft_printf("0x%04x : ", i);
 		ft_printf("%02x ", memory[i]);
+		i++;
+	}
+	ft_printf("\n");
+}
+
+int
+	vm_get_cursor_color(t_vm vm, int index)
+{
+	int		j;
+	int		k;
+
+	j = 0;
+	while (j < vm.champ_size)
+	{
+		k = 0;
+		while (k < (int)(vm.champ[j].processes->size))
+		{
+			if (((t_process*)vm.champ[j].processes->data)[k].offset == index)
+				return (j + 1);
+			k++;
+		}
+		j++;
+	}
+	return (0);
+}
+
+void
+	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
+{
+	int		i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		if (i > 0 && i % 64 == 0)
+			ft_printf("\n");
+		if (i % 64 == 0)
+			ft_printf("0x%04x : ", i);
+		ft_printf("%*w%02x %w", vm_get_cursor_color(vm, i), memory[i]);
 		i++;
 	}
 	ft_printf("\n");

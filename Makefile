@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/22 22:22:13 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/23 00:55:52 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -187,6 +187,21 @@ tests_asm_leak:
 	@echo $(CYAN) " - Test Leaks" $(EOC)
 	@$(foreach x, $(T_ASM_FILES_VALID), $(MAKE) X=$(T_ASM_DIR_VALID)$(x) test_asm_leak;)
 	@$(foreach x, $(T_ASM_FILES_ERROR), $(MAKE) X=$(T_ASM_DIR_ERROR)$(x) test_asm_leak;)
+
+tests_vm_error:
+	@echo $(CYAN) " - Test Error Cases" $(EOC)
+	./corewar -d 1 -n 0 tests/asm/valid/ex.cor -n 1 tests/asm/valid/Car.cor | head -4
+
+tests_vm_valid:
+	@echo $(CYAN) " - Test Valid Cases" $(EOC)
+	./corewar -d 1 tests/asm/valid/ex.cor | head -4
+	./corewar -d 1 -n 2 tests/asm/valid/ex.cor -n 1 tests/asm/valid/Car.cor | head -4
+	./corewar -d 1 tests/asm/valid/ex.cor tests/asm/valid/Car.cor
+
+tests_vm: corewar
+	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
+	@$(MAKE) tests_vm_valid
+	@$(MAKE) tests_vm_error
 
 tests: tests_asm
 
