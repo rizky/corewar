@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 21:16:58 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 21:21:21 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void
 	ft_printfln("name: %s", vm.champ[i].header.prog_name);
 	ft_printfln("size: %d", vm.champ[i].header.prog_size);
 	ft_printfln("comment: %s", vm.champ[i].header.comment);
+	ft_printfln("operations:");
 	ft_printfln("%*m", vm.champ[i].header.prog_size, vm.champ[i].op);
 }
 
