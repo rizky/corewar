@@ -54,8 +54,11 @@
 			"program": "${workspaceFolder}/corewar",
 			"args": [
 					"-n",
+					"0",
+					"tests/asm/valid/ex.cor",
+					"-n",
 					"1",
-					"tests/asm/valid/ex.cor"
+					"tests/asm/valid/Car.cor",
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

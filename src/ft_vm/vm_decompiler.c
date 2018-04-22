@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 23:58:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 00:05:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,12 @@ int
 {
 	if (ft_strcmp(av[i], "-n") == 0)
 	{
-		i = (!av[i + 1] || ft_atoi(av[i + 1]) == 0) ? -1 : i + 1;
+		if (!av[i + 1] || ft_atoi(av[i + 1]) == 0)
+			return (-1);
+		i++;
 		*index = ft_atoi(av[i]) - 1;
+		if (*index < 0 || *index > 3)
+			return (-1);
 		i++;
 	}
 	return (i);
