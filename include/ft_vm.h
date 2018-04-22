@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 22:13:07 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 22:23:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 
 typedef struct	s_champ
 {
-	char			*path;
 	t_header		header;
 	char			*op;
 }				t_champ;

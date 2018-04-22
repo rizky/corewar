@@ -17,11 +17,29 @@
 			"MIMode": "lldb"
 		},
 		{
-			"name": "(lldb) Launch VM",
+			"name": "(lldb) Launch VM -v",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["tests/asm/valid/ex.cor",
+			"args": [
+					"-v",
+					"tests/asm/valid/ex.cor",
+					"tests/asm/valid/ex1.cor"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
+		},
+		{
+			"name": "(lldb) Launch VM -d",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/corewar",
+			"args": [
+					"-d",
+					"1",
+					"tests/asm/valid/ex.cor",
 					"tests/asm/valid/ex1.cor"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

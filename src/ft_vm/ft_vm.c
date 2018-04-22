@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 22:18:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 22:34:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int
 		while (++i < vm.champ_size)
 			vm_print_verbose(vm, i);
 	vm_load_champs(vm, memory);
-	vm_print_memory(memory);
+	if (opt[OPT_D])
+		vm_print_memory(memory);
 	return (0);
 }

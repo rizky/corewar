@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:58:02 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/22 22:12:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 22:38:42 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int
 		while (av[i][++j])
 			if ((c = is_in(av[i][j], OPT_STR_V)) != -1)
 			{
-				i = (!av[i + k + 1] || ft_atoi(av[i + k + 1]) == 0) ? -1 : 0;
+				i = (!av[i + k + 1] || ft_atoi(av[i + k + 1]) == 0) ? -1 : i;
 				opt[c] = ft_atoi(av[i + ++k]);
 			}
 			else if ((c = is_in(av[i][j], OPT_STR)) != -1)

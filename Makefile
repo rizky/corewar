@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/22 20:44:00 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/22 22:22:13 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,7 +123,7 @@ debug: $(OBJ_ASM)
 	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -g -o $(NAME_VM)
 
 norm:
-	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
+	@norminette $(SRC_VM) $(HDRPATH) $(SRC_ASM) | grep -v	Norme -B1 || true
 	@cd $(LFTDIR) && $(MAKE) norm
 
 norm2:
