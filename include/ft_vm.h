@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 22:23:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 23:08:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,27 @@
 # define CHAMP_MAX		3
 # define CODE_MAX		4
 
+typedef struct	s_process
+{
+	int			pc;
+	int			live_nbr;
+}				t_process;
+
 typedef struct	s_champ
 {
-	t_header		header;
-	char			*op;
+	t_header	header;
+	char		*op;
+	t_array		*processes;
 }				t_champ;
 
 typedef struct	s_vm
 {
-	int				dump;
-	int				cycles;
-	t_champ			champ[4];
-	int				champ_size;
+	int			cycles;
+	int			cycles_to_die;
+	int			check_nbr;
+	int			carrier;
+	t_champ		champ[4];
+	int			champ_size;
 }				t_vm;
 
 void			vm_print_verbose(t_vm vm, int i);

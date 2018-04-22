@@ -46,6 +46,22 @@
 			"environment": [],
 			"externalConsole": true,
 			"MIMode": "lldb"
+		},
+		{
+			"name": "(lldb) Launch VM -n",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/corewar",
+			"args": [
+					"-n",
+					"1",
+					"tests/asm/valid/ex.cor"
+					],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
 		}
 	]
 }

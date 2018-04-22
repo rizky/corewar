@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/22 22:34:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/22 23:55:42 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int
 	{
 		if (vm.champ_size > 3)
 			return (vm_print_usage(av, -1));
-		if (vm_read_binary(i, av, &vm) == -1)
+		if ((i = vm_read_binary(i, av, &vm)) == -1)
 			return (-1);
 		i++;
 	}
