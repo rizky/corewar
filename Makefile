@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/21 14:44:05 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/22 12:11:50 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ FTASM:= ft_asm \
 
 NAME_VM:= corewar
 FTVMPATH:= ft_vm/
-FTVM:= 	ft_vm \
+FTVM:=	ft_vm \
+		vm_options \
 		vm_print
 
 # ----- Libft ------
@@ -107,6 +108,7 @@ fclean: clean
 	@rm -rf $(NAME_VM).dSYM/
 	@cd $(LFTDIR) && $(MAKE) fclean
 	@rm -f out1 out2
+	@rm -f *.cor tests/asm/valid*/*.cor
 
 re: fclean
 	@$(MAKE) all
