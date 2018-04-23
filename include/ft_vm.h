@@ -31,6 +31,7 @@ typedef struct	s_vm
 	char		*players[MAX_PLAYERS + 2];
 }				t_vm;
 
+int				vm_print_usage(char **av, int status);
 int				vm_options(char **av, t_vm *vm);
 void			vm_print(t_vm vm);
 
