@@ -27,7 +27,8 @@ FILE_VM:= ft_vm
 FTVMPATH:= ft_vm/
 FTVM:=	ft_vm \
 		vm_options \
-		vm_print
+		vm_print \
+		vm_helper_1
 
 # ----- Libft ------
 LFTDIR:=./libft

@@ -16,6 +16,34 @@
 ** To-do: Protect ft_atoi
 */
 
+static int	vm_valid_verbosity_lvl(int v)
+{
+	return (v == 0 || v == 1 || v == 2 || v == 4 || v == 8 || v == 16);
+}
+
+static int	vm_options_3(int i, char **av, t_vm *vm)
+{
+	if (!ft_strcmp(av[i], "-v"))
+	{
+		if (!vm_isnumber(av[i + 1]))
+			return (-1);
+		vm->verbose = 1;
+		vm->verbosity_lvl = ft_atoi(av[i + 1]);
+		if (!vm_valid_verbosity_lvl(vm->verbosity_lvl))
+			return (-1);
+	}
+	else if (!ft_strncmp(av[i], "-v", 2))
+	{
+		if (!vm_isnumber(&av[i][2]))
+			return (-1);
+		vm->verbose = 1;
+		vm->verbosity_lvl = ft_atoi(&av[i][2]);
+		if (!vm_valid_verbosity_lvl(vm->verbosity_lvl))
+			return (-1);
+	}
+	return (0);
+}
+
 static int	vm_options_2(int i, char **av, t_vm *vm)
 {
 	int num;
@@ -58,6 +86,8 @@ int			vm_options(char **av, t_vm *vm)
 				return (-1);
 		}
 		else if (vm_options_2(i, av, vm) == -1)
+			return (-1);
+		else if (vm_options_3(i, av, vm) == -1)
 			return (-1);
 //		if (ft_strncmp(av[i], "-n", 2) && ft_strcmp(av[i], "-dump") &&
 //			ft_strcmp(&av[i][ft_strlen(av[i]) - 4], ".cor") &&

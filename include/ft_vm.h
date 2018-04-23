@@ -20,10 +20,14 @@ typedef struct	s_vm
 {
 	int			dump;
 	int			cycles;
+	int			verbose;
+	int			verbosity_lvl;
 	char		*players[MAX_PLAYERS + 2];
 }				t_vm;
 
 int				vm_options(char **av, t_vm *vm);
 void			vm_print(t_vm vm);
+
+int				vm_isnumber(char *str);
 
 #endif

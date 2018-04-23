@@ -18,6 +18,7 @@ void	vm_print(t_vm vm)
 
 	i = -1;
 	ft_printf("dump: %d cycles: %d\n", vm.dump, vm.cycles);
+	ft_printf("is verbose: %d verbosity level: %d\n", vm.verbose, vm.verbosity_lvl);
 	while (++i < MAX_PLAYERS)
 		ft_printf("player %d: %s\n", i + 1, vm.players[i]);
 	ft_printfln("This is Corewar!");
