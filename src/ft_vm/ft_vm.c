@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 11:26:56 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 12:05:16 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ int
 	t_vm			vm;
 	int				i;
 	static	int		opt[OPT_NUM] = {0, 0};
-	unsigned char	memory[MEM_SIZE];
 
-	ft_bzero(&memory, MEM_SIZE);
+	ft_bzero(&g_memory, MEM_SIZE);
 	if ((i = vm_getoptions(av, opt)) == -1)
 		return (vm_print_usage(av, -1));
 	ft_bzero(&vm, sizeof(t_vm));
@@ -59,13 +58,13 @@ int
 	if (opt[OPT_V])
 		while (++i < vm.champ_size)
 			vm_print_verbose(vm, i);
-	vm_load_champs(&vm, memory);
+	vm_load_champs(&vm, g_memory);
 	while (vm.cycles < vm.cycles_to_die)
 	{
 		system("sleep 1");
 		system("clear");
 		vm_executor(&vm);
-		vm_print_memory_cursor(memory, vm);
+		vm_print_memory_cursor(g_memory, vm);
 		vm.cycles++;
 	}
 	return (0);
