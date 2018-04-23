@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 21:54:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 23:24:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,13 @@ void
 	int		i;
 	int		j;
 
-	i = 0;
-	while (i < vm->champ_size)
+	i = vm->champ_size - 1;
+	while (i >= 0)
 	{
-		j = 0;
-		while (j < (int)(vm->champ[i].processes->size))
-		{
+		j = -1;
+		while (++j < (int)(vm->champ[i].processes->size))
 			vm_executor_process(vm,
 				&(((t_process*)vm->champ[i].processes->data)[j]));
-			j++;
-		}
-		i++;
+		i--;
 	}
 }
