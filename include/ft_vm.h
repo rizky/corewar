@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 21:48:11 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 23:11:34 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 # include "libft.h"
 # include "op.h"
-
-# define OPT_D 0
-# define OPT_V 1
-
-# define OPT_NUM 3
-# define OPT_STR "dv"
-# define OPT_STR_V "d"
 
 # define MALLOC			1
 # define INVALID_FILE	2
@@ -46,10 +39,12 @@ typedef struct	s_champ
 
 typedef struct	s_vm
 {
+	int			dump;
 	int			cycles;
 	int			cycles_to_die;
 	int			check_nbr;
 	int			carrier;
+	char		*players[MAX_PLAYERS + 2];
 	t_champ		champ[4];
 	int			champ_size;
 }				t_vm;
@@ -61,14 +56,18 @@ void			vm_print_verbose(t_vm vm, int i);
 int				vm_print_usage(char **av, int status);
 
 int				vm_error(int errnum, int status);
-int				vm_getoptions(char **av, int opt[OPT_NUM]);
 
 int				vm_binary_toint(unsigned char *bin, int size);
 int				vm_read_binary(int i, char **av, t_vm *vm);
+
 void			vm_print_memory(unsigned char memory[MEM_SIZE]);
 void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);
+void			vm_print(t_vm vm);
+
 void			vm_executor_process(t_vm *vm, t_process *p);
 void			vm_executor(t_vm *vm);
+
+int				vm_options(char **av, t_vm *vm);
 
 typedef struct	s_param
 {

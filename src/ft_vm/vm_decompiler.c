@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 19:39:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 23:14:31 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,14 @@ int
 }
 
 int
-	vm_read_binary(int i, char **av, t_vm *vm)
+	vm_read_binary(int i, char **paths, t_vm *vm)
 {
 	int				fd;
 	int				ret;
 	unsigned char	buf[COMMENT_LENGTH + 4];
 	t_champ			champ;
-	int				index;
 
-	index = vm->champ_size;
-	if ((i = vm_handle_n(i, av, &index)) == -1 ||
-		vm->champ[index].header.prog_size != 0)
-		return (vm_print_usage(av, -1));
-	if (!ft_strequ(&av[i][ft_strlen(av[i]) - 4], ".cor") ||
-		(fd = open(av[i], O_RDONLY)) == -1)
+	if ((fd = open(paths[i], O_RDONLY)) == -1)
 		return (vm_error(INVALID_FILE, -1));
 	if (vm_read_header(fd, &champ) == -1)
 		return (-1);
@@ -103,9 +97,8 @@ int
 	champ.op = ft_memalloc(champ.header.prog_size + 1);
 	ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
 	champ.op[champ.header.prog_size] = '\0';
-	vm->champ[index] = champ;
-	vm->champ[index].processes = fta_alloc(sizeof(t_process));
-	vm->champ_size++;
+	vm->champ[i] = champ;
+	vm->champ[i].processes = fta_alloc(sizeof(t_process));
 	close(fd);
 	return (i);
 }

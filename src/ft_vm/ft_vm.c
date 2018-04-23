@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 21:55:44 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 23:13:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,67 @@ void
 	}
 }
 
+static int
+	vm_get_champions(char **av, t_vm *vm)
+{
+	int i;
+	int j;
+	int equ;
+	int num;
+
+	i = 0;
+	equ = 0;
+	num = 0;
+	while (av[++i])
+	{
+		j = -1;
+		equ = 0;
+		if (ft_strequ(&av[i][ft_strlen(av[i]) - 4], ".cor"))
+		{
+			while (++j < 4)
+				if (ft_strequ(av[i], vm->players[j]))
+					equ = 1;
+			j = 0;
+			if (!equ)
+			{
+				while (vm->players[j])
+					j++;
+				if (j <= 4)
+					vm->players[j] = av[i];
+				else
+					return (MAX_PLAYERS + 1);
+			}
+			num++;
+		}
+	}
+	vm->champ_size = num;
+	return (num);
+}
+
 int
 	main(int ac, char **av)
 {
 	t_vm			vm;
 	int				i;
-	static	int		opt[OPT_NUM] = {0, 0};
 
 	ft_bzero(&g_memory, MEM_SIZE);
 	ft_bzero(&g_memory_mark, MEM_SIZE);
-	if ((i = vm_getoptions(av, opt)) == -1)
-		return (vm_print_usage(av, -1));
 	ft_bzero(&vm, sizeof(t_vm));
-	while (i < ac)
+	if (ac < 2 || vm_options(av, &vm) == -1)
 	{
-		if (vm.champ_size > 3)
-			return (vm_print_usage(av, -1));
-		if ((i = vm_read_binary(i, av, &vm)) == -1)
+		ft_dprintf(2, "usage: %s [-dump nbr_cycles] [-n number] ", av[0]);
+		ft_dprintf(2, "champion1.cor ...\n");
+		return (-1);
+	}
+	else if (vm_get_champions(av, &vm) > MAX_PLAYERS)
+	{
+		ft_dprintf(2, "Too many champions\n");
+		return (-1);
+	}
+	i = 0;
+	while (i < vm.champ_size)
+	{
+		if ((i = vm_read_binary(i, vm.players, &vm)) == -1)
 			return (-1);
 		i++;
 	}
