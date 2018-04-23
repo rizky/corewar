@@ -5,6 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"preLaunchTask": "make debug",
 			"name": "(lldb) Launch ASM",
 			"type": "cppdbg",
 			"request": "launch",
@@ -17,6 +18,7 @@
 			"MIMode": "lldb"
 		},
 		{
+			"preLaunchTask": "make debug",
 			"name": "(lldb) Launch VM -v",
 			"type": "cppdbg",
 			"request": "launch",
@@ -32,6 +34,7 @@
 			"MIMode": "lldb"
 		},
 		{
+			"preLaunchTask": "make debug",
 			"name": "(lldb) Launch VM -d",
 			"type": "cppdbg",
 			"request": "launch",
@@ -40,7 +43,8 @@
 					"-d",
 					"1",
 					"tests/asm/valid/ex.cor",
-					"tests/asm/valid/ex1.cor"],
+					"tests/asm/valid/ex1.cor"
+				],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
@@ -48,6 +52,7 @@
 			"MIMode": "lldb"
 		},
 		{
+			"preLaunchTask": "make debug",
 			"name": "(lldb) Launch VM -n",
 			"type": "cppdbg",
 			"request": "launch",
@@ -58,7 +63,22 @@
 					"tests/asm/valid/ex.cor",
 					"-n",
 					"2",
-					"tests/asm/valid/Car.cor",
+					"tests/asm/valid/Car.cor"
+					],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
+		},
+		{
+			"preLaunchTask": "make debug",
+			"name": "(lldb) Launch VM ",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/corewar",
+			"args": [
+					"tests/asm/valid/MarineKing.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
