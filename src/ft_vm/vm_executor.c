@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 18:46:26 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 18:51:45 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int
 	i = 0;
 	while (i < g_op_dict[op->opcode].param_c)
 	{
-		op->params[i].type = (op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2);
+		if (g_op_dict[op->opcode].is_oc)
+			op->params[i].type = (op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2);
+		else
+			op->params[i].type = op->oc;
 		if ((op->params[i].type & g_op_dict[op->opcode].p_type[i]) ==
 			op->params[i].type || !g_op_dict[op->opcode].is_oc)
 		{
