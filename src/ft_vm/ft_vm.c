@@ -6,13 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 19:26:32 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 21:55:44 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void	*vm_memmark(void *dst, int i, size_t n)
+void
+	*vm_memmark(void *dst, int i, size_t n)
 {
 	unsigned char	*dst_p;
 
@@ -67,7 +68,6 @@ int
 			return (-1);
 		i++;
 	}
-	i = -1;
 	vm_load_champs(&vm, g_memory);
 	while (vm.cycles < vm.cycles_to_die)
 	{

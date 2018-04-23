@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 20:08:17 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 21:54:21 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,15 @@ int
 	while (i < g_op_dict[op->opcode].param_c)
 	{
 		op->params[i].type = (g_op_dict[op->opcode].is_oc) ?
-			(op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2) : op->oc;
-		if ((op->params[i].type & g_op_dict[op->opcode].p_type[i]) ==
-			op->params[i].type || !g_op_dict[op->opcode].is_oc)
-		{
-			(op->params[i].type == T_REG) ? op->params[i].size = 1 : 0;
-			(op->params[i].type == T_IND) ? op->params[i].size = 2 : 0;
-			(op->params[i].type == T_DIR) ? op->params[i].size =
-				g_op_dict[op->opcode].d_size : 0;
-			op->params[i].value =
-			vm_binary_toint(&g_memory[p->offset + p->pc + c + i],
-				op->params[i].size);
-			op->size += op->params[i].size;
-		}
-		else
-			return (-1);
+		(op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2) : op->oc;
+		(op->params[i].type == REG_CODE) ? op->params[i].size = 1 : 0;
+		(op->params[i].type == IND_CODE) ? op->params[i].size = 2 : 0;
+		(op->params[i].type == DIR_CODE) ? op->params[i].size =
+			g_op_dict[op->opcode].d_size : 0;
+		op->params[i].value =
+		vm_binary_toint(&g_memory[p->offset + p->pc + c + i],
+			op->params[i].size);
+		op->size += op->params[i].size;
 		i++;
 	}
 	return (0);
