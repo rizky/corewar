@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 00:52:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 11:26:56 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void
 	t_process	p;
 
 	i = 0;
+	vm->cycles_to_die = 10;
 	ft_bzero(&p, sizeof(t_process));
 	ft_printfln("Introducing contestants...");
 	while (i < vm->champ_size)
@@ -59,7 +60,13 @@ int
 		while (++i < vm.champ_size)
 			vm_print_verbose(vm, i);
 	vm_load_champs(&vm, memory);
-	if (opt[OPT_D])
+	while (vm.cycles < vm.cycles_to_die)
+	{
+		system("sleep 1");
+		system("clear");
+		vm_executor(&vm);
 		vm_print_memory_cursor(memory, vm);
+		vm.cycles++;
+	}
 	return (0);
 }

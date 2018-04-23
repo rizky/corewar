@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 01:05:55 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 11:44:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,7 @@ int
 	ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
 	champ.op[champ.header.prog_size] = '\0';
 	vm->champ[index] = champ;
-	vm->champ[index].processes = ft_memalloc(sizeof(t_array));
-	vm->champ[index].processes->size = 0;
-	vm->champ[index].processes->data = NULL;
-	vm->champ[index].processes->max = 0;
-	vm->champ[index].processes->type_size = sizeof(t_process);
+	vm->champ[index].processes = fta_alloc(sizeof(t_process));
 	vm->champ_size++;
 	close(fd);
 	return (i);

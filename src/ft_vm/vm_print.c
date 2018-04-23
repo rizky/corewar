@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 01:04:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 11:18:40 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int
 		k = 0;
 		while (k < (int)(vm.champ[j].processes->size))
 		{
-			if (((t_process*)vm.champ[j].processes->data)[k].offset == index)
+			if (((t_process*)vm.champ[j].processes->data)[k].offset +
+				((t_process*)vm.champ[j].processes->data)[k].pc == index)
 				return (j + 1);
 			k++;
 		}
