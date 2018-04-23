@@ -6,51 +6,22 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 18:51:45 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 19:23:30 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void
-	vm_op_inc(t_vm *vm, t_process *p, t_op *op)
-{
-	(void)vm;
-	(void)op;
-	p->pc++;
-}
-
-void
-	vm_op_sti(t_vm *vm, t_process *p, t_op *op)
-{
-	(void)vm;
-	(void)op;
-	p->pc += 2;
-}
-
 int
-	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
+	vm_decompiler_param(t_process *p, t_op *op, int c)
 {
 	int		i;
-	int		c;
 
-	(void)vm;
-	c = 1;
-	op->opcode = g_memory[p->offset + p->pc];
-	if (op->opcode < 0x01 || op->opcode > 0x10)
-		return (-1);
-	if (g_op_dict[op->opcode].is_oc)
-		op->oc = g_memory[p->offset + p->pc + c];
-	else
-		op->oc = g_op_dict[op->opcode].p_type[0];
-	c++;
 	i = 0;
 	while (i < g_op_dict[op->opcode].param_c)
 	{
-		if (g_op_dict[op->opcode].is_oc)
-			op->params[i].type = (op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2);
-		else
-			op->params[i].type = op->oc;
+		op->params[i].type = (g_op_dict[op->opcode].is_oc) ?
+			(op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2) : op->oc;
 		if ((op->params[i].type & g_op_dict[op->opcode].p_type[i]) ==
 			op->params[i].type || !g_op_dict[op->opcode].is_oc)
 		{
@@ -67,6 +38,26 @@ int
 			return (-1);
 		i++;
 	}
+	return (0);
+}
+
+int
+	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
+{
+	int		c;
+
+	(void)vm;
+	c = 1;
+	op->opcode = g_memory[p->offset + p->pc];
+	if (op->opcode < 0x01 || op->opcode > 0x10)
+		return (-1);
+	if (g_op_dict[op->opcode].is_oc)
+		op->oc = g_memory[p->offset + p->pc + c];
+	else
+		op->oc = g_op_dict[op->opcode].p_type[0];
+	c++;
+	if (vm_decompiler_param(p, op, c) == -1)
+		return (-1);
 	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
 	p->pc += op->size;
 	return (0);
