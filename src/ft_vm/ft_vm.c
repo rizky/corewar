@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 23:13:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 23:19:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,10 @@ int
 		ft_dprintf(2, "Too many champions\n");
 		return (-1);
 	}
-	i = 0;
-	while (i < vm.champ_size)
-	{
+	i = -1;
+	while (++i < vm.champ_size)
 		if ((i = vm_read_binary(i, vm.players, &vm)) == -1)
 			return (-1);
-		i++;
-	}
 	vm_load_champs(&vm, g_memory);
 	while (vm.cycles < vm.cycles_to_die)
 	{

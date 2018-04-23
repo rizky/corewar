@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/23 15:38:46 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/23 23:20:29 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,14 @@ int			vm_options(char **av, t_vm *vm)
 //			return (-1);
 	}
 	return (0);
+}
+
+void	vm_print(t_vm vm)
+{
+	int i;
+
+	i = -1;
+	ft_printf("dump: %d cycles: %d\n", vm.dump, vm.cycles);
+	while (++i < MAX_PLAYERS)
+		ft_printf("player %d: %s\n", i + 1, vm.players[i]);
 }

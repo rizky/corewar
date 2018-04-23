@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 23:10:22 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 23:20:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,4 @@ void
 	}
 	ft_printf("\n");
 	system("sleep 1");
-}
-
-void	vm_print(t_vm vm)
-{
-	int i;
-
-	i = -1;
-	ft_printf("dump: %d cycles: %d\n", vm.dump, vm.cycles);
-	while (++i < MAX_PLAYERS)
-		ft_printf("player %d: %s\n", i + 1, vm.players[i]);
 }
