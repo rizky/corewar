@@ -15,10 +15,20 @@
 void	vm_print(t_vm vm)
 {
 	int i;
+	int j;
 
-	i = -1;
 	ft_printf("dump: %d cycles: %d\n", vm.dump, vm.cycles);
-	ft_printf("is verbose: %d verbosity level: %d\n", vm.verbose, vm.verbosity_lvl);
+	i = -1;
+	j = 0;
+	while (++i < 6)
+	{
+		j = (i == 3) ? 4 : j;
+		j = (i == 4) ? 8 : j;
+		j = (i == 5) ? 16 : j;
+		ft_printf("verbosity lvl %d: %d\n", j, vm.v_lvl[i]);
+		j++;
+	}
+	i = -1;
 	while (++i < MAX_PLAYERS)
 		ft_printf("player %d: %s\n", i + 1, vm.players[i]);
 	ft_printfln("This is Corewar!");

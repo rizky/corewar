@@ -54,8 +54,8 @@ int			main(int ac, char **av)
 	ft_bzero(&vm, sizeof(t_vm));
 	if (ac < 2 || vm_options(av, &vm) == -1)
 	{
-		ft_dprintf(2, "usage: %s [-dump nbr_cycles] [-n number] ", av[0]);
-		ft_dprintf(2, "champion1.cor ...\n");
+		ft_dprintf(2, "usage: %s [-dump nbr_cycles] ", av[0]);
+		ft_dprintf(2, "[-v N ...] [-n number] champion1.cor ...\n");
 		return (-1);
 	}
 	else if (vm_get_champions(av, &vm) > MAX_PLAYERS)

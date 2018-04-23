@@ -16,12 +16,18 @@
 # include "libft.h"
 # include "op.h"
 
+# define V_LVL_0 0
+# define V_LVL_1 1
+# define V_LVL_2 2
+# define V_LVL_4 3
+# define V_LVL_8 4
+# define V_LVL_16 5
+
 typedef struct	s_vm
 {
 	int			dump;
 	int			cycles;
-	int			verbose;
-	int			verbosity_lvl;
+	int			v_lvl[6];
 	char		*players[MAX_PLAYERS + 2];
 }				t_vm;
 
