@@ -6,19 +6,20 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 23:24:18 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 01:05:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
 int
-	vm_decompiler_param(t_process *p, t_op *op, int c)
+	vm_decompiler_param(t_process *p, t_op *op)
 {
 	int		i;
 
 	i = 0;
-	while (i < g_op_dict[op->opcode].param_c)
+	op->param_c = g_op_dict[op->opcode].param_c;
+	while (i < op->param_c)
 	{
 		op->params[i].type = (g_op_dict[op->opcode].is_oc) ?
 		(op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2) : op->oc;
@@ -27,7 +28,7 @@ int
 		(op->params[i].type == DIR_CODE) ? op->params[i].size =
 			g_op_dict[op->opcode].d_size : 0;
 		op->params[i].value =
-		vm_binary_toint(&g_memory[p->offset + p->pc + c + i],
+		vm_binary_toint(&g_memory[p->offset + p->pc + op->size],
 			op->params[i].size);
 		op->size += op->params[i].size;
 		i++;
@@ -38,21 +39,17 @@ int
 int
 	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
 {
-	int		c;
-
 	(void)vm;
-	c = 1;
 	op->opcode = g_memory[p->offset + p->pc];
+	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
 	if (op->opcode < 0x01 || op->opcode > 0x10)
 		return (-1);
 	if (g_op_dict[op->opcode].is_oc)
-		op->oc = g_memory[p->offset + p->pc + c];
+		op->oc = g_memory[p->offset + p->pc + 1];
 	else
 		op->oc = g_op_dict[op->opcode].p_type[0];
-	c++;
-	if (vm_decompiler_param(p, op, c) == -1)
+	if (vm_decompiler_param(p, op) == -1)
 		return (-1);
-	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
 	p->pc += op->size;
 	return (0);
 }
@@ -64,7 +61,11 @@ void
 
 	ft_bzero(&op, sizeof(t_op));
 	if (vm_decompiler_op(vm, p, &op) == -1)
+	{
+		ft_bzero(&p->op, sizeof(t_op));
 		vm_op_inc(vm, p, NULL);
+	}
+	p->op = op;
 }
 
 void

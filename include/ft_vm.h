@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 23:11:34 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 00:56:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@
 # define CHAMP_MAX		3
 # define CODE_MAX		4
 
+typedef struct	s_param
+{
+	int			type;
+	int			size;
+	int			value;
+}				t_param;
+
+typedef struct	s_op
+{
+	int			opcode;
+	int			oc;
+	int			size;
+	t_param		params[3];
+	int			param_c;
+}				t_op;
+
 typedef struct	s_process
 {
 	int			offset;
@@ -28,6 +44,7 @@ typedef struct	s_process
 	int			pc;
 	int			pc_next;
 	int			live_nbr;
+	t_op		op;
 }				t_process;
 
 typedef struct	s_champ
@@ -68,21 +85,6 @@ void			vm_executor_process(t_vm *vm, t_process *p);
 void			vm_executor(t_vm *vm);
 
 int				vm_options(char **av, t_vm *vm);
-
-typedef struct	s_param
-{
-	int			type;
-	int			size;
-	int			value;
-}				t_param;
-
-typedef struct	s_op
-{
-	int			opcode;
-	int			oc;
-	int			size;
-	t_param		params[3];
-}				t_op;
 
 void			vm_op_sti(t_vm *vm, t_process *p, t_op *op);
 void			vm_op_and(t_vm *vm, t_process *p, t_op *op);

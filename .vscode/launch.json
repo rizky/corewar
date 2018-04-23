@@ -96,7 +96,7 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
 			"args": [
-					"tests/asm/valid/MarineKing.cor"
+					"tests/asm/valid/ex.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
