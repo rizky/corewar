@@ -53,6 +53,24 @@
 		},
 		{
 			"preLaunchTask": "make debug",
+			"name": "(lldb) Launch VM -n 4",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/corewar",
+			"args": [
+					"tests/asm/valid/ex.cor",
+					"tests/asm/valid/ex1.cor",
+					"tests/asm/valid/Car.cor",
+					"tests/asm/valid/MarineKing.cor"
+				],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
+		},
+		{
+			"preLaunchTask": "make debug",
 			"name": "(lldb) Launch VM -n",
 			"type": "cppdbg",
 			"request": "launch",

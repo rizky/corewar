@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 23:20:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 00:10:33 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void
 	int		color;
 
 	i = 0;
-	system("clear");
+	ft_printf("\033[H\033[J");
 	while (i < MEM_SIZE)
 	{
 		if (i > 0 && i % 64 == 0)
@@ -93,5 +93,5 @@ void
 		i++;
 	}
 	ft_printf("\n");
-	system("sleep 1");
+	system("sleep 0.5");
 }
