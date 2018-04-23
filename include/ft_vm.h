@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 12:45:19 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 16:08:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ typedef struct	s_vm
 	int			champ_size;
 }				t_vm;
 
-static unsigned char	g_memory[MEM_SIZE];
-static unsigned char	g_memory_owner[MEM_SIZE];
+unsigned char	g_memory[MEM_SIZE];
+unsigned char	g_memory_mark[MEM_SIZE];
 
 void			vm_print_verbose(t_vm vm, int i);
 int				vm_print_usage(char **av, int status);
@@ -109,7 +109,7 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "ldi", .opcode = 0x0a, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, &vm_op_inc},
 	{ .name = "sti", .opcode = 0x0b, .d_size = 2, .param_c = 3, .is_oc = 1,
-		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG}, &vm_op_inc},
+		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG}, &vm_op_sti},
 	{ .name = "fork", .opcode = 0x0c, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0}, &vm_op_inc},
 	{ .name = "lld", .opcode = 0x0d, .d_size = 4, .param_c = 2, .is_oc = 1,

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 11:18:40 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 16:15:11 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void
 	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
 {
 	int		i;
+	int		color;
 
 	i = 0;
 	while (i < MEM_SIZE)
@@ -83,7 +84,11 @@ void
 			ft_printf("\n");
 		if (i % 64 == 0)
 			ft_printf("0x%04x : ", i);
-		ft_printf("%*w%02x %w", vm_get_cursor_color(vm, i), memory[i]);
+		color = vm_get_cursor_color(vm, i);
+		if (color)
+			ft_printf("%*W%02x %w", color, memory[i]);
+		else
+			ft_printf("%*w%02x %w", g_memory_mark[i], memory[i]);
 		i++;
 	}
 	ft_printf("\n");
