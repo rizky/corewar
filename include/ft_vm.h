@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 16:08:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/23 17:50:31 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,6 @@
 # define INVALID_FILE	2
 # define CHAMP_MAX		3
 # define CODE_MAX		4
-
-typedef struct	s_op_dict
-{
-	char		*name;
-	int			opcode;
-	int			d_size;
-	int			param_c;
-	int			is_oc;
-	int			p_type[3];
-	void		*opfunc;
-}				t_op_dict;
 
 typedef struct	s_process
 {
@@ -79,11 +68,37 @@ void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);
 void			vm_executor_process(t_vm *vm, t_process *p);
 void			vm_executor(t_vm *vm);
 
-void			vm_op_sti(t_vm *vm, t_process *p);
-void			vm_op_and(t_vm *vm, t_process *p);
-void			vm_op_zjmp(t_vm *vm, t_process *p);
-void			vm_op_live(t_vm *vm, t_process *p);
-void			vm_op_inc(t_vm *vm, t_process *p);
+typedef struct	s_param
+{
+	int			type;
+	int			size;
+	int			value;
+}				t_param;
+
+typedef struct	s_op
+{
+	int			opcode;
+	int			oc;
+	int			size;
+	t_param		params[3];
+}				t_op;
+
+void			vm_op_sti(t_vm *vm, t_process *p, t_op *op);
+void			vm_op_and(t_vm *vm, t_process *p, t_op *op);
+void			vm_op_zjmp(t_vm *vm, t_process *p, t_op *op);
+void			vm_op_live(t_vm *vm, t_process *p, t_op *op);
+void			vm_op_inc(t_vm *vm, t_process *p, t_op *op);
+
+typedef struct	s_op_dict
+{
+	char		*name;
+	int			opcode;
+	int			d_size;
+	int			param_c;
+	int			is_oc;
+	int			p_type[3];
+	void		*opfunc;
+}				t_op_dict;
 
 static	t_op_dict g_op_dict[17] = {
 	{ .name = "\0", .opcode = 0x00, .d_size = 0, .param_c = 0, .is_oc = 0,
