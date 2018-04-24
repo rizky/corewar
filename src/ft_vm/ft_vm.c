@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 15:42:32 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/24 15:40:07 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	vm_get_champions(char **av, t_vm *vm)
 		if (ft_strequ(&av[i][ft_strlen(av[i]) - 4], ".cor"))
 		{
 			while (++j < 4)
-				if (ft_strequ(av[i], vm->players[j]))
+				if (ft_strequ(av[i], vm->players[j]) && av[i] == vm->players[j])
 					equ = 1;
 			j = 0;
 			if (!equ)
@@ -44,6 +44,7 @@ static int	vm_get_champions(char **av, t_vm *vm)
 			num++;
 		}
 	}
+	ft_printf("%d\n", num);
 	return (num);
 }
 
