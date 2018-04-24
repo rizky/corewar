@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 19:25:00 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 22:05:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,49 +119,57 @@ typedef struct	s_op_dict
 	int			p_type[3];
 	void		*opfunc;
 	void		*opprint;
+	int			is_car;
+	int			cycles;
 }				t_op_dict;
 
 static	t_op_dict g_op_dict[17] = {
 	{ .name = "\0", .opcode = 0x00, .d_size = 0, .param_c = 0, .is_oc = 0,
-		{0, 0, 0}, &vm_op_inc, &vm_op_print},
+		{0, 0, 0}, &vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 0},
 	{ .name = "live", .opcode = 0x01, .d_size = 4, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc, &vm_live_print},
+		{T_DIR, 0, 0}, &vm_op_inc, &vm_live_print, .is_car = 0, .cycles = 10},
 	{ .name = "ld", .opcode = 0x02, .d_size = 4, .param_c = 2, .is_oc = 1,
-		{T_DIR | T_IND, T_REG, 0}, &vm_op_inc, &vm_op_print},
+		{T_DIR | T_IND, T_REG, 0},
+		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 5},
 	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2, .is_oc = 1,
-		{T_REG, T_REG | T_IND, 0}, &vm_op_inc, &vm_op_print},
+		{T_REG, T_REG | T_IND, 0},
+		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 5},
 	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3, .is_oc = 1,
-		{T_REG, T_REG, T_REG}, &vm_op_inc, &vm_op_print},
+		{T_REG, T_REG, T_REG},
+		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
 	{ .name = "sub", .opcode = 0x05, .d_size = 0, .param_c = 3, .is_oc = 1,
-		{T_REG, T_REG, T_REG}, &vm_op_inc, &vm_op_print},
+		{T_REG, T_REG, T_REG},
+		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
 	{ .name = "and", .opcode = 0x06, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		&vm_op_inc, &vm_and_print},
+		&vm_op_inc, &vm_and_print, .is_car = 1, .cycles = 6},
 	{ .name = "or", .opcode = 0x07, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		&vm_op_inc, &vm_op_print},
+		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 6},
 	{ .name = "xor", .opcode = 0x08, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		&vm_op_inc, &vm_op_print},
+		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 6},
 	{ .name = "zjmp", .opcode = 0x09, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc, &vm_zjump_print},
+		{T_DIR, 0, 0},
+		&vm_op_inc, &vm_zjump_print, .is_car = 0, .cycles = 20},
 	{ .name = "ldi", .opcode = 0x0a, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
-		&vm_op_inc, &vm_op_print},
+		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 25},
 	{ .name = "sti", .opcode = 0x0b, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG},
-		&vm_op_sti, &vm_sti_print},
+		&vm_op_sti, &vm_sti_print, .is_car = 0, .cycles = 25},
 	{ .name = "fork", .opcode = 0x0c, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc, &vm_op_print},
+		{T_DIR, 0, 0}, &vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 800},
 	{ .name = "lld", .opcode = 0x0d, .d_size = 4, .param_c = 2, .is_oc = 1,
-		{T_IND | T_DIR, T_REG, 0}, &vm_op_inc, &vm_op_print},
+		{T_IND | T_DIR, T_REG, 0},
+		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
 	{ .name = "lldi", .opcode = 0x0e, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
-		&vm_op_inc, &vm_op_print},
+		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 50},
 	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc, &vm_op_print},
+		{T_DIR, 0, 0}, &vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 1000},
 	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
-		{T_REG, 0, 0}, &vm_op_inc, &vm_op_print}
+		{T_REG, 0, 0}, &vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 2}
 };
 int				vm_print_usage(char **av, int status);
 int				vm_options(char **av, t_vm *vm);
