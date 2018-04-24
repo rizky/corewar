@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 15:55:54 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:22:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ typedef struct	s_champ
 	char		*op;
 	t_array		*processes;
 }				t_champ;
+# define V_LVL_0 0
+# define V_LVL_1 1
+# define V_LVL_2 2
+# define V_LVL_4 3
+# define V_LVL_8 4
+# define V_LVL_16 5
 
 typedef struct	s_vm
 {
@@ -60,6 +66,7 @@ typedef struct	s_vm
 	int			cycles;
 	int			cycles_to_die;
 	int			check_nbr;
+	int			v_lvl[6];
 	char		*players[MAX_PLAYERS + 2];
 	t_champ		champ[4];
 	int			champ_size;
@@ -71,7 +78,6 @@ int				g_reg[REG_NUMBER];
 int				g_carrier;
 
 void			vm_print_verbose(t_vm vm, int i);
-int				vm_print_usage(char **av, int status);
 
 int				vm_error(int errnum, int status);
 
@@ -155,4 +161,11 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
 		{T_REG, 0, 0}, &vm_op_inc, &vm_op_print}
 };
+int				vm_print_usage(char **av, int status);
+int				vm_options(char **av, t_vm *vm);
+void			vm_print(t_vm vm);
+
+int				ft_isnumber(char *str);
+int				ft_abs(int i);
+
 #endif
