@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 17:22:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 18:55:37 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_champ
 	char		*op;
 	t_array		*processes;
 }				t_champ;
+
 # define V_LVL_0 0
 # define V_LVL_1 1
 # define V_LVL_2 2
@@ -69,6 +70,7 @@ typedef struct	s_vm
 	int			v_lvl[6];
 	char		*players[MAX_PLAYERS + 2];
 	t_champ		champ[4];
+	int			process_size;
 	int			champ_size;
 }				t_vm;
 
@@ -101,11 +103,11 @@ void			vm_op_live(t_vm *vm, t_process *p);
 void			vm_op_inc(t_vm *vm, t_process *p);
 
 void			vm_print_v_4(t_vm vm);
-void			vm_op_print(t_op op, t_process p);
-void			vm_sti_print(t_op op, t_process p);
-void			vm_and_print(t_op op, t_process p);
-void			vm_live_print(t_op op, t_process p);
-void			vm_zjump_print(t_op op, t_process p);
+void			vm_op_print(t_process p);
+void			vm_sti_print(t_process p);
+void			vm_and_print(t_process p);
+void			vm_live_print(t_process p);
+void			vm_zjump_print(t_process p);
 
 typedef struct	s_op_dict
 {

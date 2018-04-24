@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 16:52:03 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 18:55:51 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void
 				&(((t_process*)vm->champ[i].processes->data)[j]),
 				&op);
 			p->op = op;
+			vm->process_size++;
 			j++;
 		}
 	}
