@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 19:18:53 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:36:00 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void
 	i = -1;
 	while (++i < p.op.param_c)
 		if (p.op.params[i].type == REG_CODE)
-			ft_printf(" r%d", p.op.params[i].value);
+			if (i > 0)
+				ft_printf(" %d", g_reg[p.op.params[i].value]);
+			else
+				ft_printf(" r%d", p.op.params[i].value);
 		else
 			ft_printf(" %d", p.op.params[i].value);
 	ft_printf("\n");
