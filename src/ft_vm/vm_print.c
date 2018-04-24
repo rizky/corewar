@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 21:48:42 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/25 01:19:25 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
 
 	i = 0;
 	ft_printf("\033[H\033[J");
+	ft_printfln("Cycles %d", g_cycles);
 	while (i < MEM_SIZE)
 	{
 		if (i > 0 && i % 64 == 0)
@@ -98,5 +99,5 @@ void	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
 		i++;
 	}
 	ft_printf("\n");
-	system("sleep 0.5");
+	system("sleep 0.0001");
 }

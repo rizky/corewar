@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 00:46:02 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 01:17:05 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int
 	if (vm_decompiler_param(p, op) == -1)
 		return (-1);
 	p->pc_next = p->pc + op->size;
+	p->cycles = g_cycles + g_op_dict[op->opcode].cycles;
 	return (0);
 }
 
@@ -103,10 +104,14 @@ void
 		{
 			ft_bzero(&op, sizeof(t_op));
 			p = &(((t_process*)vm->champ[i].processes->data)[j]);
-			vm_decompiler_op(vm,
-				&(((t_process*)vm->champ[i].processes->data)[j]),
-				&op);
-			p->op = op;
+			if (p->op.opcode == 0)
+			{
+				p->cycles = g_cycles;
+				vm_decompiler_op(vm,
+					&(((t_process*)vm->champ[i].processes->data)[j]),
+					&op);
+				p->op = op;
+			}
 			vm->process_size++;
 			j++;
 		}
