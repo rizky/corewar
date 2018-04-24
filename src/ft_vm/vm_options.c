@@ -41,9 +41,9 @@ static int	vm_option_v(int i, char **av, t_vm *vm)
 
 	if (!ft_strcmp(av[i], "-v"))
 	{
-		if (!vm_isnumber(av[i + 1]))
+		if (!ft_isnumber(av[i + 1]))
 			return (-1);
-		while (av[++i] && vm_isnumber(av[i]))
+		while (av[++i] && ft_isnumber(av[i]))
 		{
 			lvl = ft_atoi(av[i]);
 			if (!vm_valid_verbosity_lvl(lvl))
@@ -54,14 +54,14 @@ static int	vm_option_v(int i, char **av, t_vm *vm)
 	}
 	else if (!ft_strncmp(av[i], "-v", 2))
 	{
-		if (!vm_isnumber(&av[i][2]))
+		if (!ft_isnumber(&av[i][2]))
 			return (-1);
 		lvl = ft_atoi(&av[i][2]);
 		if (!vm_valid_verbosity_lvl(lvl))
 			return (-1);
 		vm->v_lvl[vm_lvl_to_index(lvl)] =
 		(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->v_lvl[lvl];
-		while (av[++i] && vm_isnumber(av[i]))
+		while (av[++i] && ft_isnumber(av[i]))
 		{
 			lvl = ft_atoi(av[i]);
 			if (!vm_valid_verbosity_lvl(lvl))
@@ -80,7 +80,7 @@ static int	vm_option_n(int i, char **av, t_vm *vm)
 	num = 1;
 	if (!ft_strcmp(av[i], "-n"))
 	{
-		num = ft_atoi(av[i + 1]);
+		num = ft_abs(ft_atoi(av[i + 1]));
 		if (num < 1 || num > MAX_PLAYERS)
 			return (-1);
 		if (!av[i + 2] ||
@@ -90,7 +90,7 @@ static int	vm_option_n(int i, char **av, t_vm *vm)
 	}
 	else if (!ft_strncmp(av[i], "-n", 2))
 	{
-		num = ft_atoi(&av[i][2]);
+		num = ft_abs(ft_atoi(&av[i][2]));
 		if (num < 1 || num > MAX_PLAYERS)
 			return (-1);
 		if (!av[i + 1] ||

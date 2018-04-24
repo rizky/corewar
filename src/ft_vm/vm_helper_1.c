@@ -29,7 +29,7 @@ int		vm_print_usage(char **av, int status)
 		return (status);
 }
 
-int		vm_isnumber(char *str)
+int		ft_isnumber(char *str)
 {
 	int i;
 	int sign;
@@ -54,4 +54,11 @@ int		vm_isnumber(char *str)
 			return (0);
 	}
 	return (digit > 0);
+}
+
+int		ft_abs(int i)
+{
+	if (i < 0)
+		return (i *= -1);
+	return (i);
 }

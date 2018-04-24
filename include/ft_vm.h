@@ -35,6 +35,7 @@ int				vm_print_usage(char **av, int status);
 int				vm_options(char **av, t_vm *vm);
 void			vm_print(t_vm vm);
 
-int				vm_isnumber(char *str);
+int				ft_isnumber(char *str);
+int				ft_abs(int i);
 
 #endif
