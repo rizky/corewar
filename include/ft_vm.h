@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 15:41:00 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/24 18:55:26 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ typedef struct	s_vm
 	char		*players[MAX_PLAYERS + 2];
 }				t_vm;
 
-int				vm_print_usage(char **av, int status);
 int				vm_options(char **av, t_vm *vm);
+int				vm_print_usage(char **av, int status);
 void			vm_print(t_vm vm);
 
+int				vm_valid_verbosity_lvl(int lvl);
+int				vm_lvl_to_index(int index);
 int				ft_isnumber(char *str);
 int				ft_abs(int i);
 

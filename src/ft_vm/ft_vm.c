@@ -6,11 +6,25 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 15:40:07 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:20:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
+
+static int	vm_populate_players(int i, char **av, t_vm *vm)
+{
+	int j;
+
+	j = 0;
+	while (vm->players[j])
+		j++;
+	if (j <= 4)
+		vm->players[j] = av[i];
+	else
+		return (-1);
+	return (0);
+}
 
 static int	vm_get_champions(char **av, t_vm *vm)
 {
@@ -20,7 +34,6 @@ static int	vm_get_champions(char **av, t_vm *vm)
 	int num;
 
 	i = 0;
-	equ = 0;
 	num = 0;
 	while (av[++i])
 	{
@@ -31,16 +44,8 @@ static int	vm_get_champions(char **av, t_vm *vm)
 			while (++j < 4)
 				if (ft_strequ(av[i], vm->players[j]) && av[i] == vm->players[j])
 					equ = 1;
-			j = 0;
-			if (!equ)
-			{
-				while (vm->players[j])
-					j++;
-				if (j <= 4)
-					vm->players[j] = av[i];
-				else
-					return (MAX_PLAYERS + 1);
-			}
+			if (!equ && vm_populate_players(i, av, vm) == -1)
+				return (MAX_PLAYERS + 1);
 			num++;
 		}
 	}
