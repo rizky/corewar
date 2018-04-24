@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 00:43:36 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 00:56:55 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void
 	t_process	p;
 
 	i = 0;
-	vm->cycles_to_die = CYCLE_TO_DIE;
+	g_cycles_to_die = CYCLE_TO_DIE;
 	ft_bzero(&p, sizeof(t_process));
 	ft_bzero(&g_memory, MEM_SIZE);
 	ft_bzero(&g_reg, REG_NUMBER);
@@ -111,15 +111,15 @@ int
 		if ((i = vm_read_binary(i, vm.players, &vm)) == -1)
 			return (-1);
 	vm_load_champs(&vm, g_memory);
-	while (vm.cycles < vm.cycles_to_die)
+	while (g_cycles < g_cycles_to_die)
 	{
 		(vm.v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, vm) : 0;
 		vm_decompiler(&vm);
 		vm_executor(&vm);
-		(vm.dump && vm.dump == vm.cycles) ? vm_print_memory(g_memory) : 0;
-		if (vm.dump && vm.dump == vm.cycles)
+		(vm.dump && vm.dump == g_cycles) ? vm_print_memory(g_memory) : 0;
+		if (vm.dump && vm.dump == g_cycles)
 			break ;
-		vm.cycles++;
+		g_cycles++;
 	}
 	return (0);
 }

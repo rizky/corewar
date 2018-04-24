@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 00:49:42 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 00:55:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ typedef struct	s_champ
 typedef struct	s_vm
 {
 	int			dump;
-	int			cycles;
-	int			cycles_to_die;
 	int			check_nbr;
 	int			v_lvl[6];
 	char		*players[MAX_PLAYERS + 2];
@@ -78,6 +76,8 @@ unsigned char	g_memory[MEM_SIZE];
 unsigned char	g_memory_mark[MEM_SIZE];
 int				g_reg[REG_NUMBER];
 int				g_carrier;
+int				g_cycles;
+int				g_cycles_to_die;
 
 int				vm_print_usage(char **av, int status);
 void			vm_print(t_vm vm);

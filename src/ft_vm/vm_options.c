@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/25 00:50:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 00:55:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		vm_print(t_vm vm)
 	int i;
 	int j;
 
-	ft_printf("dump: %d cycles: %d\n", vm.dump, vm.cycles);
+	ft_printf("dump: %d cycles: %d\n", vm.dump, vm.dump);
 	i = -1;
 	j = 0;
 	while (++i < 6)
