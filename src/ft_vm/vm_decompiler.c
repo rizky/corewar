@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 16:00:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 16:52:03 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,13 @@ void
 	t_process	*p;
 
 	ft_bzero(&op, sizeof(t_op));
-	i = vm->champ_size - 1;
-	while (i >= 0)
+	i = -1;
+	while (++i < vm->champ_size)
 	{
 		j = -1;
 		while (++j < (int)(vm->champ[i].processes->size))
 		{
+			ft_bzero(&op, sizeof(t_op));
 			p = &(((t_process*)vm->champ[i].processes->data)[j]);
 			vm_decompiler_op(vm,
 				&(((t_process*)vm->champ[i].processes->data)[j]),
@@ -109,6 +110,5 @@ void
 			p->op = op;
 			j++;
 		}
-		i--;
 	}
 }
