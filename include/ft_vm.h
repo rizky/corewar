@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 18:55:37 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:25:00 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void			vm_op_live(t_vm *vm, t_process *p);
 
 void			vm_op_inc(t_vm *vm, t_process *p);
 
-void			vm_print_v_4(t_vm vm);
+void			vm_print_v_4(t_process p, int n);
 void			vm_op_print(t_process p);
 void			vm_sti_print(t_process p);
 void			vm_and_print(t_process p);

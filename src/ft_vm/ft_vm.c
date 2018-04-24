@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 17:15:08 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:25:25 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int
 	{
 		// vm_print_memory_cursor(g_memory, vm);
 		vm_decompiler(&vm);
-		vm_print_v_4(vm);
 		vm_executor(&vm);
 		vm.cycles++;
 	}
