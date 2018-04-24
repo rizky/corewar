@@ -12,21 +12,23 @@
 
 #include "ft_vm.h"
 
-int		vm_print_usage(char **av, int status)
+int		vm_valid_verbosity_lvl(int v)
 {
-		ft_dprintf(2, "usage: %s [-dump nbr_cycles] ", av[0]);
-		ft_dprintf(2, "[-v N ...] [-n number] champion1.cor ...\n");
-		ft_dprintf(2, "    -v N      : Verbosity levels");
-		ft_dprintf(2, ", can be added together to enable several\n");
-		ft_dprintf(2, "                - 0 : Show only essentials\n");
-		ft_dprintf(2, "                - 1 : Show lives\n");
-		ft_dprintf(2, "                - 2 : Show cycles\n");
-		ft_dprintf(2, "                - 4 : Show operations ");
-		ft_dprintf(2, "(Params are NOT literal ...\n");
-		ft_dprintf(2, "                - 8 : Show deaths\n");
-		ft_dprintf(2, "                - 16 : Show PC movements ");
-		ft_dprintf(2, "(Except for jumps)\n");
-		return (status);
+	return (v == 0 || v == 1 || v == 2 || v == 4 || v == 8 || v == 16);
+}
+
+int		vm_lvl_to_index(int lvl)
+{
+	if (lvl == 0 || lvl == 1 || lvl == 2)
+		return (lvl);
+	else if (lvl == 4)
+		return (V_LVL_4);
+	else if (lvl == 8)
+		return (V_LVL_8);
+	else if (lvl == 16)
+		return (V_LVL_16);
+	else
+		return (0);
 }
 
 int		ft_isnumber(char *str)

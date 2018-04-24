@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 19:25:00 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:41:09 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # define INVALID_FILE	2
 # define CHAMP_MAX		3
 # define CODE_MAX		4
+
+# define V_LVL_0		0
+# define V_LVL_1		1
+# define V_LVL_2		2
+# define V_LVL_4		3
+# define V_LVL_8		4
+# define V_LVL_16		5
 
 typedef struct	s_param
 {
@@ -54,13 +61,6 @@ typedef struct	s_champ
 	t_array		*processes;
 }				t_champ;
 
-# define V_LVL_0 0
-# define V_LVL_1 1
-# define V_LVL_2 2
-# define V_LVL_4 3
-# define V_LVL_8 4
-# define V_LVL_16 5
-
 typedef struct	s_vm
 {
 	int			dump;
@@ -79,7 +79,11 @@ unsigned char	g_memory_mark[MEM_SIZE];
 int				g_reg[REG_NUMBER];
 int				g_carrier;
 
+int				vm_print_usage(char **av, int status);
+void			vm_print(t_vm vm);
 void			vm_print_verbose(t_vm vm, int i);
+
+int				vm_options(char **av, t_vm *vm);
 
 int				vm_error(int errnum, int status);
 
@@ -92,8 +96,6 @@ void			vm_print(t_vm vm);
 
 void			vm_executor(t_vm *vm);
 void			vm_decompiler(t_vm *vm);
-
-int				vm_options(char **av, t_vm *vm);
 
 void			vm_op_sti(t_vm *vm, t_process *p);
 void			vm_op_and(t_vm *vm, t_process *p);
@@ -108,6 +110,11 @@ void			vm_sti_print(t_process p);
 void			vm_and_print(t_process p);
 void			vm_live_print(t_process p);
 void			vm_zjump_print(t_process p);
+
+int				vm_valid_verbosity_lvl(int lvl);
+int				vm_lvl_to_index(int index);
+int				ft_isnumber(char *str);
+int				ft_abs(int i);
 
 typedef struct	s_op_dict
 {
@@ -163,11 +170,5 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
 		{T_REG, 0, 0}, &vm_op_inc, &vm_op_print}
 };
-int				vm_print_usage(char **av, int status);
-int				vm_options(char **av, t_vm *vm);
-void			vm_print(t_vm vm);
-
-int				ft_isnumber(char *str);
-int				ft_abs(int i);
 
 #endif

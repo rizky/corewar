@@ -6,14 +6,30 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 17:23:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:48:42 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void
-	vm_print_verbose(t_vm vm, int i)
+int		vm_print_usage(char **av, int status)
+{
+	ft_dprintf(2, "usage: %s [-dump nbr_cycles] ", av[0]);
+	ft_dprintf(2, "[-v N ...] [-n number] champion1.cor ...\n");
+	ft_dprintf(2, "    -v N      : Verbosity levels");
+	ft_dprintf(2, ", can be added together to enable several\n");
+	ft_dprintf(2, "                - 0 : Show only essentials\n");
+	ft_dprintf(2, "                - 1 : Show lives\n");
+	ft_dprintf(2, "                - 2 : Show cycles\n");
+	ft_dprintf(2, "                - 4 : Show operations ");
+	ft_dprintf(2, "(Params are NOT literal ...\n");
+	ft_dprintf(2, "                - 8 : Show deaths\n");
+	ft_dprintf(2, "                - 16 : Show PC movements ");
+	ft_dprintf(2, "(Except for jumps)\n");
+	return (status);
+}
+
+void	vm_print_verbose(t_vm vm, int i)
 {
 	ft_printfln("magic: %x", vm.champ[i].header.magic);
 	ft_printfln("name: %s", vm.champ[i].header.prog_name);
@@ -23,8 +39,7 @@ void
 	ft_printfln("%*m", vm.champ[i].header.prog_size, vm.champ[i].op);
 }
 
-void
-	vm_print_memory(unsigned char memory[MEM_SIZE])
+void	vm_print_memory(unsigned char memory[MEM_SIZE])
 {
 	int		i;
 
@@ -41,8 +56,7 @@ void
 	ft_printf("\n");
 }
 
-int
-	vm_get_cursor_color(t_vm vm, int index)
+int		vm_get_cursor_color(t_vm vm, int index)
 {
 	int		j;
 	int		k;
@@ -63,8 +77,7 @@ int
 	return (0);
 }
 
-void
-	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
+void	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
 {
 	int		i;
 	int		color;
