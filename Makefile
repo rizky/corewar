@@ -29,7 +29,16 @@ FTVM:=	ft_vm \
 		vm_op \
 		vm_print \
 		vm_error \
-		vm_options
+		vm_options \
+		draw_animation_1 \
+		draw_animation_2 \
+		draw_end \
+		draw_game \
+		draw_info \
+		draw_init \
+		draw_key_utils \
+		draw_nyan \
+		draw \
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -81,7 +90,7 @@ $(NAME): $(OBJ_ASM)
 $(NAME_VM): $(OBJ_VM)
 	@$(MAKE) libft
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -o $(NAME_VM)
+	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -o $(NAME_VM) -lncurses
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c | $(CCHF)

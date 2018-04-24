@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "op.h"
+# include "animation.h"
 
 # define MALLOC			1
 # define INVALID_FILE	2
@@ -61,6 +62,8 @@ typedef struct	s_vm
 	int			cycles_to_die;
 	int			check_nbr;
 	int			carrier;
+	t_status	status;			//the various counter for ncurses to run and animate
+	t_win		win;			//the window for ncurses
 	char		*players[MAX_PLAYERS + 2];
 	t_champ		champ[4];
 	int			champ_size;
@@ -91,6 +94,10 @@ void			vm_op_and(t_vm *vm, t_process *p, t_op *op);
 void			vm_op_zjmp(t_vm *vm, t_process *p, t_op *op);
 void			vm_op_live(t_vm *vm, t_process *p, t_op *op);
 void			vm_op_inc(t_vm *vm, t_process *p, t_op *op);
+
+void			init_ncurses(t_vm *vm);	//i would like to keep these prototype in animation.h
+void			draw(t_vm *vm);			//but it use t_vm and it is declared here
+void			draw_info(t_vm *vm);
 
 typedef struct	s_op_dict
 {

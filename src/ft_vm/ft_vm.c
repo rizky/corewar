@@ -124,6 +124,7 @@ int
 {
 	t_vm			vm;
 	int				i;
+	time_t		start;						//count the time to repeat the music, can decide if want to include this inside t_vm
 
 	ft_bzero(&g_memory, MEM_SIZE);
 	ft_bzero(&g_memory_mark, MEM_SIZE);
@@ -144,12 +145,34 @@ int
 		if ((i = vm_read_binary(i, vm.players, &vm)) == -1)
 			return (-1);
 	vm_load_champs(&vm, g_memory);
+	// if (option == "-v")					// this is the dummy code, i dunno how the vm_options will handle this option yet
+	init_ncurses(&vm);						// if option contain -v call this function
+	start = time(NULL);						//count the time to repeat the music
 	while (vm.cycles < vm.cycles_to_die)
 	{
-		// vm_print_memory_cursor(g_memory, vm);
-		vm_executor(&vm);
-		vm_print_v_4(vm);
-		vm.cycles++;
+		// if (vm.status.pause == 0)		// we can leave this here, by default pause is 0, even withoout option -v, this won't affect the program
+		// {
+			// if (option == "-v")			// this is the dummy code, i dunno how the vm_options will handle this option yet
+			// {
+				if (time(NULL) - start >= 121)
+				{
+					system("afplay -t 120 sound/nyan.mp3&");
+					start = time(NULL);
+				}
+				draw(&vm);
+				if ((key_hook(&vm.status)) == -1)
+					break ;
+				usleep(vm.status.delay);
+			// }
+
+
+			// vm_print_memory_cursor(g_memory, vm);
+			vm_executor(&vm);
+			vm_print_v_4(vm);
+			vm.cycles++;
+		// }
 	}
+	// if (option == "-v")					// this is the dummy code, i dunno how the vm_options will handle this option yet
+	draw_end(&vm.win);
 	return (0);
 }
