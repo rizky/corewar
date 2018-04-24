@@ -5,100 +5,110 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/23 23:14:31 by rnugroho         ###   ########.fr       */
+/*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
+/*   Updated: 2018/04/24 16:00:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
 int
-	vm_binary_toint(unsigned char *bin, int size)
+	vm_checker_oc(t_op *op)
+{
+	int param[3];
+	int i;
+
+	if (!g_op_dict[op->opcode].is_oc)
+		return (0);
+	param[0] = (op->oc & 192) >> 6;
+	param[1] = (op->oc & 48) >> 4;
+	param[2] = (op->oc & 12) >> 2;
+	i = 0;
+	while (i != 3)
+	{
+		if (param[i] == IND_CODE)
+			if (!(g_op_dict[op->opcode].p_type[i] >= T_IND))
+				return (-1);
+		if (param[i] == DIR_CODE)
+			if (!(g_op_dict[op->opcode].p_type[i] & T_DIR))
+				return (-1);
+		if (param[i] == REG_CODE)
+			if (!(g_op_dict[op->opcode].p_type[i] & T_REG))
+				return (-1);
+		if (param[i] == 0)
+			if (g_op_dict[op->opcode].p_type[i])
+				return (-1);
+		i++;
+	}
+	return (0);
+}
+
+int
+	vm_decompiler_param(t_process *p, t_op *op)
 {
 	int		i;
-	int		result;
 
-	i = 1;
-	result = 0;
-	while (i <= size)
+	i = 0;
+	op->param_c = g_op_dict[op->opcode].param_c;
+	while (i < op->param_c)
 	{
-		result += bin[i - 1] << ((size - i) * 8);
+		if (vm_checker_oc(op) == -1)
+			return (-1);
+		op->params[i].type = (g_op_dict[op->opcode].is_oc) ?
+		(op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2) : op->oc;
+		(op->params[i].type == REG_CODE) ? op->params[i].size = 1 : 0;
+		(op->params[i].type == IND_CODE) ? op->params[i].size = 2 : 0;
+		(op->params[i].type == DIR_CODE) ? op->params[i].size =
+			g_op_dict[op->opcode].d_size : 0;
+		op->params[i].value =
+		vm_binary_toint(&g_memory[p->offset + p->pc + op->size],
+			op->params[i].size);
+		op->size += op->params[i].size;
 		i++;
 	}
-	return (result);
-}
-
-int
-	vm_read_magic(int fd, t_champ *champ)
-{
-	int				ret;
-	unsigned char	buf[COMMENT_LENGTH + 4];
-
-	if ((ret = read(fd, &buf, 4)) <= 0)
-		return (vm_error(INVALID_FILE, -1));
-	champ->header.magic = vm_binary_toint(buf, 4);
-	if (vm_binary_toint(buf, 4) != COREWAR_EXEC_MAGIC)
-		return (vm_error(INVALID_FILE, -1));
 	return (0);
 }
 
 int
-	vm_read_header(int fd, t_champ *champ)
+	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
 {
-	int				ret;
-	unsigned char	buf[COMMENT_LENGTH + 4];
-
-	if (vm_read_magic(fd, champ) == -1)
+	(void)vm;
+	op->opcode = g_memory[p->offset + p->pc];
+	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
+	if (op->opcode < 0x01 || op->opcode > 0x10)
 		return (-1);
-	if ((ret = read(fd, &buf, PROG_NAME_LENGTH + 4)) <= 0)
-		return (vm_error(INVALID_FILE, -1));
-	ft_strncpy(champ->header.prog_name, (char*)buf, PROG_NAME_LENGTH + 4 + 1);
-	if ((ret = read(fd, &buf, 4) <= 0))
-		return (vm_error(INVALID_FILE, -1));
-	champ->header.prog_size = vm_binary_toint(buf, 4);
-	if (champ->header.prog_size > CHAMP_MAX_SIZE)
-		return (vm_error(CODE_MAX, -1));
-	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) <= 0)
-		return (vm_error(INVALID_FILE, -1));
-	ft_strncpy(champ->header.comment, (char*)buf, COMMENT_LENGTH + 4 + 1);
+	if (g_op_dict[op->opcode].is_oc)
+		op->oc = g_memory[p->offset + p->pc + 1];
+	else
+		op->oc = g_op_dict[op->opcode].p_type[0];
+	if (vm_decompiler_param(p, op) == -1)
+		return (-1);
+	p->pc_next = p->pc + op->size;
 	return (0);
 }
 
-int
-	vm_handle_n(int i, char **av, int *index)
+void
+	vm_decompiler(t_vm *vm)
 {
-	if (ft_strcmp(av[i], "-n") == 0)
+	int			i;
+	int			j;
+	t_op		op;
+	t_process	*p;
+
+	ft_bzero(&op, sizeof(t_op));
+	i = vm->champ_size - 1;
+	while (i >= 0)
 	{
-		if (!av[i + 1] || ft_atoi(av[i + 1]) == 0)
-			return (-1);
-		i++;
-		*index = ft_atoi(av[i]) - 1;
-		if (*index < 0 || *index > 3)
-			return (-1);
-		i++;
+		j = -1;
+		while (++j < (int)(vm->champ[i].processes->size))
+		{
+			p = &(((t_process*)vm->champ[i].processes->data)[j]);
+			vm_decompiler_op(vm,
+				&(((t_process*)vm->champ[i].processes->data)[j]),
+				&op);
+			p->op = op;
+			j++;
+		}
+		i--;
 	}
-	return (i);
-}
-
-int
-	vm_read_binary(int i, char **paths, t_vm *vm)
-{
-	int				fd;
-	int				ret;
-	unsigned char	buf[COMMENT_LENGTH + 4];
-	t_champ			champ;
-
-	if ((fd = open(paths[i], O_RDONLY)) == -1)
-		return (vm_error(INVALID_FILE, -1));
-	if (vm_read_header(fd, &champ) == -1)
-		return (-1);
-	if ((ret = read(fd, &buf, champ.header.prog_size)) <= 0)
-		return (vm_error(INVALID_FILE, -1));
-	champ.op = ft_memalloc(champ.header.prog_size + 1);
-	ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
-	champ.op[champ.header.prog_size] = '\0';
-	vm->champ[i] = champ;
-	vm->champ[i].processes = fta_alloc(sizeof(t_process));
-	close(fd);
-	return (i);
 }

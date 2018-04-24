@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 00:56:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 15:55:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct	s_vm
 	int			cycles;
 	int			cycles_to_die;
 	int			check_nbr;
-	int			carrier;
 	char		*players[MAX_PLAYERS + 2];
 	t_champ		champ[4];
 	int			champ_size;
@@ -68,6 +67,8 @@ typedef struct	s_vm
 
 unsigned char	g_memory[MEM_SIZE];
 unsigned char	g_memory_mark[MEM_SIZE];
+int				g_reg[REG_NUMBER];
+int				g_carrier;
 
 void			vm_print_verbose(t_vm vm, int i);
 int				vm_print_usage(char **av, int status);
@@ -81,16 +82,24 @@ void			vm_print_memory(unsigned char memory[MEM_SIZE]);
 void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);
 void			vm_print(t_vm vm);
 
-void			vm_executor_process(t_vm *vm, t_process *p);
 void			vm_executor(t_vm *vm);
+void			vm_decompiler(t_vm *vm);
 
 int				vm_options(char **av, t_vm *vm);
 
-void			vm_op_sti(t_vm *vm, t_process *p, t_op *op);
-void			vm_op_and(t_vm *vm, t_process *p, t_op *op);
-void			vm_op_zjmp(t_vm *vm, t_process *p, t_op *op);
-void			vm_op_live(t_vm *vm, t_process *p, t_op *op);
-void			vm_op_inc(t_vm *vm, t_process *p, t_op *op);
+void			vm_op_sti(t_vm *vm, t_process *p);
+void			vm_op_and(t_vm *vm, t_process *p);
+void			vm_op_zjmp(t_vm *vm, t_process *p);
+void			vm_op_live(t_vm *vm, t_process *p);
+
+void			vm_op_inc(t_vm *vm, t_process *p);
+
+void			vm_print_v_4(t_vm vm);
+void			vm_op_print(t_op op, t_process p);
+void			vm_sti_print(t_op op, t_process p);
+void			vm_and_print(t_op op, t_process p);
+void			vm_live_print(t_op op, t_process p);
+void			vm_zjump_print(t_op op, t_process p);
 
 typedef struct	s_op_dict
 {
@@ -101,42 +110,49 @@ typedef struct	s_op_dict
 	int			is_oc;
 	int			p_type[3];
 	void		*opfunc;
+	void		*opprint;
 }				t_op_dict;
 
 static	t_op_dict g_op_dict[17] = {
 	{ .name = "\0", .opcode = 0x00, .d_size = 0, .param_c = 0, .is_oc = 0,
-		{0, 0, 0}, &vm_op_inc},
+		{0, 0, 0}, &vm_op_inc, &vm_op_print},
 	{ .name = "live", .opcode = 0x01, .d_size = 4, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc},
+		{T_DIR, 0, 0}, &vm_op_inc, &vm_live_print},
 	{ .name = "ld", .opcode = 0x02, .d_size = 4, .param_c = 2, .is_oc = 1,
-		{T_DIR | T_IND, T_REG, 0}, &vm_op_inc},
+		{T_DIR | T_IND, T_REG, 0}, &vm_op_inc, &vm_op_print},
 	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2, .is_oc = 1,
-		{T_REG, T_REG | T_IND, 0}, &vm_op_inc},
+		{T_REG, T_REG | T_IND, 0}, &vm_op_inc, &vm_op_print},
 	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3, .is_oc = 1,
-		{T_REG, T_REG, T_REG}, &vm_op_inc},
+		{T_REG, T_REG, T_REG}, &vm_op_inc, &vm_op_print},
 	{ .name = "sub", .opcode = 0x05, .d_size = 0, .param_c = 3, .is_oc = 1,
-		{T_REG, T_REG, T_REG}, &vm_op_inc},
+		{T_REG, T_REG, T_REG}, &vm_op_inc, &vm_op_print},
 	{ .name = "and", .opcode = 0x06, .d_size = 4, .param_c = 3, .is_oc = 1,
-		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, &vm_op_inc},
+		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
+		&vm_op_inc, &vm_and_print},
 	{ .name = "or", .opcode = 0x07, .d_size = 4, .param_c = 3, .is_oc = 1,
-		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, &vm_op_inc},
+		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
+		&vm_op_inc, &vm_op_print},
 	{ .name = "xor", .opcode = 0x08, .d_size = 4, .param_c = 3, .is_oc = 1,
-		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, &vm_op_inc},
+		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
+		&vm_op_inc, &vm_op_print},
 	{ .name = "zjmp", .opcode = 0x09, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc},
+		{T_DIR, 0, 0}, &vm_op_inc, &vm_zjump_print},
 	{ .name = "ldi", .opcode = 0x0a, .d_size = 2, .param_c = 3, .is_oc = 1,
-		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, &vm_op_inc},
+		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
+		&vm_op_inc, &vm_op_print},
 	{ .name = "sti", .opcode = 0x0b, .d_size = 2, .param_c = 3, .is_oc = 1,
-		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG}, &vm_op_sti},
+		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG},
+		&vm_op_sti, &vm_sti_print},
 	{ .name = "fork", .opcode = 0x0c, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc},
+		{T_DIR, 0, 0}, &vm_op_inc, &vm_op_print},
 	{ .name = "lld", .opcode = 0x0d, .d_size = 4, .param_c = 2, .is_oc = 1,
-		{T_IND | T_DIR, T_REG, 0}, &vm_op_inc},
+		{T_IND | T_DIR, T_REG, 0}, &vm_op_inc, &vm_op_print},
 	{ .name = "lldi", .opcode = 0x0e, .d_size = 2, .param_c = 3, .is_oc = 1,
-		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, &vm_op_inc},
+		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
+		&vm_op_inc, &vm_op_print},
 	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc},
+		{T_DIR, 0, 0}, &vm_op_inc, &vm_op_print},
 	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
-		{T_REG, 0, 0}, &vm_op_inc}
+		{T_REG, 0, 0}, &vm_op_inc, &vm_op_print}
 };
 #endif

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 01:16:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 15:54:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,40 +85,6 @@ static int
 	return (num);
 }
 
-void
-	vm_print_v_4(t_vm vm)
-{
-	int		i;
-	int		j;
-	int		k;
-	t_op	op;
-
-	i = vm.champ_size - 1;
-	while (i >= 0)
-	{
-		j = -1;
-		while (++j < (int)(vm.champ[i].processes->size))
-		{
-			op = (((t_process*)vm.champ[i].processes->data)[j]).op;
-			if (op.opcode != 0)
-			{
-				ft_printf("P %3d | %s", j + 1, g_op_dict[op.opcode].name);
-				k = 0;
-				while (k < op.param_c)
-				{
-					if (op.params[k].type == REG_CODE)
-						ft_printf(" r%d", op.params[k].value);
-					else
-						ft_printf(" %d", op.params[k].value);
-					k++;
-				}
-				ft_printf("\n");
-			}
-		}
-		i--;
-	}
-}
-
 int
 	main(int ac, char **av)
 {
@@ -126,8 +92,11 @@ int
 	int				i;
 
 	ft_bzero(&g_memory, MEM_SIZE);
+	ft_bzero(&g_reg, REG_NUMBER);
 	ft_bzero(&g_memory_mark, MEM_SIZE);
 	ft_bzero(&vm, sizeof(t_vm));
+	g_carrier = 0;
+	g_reg[1] = -1;
 	if (ac < 2 || vm_options(av, &vm) == -1)
 	{
 		ft_dprintf(2, "usage: %s [-dump nbr_cycles] [-n number] ", av[0]);
@@ -147,8 +116,9 @@ int
 	while (vm.cycles < vm.cycles_to_die)
 	{
 		// vm_print_memory_cursor(g_memory, vm);
-		vm_executor(&vm);
+		vm_decompiler(&vm);
 		vm_print_v_4(vm);
+		vm_executor(&vm);
 		vm.cycles++;
 	}
 	return (0);
