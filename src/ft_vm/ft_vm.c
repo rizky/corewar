@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 21:17:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:29:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void
 	i = 0;
 	vm->cycles_to_die = CYCLE_TO_DIE;
 	ft_bzero(&p, sizeof(t_process));
+	ft_bzero(&g_memory, MEM_SIZE);
+	ft_bzero(&g_reg, REG_NUMBER);
+	ft_bzero(&g_memory_mark, MEM_SIZE);
+	g_carrier = 0;
 	ft_printfln("Introducing contestants...");
 	while (i < vm->champ_size)
 	{
@@ -91,19 +95,11 @@ int
 	t_vm			vm;
 	int				i;
 
-	ft_bzero(&g_memory, MEM_SIZE);
-	ft_bzero(&g_reg, REG_NUMBER);
-	ft_bzero(&g_memory_mark, MEM_SIZE);
 	ft_bzero(&vm, sizeof(t_vm));
-	g_carrier = 0;
-	g_reg[1] = -1;
 	if (ac < 2 || vm_options(av, &vm) == -1)
 		return (vm_print_usage(av, -1));
-	else if (vm_get_champions(av, &vm) > MAX_PLAYERS)
-	{
-		ft_dprintf(2, "Too many champions\n");
-		return (-1);
-	}
+	if (vm_get_champions(av, &vm) > MAX_PLAYERS)
+		return(vm_error(CHAMP_MAX, -1));
 	i = -1;
 	while (++i < vm.champ_size)
 		if ((i = vm_read_binary(i, vm.players, &vm)) == -1)
