@@ -27,7 +27,7 @@ int
 	while (i != 3)
 	{
 		if (param[i] == IND_CODE)
-			if (!(g_op_dict[op->opcode].p_type[i] & T_IND))
+			if (!(g_op_dict[op->opcode].p_type[i] >= T_IND))
 				return (-1);
 		if (param[i] == DIR_CODE)
 			if (!(g_op_dict[op->opcode].p_type[i] & T_DIR))
