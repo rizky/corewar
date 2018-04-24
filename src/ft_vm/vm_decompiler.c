@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 18:55:51 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:17:27 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void
 
 	ft_bzero(&op, sizeof(t_op));
 	i = -1;
+	vm->process_size = 0;
 	while (++i < vm->champ_size)
 	{
 		j = -1;

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 19:03:47 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:18:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void
 		g_reg[p.op.params[2].value] : p.op.params[2].value;
 	vm_op_print(p);
 	ft_printf("      | -> store to %d + %d = %d (with pc and mod %d)",
-		param1, param2, param1 + param2, p.pc + param1 + param2);
+		param1, param2, param1 + param2, p.offset + p.pc + param1 + param2);
 	ft_printf("\n");
 }
