@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 23:14:52 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 00:49:42 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void			vm_and_print(t_process p);
 void			vm_live_print(t_process p);
 void			vm_zjump_print(t_process p);
 
+int				vm_valid_arg(char *arg);
 int				vm_valid_verbosity_lvl(int lvl);
 int				vm_lvl_to_index(int index);
 int				ft_isnumber(char *str);
