@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/24 17:20:29 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:16:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,7 @@ int			vm_options(char **av, t_vm *vm)
 	{
 		if (!ft_strcmp(av[i], "-dump"))
 		{
-			vm->dump = 1;
-			if ((vm->cycles = ft_atoi(av[i + 1])) <= 0)
+			if ((vm->dump = ft_atoi(av[i + 1])) <= 0)
 				return (-1);
 		}
 		else if (vm_option_n(i, av, vm) == -1)

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 21:04:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:14:04 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void
 		while (++j < (int)(vm->champ[i].processes->size))
 		{
 			p = &(((t_process*)vm->champ[i].processes->data)[j]);
-			vm_print_v_4(*p, n);
+			(vm->v_lvl[V_LVL_4]) ? vm_print_v_4(*p, n) : 0;
 			(((void (*)())g_op_dict[p->op.opcode].opfunc)(vm, p));
 		}
 		i--;
