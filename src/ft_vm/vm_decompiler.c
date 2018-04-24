@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 19:17:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 00:46:02 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,14 @@ int
 	i = 0;
 	while (i != 3)
 	{
-		if (param[i] == IND_CODE)
-			if (!(g_op_dict[op->opcode].p_type[i] >= T_IND))
-				return (-1);
-		if (param[i] == DIR_CODE)
-			if (!(g_op_dict[op->opcode].p_type[i] & T_DIR))
-				return (-1);
-		if (param[i] == REG_CODE)
-			if (!(g_op_dict[op->opcode].p_type[i] & T_REG))
-				return (-1);
-		if (param[i] == 0)
-			if (g_op_dict[op->opcode].p_type[i])
-				return (-1);
+		if (param[i] == IND_CODE && !(g_op_dict[op->opcode].p_type[i] >= T_IND))
+			return (-1);
+		if (param[i] == DIR_CODE && !(g_op_dict[op->opcode].p_type[i] & T_DIR))
+			return (-1);
+		if (param[i] == REG_CODE && !(g_op_dict[op->opcode].p_type[i] & T_REG))
+			return (-1);
+		if (param[i] == 0 && g_op_dict[op->opcode].p_type[i])
+			return (-1);
 		i++;
 	}
 	return (0);
@@ -72,11 +68,13 @@ int
 int
 	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
 {
+	const int cursor = g_memory[p->offset + p->pc];
+
 	(void)vm;
-	op->opcode = g_memory[p->offset + p->pc];
-	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
-	if (op->opcode < 0x01 || op->opcode > 0x10)
+	if (cursor < 0x01 || cursor > 0x10)
 		return (-1);
+	op->opcode = cursor;
+	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
 	if (g_op_dict[op->opcode].is_oc)
 		op->oc = g_memory[p->offset + p->pc + 1];
 	else
