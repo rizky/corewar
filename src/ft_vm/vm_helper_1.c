@@ -3,29 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   vm_helper_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:58:02 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/25 02:59:45 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 07:59:18 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int		vm_valid_arg(char *arg)
+int		vm_valid_arg(char *arg, t_vm *vm)
 {
 	if (!ft_strcmp(arg, "-dump") || !ft_strcmp(arg, "-v") ||
 		!ft_strcmp(arg, "-n"))
-		return (1);
+	{
+		if (!ft_strcmp(arg, "-dump"))
+			return (vm->valid_arg[0] = 1);
+		else
+			return (vm->valid_arg[1] = 1);
+	}
 	else if ((!ft_strncmp(arg, "-v", 2) || !ft_strncmp(arg, "-n", 2)) &&
 		ft_isnumber(&arg[2]))
+	{
+		return (vm->valid_arg[1] = 1);
+	}
+	else if (ft_isnumber(arg) && (vm->valid_arg[0] || vm->valid_arg[1]))
+	{
+		vm->valid_arg[0] = 0;
 		return (1);
-	else if (ft_isnumber(arg))
-		return (1);
+	}
 	else if (!ft_strcmp(&arg[ft_strlen(arg) - 4], ".cor"))
+	{
+		vm->valid_arg[0] = 0;
+		vm->valid_arg[1] = 0;
 		return (1);
-	else
-		return (0);
+	}
+	return (0);
 }
 
 int		vm_valid_verbosity_lvl(int v)

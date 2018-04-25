@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 03:14:13 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 07:37:37 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ typedef struct	s_champ
 
 typedef struct	s_vm
 {
+	int			valid_arg[2];
 	int			dump;
 	int			check_nbr;
 	int			v_lvl[6];
-	char		*players[MAX_PLAYERS + 2];
+	char		*players[MAX_PLAYERS + 1];
 	t_champ		champ[4];
 	int			process_size;
 	int			champ_size;
@@ -113,7 +114,7 @@ void			vm_and_print(t_process p);
 void			vm_live_print(t_process p);
 void			vm_zjmp_print(t_process p);
 
-int				vm_valid_arg(char *arg);
+int				vm_valid_arg(char *arg, t_vm *vm);
 int				vm_valid_verbosity_lvl(int lvl);
 int				vm_lvl_to_index(int index);
 int				ft_isnumber(char *str);
