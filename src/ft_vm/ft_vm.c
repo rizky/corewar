@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 17:16:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 18:27:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void
 	*vm_memmark(void *dst, int i, size_t n)
 {
-	unsigned char	*dst_p;
+	unsigned char *dst_p;
 
 	dst_p = (unsigned char*)dst;
 	while (n-- > 0)
@@ -29,7 +29,7 @@ void
 	int			i;
 	t_process	p;
 
-	i = 0;
+	i = -1;
 	g_cycles_to_die = CYCLE_TO_DIE;
 	ft_bzero(&p, sizeof(t_process));
 	ft_bzero(&g_memory, MEM_SIZE);
@@ -38,7 +38,7 @@ void
 	ft_bzero(&g_memory_mark, MEM_SIZE);
 	g_carrier = 0;
 	ft_printfln("Introducing contestants...");
-	while (i < vm->champ_size)
+	while (++i < vm->champ_size)
 	{
 		ft_printfln("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !", i + 1,
 		vm->champ[i].header.prog_size, vm->champ[i].header.prog_name,
@@ -50,7 +50,6 @@ void
 		p.offset = i * MEM_SIZE / vm->champ_size;
 		p.champ = i;
 		fta_append(vm->champ[i].processes, &p, 1);
-		i++;
 	}
 }
 
@@ -100,8 +99,8 @@ static int
 int
 	main(int ac, char **av)
 {
-	t_vm			vm;
-	int				i;
+	int		i;
+	t_vm	vm;
 
 	ft_bzero(&vm, sizeof(t_vm));
 	if (ac < 2 || vm_options(av, &vm) == -1)
