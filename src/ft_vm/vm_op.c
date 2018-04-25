@@ -81,6 +81,56 @@ void
 }
 
 void
+vm_op_or(t_vm *vm, t_process *p)
+{
+	int		param0;
+	int		param1;
+
+	(void)vm;
+	param0 = (p->op.params[0].type == REG_CODE) ?
+			 g_reg[p->champ][p->op.params[0].value] : p->op.params[0].value;
+	param1 = (p->op.params[1].type == REG_CODE) ?
+			 g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
+	g_reg[p->champ][p->op.params[2].value] = param0 | param1;
+	if (g_reg[p->champ][p->op.params[2].value] == 0)
+		g_carrier = 1;
+	vm_op_inc(vm, p);
+}
+
+void
+	vm_op_xor(t_vm *vm, t_process *p)
+{
+	int		param0;
+	int		param1;
+
+	(void)vm;
+	param0 = (p->op.params[0].type == REG_CODE) ?
+			 g_reg[p->champ][p->op.params[0].value] : p->op.params[0].value;
+	param1 = (p->op.params[1].type == REG_CODE) ?
+			 g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
+	g_reg[p->champ][p->op.params[2].value] = param0 ^ param1;
+	if (g_reg[p->champ][p->op.params[2].value] == 0)
+		g_carrier = 1;
+	vm_op_inc(vm, p);
+}
+
+void
+	vm_op_fork(t_vm *vm, t_process *p)
+{
+	t_process	new_p;
+	int			param0;
+	int			param1;
+
+	param0 = (p->op.params[0].type == REG_CODE) ?
+			 g_reg[p->champ][p->op.params[0].value] : p->op.params[0].value;
+	param1 = (p->op.params[1].type == REG_CODE) ?
+			 g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
+	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
+	new_p.champ = p->champ;
+	fta_append(vm->champ[p->champ].processes, &new_p, 1);
+}
+
+void
 	vm_op_live(t_vm *vm, t_process *p)
 {
 	(void)vm;
