@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 14:36:57 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 15:13:31 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void
 	ft_bzero(&p, sizeof(t_process));
 	ft_bzero(&g_memory, MEM_SIZE);
 	ft_bzero(&g_reg, sizeof(int) * MAX_PLAYERS * REG_NUMBER);
+	g_reg[i][1] = (i + 1) * -1;
 	ft_bzero(&g_memory_mark, MEM_SIZE);
 	g_carrier = 0;
 	ft_printfln("Introducing contestants...");
