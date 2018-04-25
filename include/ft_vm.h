@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 01:38:11 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 03:14:13 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void			vm_op_print(t_process p);
 void			vm_sti_print(t_process p);
 void			vm_and_print(t_process p);
 void			vm_live_print(t_process p);
-void			vm_zjump_print(t_process p);
+void			vm_zjmp_print(t_process p);
 
 int				vm_valid_arg(char *arg);
 int				vm_valid_verbosity_lvl(int lvl);
@@ -137,7 +137,7 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "\0", .opcode = 0x00, .d_size = 0, .param_c = 0, .is_oc = 0,
 		{0, 0, 0}, &vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 0},
 	{ .name = "live", .opcode = 0x01, .d_size = 4, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc, &vm_live_print, .is_car = 0, .cycles = 10},
+		{T_DIR, 0, 0}, &vm_op_live, &vm_live_print, .is_car = 0, .cycles = 10},
 	{ .name = "ld", .opcode = 0x02, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_DIR | T_IND, T_REG, 0},
 		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 5},
@@ -152,7 +152,7 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
 	{ .name = "and", .opcode = 0x06, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		&vm_op_inc, &vm_and_print, .is_car = 1, .cycles = 6},
+		&vm_op_and, &vm_and_print, .is_car = 1, .cycles = 6},
 	{ .name = "or", .opcode = 0x07, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
 		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 6},
@@ -161,7 +161,7 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 6},
 	{ .name = "zjmp", .opcode = 0x09, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0},
-		&vm_op_inc, &vm_zjump_print, .is_car = 0, .cycles = 20},
+		&vm_op_zjmp, &vm_zjmp_print, .is_car = 0, .cycles = 20},
 	{ .name = "ldi", .opcode = 0x0a, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
 		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 25},

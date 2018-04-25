@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/24 19:36:00 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 03:14:13 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void
 }
 
 void
-	vm_zjump_print(t_process p)
+	vm_zjmp_print(t_process p)
 {
 	int	value;
 
