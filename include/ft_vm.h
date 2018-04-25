@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 00:55:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 01:38:11 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_process
 	int			pc;
 	int			pc_next;
 	int			live_nbr;
+	int			champ;
 	t_op		op;
 }				t_process;
 
@@ -89,6 +90,7 @@ int				vm_error(int errnum, int status);
 
 int				vm_binary_toint(unsigned char *bin, int size);
 int				vm_read_binary(int i, char **av, t_vm *vm);
+void			*vm_memmark(void *dst, int i, size_t n);
 
 void			vm_print_memory(unsigned char memory[MEM_SIZE]);
 void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);

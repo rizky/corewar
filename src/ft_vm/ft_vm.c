@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 00:56:55 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 02:14:43 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void
 		vm_memmark(&g_memory_mark[i * MEM_SIZE / vm->champ_size], i + 1,
 				vm->champ[i].header.prog_size);
 		p.offset = i * MEM_SIZE / vm->champ_size;
+		p.champ = i;
 		fta_append(vm->champ[i].processes, &p, 1);
 		i++;
 	}

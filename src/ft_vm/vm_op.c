@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 19:23:14 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 00:46:15 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 01:37:22 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void
 	temp = vm_to_big_endian(g_reg[p->op.params[0].value], 4);
 	ft_memcpy(&g_memory[p->offset + p->pc + param1 + param2],
 		temp, 4);
+	vm_memmark(&g_memory_mark[p->offset + p->pc + param1 + param2],
+		p->champ + 1, 4);
 	free(temp);
 	vm_op_inc(vm, p);
 }
