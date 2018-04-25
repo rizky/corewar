@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 02:14:43 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:56:23 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void
 	g_cycles_to_die = CYCLE_TO_DIE;
 	ft_bzero(&p, sizeof(t_process));
 	ft_bzero(&g_memory, MEM_SIZE);
-	ft_bzero(&g_reg, REG_NUMBER);
+	ft_bzero(&g_reg, sizeof(int) * MAX_PLAYERS * REG_NUMBER);
 	ft_bzero(&g_memory_mark, MEM_SIZE);
 	g_carrier = 0;
 	ft_printfln("Introducing contestants...");

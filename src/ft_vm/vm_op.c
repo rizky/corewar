@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 19:23:14 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 13:47:00 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:58:45 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void
 
 	(void)vm;
 	param1 = (p->op.params[1].type == REG_CODE) ?
-		g_reg[p->op.params[1].value] : p->op.params[1].value;
+		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
 	param2 = (p->op.params[2].type == REG_CODE) ?
-		g_reg[p->op.params[2].value] : p->op.params[2].value;
-	temp = vm_to_big_endian(g_reg[p->op.params[0].value], 4);
+		g_reg[p->champ][p->op.params[2].value] : p->op.params[2].value;
+	temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
 	ft_memcpy(&g_memory[p->offset + p->pc + param1 + param2],
 		temp, 4);
 	vm_memmark(&g_memory_mark[p->offset + p->pc + param1 + param2],
@@ -71,11 +71,11 @@ void
 
 	(void)vm;
 	param0 = (p->op.params[0].type == REG_CODE) ?
-		g_reg[p->op.params[0].value] : p->op.params[0].value;
+		g_reg[p->champ][p->op.params[0].value] : p->op.params[0].value;
 	param1 = (p->op.params[1].type == REG_CODE) ?
-		g_reg[p->op.params[1].value] : p->op.params[1].value;
-	g_reg[p->op.params[2].value] = param0 & param1;
-	if (g_reg[p->op.params[2].value] == 0)
+		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
+	g_reg[p->champ][p->op.params[2].value] = param0 & param1;
+	if (g_reg[p->champ][p->op.params[2].value] == 0)
 		g_carrier = 1;
 	vm_op_inc(vm, p);
 }

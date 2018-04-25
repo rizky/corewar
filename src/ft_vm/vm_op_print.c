@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 13:32:15 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:57:08 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void
 	while (++i < p.op.param_c)
 		if (p.op.params[i].type == REG_CODE)
 			if (i > 0)
-				ft_printf(" %d", g_reg[p.op.params[i].value]);
+				ft_printf(" %d", g_reg[p.champ][p.op.params[i].value]);
 			else
 				ft_printf(" r%d", p.op.params[i].value);
 		else
@@ -37,7 +37,7 @@ void
 
 	(void)p;
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	ft_printf(" %d", g_reg[p.op.params[0].value]);
+	ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
 	i = 0;
 	while (++i < p.op.param_c)
 		if (p.op.params[i].type == REG_CODE)
@@ -78,9 +78,9 @@ void
 	int param2;
 
 	param1 = (p.op.params[1].type == REG_CODE) ?
-		g_reg[p.op.params[1].value] : p.op.params[1].value;
+		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
 	param2 = (p.op.params[2].type == REG_CODE) ?
-		g_reg[p.op.params[2].value] : p.op.params[2].value;
+		g_reg[p.champ][p.op.params[2].value] : p.op.params[2].value;
 	vm_op_print(p);
 	ft_printf("      | -> store to %d + %d = %d (with pc and mod %d)",
 		param1, param2, param1 + param2, p.offset + p.pc + param1 + param2);

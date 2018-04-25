@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 01:09:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:56:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void
 	n = vm->process_size;
 	while (i >= 0)
 	{
-		g_reg[1] = (i + 1) * -1;
+		g_reg[i][1] = (i + 1) * -1;
 		j = -1;
 		while (++j < (int)(vm->champ[i].processes->size))
 		{
