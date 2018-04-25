@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 19:23:14 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 13:35:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:47:00 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ void
 	if (value > MEM_SIZE)
 		value = value % MEM_SIZE;
 	if (g_carrier)
-		p->pc = value;
+		p->pc += value - (p->offset + p->pc);
 }
