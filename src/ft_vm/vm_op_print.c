@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 12:13:54 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:32:15 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void
 	int	value;
 
 	(void)p;
-	value = 0;
-	if ((p.op.params[0].value + p.offset + p.pc) > MEM_SIZE)
+	value = (p.op.params[0].value + p.offset + p.pc);
+	if (value > MEM_SIZE)
 		value = (p.op.params[0].value + p.offset + p.pc) % MEM_SIZE;
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %d", value - (p.offset + p.pc));

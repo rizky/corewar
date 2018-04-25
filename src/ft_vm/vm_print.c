@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 12:44:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:31:04 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
 
 	i = 0;
 	ft_printf("%0.0v");
-	ft_printfln("Cycles: %d    Live: %d          \n", g_cycles, vm_checker_livenbr(vm));
+	ft_printfln("Cycles: %d    Live: %d                        ",
+		g_cycles, vm_checker_livenbr(vm));
 	while (i < MEM_SIZE)
 	{
 		if (i > 0 && i % 64 == 0)
