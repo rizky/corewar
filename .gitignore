@@ -57,6 +57,9 @@ CMakeLists.txt
 asm
 asm *
 corewar
+!resources/binaries/asm
+!resources/binaries/corewar
+!tests/asm
 .cache_exists
 text
 *cor

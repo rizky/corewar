@@ -6,14 +6,14 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 14:00:50 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/18 15:57:34 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/19 14:02:23 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ASM_H
 # define FT_ASM_H
 
-# include "../libft/include/libft.h"
+# include "libft.h"
 # include "op.h"
 
 # define SOURCEFILE		1
@@ -29,12 +29,15 @@
 # define OP_PARAM		11
 # define OP_PARAM_TYPE	12
 # define LABEL_MISSING	13
+# define LABEL_INVALID	14
 
 # define OPT_A 0
 # define OPT_M 1
 
 # define OPT_NUM 2
 # define OPT_STR "am"
+
+# define YELLOW 3
 
 # define ARRAY(D, I) ((t_op*)(D)->data)[I]
 
@@ -85,7 +88,6 @@ static	t_op_dict g_op_dict[17] = {
 		{T_REG, 0, 0} }
 };
 
-
 typedef struct	s_param
 {
 	char		*str;
@@ -118,8 +120,6 @@ typedef struct	s_asm
 	t_array		*ops;
 	int			op_c;
 	int			size;
-	int			start;
-	int			header_end;
 }				t_asm;
 
 int				ft_parsing(t_asm *a);
@@ -147,20 +147,13 @@ int				ft_line_is_empty(t_asm *a);
 void			ft_skip_empty_lines(t_asm *a);
 void			ft_handle_comments(char **file);
 void			ft_trim_file(char **file);
-void			ft_print_tab(char **tab);
 int				ft_free(char *str, int status);
-int				ft_free_tab(char **tab, int status);
+int				ft_free_strtab(char **tab, int status);
 int				ft_free_asm(t_asm *a, int status);
 
 int				ft_strcspn(const char *s, const char *charset);
 char			*ft_strcdup(const char *s1, const char c);
-<<<<<<< HEAD
-int 			check_ops(t_asm *a);
-char			**ft_strsplit_keep_empty(const char *str, char c);
-int				ft_is_label(char *line);
-int		        ft_get_labels(t_asm *a);
-=======
-char			**ft_strsplit2(const char *s1, const char c);
->>>>>>> rizky
+int				asm_wordcounter(const char *str, char c);
+char			**asm_strsplit(char const *s, char c);
 
 #endif
