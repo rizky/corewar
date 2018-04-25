@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 01:17:05 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 02:59:03 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void
 	t_op		op;
 	t_process	*p;
 
-	ft_bzero(&op, sizeof(t_op));
 	i = -1;
 	vm->process_size = 0;
 	while (++i < vm->champ_size)
@@ -113,7 +112,6 @@ void
 				p->op = op;
 			}
 			vm->process_size++;
-			j++;
 		}
 	}
 }

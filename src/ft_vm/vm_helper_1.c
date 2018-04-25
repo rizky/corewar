@@ -6,15 +6,16 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:58:02 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/24 22:43:11 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/25 02:59:45 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int			vm_valid_arg(char *arg)
+int		vm_valid_arg(char *arg)
 {
-	if (!ft_strcmp(arg, "-dump") || !ft_strcmp(arg, "-v") || !ft_strcmp(arg, "-n"))
+	if (!ft_strcmp(arg, "-dump") || !ft_strcmp(arg, "-v") ||
+		!ft_strcmp(arg, "-n"))
 		return (1);
 	else if ((!ft_strncmp(arg, "-v", 2) || !ft_strncmp(arg, "-n", 2)) &&
 		ft_isnumber(&arg[2]))
