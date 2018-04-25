@@ -91,11 +91,13 @@
 		},
 		{
 			"preLaunchTask": "make debug",
-			"name": "(lldb) Launch VM ",
+			"name": "(lldb) Launch VM -v 4",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
 			"args": [
+					"-v",
+					"4",
 					"tests/asm/valid/ex1.cor"
 					],
 			"stopAtEntry": false,

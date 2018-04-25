@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 03:14:13 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 12:13:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void
 	vm_live_print(t_process p)
 {
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	ft_printf(" %d", vm_binary_toint(&g_memory[p.pc_next], 4));
+	ft_printf(" %d", vm_binary_toint(&g_memory[p.pc + 1], 4));
 	ft_printf("\n");
 }
 
