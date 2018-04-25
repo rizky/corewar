@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 13:56:23 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 14:36:57 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,17 @@ int
 		if ((i = vm_read_binary(i, vm.players, &vm)) == -1)
 			return (-1);
 	vm_load_champs(&vm, g_memory);
-	while (g_cycles < g_cycles_to_die)
+	while (vm_checker(&vm))
 	{
-		(vm.v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, vm) : 0;
+		(vm.v_lvl[V_LVL_0] && g_cycles % 20 == 0) ?
+			vm_print_memory_cursor(g_memory, vm) : 0;
 		vm_decompiler(&vm);
 		vm_executor(&vm);
 		(vm.dump && vm.dump == g_cycles) ? vm_print_memory(g_memory) : 0;
 		if (vm.dump && vm.dump == g_cycles)
 			break ;
 		g_cycles++;
+		g_cycles_to++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 13:55:32 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 14:21:14 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ unsigned char	g_memory_mark[MEM_SIZE];
 int				g_reg[MAX_PLAYERS][REG_NUMBER];
 int				g_carrier;
 int				g_cycles;
+int				g_cycles_to;
 int				g_cycles_to_die;
+int				g_max_check;
 
 int				vm_print_usage(char **av, int status);
 void			vm_print(t_vm vm);
@@ -120,7 +122,9 @@ int				vm_lvl_to_index(int index);
 int				ft_isnumber(char *str);
 int				ft_abs(int i);
 
+int				vm_checker(t_vm *vm);
 int				vm_checker_livenbr(t_vm vm);
+int				vm_checker_processnbr(t_vm vm);
 
 typedef struct	s_op_dict
 {

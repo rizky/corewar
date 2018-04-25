@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 13:31:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/25 14:42:08 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,12 @@ void	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
 	int		color;
 
 	i = 0;
-	ft_printf("%0.0v");
-	ft_printfln("Cycles: %d    Live: %d                        ",
-		g_cycles, vm_checker_livenbr(vm));
+	ft_printf("%0.0v%150Q", ' ');
+	ft_printf("%0.0vCycles:%4d\tCTD:%4d/%4d(-%d)\tLives:%4d\tProcesses:%4d\t",
+		g_cycles, g_cycles_to, g_cycles_to_die, CYCLE_DELTA,
+		vm_checker_livenbr(vm), vm_checker_processnbr(vm));
+	ft_printfln("Max Check:%2d/%2d",
+		g_max_check, MAX_CHECKS);
 	while (i < MEM_SIZE)
 	{
 		if (i > 0 && i % 64 == 0)
