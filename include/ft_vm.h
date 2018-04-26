@@ -80,6 +80,7 @@ unsigned char	g_memory_mark[MEM_SIZE];
 int				g_reg[MAX_PLAYERS][REG_NUMBER];
 int				g_carry;
 int				g_cycles;
+int				g_carrier;
 int				g_cycles_to;
 int				g_cycles_to_die;
 int				g_max_check;

@@ -87,8 +87,6 @@ static int
 }
 
 int
-<<<<<<< HEAD
-=======
 	vm_start_ncurse(int start, t_vm vm)
 {
 	while (g_draw_status.pause)
@@ -110,7 +108,6 @@ int
 }
 
 int
->>>>>>> dev/julianto
 	main(int ac, char **av)
 {
 	t_vm		vm;
@@ -135,7 +132,7 @@ int
 		vm_decompiler(&vm);
 		vm_executor(&vm);
 		(vm.dump && vm.dump == g_cycles) ? vm_print_memory(g_memory) : 0;
-		if (vm.visualizer && start_ncurses(start, vm) == -1)
+		if (vm.visualizer && vm_start_ncurse(start, vm) == -1)
 			break ;
 		g_cycles++;
 		g_cycles_to++;
