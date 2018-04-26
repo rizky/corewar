@@ -98,8 +98,8 @@
 			"program": "${workspaceFolder}/corewar",
 			"args": [
 					"-v",
-					"4",
-					"tests/asm/valid/ex.cor"
+					"0",
+					"tests/op/fork.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

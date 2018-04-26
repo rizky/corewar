@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_operations_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:29:55 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/26 08:39:40 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/27 00:48:04 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,23 @@ void	vm_op_sti(t_vm *vm, t_process *p)
 	vm_op_inc(vm, p);
 }
 
- void
- 	vm_op_fork(t_vm *vm, t_process *p)
- {
- 	t_process	new_p;
-	 int value;
+void
+	vm_op_fork(t_vm *vm, t_process *p)
+{
+	t_process	new_p;
+	int			value;
 
+	ft_bzero(&new_p, sizeof(new_p));
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
 	value = (p->op.params[0].value + p->offset + p->pc);
-	 if (value > IDX_MOD)
-		 value = value % IDX_MOD;
+	if (value > IDX_MOD)
+		value = value % IDX_MOD;
 	if (value > MEM_SIZE)
 		value = value % MEM_SIZE;
-	 new_p.pc = p->pc + value - (p->offset + p->pc);
-	 new_p.champ = p->champ;
-	 vm->champ[p->champ].processes->size += 1;
+	new_p.pc = p->pc + value - (p->offset + p->pc);
+	new_p.champ = p->champ;
+	vm->champ[p->champ].processes->size += 1;
 	fta_append(vm->champ[p->champ].processes, &new_p, 1);
-	 vm_op_inc(vm, p);
- }
+	vm_op_inc(vm, p);
+}

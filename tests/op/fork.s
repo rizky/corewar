@@ -2,6 +2,6 @@
 .comment "test fork"
 
 
-fork %0
+fork %59
 
 #this will created the same process at the same place
