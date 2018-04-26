@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/26 08:53:36 by fpetras          ###   ########.fr        #
+#    Updated: 2018/04/26 11:10:04 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,18 @@ FTVM:=	ft_vm \
 		vm_print \
 		vm_error \
 		vm_options \
-		vm_helper_1
+		vm_helper_1 
+
+FTVMDRAWPATH:= ft_vm/vm_draw/
+FTVMDRAW:= draw_animation_1 \
+		draw_animation_2 \
+		draw_end \
+		draw_game \
+		draw_info \
+		draw_init \
+		draw_key_utils \
+		draw_nyan \
+		draw \
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -64,6 +75,7 @@ EOC:="\033[0;0m"
 
 FILES_ASM:=$(addprefix $(FTASMPATH),$(FTASM))
 FILES_VM:=$(addprefix $(FTVMPATH),$(FTVM))
+FILES_VM_DRAW:=$(addprefix $(FTVMDRAWPATH),$(FTVMDRAW))
 
 # ------ Auto ------
 SRC_ASM:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_ASM)))
@@ -71,6 +83,9 @@ OBJ_ASM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_ASM)))
 
 SRC_VM:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM)))
 OBJ_VM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM)))
+
+SRC_VM+=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM_DRAW)))
+OBJ_VM+=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM_DRAW)))
 
 # ==================
 CCHF:=.cache_exists
@@ -86,7 +101,7 @@ $(NAME): $(OBJ_ASM)
 $(NAME_VM): $(OBJ_VM)
 	@$(MAKE) libft
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -o $(NAME_VM)
+	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -o $(NAME_VM) -lncurses
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c | $(CCHF)
@@ -104,6 +119,7 @@ $(CCHF):
 	@mkdir $(CCHPATH)
 	@mkdir $(CCHPATH)$(FTASMPATH)
 	@mkdir $(CCHPATH)$(FTVMPATH)
+	@mkdir $(CCHPATH)$(FTVMDRAWPATH)
 	@touch $(CCHF)
 
 clean:
