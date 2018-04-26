@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 14:21:14 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 10:56:06 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct	s_vm
 unsigned char	g_memory[MEM_SIZE];
 unsigned char	g_memory_mark[MEM_SIZE];
 int				g_reg[MAX_PLAYERS][REG_NUMBER];
-int				g_carrier;
+int				g_carry;
 int				g_cycles;
 int				g_cycles_to;
 int				g_cycles_to_die;
@@ -102,23 +102,34 @@ void			vm_print(t_vm vm);
 void			vm_executor(t_vm *vm);
 void			vm_decompiler(t_vm *vm);
 
-void			vm_op_sti(t_vm *vm, t_process *p);
+char			*vm_to_big_endian(int value, int size);
+void			vm_op_inc(t_vm *vm, t_process *p);
+
+void			vm_op_live(t_vm *vm, t_process *p);
+void			vm_op_ld(t_vm *vm, t_process *p);
+void			vm_op_st(t_vm *vm, t_process *p);
+void			vm_op_add(t_vm *vm, t_process *p);
+void			vm_op_sub(t_vm *vm, t_process *p);
 void			vm_op_and(t_vm *vm, t_process *p);
 void			vm_op_or(t_vm *vm, t_process *p);
 void			vm_op_xor(t_vm *vm, t_process *p);
 void			vm_op_fork(t_vm *vm, t_process *p);
 void			vm_op_lfork(t_vm *vm, t_process *p);
 void			vm_op_zjmp(t_vm *vm, t_process *p);
-void			vm_op_live(t_vm *vm, t_process *p);
-
-void			vm_op_inc(t_vm *vm, t_process *p);
+void			vm_op_ldi(t_vm *vm, t_process *p);
+void			vm_op_sti(t_vm *vm, t_process *p);
+void			vm_op_fork(t_vm *vm, t_process *p);
+void			vm_op_lld(t_vm *vm, t_process *p);
+void			vm_op_lldi(t_vm *vm, t_process *p);
+void			vm_op_lfork(t_vm *vm, t_process *p);
+void			vm_op_aff(t_vm *vm, t_process *p);
 
 void			vm_print_v_4(t_process p, int n);
 void			vm_op_print(t_process p);
-void			vm_sti_print(t_process p);
-void			vm_and_print(t_process p);
 void			vm_live_print(t_process p);
+void			vm_and_print(t_process p);
 void			vm_zjmp_print(t_process p);
+void			vm_sti_print(t_process p);
 
 int				vm_valid_arg(char *arg, t_vm *vm);
 int				vm_valid_verbosity_lvl(int lvl);

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 13:57:08 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 08:48:51 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void
 		value = (p.op.params[0].value + p.offset + p.pc) % MEM_SIZE;
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %d", value - (p.offset + p.pc));
-	if (!g_carrier)
+	if (!g_carry)
 		ft_printf(" FAILED");
 	ft_printf("\n");
 }
