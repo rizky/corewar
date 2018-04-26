@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 22:25:40 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 10:58:45 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 14:21:53 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ void	draw(t_vm *vm)
 		g_draw_status.c_now++;
 	if (g_draw_status.c_now > g_cycles_to_die)
 		g_draw_status.c_now = 0;
+}
+
+int		start_ncurses(int start, t_vm vm)
+{
+	while (g_draw_status.pause)
+		;
+	if (time(NULL) - start >= 121)
+	{
+//		system("afplay -t 120 sound/nyan.mp3&");
+		start = time(NULL);
+	}
+	draw(&vm);
+	if ((key_hook(&g_draw_status)) == -1)
+		return (-1);
+	usleep(g_draw_status.delay);
+	return (0);
 }
 
 // int		main(int argc, char *argv[])

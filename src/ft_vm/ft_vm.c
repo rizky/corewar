@@ -6,23 +6,12 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 10:59:05 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 14:23:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 #include "ft_vm_draw.h"
-
-void
-	*vm_memmark(void *dst, int i, size_t n)
-{
-	unsigned char *dst_p;
-
-	dst_p = (unsigned char*)dst;
-	while (n-- > 0)
-		*dst_p++ = i;
-	return (dst);
-}
 
 void
 	vm_load_champs(t_vm *vm, unsigned char memory[MEM_SIZE])
@@ -98,22 +87,6 @@ static int
 }
 
 int
-	vm_start_ncurse(int start, t_vm vm)
-{
-	while (g_draw_status.pause);
-	if (time(NULL) - start >= 121)
-	{
-		// system("afplay -t 120 sound/nyan.mp3&");
-		start = time(NULL);
-	}
-	draw(&vm);
-	if ((key_hook(&g_draw_status)) == -1)
-		return (-1);
-	usleep(g_draw_status.delay);
-	return (0);
-}
-
-int
 	main(int ac, char **av)
 {
 	t_vm		vm;
@@ -130,7 +103,7 @@ int
 		if ((i = vm_read_binary(i, vm.players, &vm)) == -1)
 			return (-1);
 	vm_load_champs(&vm, g_memory);
-	(vm.v_lvl[V_LVL_1]) ? init_ncurses(&vm, &start) : 0;
+	(vm.visualizer) ? init_ncurses(&vm, &start) : 0;
 	while (vm_checker(&vm))
 	{
 		(vm.v_lvl[V_LVL_0] && g_cycles % 20 == 0) ?
@@ -138,11 +111,11 @@ int
 		vm_decompiler(&vm);
 		vm_executor(&vm);
 		(vm.dump && vm.dump == g_cycles) ? vm_print_memory(g_memory) : 0;
-		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(start, vm) == -1)
+		if (vm.visualizer && start_ncurses(start, vm) == -1)
 			break ;
 		g_cycles++;
 		g_cycles_to++;
 	}
-	draw_end(&g_draw_win);
+	(vm.visualizer) ? draw_end(&g_draw_win) : 0;
 	return (0);
 }

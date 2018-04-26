@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/25 07:33:21 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 12:10:25 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		vm_print(t_vm vm)
 	int j;
 
 	ft_printf("dump: %d cycles: %d\n", vm.dump, vm.dump);
+	ft_printf("Visulizer: %d\n", vm.visualizer);
 	i = -1;
 	j = 0;
 	while (++i < 6)
@@ -67,7 +68,9 @@ static int	vm_option_v(int i, char **av, t_vm *vm)
 {
 	int lvl;
 
-	if (!ft_strcmp(av[i], "-v"))
+	if (!ft_strcmp(av[i], "-V"))
+		vm->visualizer = 1;
+	else if (!ft_strcmp(av[i], "-v"))
 	{
 		if (!ft_isnumber(av[i + 1]))
 			return (-1);
@@ -127,10 +130,14 @@ int			vm_options(char **av, t_vm *vm)
 			if ((vm->dump = ft_atoi(av[i + 1])) <= 0)
 				return (-1);
 		}
-		else if (vm_option_n(i, av, vm) == -1)
-			return (-1);
 		else if (vm_option_v(i, av, vm) == -1)
 			return (-1);
+		else if (vm_option_n(i, av, vm) == -1)
+			return (-1);
 	}
+	i = -1;
+	if (vm->visualizer)
+		while (++i < 5)
+			vm->v_lvl[i] = 0;
 	return (0);
 }
