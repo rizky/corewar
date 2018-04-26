@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 18:27:54 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 08:47:52 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void
 	ft_bzero(&g_reg, sizeof(int) * (MAX_PLAYERS * REG_NUMBER));
 	g_reg[i][1] = (i + 1) * -1;
 	ft_bzero(&g_memory_mark, MEM_SIZE);
-	g_carrier = 0;
+	g_carry = 0;
 	ft_printfln("Introducing contestants...");
 	while (++i < vm->champ_size)
 	{
