@@ -6,11 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:04:15 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 13:07:53 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 14:22:23 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vm.h"
+#include "ft_vm_draw.h"
 
 static void	draw_map(WINDOW *win, unsigned char *memory)
 {

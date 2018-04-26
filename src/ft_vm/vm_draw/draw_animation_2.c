@@ -6,11 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 22:18:43 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 13:07:41 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 14:22:10 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vm.h"
+#include "ft_vm_draw.h"
 
 void	draw_guitar_1(WINDOW *w, int round)
 {

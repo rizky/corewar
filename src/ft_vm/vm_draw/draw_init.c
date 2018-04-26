@@ -6,11 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:00:22 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 13:08:04 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 14:22:35 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vm.h"
+#include "ft_vm_draw.h"
 
 static void	init_all_color(void)
 {

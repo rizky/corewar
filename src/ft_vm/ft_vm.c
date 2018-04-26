@@ -6,11 +6,12 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 13:19:26 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 14:23:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
+#include "ft_vm_draw.h"
 
 void
 	vm_load_champs(t_vm *vm, unsigned char memory[MEM_SIZE])

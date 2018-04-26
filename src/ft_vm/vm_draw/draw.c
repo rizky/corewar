@@ -6,11 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 22:25:40 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 13:18:58 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 14:21:53 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vm.h"
+#include "ft_vm_draw.h"
 
 void	draw(t_vm *vm)
 {
