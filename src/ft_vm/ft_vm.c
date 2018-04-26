@@ -98,7 +98,7 @@ static int
 }
 
 int
-	vm_start_ncurse(int start, t_vm vm)
+	vm_start_ncurse(time_t *start, t_vm vm)
 {
 	while (g_draw_status.pause)
 	{
@@ -106,10 +106,10 @@ int
 		if ((key_hook(&g_draw_status)) == -1)
 			return (-1);
 	}
-	if (time(NULL) - start >= 121)
+	if (time(NULL) - *start >= 121)
 	{
 		system("afplay -t 120 sound/nyan.mp3&");
-		start = time(NULL);
+		*start = time(NULL);
 	}
 	draw(&vm);
 	if ((key_hook(&g_draw_status)) == -1)
@@ -143,11 +143,11 @@ int
 		vm_decompiler(&vm);
 		vm_executor(&vm);
 		(vm.dump && vm.dump == g_cycles) ? vm_print_memory(g_memory) : 0;
-		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(start, vm) == -1)
+		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
 			break ;
 		g_cycles++;
 		g_cycles_to++;
 	}
-	draw_end(&g_draw_win);
+	(vm.v_lvl[V_LVL_1]) ? draw_end(&g_draw_win) : 0;
 	return (0);
 }

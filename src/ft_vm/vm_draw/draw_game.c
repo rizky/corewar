@@ -14,7 +14,7 @@
 
 static void		process_color(t_process *p, unsigned char *m, int *i, int *col)
 {
-	if (p->offset == *i)
+	if (p->pc + p->offset == *i)
 	{
 		if (m[*i] == 1)
 			*col = 14;
