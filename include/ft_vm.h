@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 11:38:50 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:10:19 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int				vm_options(char **av, t_vm *vm);
 int				vm_error(int errnum, int status);
 
 int				vm_binary_toint(unsigned char *bin, int size);
-int				vm_read_binary(int i, char **av, t_vm *vm);
+int				vm_read_binaries(char **paths, t_vm *vm);
 void			*vm_memmark(void *dst, int i, size_t n);
 
 void			vm_print_memory(unsigned char memory[MEM_SIZE]);

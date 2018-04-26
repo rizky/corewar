@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 22:13:56 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 14:27:57 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:15:36 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ typedef	struct	s_status
 	int			pause;
 	int			delay;
 	int			speed;
-//	int 		cycle;
 	int			c_now;
-//	int			ctd_now;
 	int			nyan_col;
 }				t_status;
 
@@ -48,8 +46,7 @@ typedef	struct	s_win
 t_status		g_draw_status;
 t_win			g_draw_win;
 
-int 		key_hook(t_status *status);
-
+int				key_hook(t_status *status);
 
 void			draw_animation(WINDOW *w, int cycle);
 void			draw_guitar_1(WINDOW *w, int cycle);
@@ -60,9 +57,10 @@ void			draw_bass(WINDOW *w, int cycle);
 void			draw_nyan(WINDOW *w, int cycle, int *nyan_col);
 void			draw_end(t_win *win);
 
-void		init_ncurses(t_vm *vm, time_t *start);
-void		draw(t_vm *vm);
-void		draw_info(t_vm *vm);
-void		draw_game(t_vm *v, t_win w, unsigned char *m_1, unsigned char *m_2);
+void			init_ncurses(t_vm *vm, time_t *start);
+void			draw(t_vm *vm);
+void			draw_info(t_vm *vm);
+void			draw_game(t_vm *v, t_win w, unsigned char *m_1,
+				unsigned char *m_2);
 
 #endif
