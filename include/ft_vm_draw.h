@@ -48,7 +48,7 @@ t_status	g_draw_status;
 t_win		g_draw_win;
 
 int 		key_hook(t_status *status);
-void		draw_game(t_win win, unsigned char *memory);
+
 
 void		draw_animation(WINDOW *w, int cycle);
 void		draw_guitar_1(WINDOW *w, int cycle);
@@ -62,5 +62,6 @@ void		draw_end(t_win *win);
 void		init_ncurses(t_vm *vm, time_t *start);
 void		draw(t_vm *vm);
 void		draw_info(t_vm *vm);
+void		draw_game(t_vm *v, t_win w, unsigned char *m_1, unsigned char *m_2);
 
 #endif
