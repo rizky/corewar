@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/26 11:47:05 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 12:10:25 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,9 @@ int			vm_options(char **av, t_vm *vm)
 		else if (vm_option_n(i, av, vm) == -1)
 			return (-1);
 	}
+	i = -1;
+	if (vm->visualizer)
+		while (++i < 5)
+			vm->v_lvl[i] = 0;
 	return (0);
 }
