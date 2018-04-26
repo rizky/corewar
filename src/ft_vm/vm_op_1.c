@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_op.c                                            :+:      :+:    :+:   */
+/*   vm_operations_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/23 19:23:14 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 08:42:45 by fpetras          ###   ########.fr       */
+/*   Created: 2018/04/26 08:27:57 by fpetras           #+#    #+#             */
+/*   Updated: 2018/04/27 01:55:01 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,29 @@ void
 		p->pc++;
 	if (p->pc + p->offset == MEM_SIZE)
 		p->pc = p->offset * -1;
+}
+
+void	vm_op_live(t_vm *vm, t_process *p)
+{
+	(void)vm;
+	p->live_nbr++;
+	vm_op_inc(vm, p);
+}
+
+void	vm_op_ld(t_vm *vm, t_process *p)
+{
+	(void)vm;
+	(void)p;
+}
+
+void	vm_op_st(t_vm *vm, t_process *p)
+{
+	(void)vm;
+	(void)p;
+}
+
+void	vm_op_add(t_vm *vm, t_process *p)
+{
+	(void)vm;
+	(void)p;
 }

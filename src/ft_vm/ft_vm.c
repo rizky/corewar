@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 19:12:05 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 01:50:55 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int
 	if (vm_read_binaries(vm.players, &vm) == -1)
 		return (-1);
 	vm_load_champs(&vm, g_memory);
-	while (vm_checker(&vm))
+	while (g_cycles == 0 || vm_checker(&vm))
 	{
 		vm_decompiler(&vm);
 		vm_executor(&vm);

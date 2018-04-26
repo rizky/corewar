@@ -98,7 +98,7 @@
 			"args": [
 					"-v",
 					"4",
-					"tests/asm/valid/ex.cor"
+					"tests/op/fork.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
