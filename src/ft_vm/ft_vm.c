@@ -124,7 +124,8 @@ int
 		if ((i = vm_read_binary(i, vm.players, &vm)) == -1)
 			return (-1);
 	vm_load_champs(&vm, g_memory);
-	(vm.visualizer) ? init_ncurses(&vm, &start) : 0;
+	//(vm.visualizer) ? init_ncurses(&vm, &start) : 0;
+	(vm.v_lvl[V_LVL_1]) ? init_ncurses(&vm, &start) : 0;
 	while (vm_checker(&vm))
 	{
 		(vm.v_lvl[V_LVL_0] && g_cycles % 20 == 0) ?

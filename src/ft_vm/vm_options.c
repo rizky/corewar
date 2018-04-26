@@ -68,9 +68,10 @@ static int	vm_option_v(int i, char **av, t_vm *vm)
 {
 	int lvl;
 
-	if (!ft_strcmp(av[i], "-V"))
-		vm->visualizer = 1;
-	else if (!ft_strcmp(av[i], "-v"))
+//	if (!ft_strcmp(av[i], "-V"))
+//		vm->visualizer = 1;
+	//else
+	if (!ft_strcmp(av[i], "-v"))
 	{
 		if (!ft_isnumber(av[i + 1]))
 			return (-1);
@@ -136,8 +137,8 @@ int			vm_options(char **av, t_vm *vm)
 			return (-1);
 	}
 	i = -1;
-	if (vm->visualizer)
-		while (++i < 5)
-			vm->v_lvl[i] = 0;
+//	if (vm->visualizer)
+//		while (++i < 5)
+//			vm->v_lvl[i] = 0;
 	return (0);
 }

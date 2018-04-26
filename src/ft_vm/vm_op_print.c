@@ -86,3 +86,33 @@ void
 		param1, param2, param1 + param2, p.offset + p.pc + param1 + param2);
 	ft_printf("\n");
 }
+
+void
+	vm_fork_print(t_process p)
+{
+	int	value;
+
+	(void)p;
+	value = (p.op.params[0].value + p.offset + p.pc);
+	if (value > IDX_MOD)
+		value = (p.op.params[0].value + p.offset + p.pc) % IDX_MOD;
+	//if (value > MEM_SIZE)
+	//	value = (p.op.params[0].value + p.offset + p.pc) % MEM_SIZE;
+	ft_printf("%s", g_op_dict[p.op.opcode].name);
+	ft_printf(" %d", value - (p.offset + p.pc));
+	ft_printf("\n");
+}
+
+void
+	vm_lfork_print(t_process p)
+{
+	int	value;
+
+	(void)p;
+	value = (p.op.params[0].value + p.offset + p.pc);
+	//if (value > MEM_SIZE)
+	//	value = (p.op.params[0].value + p.offset + p.pc) % MEM_SIZE;
+	ft_printf("%s", g_op_dict[p.op.opcode].name);
+	ft_printf(" %d (%d)", value - (p.offset + p.pc), value - (p.offset + p.pc));
+	ft_printf("\n");
+}

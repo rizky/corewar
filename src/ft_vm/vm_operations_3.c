@@ -58,13 +58,16 @@ void	vm_op_sti(t_vm *vm, t_process *p)
  	t_process	new_p;
 	 int value;
 
-//	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
-//	new_p.champ = p->champ;
-//	value = (p->op.params[0].value + p->offset + p->pc);
-//	if (value > MEM_SIZE)
-//		value = value % MEM_SIZE;
-	// new_p.pc = p->pc + value - (p->offset + p->pc);
-	// new_p.offset = 200;
-	 //new_p.champ = p->champ;
-	//fta_append(vm->champ[p->champ].processes, &new_p, 1);
+	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
+	new_p.champ = p->champ;
+	value = (p->op.params[0].value + p->offset + p->pc);
+	 if (value > IDX_MOD)
+		 value = value % IDX_MOD;
+	if (value > MEM_SIZE)
+		value = value % MEM_SIZE;
+	 new_p.pc = p->pc + value - (p->offset + p->pc);
+	 new_p.champ = p->champ;
+	 vm->champ[p->champ].processes->size += 1;
+	fta_append(vm->champ[p->champ].processes, &new_p, 1);
+	 vm_op_inc(vm, p);
  }

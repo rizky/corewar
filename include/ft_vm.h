@@ -132,6 +132,8 @@ void			vm_live_print(t_process p);
 void			vm_and_print(t_process p);
 void			vm_zjmp_print(t_process p);
 void			vm_sti_print(t_process p);
+void			vm_fork_print(t_process p);
+void			vm_lfork_print(t_process p);
 
 int				vm_valid_arg(char *arg, t_vm *vm);
 int				vm_valid_verbosity_lvl(int lvl);
@@ -193,7 +195,7 @@ static	t_op_dict g_op_dict[17] = {
 		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG},
 		&vm_op_sti, &vm_sti_print, .is_car = 0, .cycles = 25},
 	{ .name = "fork", .opcode = 0x0c, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 800},
+		{T_DIR, 0, 0}, &vm_op_fork, &vm_fork_print, .is_car = 0, .cycles = 800},
 	{ .name = "lld", .opcode = 0x0d, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_IND | T_DIR, T_REG, 0},
 		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
@@ -201,7 +203,7 @@ static	t_op_dict g_op_dict[17] = {
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
 		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 50},
 	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_lfork, &vm_op_print, .is_car = 0, .cycles = 1000},
+		{T_DIR, 0, 0}, &vm_op_lfork, &vm_lfork_print, .is_car = 0, .cycles = 1000},
 	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
 		{T_REG, 0, 0}, &vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 2}
 };
