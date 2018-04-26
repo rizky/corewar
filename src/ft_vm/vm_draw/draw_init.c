@@ -32,6 +32,10 @@ static void	init_all_color(void)
 	init_pair(11, COLOR_RED, COLOR_RED);
 	init_pair(12, COLOR_PINK, COLOR_BLACK);
 	init_pair(13, COLOR_BLUE_L, COLOR_BLACK);
+	init_pair(14, COLOR_BLUE_L, COLOR_GREY);
+	init_pair(15, COLOR_GREEN, COLOR_GREY);
+	init_pair(16, COLOR_BROWN_1, COLOR_GREY);
+	init_pair(17, COLOR_PINK, COLOR_GREY);
 }
 
 void		init_ncurses(t_vm *vm, time_t *start)
@@ -46,9 +50,9 @@ void		init_ncurses(t_vm *vm, time_t *start)
 	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 	init_all_color();
+	system("afplay -t 120 sound/nyan.mp3&");
 	g_draw_win.game = newwin(4 + (MEM_SIZE / 64), 197, 0, 0);
 	g_draw_win.info = newwin(4 + (MEM_SIZE / 64), 58, 0, 196);
 	g_draw_win.nyan = newwin(9, 254, 4 + (MEM_SIZE / 64), 0);
 	g_draw_status.speed = 80;
-//	g_draw_status.ctd_now = CYCLE_TO_DIE;
 }
