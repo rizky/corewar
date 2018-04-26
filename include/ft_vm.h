@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 13:06:39 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 13:19:09 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@
 # define V_LVL_8		4
 # define V_LVL_16		5
 
-# define DELAY 1000000
-# define COLOR_GREY 20
-# define COLOR_BRIGHT_W 21
-# define COLOR_BROWN_1 22
-# define COLOR_PINK 23
-# define COLOR_BLUE_L 24
+# define DELAY			1000000
+# define COLOR_GREY		20
+# define COLOR_BRIGHT_W	21
+# define COLOR_BROWN_1	22
+# define COLOR_PINK		23
+# define COLOR_BLUE_L	24
 
 typedef	struct	s_status
 {
@@ -183,6 +183,7 @@ void			draw_nyan(WINDOW *w, int cycle, int *nyan_col);
 void			draw_end(t_win *win);
 
 void			init_ncurses(t_vm *vm, time_t *start);
+int				start_ncurses(int start, t_vm vm);
 void			draw(t_vm *vm);
 void			draw_info(t_vm *vm);
 

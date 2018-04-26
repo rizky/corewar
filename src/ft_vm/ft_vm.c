@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 12:59:24 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 13:19:26 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,23 +86,6 @@ static int
 }
 
 int
-	vm_start_ncurse(int start, t_vm vm)
-{
-	while (g_draw_status.pause)
-		;
-	if (time(NULL) - start >= 121)
-	{
-//		system("afplay -t 120 sound/nyan.mp3&");
-		start = time(NULL);
-	}
-	draw(&vm);
-	if ((key_hook(&g_draw_status)) == -1)
-		return (-1);
-	usleep(g_draw_status.delay);
-	return (0);
-}
-
-int
 	main(int ac, char **av)
 {
 	t_vm		vm;
@@ -127,7 +110,7 @@ int
 		vm_decompiler(&vm);
 		vm_executor(&vm);
 		(vm.dump && vm.dump == g_cycles) ? vm_print_memory(g_memory) : 0;
-		if (vm.visualizer && vm_start_ncurse(start, vm) == -1)
+		if (vm.visualizer && start_ncurses(start, vm) == -1)
 			break ;
 		g_cycles++;
 		g_cycles_to++;
