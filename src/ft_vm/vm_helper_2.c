@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_end.c                                         :+:      :+:    :+:   */
+/*   vm_helper_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/24 05:08:34 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 13:07:47 by fpetras          ###   ########.fr       */
+/*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
+/*   Updated: 2018/04/26 12:28:35 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void	draw_end(t_win *win)
+void	*vm_memmark(void *dst, int i, size_t n)
 {
-	nodelay(stdscr, FALSE);
-	mvwprintw((*win).info, 46, 15, "** PRESS ANY KEY TO EXIT **");
-	wrefresh((*win).info);
-	getch();
-	system("kill $(pgrep afplay)");
-	delwin((*win).game);
-	delwin((*win).info);
-	delwin((*win).nyan);
-	endwin();
+	unsigned char *dst_p;
+
+	dst_p = (unsigned char*)dst;
+	while (n-- > 0)
+		*dst_p++ = i;
+	return (dst);
 }

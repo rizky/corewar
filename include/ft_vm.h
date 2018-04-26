@@ -6,13 +6,15 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 11:38:50 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 13:06:39 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_VM_H
 # define FT_VM_H
 
+# include <ncurses.h>
+# include <time.h>
 # include "libft.h"
 # include "op.h"
 
@@ -27,6 +29,31 @@
 # define V_LVL_4		3
 # define V_LVL_8		4
 # define V_LVL_16		5
+
+# define DELAY 1000000
+# define COLOR_GREY 20
+# define COLOR_BRIGHT_W 21
+# define COLOR_BROWN_1 22
+# define COLOR_PINK 23
+# define COLOR_BLUE_L 24
+
+typedef	struct	s_status
+{
+	int			pause;
+	int			delay;
+	int			speed;
+//  int			cycle;
+	int			c_now;
+//  int			ctd_now;
+	int			nyan_col;
+}				t_status;
+
+typedef	struct	s_win
+{
+	WINDOW		*game;
+	WINDOW		*info;
+	WINDOW		*nyan;
+}				t_win;
 
 typedef struct	s_param
 {
@@ -84,6 +111,9 @@ int				g_cycles_to;
 int				g_cycles_to_die;
 int				g_max_check;
 
+t_status		g_draw_status;
+t_win			g_draw_win;
+
 int				vm_print_usage(char **av, int status);
 void			vm_print(t_vm vm);
 void			vm_print_verbose(t_vm vm, int i);
@@ -139,6 +169,22 @@ int				ft_abs(int i);
 int				vm_checker(t_vm *vm);
 int				vm_checker_livenbr(t_vm vm);
 int				vm_checker_processnbr(t_vm vm);
+
+int				key_hook(t_status *status);
+void			draw_game(t_win win, unsigned char *memory);
+
+void			draw_animation(WINDOW *w, int cycle);
+void			draw_guitar_1(WINDOW *w, int cycle);
+void			draw_guitar_2(WINDOW *w, int cycle);
+void			draw_drummer(WINDOW *w, int cycle);
+void			draw_singer(WINDOW *w, int cycle);
+void			draw_bass(WINDOW *w, int cycle);
+void			draw_nyan(WINDOW *w, int cycle, int *nyan_col);
+void			draw_end(t_win *win);
+
+void			init_ncurses(t_vm *vm, time_t *start);
+void			draw(t_vm *vm);
+void			draw_info(t_vm *vm);
 
 typedef struct	s_op_dict
 {

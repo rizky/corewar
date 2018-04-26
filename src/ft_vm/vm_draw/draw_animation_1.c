@@ -6,11 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 22:19:10 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 10:58:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 13:07:36 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vm_draw.h"
+#include "ft_vm.h"
 
 static void	draw_spark_1(WINDOW *w)
 {

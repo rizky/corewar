@@ -6,11 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 03:59:07 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 10:58:42 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 13:08:15 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vm_draw.h"
+#include "ft_vm.h"
 
 static void	draw_nyan_2(WINDOW *w, int *nyan_col)
 {

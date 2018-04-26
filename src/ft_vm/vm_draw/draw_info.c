@@ -6,11 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 04:54:09 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 10:58:33 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 13:07:58 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vm_draw.h"
+#include "ft_vm.h"
 
 static void	draw_main_info(t_vm *vm, t_win win, t_status *s)
 {

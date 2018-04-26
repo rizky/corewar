@@ -6,23 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 12:19:18 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 12:59:24 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
-#include "ft_vm_draw.h"
-
-void
-	*vm_memmark(void *dst, int i, size_t n)
-{
-	unsigned char *dst_p;
-
-	dst_p = (unsigned char*)dst;
-	while (n-- > 0)
-		*dst_p++ = i;
-	return (dst);
-}
 
 void
 	vm_load_champs(t_vm *vm, unsigned char memory[MEM_SIZE])
