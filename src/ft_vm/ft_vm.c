@@ -87,6 +87,30 @@ static int
 }
 
 int
+<<<<<<< HEAD
+=======
+	vm_start_ncurse(int start, t_vm vm)
+{
+	while (g_draw_status.pause)
+	{
+		draw(&vm);
+		if ((key_hook(&g_draw_status)) == -1)
+			return (-1);
+	}
+	if (time(NULL) - start >= 121)
+	{
+		system("afplay -t 120 sound/nyan.mp3&");
+		start = time(NULL);
+	}
+	draw(&vm);
+	if ((key_hook(&g_draw_status)) == -1)
+		return (-1);
+	usleep(g_draw_status.delay);
+	return (0);
+}
+
+int
+>>>>>>> dev/julianto
 	main(int ac, char **av)
 {
 	t_vm		vm;
