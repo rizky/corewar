@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 11:56:39 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 12:19:18 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,6 @@ int
 		g_cycles++;
 		g_cycles_to++;
 	}
-	draw_end(&g_draw_win);
+	(vm.visualizer) ? draw_end(&g_draw_win) : 0;
 	return (0);
 }
