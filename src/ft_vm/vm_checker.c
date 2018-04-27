@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 05:19:39 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 05:21:20 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int
 		{
 			g_max_check = g_max_check == MAX_CHECKS ? 0 : g_max_check;
 			g_cycles_to_die -= CYCLE_DELTA;
-			(vm.v_lvl[V_LVL_2]) ?
+			(vm->v_lvl[V_LVL_2]) ?
 			ft_printfln("Cycle to die is now %d", g_cycles_to_die) : 0;
 		}
 		vm_reset_livenbr(vm);
