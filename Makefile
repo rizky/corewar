@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/27 03:02:23 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/27 03:17:03 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -229,8 +229,8 @@ test_vm_op : corewar
 
 test_vm_dump : corewar
 	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
-	@./corewar -dump 1 $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
-	@./resources/binaries/corewar -d 1 $(T_VM_DIR_OP)$(X).cor > out2; true
+	@./corewar -dump $(DUMP) $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -d $(DUMP) $(T_VM_DIR_OP)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR_OP)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
