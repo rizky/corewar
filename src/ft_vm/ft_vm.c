@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 05:08:29 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 05:14:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int
 int
 	vm_start_ncurse(time_t *start, t_vm vm)
 {
-	(vm.v_lvl[V_LVL_1] && g_cycles == 0) ? init_ncurses(&vm, start) : 0;
+	(vm.v_lvl[V_LVL_1] && g_cycles == 1) ? init_ncurses(&vm, start) : 0;
 	while (g_draw_status.pause)
 	{
 		draw(&vm);
@@ -117,7 +117,7 @@ int
 	t_vm		vm;
 	time_t		start;
 
-	g_cycles = 0;
+	g_cycles = 1;
 	ft_bzero(&vm, sizeof(t_vm));
 	if (ac < 2 || vm_options(av, &vm) == -1)
 		return (vm_print_usage(av, -1));
@@ -126,8 +126,9 @@ int
 	if (vm_read_binaries(vm.players, &vm) == -1)
 		return (-1);
 	vm_load_champs(&vm, g_memory);
-	while (g_cycles == 0 || vm_checker(&vm))
+	while (g_cycles == 1 || vm_checker(&vm))
 	{
+		(vm.v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
 		vm_decompiler(&vm);
 		vm_executor(&vm);
 		(vm.dump && vm.cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
