@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 02:55:45 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 04:21:34 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void
 	ft_printf(" %d", value - (p.offset + p.pc));
 	if (!g_carry)
 		ft_printf(" FAILED");
+	else
+		ft_printf(" OK");
 	ft_printf("\n");
 }
 

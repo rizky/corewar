@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:27:57 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 03:26:43 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 04:24:43 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	vm_op_ld(t_vm *vm, t_process *p)
 		vm_binary_toint(&g_memory[p->offset + p->pc + p->op.params[0].value], 4)
 		: p->op.params[0].value;
 	g_reg[p->champ][p->op.params[1].value] = param0;
+	if (param0 == 0)
+		g_carry = 1;
 	vm_op_inc(vm, p);
 }
 
