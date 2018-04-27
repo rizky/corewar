@@ -1,7 +1,7 @@
 .name "tester"
-.comment "test fork"
+.comment "test lfork"
 
 
-fork %59
+lfork %65535
 
 #this will created the same process at the same place

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 11:38:50 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/27 01:57:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct	s_vm
 {
 	int			valid_arg[2];
 	int			dump;
-	int			visualizer;
 	int			v_lvl[6];
 	int			check_nbr;
 	char		*players[MAX_PLAYERS + 1];
@@ -94,7 +93,7 @@ int				vm_options(char **av, t_vm *vm);
 int				vm_error(int errnum, int status);
 
 int				vm_binary_toint(unsigned char *bin, int size);
-int				vm_read_binary(int i, char **av, t_vm *vm);
+int				vm_read_binaries(char **paths, t_vm *vm);
 void			*vm_memmark(void *dst, int i, size_t n);
 
 void			vm_print_memory(unsigned char memory[MEM_SIZE]);

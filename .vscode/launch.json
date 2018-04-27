@@ -99,7 +99,11 @@
 			"program": "${workspaceFolder}/corewar",
 			"args": [
 					"-v",
+<<<<<<< HEAD
 					"0",
+=======
+					"4",
+>>>>>>> dev/rizky
 					"tests/op/fork.cor"
 					],
 =======

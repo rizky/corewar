@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 09:23:05 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:10:33 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int
 	unsigned char	buf[COMMENT_LENGTH + 4];
 
 	if (vm_read_magic(fd, champ) == -1)
-		return (-1);
+		return (vm_error(INVALID_FILE, -1));
 	if ((ret = read(fd, &buf, PROG_NAME_LENGTH + 4)) <= 0)
 		return (vm_error(INVALID_FILE, -1));
 	ft_strncpy(champ->header.prog_name, (char*)buf, PROG_NAME_LENGTH + 4 + 1);
@@ -65,24 +65,29 @@ int
 }
 
 int
-	vm_read_binary(int i, char **paths, t_vm *vm)
+	vm_read_binaries(char **paths, t_vm *vm)
 {
 	int				fd;
 	int				ret;
 	unsigned char	buf[COMMENT_LENGTH + 4];
 	t_champ			champ;
+	int				i;
 
-	if ((fd = open(paths[i], O_RDONLY)) == -1)
-		return (vm_error(INVALID_FILE, -1));
-	if (vm_read_header(fd, &champ) == -1)
-		return (-1);
-	if ((ret = read(fd, &buf, champ.header.prog_size)) <= 0)
-		return (vm_error(INVALID_FILE, -1));
-	champ.op = ft_memalloc(champ.header.prog_size + 1);
-	ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
-	champ.op[champ.header.prog_size] = '\0';
-	vm->champ[i] = champ;
-	vm->champ[i].processes = fta_alloc(sizeof(t_process));
-	close(fd);
-	return (i);
+	i = -1;
+	while (++i < vm->champ_size)
+	{
+		if ((fd = open(paths[i], O_RDONLY)) == -1)
+			return (vm_error(INVALID_FILE, -1));
+		if (vm_read_header(fd, &champ) == -1)
+			return (-1);
+		if ((ret = read(fd, &buf, champ.header.prog_size)) <= 0)
+			return (vm_error(INVALID_FILE, -1));
+		champ.op = ft_memalloc(champ.header.prog_size + 1);
+		ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
+		champ.op[champ.header.prog_size] = '\0';
+		vm->champ[i] = champ;
+		vm->champ[i].processes = fta_alloc(sizeof(t_process));
+		close(fd);
+	}
+	return (0);
 }
