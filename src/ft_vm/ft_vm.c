@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 08:42:38 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/27 08:54:49 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,8 @@ int
 	if (ac < 2 || vm_options(av, &vm) == -1)
 		return (vm_print_usage(av, -1));
 	vm_get_champions(av, &vm);
-	if (vm.champ_size < 1)
-		return (vm_error(CHAMP_MIN, -1));
-	else if (vm.champ_size > MAX_PLAYERS)
-		return (vm_error(CHAMP_MAX, -1));
+	if (vm.champ_size < 1 || vm.champ_size > MAX_PLAYERS)
+		return (vm_error(vm.champ_size < 1 ? CHAMP_MIN : CHAMP_MAX, -1));
 	if (vm_read_binaries(vm.players, &vm) == -1)
 		return (-1);
 	vm_load_champs(&vm, g_memory);
