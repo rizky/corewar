@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:29:55 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 16:13:07 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:28:32 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	vm_op_ldi(t_vm *vm, t_process *p)
 		cursor = MEM_SIZE - cursor;
 	g_reg[p->champ][p->op.params[2].value] =
 		vm_binary_toint(&g_memory[cursor], 4);
-	if (g_reg[p->champ][p->op.params[2].value] == 0)
-		g_carry = 1;
 	vm_op_inc(vm, p);
 }
 
