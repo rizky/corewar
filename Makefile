@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/27 15:14:08 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/27 16:29:24 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -238,7 +238,7 @@ test_vm_dump : corewar
 	fi
 
 tests_vm_op: corewar
-	@echo $(CYAN) " - Test Op" $(EOC)
+	@echo $(CYAN) " - Test Basic Operations" $(EOC)
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_op;)
 
 tests_vm_dump: corewar

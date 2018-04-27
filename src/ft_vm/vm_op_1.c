@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:27:57 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 16:26:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:34:13 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	vm_op_st(t_vm *vm, t_process *p)
 	(void)vm;
 	if (p->op.params[0].value < 1 ||
 		p->op.params[0].value > 16)
+	{
 		vm_op_inc(vm, p);
+		return ;
+	}
 	param1 = (p->op.params[1].type == REG_CODE) ?
 		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
 	temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
@@ -73,7 +76,10 @@ void	vm_op_add(t_vm *vm, t_process *p)
 		p->op.params[1].value > 16 ||
 		p->op.params[2].value < 1 ||
 		p->op.params[2].value > 16)
+	{
 		vm_op_inc(vm, p);
+		return ;
+	}
 	g_reg[p->champ][p->op.params[2].value] =
 		g_reg[p->champ][p->op.params[0].value] +
 		g_reg[p->champ][p->op.params[1].value];
