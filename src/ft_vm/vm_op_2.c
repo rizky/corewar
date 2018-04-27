@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_operations_2.c                                  :+:      :+:    :+:   */
+/*   vm_op_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:29:15 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/26 08:35:54 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/27 17:16:41 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,22 @@
 void	vm_op_sub(t_vm *vm, t_process *p)
 {
 	(void)vm;
-	(void)p;
+	if (p->op.params[0].value < 1 ||
+		p->op.params[0].value > 16 ||
+		p->op.params[1].value < 1 ||
+		p->op.params[1].value > 16 ||
+		p->op.params[2].value < 1 ||
+		p->op.params[2].value > 16)
+	{
+		vm_op_inc(vm, p);
+		return ;
+	}
+	g_reg[p->champ][p->op.params[2].value] =
+		g_reg[p->champ][p->op.params[0].value] -
+		g_reg[p->champ][p->op.params[1].value];
+	if (g_reg[p->champ][p->op.params[2].value] == 0)
+		g_carry = 1;
+	vm_op_inc(vm, p);
 }
 
 void	vm_op_and(t_vm *vm, t_process *p)
