@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:27:57 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 16:34:13 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:47:39 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,19 @@ void	vm_op_st(t_vm *vm, t_process *p)
 		vm_op_inc(vm, p);
 		return ;
 	}
-	param1 = (p->op.params[1].type == REG_CODE) ?
-		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
-	temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
-	ft_memcpy(&g_memory[(p->offset + p->pc + param1) % IDX_MOD],
-		temp, 4);
-	vm_memmark(&g_memory_mark[(p->offset + p->pc + param1) % IDX_MOD],
-		p->champ + 1, 4);
-	free(temp);
+	if (p->op.params[1].type == REG_CODE)
+		g_reg[p->champ][p->op.params[1].value] =
+			g_reg[p->champ][p->op.params[0].value];
+	else
+	{
+		param1 = p->op.params[1].value;
+		temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
+		ft_memcpy(&g_memory[(p->offset + p->pc + param1) % IDX_MOD],
+			temp, 4);
+		vm_memmark(&g_memory_mark[(p->offset + p->pc + param1) % IDX_MOD],
+			p->champ + 1, 4);
+		free(temp);
+	}
 	vm_op_inc(vm, p);
 }
 
