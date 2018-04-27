@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 15:36:20 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:28:23 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,16 +128,15 @@ void			vm_op_aff(t_vm *vm, t_process *p);
 
 void			vm_op_print(t_process p);
 void			vm_live_print(t_process p);
+void			vm_ld_print(t_process p);
+void			vm_st_print(t_process p);
+void			vm_add_print(t_process p);
+void			vm_sub_print(t_process p);
 void			vm_and_print(t_process p);
 void			vm_zjmp_print(t_process p);
-void			vm_sti_print(t_process p);
-
-void			vm_fork_print(t_process p);
-void			vm_ld_print(t_process p);
 void			vm_ldi_print(t_process p);
-void			vm_st_print(t_process p);
-
-void			vm_add_print(t_process p);
+void			vm_sti_print(t_process p);
+void			vm_fork_print(t_process p);
 void			vm_aff_print(t_process p);
 
 int				vm_valid_arg(char *arg, t_vm *vm);
@@ -180,7 +179,7 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_add, &vm_add_print, .is_car = 1, .cycles = 10},
 	{ .name = "sub", .opcode = 0x05, .d_size = 0, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG},
-		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
+		&vm_op_sub, &vm_sub_print, .is_car = 1, .cycles = 10},
 	{ .name = "and", .opcode = 0x06, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
 		&vm_op_and, &vm_and_print, .is_car = 1, .cycles = 6},
