@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_op_print.c                                      :+:      :+:    :+:   */
+/*   vm_op_print_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 01:34:15 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 02:55:45 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,15 @@ void
 
 	param1 = (p.op.params[1].type == REG_CODE) ?
 		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
+	param1 = (p.op.params[1].type == IND_CODE) ?
+		vm_binary_toint(&g_memory[p.offset + p.pc + p.op.params[1].value], 4)
+		: param1;
 	param2 = (p.op.params[2].type == REG_CODE) ?
 		g_reg[p.champ][p.op.params[2].value] : p.op.params[2].value;
-	vm_op_print(p);
-	ft_printf("      | -> store to %d + %d = %d (with pc and mod %d)",
-		param1, param2, param1 + param2, p.offset + p.pc + param1 + param2);
+	ft_printf("%s", g_op_dict[p.op.opcode].name);
+	ft_printfln(" r%d %d %hd", p.op.params[0].value, param1, param2);
+	ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
+		param1, param2, param1 + param2,
+		(p.offset + p.pc + param1 + param2) % IDX_MOD);
 	ft_printf("\n");
 }

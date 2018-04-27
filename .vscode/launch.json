@@ -98,7 +98,7 @@
 			"args": [
 					"-v",
 					"4",
-					"tests/op/fork.cor"
+					"tests/vm/op/sti_2.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

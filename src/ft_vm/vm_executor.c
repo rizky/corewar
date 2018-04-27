@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/25 15:13:24 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 02:23:14 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void
 {
 	if (p.op.opcode != 0)
 	{
-		ft_printf("P %3d | ", n);
+		ft_printf("P %4d | ", n);
 		(((void (*)())g_op_dict[p.op.opcode].opprint)(p));
 		n--;
 	}

@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/27 01:56:08 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/27 02:25:11 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ FTVM:=	ft_vm \
 		vm_executor \
 		vm_checker \
 		vm_op_1 vm_op_2 vm_op_3 vm_op_4 \
-		vm_op_print_1 \
+		vm_op_print_1 vm_op_print_2 \
 		vm_print \
 		vm_error \
 		vm_options \
@@ -214,16 +214,26 @@ tests_vm_error:
 	@echo $(CYAN) " - Test Error Cases" $(EOC)
 	./corewar -d 1 -n 0 tests/asm/valid/ex.cor -n 1 tests/asm/valid/Car.cor | head -4
 
-tests_vm_valid:
-	@echo $(CYAN) " - Test Valid Cases" $(EOC)
-	./corewar -d 1 tests/asm/valid/ex.cor | head -4
-	./corewar -d 1 -n 2 tests/asm/valid/ex.cor -n 1 tests/asm/valid/Car.cor | head -4
-	./corewar -d 1 tests/asm/valid/ex.cor tests/asm/valid/Car.cor
+# ----- TEST UNIT VM ------
+T_VM_DIR_OP = tests/vm/op/
+T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE_OP).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+
+test_vm_op : corewar
+	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
+	@./corewar -v 4 $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 4 $(T_VM_DIR_OP)$(X).cor > out2; true
+	@if diff out1 out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_OP)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
+	fi
+
+tests_vm_op: corewar
+	@echo $(CYAN) " - Test Op" $(EOC)
+	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_op;)
 
 tests_vm: corewar
 	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
-	@$(MAKE) tests_vm_valid
-	@$(MAKE) tests_vm_error
+	@$(MAKE) tests_vm_op
 
 tests: tests_asm
 
