@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 05:07:54 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 08:37:59 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include "op.h"
 
 # define MALLOC			1
-# define INVALID_FILE	2
+# define CHAMP_MIN		2
 # define CHAMP_MAX		3
-# define CODE_MAX		4
+# define INVALID_FILE	4
+# define CODE_MAX		5
 
 # define V_LVL_0		0
 # define V_LVL_1		1
