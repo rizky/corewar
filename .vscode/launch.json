@@ -98,6 +98,7 @@
 			"args": [
 					"-v",
 					"4",
+					"16",
 					"tests/vm/op/ld_1.cor"
 					],
 			"stopAtEntry": false,
