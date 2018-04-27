@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/27 03:17:03 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/27 03:57:56 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -217,6 +217,7 @@ tests_vm_error:
 # ----- TEST UNIT VM ------
 T_VM_DIR_OP = tests/vm/op/
 T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE_OP).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+DUMP = 150
 
 test_vm_op : corewar
 	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
