@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/27 16:29:24 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/27 17:00:07 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -228,6 +228,10 @@ test_vm_op : corewar
 		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
 	fi
 
+tests_vm_op: corewar
+	@echo $(CYAN) " - Test Basic Operations" $(EOC)
+	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_op;)
+
 test_vm_dump : corewar
 	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
 	@./corewar -dump $(DUMP) $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
@@ -236,10 +240,6 @@ test_vm_dump : corewar
 		then echo $(GREEN) " - [OK] $(T_VM_DIR_OP)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
 	fi
-
-tests_vm_op: corewar
-	@echo $(CYAN) " - Test Basic Operations" $(EOC)
-	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_op;)
 
 tests_vm_dump: corewar
 	@echo $(CYAN) " - Test Memory Dump" $(EOC)
@@ -251,6 +251,23 @@ test_vm_leak: corewar
 tests_vm_leak:
 	@echo $(CYAN) " - Test Leaks" $(EOC)
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$(T_VM_DIR_OP)$(x) test_vm_leak;)
+
+T_VM_DIR_B = tests/vm/battle/
+T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+
+test_vm_battle : corewar
+	@./resources/binaries/asm $(T_VM_DIR_B)$(X).s > /dev/null; true
+	@./resources/binaries/asm $(T_VM_DIR_B)$(X)X.s > /dev/null; true
+	@./corewar -v 4 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 4 -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
+	@if diff out1 out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_B)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_B)$(X)" $(EOC) ; \
+	fi
+
+tests_vm_battle: corewar
+	@echo $(CYAN) " - Test Battle" $(EOC)
+	@$(foreach x, $(T_VM_FILES_B), $(MAKE) X=$x test_vm_battle;)
 
 tests_vm: corewar
 	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
