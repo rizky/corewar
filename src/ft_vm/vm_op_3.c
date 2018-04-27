@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:29:55 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 03:21:24 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:13:07 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,22 @@ void	vm_op_zjmp(t_vm *vm, t_process *p)
 
 void	vm_op_ldi(t_vm *vm, t_process *p)
 {
+	int		param0;
+	int		cursor;
+
 	(void)vm;
-	(void)p;
+	param0 = (p->op.params[0].type == IND_CODE) ?
+		vm_binary_toint(&g_memory[p->offset + p->pc + p->op.params[0].value], 4)
+		: p->op.params[0].value;
+	cursor = (p->offset + p->pc +
+		param0 + p->op.params[1].value) % IDX_MOD;
+	if (cursor < 0)
+		cursor = MEM_SIZE - cursor;
+	g_reg[p->champ][p->op.params[2].value] =
+		vm_binary_toint(&g_memory[cursor], 4);
+	if (g_reg[p->champ][p->op.params[2].value] == 0)
+		g_carry = 1;
+	vm_op_inc(vm, p);
 }
 
 void	vm_op_sti(t_vm *vm, t_process *p)

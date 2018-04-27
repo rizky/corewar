@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 15:12:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:26:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void
 void
 	vm_st_print(t_process p)
 {
+	if (p.op.params[0].value < 1 ||
+		p.op.params[0].value > 16)
+		return ;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" r%d", p.op.params[0].value);

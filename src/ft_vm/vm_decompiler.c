@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 03:42:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:24:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ int
 	else
 		op->oc = g_op_dict[op->opcode].p_type[0];
 	if (vm_decompiler_param(p, op) == -1)
+	{
+		ft_bzero(op, sizeof(t_op));
 		return (-1);
+	}
 	p->pc_next = p->pc + op->size;
 	p->cycles = g_cycles - 1 + g_op_dict[op->opcode].cycles;
 	return (0);

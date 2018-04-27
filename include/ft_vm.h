@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 15:16:25 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:36:20 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_ld, &vm_ld_print, .is_car = 1, .cycles = 5},
 	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2, .is_oc = 1,
 		{T_REG, T_REG | T_IND, 0},
-		&vm_op_inc, &vm_st_print, .is_car = 0, .cycles = 5},
+		&vm_op_st, &vm_st_print, .is_car = 0, .cycles = 5},
 	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG},
 		&vm_op_add, &vm_add_print, .is_car = 1, .cycles = 10},
@@ -195,7 +195,7 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_zjmp, &vm_zjmp_print, .is_car = 0, .cycles = 20},
 	{ .name = "ldi", .opcode = 0x0a, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
-		&vm_op_inc, &vm_ldi_print, .is_car = 0, .cycles = 25},
+		&vm_op_ldi, &vm_ldi_print, .is_car = 0, .cycles = 25},
 	{ .name = "sti", .opcode = 0x0b, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG},
 		&vm_op_sti, &vm_sti_print, .is_car = 0, .cycles = 25},
