@@ -6,14 +6,38 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 08:54:49 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/27 10:20:20 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 #include "ft_vm_draw.h"
 
-void
+static int
+	vm_start_ncurse(time_t *start, t_vm vm)
+{
+	(vm.v_lvl[V_LVL_1] && g_cycles == 1) ? init_ncurses(&vm, start) : 0;
+	while (g_draw_status.pause)
+	{
+		draw(&vm);
+		if ((key_hook(&g_draw_status)) == -1)
+			return (-1);
+	}
+	if (time(NULL) - *start >= 121)
+	{
+		system("afplay -t 120 sound/nyan.mp3&");
+		*start = time(NULL);
+	}
+	draw(&vm);
+	if ((key_hook(&g_draw_status)) == -1)
+	{
+		draw_end(&g_draw_win);
+		return (-1);
+	}
+	usleep(g_draw_status.delay);
+	return (0);
+}
+static void
 	vm_load_champs(t_vm *vm, unsigned char memory[MEM_SIZE])
 {
 	int			i;
@@ -86,31 +110,6 @@ static int
 }
 
 int
-	vm_start_ncurse(time_t *start, t_vm vm)
-{
-	(vm.v_lvl[V_LVL_1] && g_cycles == 1) ? init_ncurses(&vm, start) : 0;
-	while (g_draw_status.pause)
-	{
-		draw(&vm);
-		if ((key_hook(&g_draw_status)) == -1)
-			return (-1);
-	}
-	if (time(NULL) - *start >= 121)
-	{
-		system("afplay -t 120 sound/nyan.mp3&");
-		*start = time(NULL);
-	}
-	draw(&vm);
-	if ((key_hook(&g_draw_status)) == -1)
-	{
-		draw_end(&g_draw_win);
-		return (-1);
-	}
-	usleep(g_draw_status.delay);
-	return (0);
-}
-
-int
 	main(int ac, char **av)
 {
 	t_vm		vm;
@@ -122,7 +121,7 @@ int
 		return (vm_print_usage(av, -1));
 	vm_get_champions(av, &vm);
 	if (vm.champ_size < 1 || vm.champ_size > MAX_PLAYERS)
-		return (vm_error(vm.champ_size < 1 ? CHAMP_MIN : CHAMP_MAX, -1));
+		return (vm_error(vm.champ_size < 1 ? CHAMP_MIN : CHAMP_MAX, -1, NULL));
 	if (vm_read_binaries(vm.players, &vm) == -1)
 		return (-1);
 	vm_load_champs(&vm, g_memory);
