@@ -12,6 +12,7 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/asm",
 			"args": ["tests/error/param_mt_3.s"],
+<<<<<<< HEAD
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
@@ -101,6 +102,8 @@
 					"0",
 					"tests/op/fork.cor"
 					],
+=======
+>>>>>>> rizky
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
