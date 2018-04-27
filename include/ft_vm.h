@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 02:33:31 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 03:25:41 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ static	t_op_dict g_op_dict[17] = {
 		{T_DIR, 0, 0}, &vm_op_live, &vm_live_print, .is_car = 0, .cycles = 10},
 	{ .name = "ld", .opcode = 0x02, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_DIR | T_IND, T_REG, 0},
-		&vm_op_inc, &vm_ld_print, .is_car = 1, .cycles = 5},
+		&vm_op_ld, &vm_ld_print, .is_car = 1, .cycles = 5},
 	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2, .is_oc = 1,
 		{T_REG, T_REG | T_IND, 0},
 		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 5},

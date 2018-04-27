@@ -98,7 +98,7 @@
 			"args": [
 					"-v",
 					"4",
-					"tests/vm/op/sti_2.cor"
+					"tests/vm/op/sti_1.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
