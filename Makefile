@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/27 02:25:11 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/27 03:02:23 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -227,13 +227,27 @@ test_vm_op : corewar
 		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
 	fi
 
+test_vm_dump : corewar
+	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
+	@./corewar -dump 1 $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -d 1 $(T_VM_DIR_OP)$(X).cor > out2; true
+	@if diff out1 out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_OP)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
+	fi
+
 tests_vm_op: corewar
 	@echo $(CYAN) " - Test Op" $(EOC)
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_op;)
 
+tests_vm_dump: corewar
+	@echo $(CYAN) " - Test Memory Dump" $(EOC)
+	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_dump;)
+
 tests_vm: corewar
 	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
 	@$(MAKE) tests_vm_op
+	@$(MAKE) tests_vm_dump
 
 tests: tests_asm
 
