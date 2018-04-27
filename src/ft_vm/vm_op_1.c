@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_operations_1.c                                  :+:      :+:    :+:   */
+/*   vm_op_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:27:57 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 01:55:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 03:11:44 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-char
-	*vm_to_big_endian(int value, int size)
-{
-	t_array	result;
-	int		i;
-	int		bits;
-
-	i = 0;
-	result = NEW_ARRAY(char);
-	bits = size * 8;
-	while (i <= bits - 8)
-	{
-		fta_append_char(&result, value >> (bits - 8 - i));
-		i = i + 8;
-	}
-	return (result.data);
-}
-
-void
-	vm_op_inc(t_vm *vm, t_process *p)
+void	vm_op_inc(t_vm *vm, t_process *p)
 {
 	(void)vm;
 	if (p->op.opcode != 0)
