@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 05:02:26 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 05:07:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct	s_vm
 {
 	int			valid_arg[2];
 	int			dump;
+	int			cycles;
 	int			v_lvl[6];
 	int			check_nbr;
 	char		*players[MAX_PLAYERS + 1];

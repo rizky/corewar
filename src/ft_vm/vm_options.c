@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 01:58:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 04:40:04 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		vm_print(t_vm vm)
 	int i;
 	int j;
 
-	ft_printf("dump: %d cycles: %d\n", vm.dump, vm.dump);
+	ft_printf("dump: %d cycles: %d\n", vm.dump, vm.cycles);
 	i = -1;
 	j = 0;
 	while (++i < 6)
@@ -124,8 +124,11 @@ int			vm_options(char **av, t_vm *vm)
 			return (-1);
 		if (!ft_strcmp(av[i], "-dump"))
 		{
-			if ((vm->dump = ft_atoi(av[i + 1])) <= 0)
+			if (!ft_isnumber(av[i + 1]))
 				return (-1);
+			if ((vm->cycles = ft_atoi(av[i + 1])) < 0)
+				return (-1);
+			vm->dump = 1;
 		}
 		else if (vm_option_v(i, av, vm) == -1)
 			return (-1);
