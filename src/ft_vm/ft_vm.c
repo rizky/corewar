@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 03:45:54 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 04:51:05 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int
 	{
 		vm_decompiler(&vm);
 		vm_executor(&vm);
-		(vm.dump && vm.dump == g_cycles) ? vm_print_memory(g_memory) : 0;
+		(vm.dump && vm.cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
 		(vm.v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, vm) : 0;
 		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
 			break ;
