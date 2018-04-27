@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 04:12:37 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 04:32:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void			vm_sti_print(t_process p);
 
 void			vm_fork_print(t_process p);
 void			vm_ld_print(t_process p);
+void			vm_ldi_print(t_process p);
 void			vm_st_print(t_process p);
 
 int				vm_valid_arg(char *arg, t_vm *vm);
@@ -189,7 +190,7 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_zjmp, &vm_zjmp_print, .is_car = 0, .cycles = 20},
 	{ .name = "ldi", .opcode = 0x0a, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
-		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 25},
+		&vm_op_inc, &vm_ldi_print, .is_car = 0, .cycles = 25},
 	{ .name = "sti", .opcode = 0x0b, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG},
 		&vm_op_sti, &vm_sti_print, .is_car = 0, .cycles = 25},

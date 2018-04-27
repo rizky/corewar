@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/27 03:57:56 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/27 04:46:30 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -222,7 +222,7 @@ DUMP = 150
 test_vm_op : corewar
 	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
 	@./corewar -v 4 $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
-	@./resources/binaries/corewar -v 4 $(T_VM_DIR_OP)$(X).cor > out2; true
+	@./resources/binaries/corewar -v 4 -a $(T_VM_DIR_OP)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR_OP)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
@@ -244,6 +244,13 @@ tests_vm_op: corewar
 tests_vm_dump: corewar
 	@echo $(CYAN) " - Test Memory Dump" $(EOC)
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_dump;)
+
+test_vm_leak: corewar
+	@valgrind ./corewar $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+
+tests_vm_leak:
+	@echo $(CYAN) " - Test Leaks" $(EOC)
+	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$(T_VM_DIR_OP)$(x) test_vm_leak;)
 
 tests_vm: corewar
 	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
