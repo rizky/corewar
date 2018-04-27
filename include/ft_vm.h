@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 01:57:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:36:20 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include "op.h"
 
 # define MALLOC			1
-# define INVALID_FILE	2
+# define CHAMP_MIN		2
 # define CHAMP_MAX		3
-# define CODE_MAX		4
+# define INVALID_FILE	4
+# define CODE_MAX		5
 
 # define V_LVL_0		0
 # define V_LVL_1		1
@@ -53,6 +54,7 @@ typedef struct	s_process
 	int			live_nbr;
 	int			champ;
 	t_op		op;
+	int			index;
 }				t_process;
 
 typedef struct	s_champ
@@ -60,12 +62,14 @@ typedef struct	s_champ
 	t_header	header;
 	char		*op;
 	t_array		*processes;
+	int			live_nbr;
 }				t_champ;
 
 typedef struct	s_vm
 {
 	int			valid_arg[2];
 	int			dump;
+	int			cycles;
 	int			v_lvl[6];
 	int			check_nbr;
 	char		*players[MAX_PLAYERS + 1];
@@ -90,7 +94,7 @@ void			vm_print_verbose(t_vm vm, int i);
 
 int				vm_options(char **av, t_vm *vm);
 
-int				vm_error(int errnum, int status);
+int				vm_error(int errnum, int status, char *name);
 
 int				vm_binary_toint(unsigned char *bin, int size);
 int				vm_read_binaries(char **paths, t_vm *vm);
@@ -125,7 +129,6 @@ void			vm_op_lldi(t_vm *vm, t_process *p);
 void			vm_op_lfork(t_vm *vm, t_process *p);
 void			vm_op_aff(t_vm *vm, t_process *p);
 
-void			vm_print_v_4(t_process p, int n);
 void			vm_op_print(t_process p);
 void			vm_live_print(t_process p);
 void			vm_and_print(t_process p);
@@ -133,6 +136,14 @@ void			vm_zjmp_print(t_process p);
 void			vm_sti_print(t_process p);
 void			vm_fork_print(t_process p);
 void			vm_lfork_print(t_process p);
+
+void			vm_fork_print(t_process p);
+void			vm_ld_print(t_process p);
+void			vm_ldi_print(t_process p);
+void			vm_st_print(t_process p);
+
+void			vm_add_print(t_process p);
+void			vm_aff_print(t_process p);
 
 int				vm_valid_arg(char *arg, t_vm *vm);
 int				vm_valid_verbosity_lvl(int lvl);
@@ -165,13 +176,13 @@ static	t_op_dict g_op_dict[17] = {
 		{T_DIR, 0, 0}, &vm_op_live, &vm_live_print, .is_car = 0, .cycles = 10},
 	{ .name = "ld", .opcode = 0x02, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_DIR | T_IND, T_REG, 0},
-		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 5},
+		&vm_op_ld, &vm_ld_print, .is_car = 1, .cycles = 5},
 	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2, .is_oc = 1,
 		{T_REG, T_REG | T_IND, 0},
-		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 5},
+		&vm_op_st, &vm_st_print, .is_car = 0, .cycles = 5},
 	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG},
-		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
+		&vm_op_add, &vm_add_print, .is_car = 1, .cycles = 10},
 	{ .name = "sub", .opcode = 0x05, .d_size = 0, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG},
 		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
@@ -189,7 +200,7 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_zjmp, &vm_zjmp_print, .is_car = 0, .cycles = 20},
 	{ .name = "ldi", .opcode = 0x0a, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
-		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 25},
+		&vm_op_ldi, &vm_ldi_print, .is_car = 0, .cycles = 25},
 	{ .name = "sti", .opcode = 0x0b, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG},
 		&vm_op_sti, &vm_sti_print, .is_car = 0, .cycles = 25},
@@ -204,7 +215,7 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0}, &vm_op_lfork, &vm_lfork_print, .is_car = 0, .cycles = 1000},
 	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
-		{T_REG, 0, 0}, &vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 2}
+		{T_REG, 0, 0}, &vm_op_inc, &vm_aff_print, .is_car = 0, .cycles = 2}
 };
 
 #endif

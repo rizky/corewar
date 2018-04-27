@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_operations_4.c                                  :+:      :+:    :+:   */
+/*   vm_op_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:30:28 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/26 08:41:49 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/27 04:34:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	vm_op_lfork(t_vm *vm, t_process *p)
 	t_process	new_p;
 	int value;
 
+	ft_bzero(&new_p, sizeof(new_p));
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
 	value = (p->op.params[0].value + p->offset + p->pc);

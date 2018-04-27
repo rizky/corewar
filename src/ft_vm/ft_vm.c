@@ -6,14 +6,38 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 01:58:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:52:41 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 #include "ft_vm_draw.h"
 
-void
+static int
+	vm_start_ncurse(time_t *start, t_vm vm)
+{
+	(vm.v_lvl[V_LVL_1] && g_cycles == 1) ? init_ncurses(&vm, start) : 0;
+	while (g_draw_status.pause)
+	{
+		draw(&vm);
+		if ((key_hook(&g_draw_status)) == -1)
+			return (-1);
+	}
+	if (time(NULL) - *start >= 121)
+	{
+		system("afplay -t 120 sound/nyan.mp3&");
+		*start = time(NULL);
+	}
+	draw(&vm);
+	if ((key_hook(&g_draw_status)) == -1)
+	{
+		draw_end(&g_draw_win);
+		return (-1);
+	}
+	usleep(g_draw_status.delay);
+	return (0);
+}
+static void
 	vm_load_champs(t_vm *vm, unsigned char memory[MEM_SIZE])
 {
 	int			i;
@@ -51,7 +75,7 @@ static int
 	j = 0;
 	while (vm->players[j])
 		j++;
-	if (j <= 4)
+	if (j < 4)
 		vm->players[j] = av[i];
 	else
 		return (-1);
@@ -78,37 +102,11 @@ static int
 				if (ft_strequ(av[i], vm->players[j]) && av[i] == vm->players[j])
 					equ = 1;
 			if (!equ && vm_populate_players(i, av, vm) == -1)
-				return (MAX_PLAYERS + 1);
+				return (vm->champ_size = MAX_PLAYERS + 1);
 			num++;
 		}
 	}
-	vm->champ_size = num;
-	return (num);
-}
-
-int
-	vm_start_ncurse(time_t *start, t_vm vm)
-{
-	(vm.v_lvl[V_LVL_1] && g_cycles == 0) ? init_ncurses(&vm, start) : 0;
-	while (g_draw_status.pause)
-	{
-		draw(&vm);
-		if ((key_hook(&g_draw_status)) == -1)
-			return (-1);
-	}
-	if (time(NULL) - *start >= 121)
-	{
-		system("afplay -t 120 sound/nyan.mp3&");
-		*start = time(NULL);
-	}
-	draw(&vm);
-	if ((key_hook(&g_draw_status)) == -1)
-	{
-		draw_end(&g_draw_win);
-		return (-1);
-	}
-	usleep(g_draw_status.delay);
-	return (0);
+	return (vm->champ_size = num);
 }
 
 int
@@ -117,24 +115,28 @@ int
 	t_vm		vm;
 	time_t		start;
 
+	g_cycles = 1;
 	ft_bzero(&vm, sizeof(t_vm));
 	if (ac < 2 || vm_options(av, &vm) == -1)
 		return (vm_print_usage(av, -1));
-	if (vm_get_champions(av, &vm) > MAX_PLAYERS)
-		return (vm_error(CHAMP_MAX, -1));
+	vm_get_champions(av, &vm);
+	if (vm.champ_size < 1 || vm.champ_size > MAX_PLAYERS)
+		return (vm_error(vm.champ_size < 1 ? CHAMP_MIN : CHAMP_MAX, -1, NULL));
 	if (vm_read_binaries(vm.players, &vm) == -1)
 		return (-1);
 	vm_load_champs(&vm, g_memory);
-	while (g_cycles == 0 || vm_checker(&vm))
+	while (g_cycles == 1 || vm_checker(&vm))
 	{
+		(vm.v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
 		vm_decompiler(&vm);
 		vm_executor(&vm);
-		(vm.dump && vm.dump == g_cycles) ? vm_print_memory(g_memory) : 0;
+		(vm.dump && vm.cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
 		(vm.v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, vm) : 0;
 		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
 			break ;
 		g_cycles++;
 		g_cycles_to++;
+		getch();
 	}
 	return (0);
 }
