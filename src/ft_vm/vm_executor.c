@@ -6,21 +6,17 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 05:06:19 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:00:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
 static void
-	vm_print_v_4(t_process p, int n)
+	vm_print_v_4(t_process p)
 {
 	if (p.op.opcode != 0)
-	{
-		ft_printf("P %4d | ", n);
 		(((void (*)())g_op_dict[p.op.opcode].opprint)(p));
-		n--;
-	}
 }
 
 static void
@@ -57,7 +53,8 @@ void
 			p = &(((t_process*)vm->champ[i].processes->data)[j]);
 			if (p->cycles == g_cycles)
 			{
-				(vm->v_lvl[V_LVL_4]) ? vm_print_v_4(*p, n) : 0;
+				p->index = n;
+				(vm->v_lvl[V_LVL_4]) ? vm_print_v_4(*p) : 0;
 				(vm->v_lvl[V_LVL_16]) ? vm_print_v_16(*p) : 0;
 				(((void (*)())g_op_dict[p->op.opcode].opfunc)(vm, p));
 				ft_bzero(&(p->op), sizeof(t_op));

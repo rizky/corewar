@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 04:21:34 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:01:44 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void
 {
 	int i;
 
+	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	i = -1;
 	while (++i < p.op.param_c)
@@ -36,6 +37,7 @@ void
 	int i;
 
 	(void)p;
+	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
 	i = 0;
@@ -50,6 +52,7 @@ void
 void
 	vm_live_print(t_process p)
 {
+	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %d", vm_binary_toint(&g_memory[p.pc + 1], 4));
 	ft_printf("\n");
@@ -64,6 +67,7 @@ void
 	value = (p.op.params[0].value + p.offset + p.pc);
 	if (value > MEM_SIZE)
 		value = (p.op.params[0].value + p.offset + p.pc) % MEM_SIZE;
+	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %d", value - (p.offset + p.pc));
 	if (!g_carry)
@@ -86,6 +90,7 @@ void
 		: param1;
 	param2 = (p.op.params[2].type == REG_CODE) ?
 		g_reg[p.champ][p.op.params[2].value] : p.op.params[2].value;
+	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printfln(" r%d %d %hd", p.op.params[0].value, param1, param2);
 	ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 10:28:51 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/27 14:59:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_process
 	int			live_nbr;
 	int			champ;
 	t_op		op;
+	int			index;
 }				t_process;
 
 typedef struct	s_champ
@@ -136,6 +137,8 @@ void			vm_ld_print(t_process p);
 void			vm_ldi_print(t_process p);
 void			vm_st_print(t_process p);
 
+void			vm_add_print(t_process p);
+
 int				vm_valid_arg(char *arg, t_vm *vm);
 int				vm_valid_verbosity_lvl(int lvl);
 int				vm_lvl_to_index(int index);
@@ -173,7 +176,7 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_inc, &vm_st_print, .is_car = 0, .cycles = 5},
 	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG},
-		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
+		&vm_op_inc, &vm_add_print, .is_car = 1, .cycles = 10},
 	{ .name = "sub", .opcode = 0x05, .d_size = 0, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG},
 		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
