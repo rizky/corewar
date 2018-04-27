@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 03:07:29 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 05:19:39 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int
 	{
 		if (vm_checker_processalive(*vm, &winner) <= 1)
 		{
-			if (vm->v_lvl[V_LVL_4])
+			if (!vm->dump)
 				ft_printfln("Contestant %d, \"%s\", has won !",
 					winner + 1, vm->champ[winner].header.prog_name);
 			return (0);
@@ -127,6 +127,8 @@ int
 		{
 			g_max_check = g_max_check == MAX_CHECKS ? 0 : g_max_check;
 			g_cycles_to_die -= CYCLE_DELTA;
+			(vm.v_lvl[V_LVL_2]) ?
+			ft_printfln("Cycle to die is now %d", g_cycles_to_die) : 0;
 		}
 		vm_reset_livenbr(vm);
 	}
