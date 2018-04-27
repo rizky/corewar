@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 01:58:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 03:45:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int
 	t_vm		vm;
 	time_t		start;
 
+	g_cycles = 0;
 	ft_bzero(&vm, sizeof(t_vm));
 	if (ac < 2 || vm_options(av, &vm) == -1)
 		return (vm_print_usage(av, -1));
