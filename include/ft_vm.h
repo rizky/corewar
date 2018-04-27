@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 03:25:41 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 04:12:37 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void			vm_sti_print(t_process p);
 
 void			vm_fork_print(t_process p);
 void			vm_ld_print(t_process p);
+void			vm_st_print(t_process p);
 
 int				vm_valid_arg(char *arg, t_vm *vm);
 int				vm_valid_verbosity_lvl(int lvl);
@@ -167,7 +168,7 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_ld, &vm_ld_print, .is_car = 1, .cycles = 5},
 	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2, .is_oc = 1,
 		{T_REG, T_REG | T_IND, 0},
-		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 5},
+		&vm_op_inc, &vm_st_print, .is_car = 0, .cycles = 5},
 	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG},
 		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},

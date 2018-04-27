@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 02:32:40 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 04:12:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,14 @@ void
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %hd", p.op.params[0].value);
 	ft_printf(" r%d", p.op.params[1].value);
+	ft_printf("\n");
+}
+
+void
+	vm_st_print(t_process p)
+{
+	ft_printf("%s", g_op_dict[p.op.opcode].name);
+	ft_printf(" r%d", p.op.params[0].value);
+	ft_printf(" %d", p.op.params[1].value);
 	ft_printf("\n");
 }
