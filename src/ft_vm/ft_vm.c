@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 01:50:55 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 01:58:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int
 int
 	vm_start_ncurse(time_t *start, t_vm vm)
 {
-	(vm.visualizer && g_cycles == 0) ? init_ncurses(&vm, start) : 0;
+	(vm.v_lvl[V_LVL_1] && g_cycles == 0) ? init_ncurses(&vm, start) : 0;
 	while (g_draw_status.pause)
 	{
 		draw(&vm);
@@ -131,7 +131,7 @@ int
 		vm_executor(&vm);
 		(vm.dump && vm.dump == g_cycles) ? vm_print_memory(g_memory) : 0;
 		(vm.v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, vm) : 0;
-		if (vm.visualizer && vm_start_ncurse(&start, vm) == -1)
+		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
 			break ;
 		g_cycles++;
 		g_cycles_to++;
