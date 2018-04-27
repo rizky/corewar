@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 15:10:49 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:16:25 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void			vm_ldi_print(t_process p);
 void			vm_st_print(t_process p);
 
 void			vm_add_print(t_process p);
+void			vm_aff_print(t_process p);
 
 int				vm_valid_arg(char *arg, t_vm *vm);
 int				vm_valid_verbosity_lvl(int lvl);
@@ -209,7 +210,7 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0}, &vm_op_inc, &vm_fork_print, .is_car = 0, .cycles = 1000},
 	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
-		{T_REG, 0, 0}, &vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 2}
+		{T_REG, 0, 0}, &vm_op_inc, &vm_aff_print, .is_car = 0, .cycles = 2}
 };
 
 #endif
