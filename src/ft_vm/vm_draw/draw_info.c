@@ -107,6 +107,6 @@ void		draw_info(t_vm *vm)
 	draw_main_info(vm, g_draw_win, &g_draw_status);
 	draw_counter(g_draw_win, &c_tmp);
 	draw_max_counter(g_draw_win, &ctd_tmp);
-	draw_player_info(vm, g_draw_win);
+	// draw_player_info(vm, g_draw_win);
 	draw_animation(g_draw_win.info, g_cycles);
 }
