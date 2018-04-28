@@ -76,14 +76,17 @@ void
 	ft_bzero(&new_p, sizeof(new_p));
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
+	if (p->op.params[0].value > IDX_MOD)
+		p->op.params[0].value = p->op.params[0].value % IDX_MOD;
 	value = (p->op.params[0].value + p->offset + p->pc);
-	if (value > IDX_MOD)
-		value = value % IDX_MOD;
 	if (value > MEM_SIZE)
 		value = value % MEM_SIZE;
 	new_p.pc = p->pc + value - (p->offset + p->pc);
 	new_p.champ = p->champ;
-	vm->champ[p->champ].processes->size += 1;
+	//vm->champ[p->champ].processes->size += 1;
+	//vm->process_size += 1;
 	fta_append(vm->champ[p->champ].processes, &new_p, 1);
 	vm_op_inc(vm, p);
 }
+
+

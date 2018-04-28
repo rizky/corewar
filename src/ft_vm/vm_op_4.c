@@ -37,7 +37,7 @@ void	vm_op_lfork(t_vm *vm, t_process *p)
 		value = value % MEM_SIZE;
 	new_p.pc = p->pc + value - (p->offset + p->pc);
 	new_p.champ = p->champ;
-	vm->champ[p->champ].processes->size += 1;
+	//vm->champ[p->champ].processes->size += 1;
 	fta_append(vm->champ[p->champ].processes, &new_p, 1);
 	vm_op_inc(vm, p);
 }
