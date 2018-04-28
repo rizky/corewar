@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/27 17:00:07 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/27 17:14:49 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ FTVMDRAW:= draw_animation_1 \
 		draw_end \
 		draw_game \
 		draw_info \
+		draw_player_info \
 		draw_init \
 		draw_key_utils \
 		draw_nyan \
@@ -51,7 +52,7 @@ LFTDIR:=./libft
 # ==================
 
 # ------------------
-COMPILER:=clang
+COMPILER:=gcc
 LINKER:=ar rc
 SRCPATH:=src/
 HDRPATH:=include/
@@ -133,7 +134,6 @@ fclean: clean
 	@rm -rf $(NAME_VM).dSYM/
 	@cd $(LFTDIR) && $(MAKE) fclean
 	@rm -f out1 out2
-	@rm -f *.cor tests/asm/valid*/*.cor
 
 re: fclean
 	@$(MAKE) all

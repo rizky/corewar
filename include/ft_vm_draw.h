@@ -32,7 +32,6 @@ typedef	struct	s_status
 	int			pause;
 	int			delay;
 	int			speed;
-	int			c_now;
 	int			nyan_col;
 }				t_status;
 
@@ -45,6 +44,7 @@ typedef	struct	s_win
 
 t_status		g_draw_status;
 t_win			g_draw_win;
+int				g_signal;
 
 int				key_hook(t_status *status);
 
@@ -58,10 +58,11 @@ void			draw_nyan(WINDOW *w, int cycle, int *nyan_col);
 void			draw_end(t_win *win);
 
 void			init_ncurses(t_vm *vm, time_t *start);
+int				vm_start_ncurse(time_t *start, t_vm vm);
 void			draw(t_vm *vm);
 void			draw_info(t_vm *vm);
-void			draw_game(t_vm *v, t_win w, unsigned char *m_1,
-				unsigned char *m_2);
+void			draw_player_info(t_vm *vm, t_win win);
+void			draw_game(t_vm *v, t_win w);
 
 
 #endif
