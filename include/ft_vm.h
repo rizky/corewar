@@ -136,6 +136,8 @@ void			vm_st_print(t_process p);
 void			vm_add_print(t_process p);
 void			vm_sub_print(t_process p);
 void			vm_and_print(t_process p);
+void			vm_or_print(t_process p);
+void			vm_xor_print(t_process p);
 void			vm_zjmp_print(t_process p);
 void			vm_ldi_print(t_process p);
 void			vm_sti_print(t_process p);
@@ -191,10 +193,10 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_and, &vm_and_print, .is_car = 1, .cycles = 6},
 	{ .name = "or", .opcode = 0x07, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		&vm_op_or, &vm_op_print, .is_car = 1, .cycles = 6},
+		&vm_op_or, &vm_or_print, .is_car = 1, .cycles = 6},
 	{ .name = "xor", .opcode = 0x08, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		&vm_op_xor, &vm_op_print, .is_car = 1, .cycles = 6},
+		&vm_op_xor, &vm_xor_print, .is_car = 1, .cycles = 6},
 	{ .name = "zjmp", .opcode = 0x09, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0},
 		&vm_op_zjmp, &vm_zjmp_print, .is_car = 0, .cycles = 20},
