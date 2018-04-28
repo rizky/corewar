@@ -42,9 +42,11 @@ void
 	ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
 	i = 0;
 	while (++i < p.op.param_c)
-		if (p.op.params[i].type == REG_CODE)
+		if (p.op.params[i].type == REG_CODE && i == 2)
 			ft_printf(" r%d", p.op.params[i].value);
-		else
+		else if (p.op.params[i].type == REG_CODE)
+            ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]);
+        else
 			ft_printf(" %d", p.op.params[i].value);
 	ft_printf("\n");
 }
