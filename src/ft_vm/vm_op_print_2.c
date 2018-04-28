@@ -22,7 +22,7 @@ void
 	value = p.pc + p.offset + p.op.params[0].value;
 	if (value > MEM_SIZE)
 		value = value % MEM_SIZE;
-	ft_printf(" %hd (%hd)", p.op.params[0].value, value);
+	ft_printf(" %hd (%hd)", p.op.params[0].value, p.pc + p.offset + p.op.params[0].value);
 	ft_printf("\n");
 }
 

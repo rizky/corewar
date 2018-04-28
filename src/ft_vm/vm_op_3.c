@@ -71,17 +71,20 @@ void
 	vm_op_fork(t_vm *vm, t_process *p)
 {
 	t_process	new_p;
-	int			value;
+	short		value;
 
 	ft_bzero(&new_p, sizeof(new_p));
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
-	if (p->op.params[0].value > IDX_MOD)
-		p->op.params[0].value = p->op.params[0].value % IDX_MOD;
-	value = (p->op.params[0].value + p->offset + p->pc);
-	if (value > MEM_SIZE)
+//	if (p->op.params[0].value > IDX_MOD)
+	value = p->op.params[0].value;
+	value = value % IDX_MOD;
+	value += p->offset + p->pc;
+//	if (value > MEM_SIZE)
 		value = value % MEM_SIZE;
-	new_p.pc = p->pc + value - (p->offset + p->pc);
+	new_p.pc = value - p->offset;
+	if (value < 0)
+		new_p.pc += MEM_SIZE;
 	new_p.champ = p->champ;
 	//vm->champ[p->champ].processes->size += 1;
 	//vm->process_size += 1;
