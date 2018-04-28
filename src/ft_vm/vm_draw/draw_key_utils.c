@@ -48,6 +48,8 @@ int			key_hook(t_status *status)
 	}
 	if (ch == 27)
 		return (-1);
+	if (ch == 115)
+		return (1);
 	key_speed(ch, status);
 	return (0);
 }

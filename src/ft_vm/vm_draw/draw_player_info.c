@@ -43,7 +43,8 @@ void			draw_player_info(t_vm *vm, t_win w)
 		mvwprintw(w.info, 24 + i + row, 3, "* Lives in current period :		%d",
 			vm->champ[i].live_nbr);
 		wattron(w.info, COLOR_PAIR(color));
-		mvwprintw(w.info, 23 + i + row, 15, "%s",vm->champ[i].header.prog_name);
+		mvwprintw(w.info, 23 + i + row, 15, "%s",
+			vm->champ[i].header.prog_name);
 		wattroff(w.info, COLOR_PAIR(color));
 		row += 3;
 	}

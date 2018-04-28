@@ -58,29 +58,22 @@ static void		color_picker(t_vm *vm, unsigned char *m, int *i, int *color)
 	}
 }
 
-static void		draw_map(t_vm *v, t_win w, unsigned char *m1, unsigned char *m2)
+static void		draw_map(t_vm *v, t_win w)
 {
 	int			i;
 	int			col;
 	int			row;
 	int			color;
-	// unsigned char	m[MEM_SIZE];
 
 	i = 0;
 	col = 0;
 	row = 0;
 	color = 7;
-	// ft_memcpy(m, m1, MEM_SIZE);
-	// ft_bzero(m, MEM_SIZE);
 	while (i < MEM_SIZE)
 	{
-		// if (g_cylcm[i] != m1[i])
-		// {
-			color_picker(v, m2, &i, &color);
-			wattron(w.game, COLOR_PAIR(color));
-			mvwprintw(w.game, (2 + row), 3 + (col * 3), "%02x", m1[i]);
-			// m[i] = m1[i];
-		// }
+		color_picker(v, g_memory_mark, &i, &color);
+		wattron(w.game, COLOR_PAIR(color));
+		mvwprintw(w.game, (2 + row), 3 + (col * 3), "%02x", g_memory[i]);
 		col++;
 		i++;
 		if (col == 64)
@@ -88,16 +81,15 @@ static void		draw_map(t_vm *v, t_win w, unsigned char *m1, unsigned char *m2)
 			col = 0;
 			row++;
 		}
-		// ft_memcpy(m, m1, MEM_SIZE);
 	}
 	wattroff(w.game, COLOR_PAIR(7));
 }
 
-void			draw_game(t_vm *v, t_win w, unsigned char *m, unsigned char *m2)
+void			draw_game(t_vm *v, t_win w)
 {
 	wattron(w.game, COLOR_PAIR(1));
 	box(w.game, 'x', 'x');
-	draw_map(v, w, m, m2);
+	draw_map(v, w);
 	wattron(w.info, COLOR_PAIR(1));
 	box(w.info, 'x', 'x');
 }
