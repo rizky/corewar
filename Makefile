@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/26 11:10:04 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/04/27 17:14:49 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,12 @@ FTVM:=	ft_vm \
 		vm_decompiler_file \
 		vm_executor \
 		vm_checker \
-		vm_op \
-		vm_operations_1 vm_operations_2 vm_operations_3 vm_operations_4 \
-		vm_op_print \
+		vm_op_1 vm_op_2 vm_op_3 vm_op_4 \
+		vm_op_print_1 vm_op_print_2 vm_op_print_3\
 		vm_print \
 		vm_error \
 		vm_options \
-		vm_helper_1 
+		vm_helper_1 vm_helper_2
 
 FTVMDRAWPATH:= ft_vm/vm_draw/
 FTVMDRAW:= draw_animation_1 \
@@ -42,6 +41,7 @@ FTVMDRAW:= draw_animation_1 \
 		draw_end \
 		draw_game \
 		draw_info \
+		draw_player_info \
 		draw_init \
 		draw_key_utils \
 		draw_nyan \
@@ -52,7 +52,7 @@ LFTDIR:=./libft
 # ==================
 
 # ------------------
-COMPILER:=clang
+COMPILER:=gcc
 LINKER:=ar rc
 SRCPATH:=src/
 HDRPATH:=include/
@@ -134,16 +134,15 @@ fclean: clean
 	@rm -rf $(NAME_VM).dSYM/
 	@cd $(LFTDIR) && $(MAKE) fclean
 	@rm -f out1 out2
-	@rm -f *.cor tests/asm/valid*/*.cor
 
 re: fclean
 	@$(MAKE) all
 
-debug: $(OBJ_ASM)
+debug: $(OBJ_ASM) $(OBJ_VM)
 	@echo $(CYAN) " - Compiling debug asm" $(EOC)
 	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) -g -o $(NAME)
 	@echo $(CYAN) " - Compiling debug vm" $(EOC)
-	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -g -o $(NAME_VM)
+	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -g -o $(NAME_VM) -lncurses
 
 norm:
 	@norminette $(SRC_VM) $(HDRPATH) $(SRC_ASM) | grep -v	Norme -B1 || true
@@ -215,17 +214,66 @@ tests_vm_error:
 	@echo $(CYAN) " - Test Error Cases" $(EOC)
 	./corewar -d 1 -n 0 tests/asm/valid/ex.cor -n 1 tests/asm/valid/Car.cor | head -4
 
-tests_vm_valid:
-	@echo $(CYAN) " - Test Valid Cases" $(EOC)
-	./corewar -d 1 tests/asm/valid/ex.cor | head -4
-	./corewar -d 1 -n 2 tests/asm/valid/ex.cor -n 1 tests/asm/valid/Car.cor | head -4
-	./corewar -d 1 tests/asm/valid/ex.cor tests/asm/valid/Car.cor
+# ----- TEST UNIT VM ------
+T_VM_DIR_OP = tests/vm/op/
+T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE_OP).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+DUMP = 150
+
+test_vm_op : corewar
+	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
+	@./corewar -v 4 $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 4 -a $(T_VM_DIR_OP)$(X).cor > out2; true
+	@if diff out1 out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_OP)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
+	fi
+
+tests_vm_op: corewar
+	@echo $(CYAN) " - Test Basic Operations" $(EOC)
+	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_op;)
+
+test_vm_dump : corewar
+	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
+	@./corewar -dump $(DUMP) $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -d $(DUMP) $(T_VM_DIR_OP)$(X).cor > out2; true
+	@if diff out1 out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_OP)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
+	fi
+
+tests_vm_dump: corewar
+	@echo $(CYAN) " - Test Memory Dump" $(EOC)
+	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_dump;)
+
+test_vm_leak: corewar
+	@valgrind ./corewar $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+
+tests_vm_leak:
+	@echo $(CYAN) " - Test Leaks" $(EOC)
+	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$(T_VM_DIR_OP)$(x) test_vm_leak;)
+
+T_VM_DIR_B = tests/vm/battle/
+T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+
+test_vm_battle : corewar
+	@./resources/binaries/asm $(T_VM_DIR_B)$(X).s > /dev/null; true
+	@./resources/binaries/asm $(T_VM_DIR_B)$(X)X.s > /dev/null; true
+	@./corewar -v 4 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 4 -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
+	@if diff out1 out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_B)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_B)$(X)" $(EOC) ; \
+	fi
+
+tests_vm_battle: corewar
+	@echo $(CYAN) " - Test Battle" $(EOC)
+	@$(foreach x, $(T_VM_FILES_B), $(MAKE) X=$x test_vm_battle;)
 
 tests_vm: corewar
 	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
-	@$(MAKE) tests_vm_valid
-	@$(MAKE) tests_vm_error
+	@$(MAKE) tests_vm_op
+	@$(MAKE) tests_vm_dump
 
-tests: tests_asm
+tests: tests_asm tests_vm
 
 .PHONY: all clean fclean re debug norm norm2 tests tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft

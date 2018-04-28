@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:01:43 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 10:58:39 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 14:22:42 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int			key_hook(t_status *status)
 	}
 	if (ch == 27)
 		return (-1);
+	if (ch == 115)
+		return (1);
 	key_speed(ch, status);
 	return (0);
 }

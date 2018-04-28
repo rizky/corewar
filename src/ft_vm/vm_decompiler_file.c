@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/26 09:23:05 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/27 10:26:52 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int
 	unsigned char	buf[COMMENT_LENGTH + 4];
 
 	if ((ret = read(fd, &buf, 4)) <= 0)
-		return (vm_error(INVALID_FILE, -1));
+		return (INVALID_FILE);
 	champ->header.magic = vm_binary_toint(buf, 4);
 	if (vm_binary_toint(buf, 4) != COREWAR_EXEC_MAGIC)
-		return (vm_error(INVALID_FILE, -1));
+		return (INVALID_FILE);
 	return (0);
 }
 
@@ -48,41 +48,47 @@ int
 	int				ret;
 	unsigned char	buf[COMMENT_LENGTH + 4];
 
-	if (vm_read_magic(fd, champ) == -1)
-		return (-1);
+	if (vm_read_magic(fd, champ) > 0)
+		return (INVALID_FILE);
 	if ((ret = read(fd, &buf, PROG_NAME_LENGTH + 4)) <= 0)
-		return (vm_error(INVALID_FILE, -1));
+		return (INVALID_FILE);
 	ft_strncpy(champ->header.prog_name, (char*)buf, PROG_NAME_LENGTH + 4 + 1);
 	if ((ret = read(fd, &buf, 4) <= 0))
-		return (vm_error(INVALID_FILE, -1));
+		return (INVALID_FILE);
 	champ->header.prog_size = vm_binary_toint(buf, 4);
 	if (champ->header.prog_size > CHAMP_MAX_SIZE)
-		return (vm_error(CODE_MAX, -1));
+		return (CODE_MAX);
 	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) <= 0)
-		return (vm_error(INVALID_FILE, -1));
+		return (INVALID_FILE);
 	ft_strncpy(champ->header.comment, (char*)buf, COMMENT_LENGTH + 4 + 1);
 	return (0);
 }
 
 int
-	vm_read_binary(int i, char **paths, t_vm *vm)
+	vm_read_binaries(char **paths, t_vm *vm)
 {
 	int				fd;
 	int				ret;
 	unsigned char	buf[COMMENT_LENGTH + 4];
 	t_champ			champ;
+	int				i;
+	int				error;
 
-	if ((fd = open(paths[i], O_RDONLY)) == -1)
-		return (vm_error(INVALID_FILE, -1));
-	if (vm_read_header(fd, &champ) == -1)
-		return (-1);
-	if ((ret = read(fd, &buf, champ.header.prog_size)) <= 0)
-		return (vm_error(INVALID_FILE, -1));
-	champ.op = ft_memalloc(champ.header.prog_size + 1);
-	ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
-	champ.op[champ.header.prog_size] = '\0';
-	vm->champ[i] = champ;
-	vm->champ[i].processes = fta_alloc(sizeof(t_process));
-	close(fd);
-	return (i);
+	i = -1;
+	while (++i < vm->champ_size)
+	{
+		if ((fd = open(paths[i], O_RDONLY)) == -1)
+			return (vm_error(INVALID_FILE, -1, paths[i]));
+		if ((error = vm_read_header(fd, &champ)) > 0)
+			return (vm_error(error, -1, paths[i]));
+		if ((ret = read(fd, &buf, champ.header.prog_size)) <= 0)
+			return (vm_error(INVALID_FILE, -1, paths[i]));
+		champ.op = ft_memalloc(champ.header.prog_size + 1);
+		ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
+		champ.op[champ.header.prog_size] = '\0';
+		vm->champ[i] = champ;
+		vm->champ[i].processes = fta_alloc(sizeof(t_process));
+		close(fd);
+	}
+	return (0);
 }

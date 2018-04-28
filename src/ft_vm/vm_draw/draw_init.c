@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:00:22 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 11:10:42 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/26 14:22:35 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void		init_ncurses(t_vm *vm, time_t *start)
 	g_draw_win.game = newwin(4 + (MEM_SIZE / 64), 197, 0, 0);
 	g_draw_win.info = newwin(4 + (MEM_SIZE / 64), 58, 0, 196);
 	g_draw_win.nyan = newwin(9, 254, 4 + (MEM_SIZE / 64), 0);
-	g_draw_status.speed = 80;
+	g_draw_status.speed = 50;
+	g_signal = 1;
 }

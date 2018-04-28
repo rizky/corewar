@@ -19,86 +19,14 @@
 		},
 		{
 			"preLaunchTask": "make debug",
-			"name": "(lldb) Launch VM -v",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/corewar",
-			"args": [
-					"-v",
-					"tests/asm/valid/ex.cor",
-					"tests/asm/valid/ex1.cor"],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": true,
-			"MIMode": "lldb"
-		},
-		{
-			"preLaunchTask": "make debug",
-			"name": "(lldb) Launch VM -d",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/corewar",
-			"args": [
-					"-d",
-					"1",
-					"tests/asm/valid/ex.cor",
-					"tests/asm/valid/ex1.cor"
-				],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": true,
-			"MIMode": "lldb"
-		},
-		{
-			"preLaunchTask": "make debug",
-			"name": "(lldb) Launch VM -n 4",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/corewar",
-			"args": [
-					"tests/asm/valid/ex.cor",
-					"tests/asm/valid/ex1.cor",
-					"tests/asm/valid/Car.cor",
-					"tests/asm/valid/MarineKing.cor"
-				],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": true,
-			"MIMode": "lldb"
-		},
-		{
-			"preLaunchTask": "make debug",
-			"name": "(lldb) Launch VM -n",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/corewar",
-			"args": [
-					"-n",
-					"1",
-					"tests/asm/valid/ex.cor",
-					"-n",
-					"2",
-					"tests/asm/valid/Car.cor"
-					],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": true,
-			"MIMode": "lldb"
-		},
-		{
-			"preLaunchTask": "make debug",
-			"name": "(lldb) Launch VM -v 4",
+			"name": "(lldb) Launch VM",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
 			"args": [
 					"-v",
 					"4",
-					"tests/asm/valid/ex.cor"
+					"tests/vm/op/st.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
