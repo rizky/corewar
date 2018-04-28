@@ -50,6 +50,7 @@ void		init_ncurses(t_vm *vm, time_t *start)
 	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 	init_all_color();
+	ft_bzero(g_m, MEM_SIZE);
 	system("afplay -t 120 sound/nyan.mp3&");
 	g_draw_win.game = newwin(4 + (MEM_SIZE / 64), 197, 0, 0);
 	g_draw_win.info = newwin(4 + (MEM_SIZE / 64), 58, 0, 196);

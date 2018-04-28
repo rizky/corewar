@@ -30,10 +30,7 @@ static int
 	}
 	draw(&vm);
 	if ((key_hook(&g_draw_status)) == -1)
-	{
-		draw_end(&g_draw_win);
 		return (-1);
-	}
 	usleep(g_draw_status.delay);
 	return (0);
 }
@@ -136,7 +133,6 @@ int
 			break ;
 		g_cycles++;
 		g_cycles_to++;
-		getch();
 	}
 	(vm.v_lvl[V_LVL_1]) ? draw_end(&g_draw_win) : 0;
 	return (0);

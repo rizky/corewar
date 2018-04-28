@@ -41,6 +41,7 @@ FTVMDRAW:= draw_animation_1 \
 		draw_end \
 		draw_game \
 		draw_info \
+		draw_player_info \
 		draw_init \
 		draw_key_utils \
 		draw_nyan \

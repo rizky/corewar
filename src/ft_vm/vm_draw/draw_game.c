@@ -64,16 +64,23 @@ static void		draw_map(t_vm *v, t_win w, unsigned char *m1, unsigned char *m2)
 	int			col;
 	int			row;
 	int			color;
+	// unsigned char	m[MEM_SIZE];
 
 	i = 0;
 	col = 0;
 	row = 0;
 	color = 7;
+	// ft_memcpy(m, m1, MEM_SIZE);
+	// ft_bzero(m, MEM_SIZE);
 	while (i < MEM_SIZE)
 	{
-		color_picker(v, m2, &i, &color);
-		wattron(w.game, COLOR_PAIR(color));
-		mvwprintw(w.game, (2 + row), 3 + (col * 3), "%02x", m1[i]);
+		// if (g_cylcm[i] != m1[i])
+		// {
+			color_picker(v, m2, &i, &color);
+			wattron(w.game, COLOR_PAIR(color));
+			mvwprintw(w.game, (2 + row), 3 + (col * 3), "%02x", m1[i]);
+			// m[i] = m1[i];
+		// }
 		col++;
 		i++;
 		if (col == 64)
@@ -81,6 +88,7 @@ static void		draw_map(t_vm *v, t_win w, unsigned char *m1, unsigned char *m2)
 			col = 0;
 			row++;
 		}
+		// ft_memcpy(m, m1, MEM_SIZE);
 	}
 	wattroff(w.game, COLOR_PAIR(7));
 }

@@ -15,7 +15,7 @@
 void	draw(t_vm *vm)
 {
 	g_draw_status.delay = DELAY / g_draw_status.speed;
-	werase(g_draw_win.game);
+	// werase(g_draw_win.game);
 	werase(g_draw_win.info);
 	werase(g_draw_win.nyan);
 	draw_game(vm, g_draw_win, g_memory, g_memory_mark);
@@ -25,8 +25,8 @@ void	draw(t_vm *vm)
 	wrefresh(g_draw_win.game);
 	wrefresh(g_draw_win.info);
 	wrefresh(g_draw_win.nyan);
-	if (g_draw_status.pause == 0)
-		g_draw_status.c_now++;
-	if (g_draw_status.c_now > g_cycles_to_die)
-		g_draw_status.c_now = 0;
+	// if (g_draw_status.pause == 0)
+	// 	g_draw_status.c_now++;
+	// if (g_draw_status.c_now > g_cycles_to_die)
+	// 	g_draw_status.c_now = 0;
 }
