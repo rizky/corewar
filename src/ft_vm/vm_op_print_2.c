@@ -31,8 +31,10 @@ void
 {
 	int param0;
 
+	if (p.op.params[1].value < 1 || p.op.params[1].value > 16)
+		return ;
 	param0 = (p.op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p.offset + p.pc + p.op.params[0].value], 4)
+		vm_binary_toint(&g_memory[(p.offset + p.pc + p.op.params[0].value) % IDX_MOD], 4)
 		: p.op.params[0].value;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);

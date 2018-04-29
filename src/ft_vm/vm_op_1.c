@@ -35,23 +35,30 @@ void	vm_op_ld(t_vm *vm, t_process *p)
 	int		param0;
 
 	(void)vm;
+	if (p->op.params[1].value < 1 || p->op.params[1].value > 16)
+	{
+		vm_op_inc(vm, p);
+		return ;
+	}
 	param0 = (p->op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p->offset + p->pc + p->op.params[0].value], 4)
+		vm_binary_toint(&g_memory[(p->offset + p->pc + p->op.params[0].value) % IDX_MOD], 4)
 		: p->op.params[0].value;
 	g_reg[p->champ][p->op.params[1].value] = param0;
 	if (param0 == 0)
 		g_carry = 1;
+	else
+		g_carry = 0;
 	vm_op_inc(vm, p);
 }
 
 void	vm_op_st(t_vm *vm, t_process *p)
 {
-	int		param1;
+	short	param1;
 	char	*temp;
 
 	(void)vm;
-	if (p->op.params[0].value < 1 ||
-		p->op.params[0].value > 16)
+	if (p->op.params[0].value < 1 || p->op.params[0].value > 16 ||
+		p->op.params[1].value < 1 || p->op.params[1].value > 16)
 	{
 		vm_op_inc(vm, p);
 		return ;
@@ -61,11 +68,14 @@ void	vm_op_st(t_vm *vm, t_process *p)
 			g_reg[p->champ][p->op.params[0].value];
 	else
 	{
-		param1 = p->op.params[1].value;
+		param1 = (p->offset + p->pc + p->op.params[1].value);
+		param1 = param1 % IDX_MOD;
+		if (param1 < 0)
+			param1 += MEM_SIZE;
 		temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
-		ft_memcpy(&g_memory[(p->offset + p->pc + param1) % IDX_MOD],
+		ft_memcpy(&g_memory[param1],
 			temp, 4);
-		vm_memmark(&g_memory_mark[(p->offset + p->pc + param1) % IDX_MOD],
+		vm_memmark(&g_memory_mark[param1],
 			p->champ + 1, 4);
 		free(temp);
 	}
@@ -90,5 +100,7 @@ void	vm_op_add(t_vm *vm, t_process *p)
 		g_reg[p->champ][p->op.params[1].value];
 	if (g_reg[p->champ][p->op.params[2].value] == 0)
 		g_carry = 1;
+	else
+		g_carry = 0;
 	vm_op_inc(vm, p);
 }

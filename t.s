@@ -1,6 +1,9 @@
 .name "tester"
 .comment "test aff"
 
+
+ld %2147483647, r2
+st r2, 62 
 # live %-1
 # ld 3, r2
 # st r2, 100
@@ -22,5 +25,5 @@
 # live %-2
 # aff r2
 
-ldi %0, %0, r2
-zjmp %0
+# ldi %0, %0, r2
+# zjmp %0
