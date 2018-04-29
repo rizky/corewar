@@ -14,7 +14,7 @@
 
 void	draw(t_vm *vm)
 {
-	g_draw_status.delay = DELAY / g_draw_status.speed;
+	//g_draw_status.delay = DELAY / g_draw_status.speed;
 	werase(g_draw_win.game);
 	werase(g_draw_win.info);
 	werase(g_draw_win.nyan);
@@ -61,3 +61,4 @@ int		vm_start_ncurse(time_t *start, t_vm vm)
 	usleep(g_draw_status.delay);
 	return (0);
 }
+

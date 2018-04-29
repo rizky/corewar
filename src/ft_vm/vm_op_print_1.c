@@ -42,9 +42,11 @@ void
 	ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
 	i = 0;
 	while (++i < p.op.param_c)
-		if (p.op.params[i].type == REG_CODE)
+		if (p.op.params[i].type == REG_CODE && i == 2)
 			ft_printf(" r%d", p.op.params[i].value);
-		else
+		else if (p.op.params[i].type == REG_CODE)
+            ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]);
+        else
 			ft_printf(" %d", p.op.params[i].value);
 	ft_printf("\n");
 }
@@ -52,7 +54,7 @@ void
 void
 	vm_live_print(t_process p)
 {
-	ft_printf("P %4d | ", p.index);
+	ft_printf("P %4d | ", p.champ + 1);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %d", vm_binary_toint(&g_memory[p.pc + 1], 4));
 	ft_printf("\n");
@@ -97,4 +99,13 @@ void
 		param1, param2, param1 + param2,
 		(p.offset + p.pc + param1 + param2) % IDX_MOD);
 	ft_printf("\n");
+}
+
+void
+    vm_lfork_print(t_process p)
+{
+    ft_printf("P %4d | ", p.champ + 1);
+    ft_printf("%s", g_op_dict[p.op.opcode].name);
+    ft_printf(" %hd (%hd)", p.op.params[0].value, p.pc + p.op.params[0].value);
+    ft_printf("\n");
 }

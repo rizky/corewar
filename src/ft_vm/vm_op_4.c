@@ -26,8 +26,20 @@ void	vm_op_lldi(t_vm *vm, t_process *p)
 
 void	vm_op_lfork(t_vm *vm, t_process *p)
 {
-	(void)vm;
-	(void)p;
+	t_process	new_p;
+	int value;
+
+	ft_bzero(&new_p, sizeof(new_p));
+	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
+	new_p.champ = p->champ;
+	value = (p->op.params[0].value + p->offset + p->pc);
+	if (value > MEM_SIZE)
+		value = value % MEM_SIZE;
+	new_p.pc = p->pc + value - (p->offset + p->pc);
+	new_p.champ = p->champ;
+	//vm->champ[p->champ].processes->size += 1;
+	fta_append(vm->champ[p->champ].processes, &new_p, 1);
+	vm_op_inc(vm, p);
 }
 
 void	vm_op_aff(t_vm *vm, t_process *p)

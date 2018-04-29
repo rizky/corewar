@@ -15,12 +15,14 @@
 void
 	vm_fork_print(t_process p)
 {
-	int i;
+	int value;
 
-	ft_printf("P %4d | ", p.index);
+	ft_printf("P %4d | ", p.champ + 1);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	i = -1;
-	ft_printf(" %hd (%hd)", p.op.params[0].value, p.op.params[0].value);
+	value = p.pc + p.offset + p.op.params[0].value;
+	if (value > MEM_SIZE)
+		value = value % MEM_SIZE;
+	ft_printf(" %hd (%hd)", p.op.params[0].value, p.pc + p.offset + p.op.params[0].value);
 	ft_printf("\n");
 }
 

@@ -1,6 +1,5 @@
 .name 		"dtonc v1.0pl4"
 .comment	"ta mere elle fait du rodeo sur les kfar"
-.extend
 
 
 debut:	

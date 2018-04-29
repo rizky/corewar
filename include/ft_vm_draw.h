@@ -44,9 +44,9 @@ typedef	struct	s_win
 	WINDOW		*nyan;
 }				t_win;
 
-t_status			g_draw_status;
-t_win				g_draw_win;
-int 				g_signal;
+t_status		g_draw_status;
+t_win			g_draw_win;
+int				g_signal;
 
 int				key_hook(t_status *status);
 
@@ -66,5 +66,6 @@ void			draw(t_vm *vm);
 void			draw_info(t_vm *vm);
 void			draw_player_info(t_vm *vm, t_win win);
 void			draw_game(t_vm *v, t_win w);
+
 
 #endif

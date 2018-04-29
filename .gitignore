@@ -50,9 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-
+.idea
+cmake-build-debug
+.DS_Store
+CMakeLists.txt
 asm
 asm *
+!resources/vm_champs/asm
 corewar
 !resources/binaries/asm
 !resources/binaries/corewar
