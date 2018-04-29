@@ -58,7 +58,8 @@ void	vm_op_st(t_vm *vm, t_process *p)
 
 	(void)vm;
 	if (p->op.params[0].value < 1 || p->op.params[0].value > 16 ||
-		p->op.params[1].value < 1 || p->op.params[1].value > 16)
+		((p->op.params[1].type == REG_CODE) &&
+			(p->op.params[1].value < 1 || p->op.params[1].value > 16)))
 	{
 		vm_op_inc(vm, p);
 		return ;

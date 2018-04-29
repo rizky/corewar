@@ -14,14 +14,27 @@
 
 void	vm_op_zjmp(t_vm *vm, t_process *p)
 {
-	int value;
+	short value;
 
 	(void)vm;
-	value = (p->op.params[0].value + p->offset + p->pc);
-	if (value > MEM_SIZE)
-		value = value % MEM_SIZE;
+	
 	if (g_carry)
-		p->pc += value - (p->offset + p->pc);
+	{
+		// value = p->op.params[0].value;
+		// value = value % IDX_MOD;
+		// value += p->offset + p->pc;
+		// value = ((p->op.params[0].value + p->offset + p->pc) %IDX_MOD);
+		// // if (value > MEM_SIZE)
+		// value = value % MEM_SIZE;
+		// p->pc += value - (p->offset + p->pc);
+		value = p->op.params[0].value;
+		value = value % IDX_MOD;
+		value += p->offset + p->pc;
+		value = value % MEM_SIZE;
+		p->pc = value - p->offset;
+		if (value < 0)
+			p->pc += MEM_SIZE;
+	}
 	else
 		vm_op_inc(vm, p);
 }
@@ -81,7 +94,7 @@ void
 	value = value % IDX_MOD;
 	value += p->offset + p->pc;
 //	if (value > MEM_SIZE)
-		value = value % MEM_SIZE;
+	value = value % MEM_SIZE;
 	new_p.pc = value - p->offset;
 	if (value < 0)
 		new_p.pc += MEM_SIZE;

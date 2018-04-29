@@ -66,13 +66,14 @@ void
 void
 	vm_st_print(t_process p)
 {
-	if (p.op.params[0].value < 1 ||
-		p.op.params[0].value > 16)
+	if (p.op.params[0].value < 1 || p.op.params[0].value > 16 ||
+		((p.op.params[1].type == REG_CODE) &&
+			(p.op.params[1].value < 1 || p.op.params[1].value > 16)))
 		return ;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" r%d", p.op.params[0].value);
-	ft_printf(" %d", p.op.params[1].value);
+	ft_printf(" %hd", p.op.params[1].value);
 	ft_printf("\n");
 }
 
