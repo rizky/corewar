@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 17:28:23 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/04/30 14:09:03 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int				g_cycles_to;
 int				g_cycles_to_die;
 int				g_max_check;
 
+void			vm_init_g_var();
 int				vm_print_usage(char **av, int status);
 void			vm_print(t_vm vm);
 void			vm_print_verbose(t_vm vm, int i);
