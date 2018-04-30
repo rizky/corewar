@@ -99,9 +99,8 @@ void
 
 	i = -1;
 	vm->process_size = 0;
-	while (++i < vm->champ_size)
+	while (++i < vm->champ_size && (j = -1))
 	{
-		j = -1;
 		while (++j < (int)(vm->champ[i].processes->size))
 		{
 			ft_bzero(&op, sizeof(t_op));
@@ -117,4 +116,5 @@ void
 			vm->process_size++;
 		}
 	}
+	vm_executor(vm);
 }

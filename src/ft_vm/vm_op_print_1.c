@@ -43,14 +43,20 @@ void
 	(void)p;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	(p.op.params[0].type == REG_CODE) ? ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]) :
-	(p.op.params[0].type == IND_CODE) ?
-		ft_printf(" %d", vm_binary_toint(&g_memory[(p.offset + p.pc + p.op.params[0].value) % IDX_MOD], 4))
-		: ft_printf(" %d", p.op.params[0].value);
-	(p.op.params[1].type == REG_CODE) ? ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]) :
-	(p.op.params[1].type == IND_CODE) ?
-		ft_printf(" %d", vm_binary_toint(&g_memory[(p.offset + p.pc + p.op.params[1].value) % IDX_MOD], 4))
-		: ft_printf(" %d", p.op.params[1].value);
+	if (p.op.params[0].type == REG_CODE)
+		ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
+	else if (p.op.params[0].type == IND_CODE)
+		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset +
+			p.pc + p.op.params[0].value % IDX_MOD], 4));
+	else
+		ft_printf(" %d", p.op.params[0].value);
+	if (p.op.params[1].type == REG_CODE)
+		ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]);
+	else if (p.op.params[1].type == IND_CODE)
+		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset + p.pc
+			+ p.op.params[1].value % IDX_MOD], 4));
+	else
+		ft_printf(" %d", p.op.params[1].value);
 	ft_printf(" r%d", p.op.params[2].value);
 	ft_printf("\n");
 }
@@ -84,73 +90,10 @@ void
 }
 
 void
-	vm_sti_print(t_process p)
+	vm_lfork_print(t_process p)
 {
-	int param1;
-	int param2;
-
-	if (p.op.params[0].value < 1 || p.op.params[0].value > 16 ||
-		((p.op.params[1].type == REG_CODE) &&
-			(p.op.params[1].value < 1 || p.op.params[1].value > 16)) ||
-		((p.op.params[2].type == REG_CODE) &&
-			(p.op.params[2].value < 1 || p.op.params[2].value > 16)))
-		return ;
-	// param1 = (p.op.params[1].type == REG_CODE) ?
-	// 	g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
-	// param1 = (p.op.params[1].type == IND_CODE) ?
-	// 	vm_binary_toint(&g_memory[p.offset + p.pc + p.op.params[1].value], 4)
-	// 	: param1;
-	// param2 = (p.op.params[2].type == REG_CODE) ?
-	// 	g_reg[p.champ][p.op.params[2].value] : p.op.params[2].value;
-	param1 = (p.op.params[0].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[0].value] : p.op.params[0].value;
-	param2 = (p.op.params[1].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
-	param1 = (p.op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p.offset + p.pc + p.op.params[0].value) % IDX_MOD], 4)
-		: param1;
-	ft_printf("P %4d | ", p.index);
+	ft_printf("P %4d | ", p.champ + 1);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	ft_printfln(" r%d ", p.op.params[0].value);
-	(p.op.params[0].type == DIR_CODE) ?
-	ft_printf(" %hd", param1) : ft_printf(" %d", param1);
-	(p.op.params[1].type == DIR_CODE) ?
-	ft_printf(" %hd\n", param2) : ft_printf(" %d", param2);
-	if (p.op.params[1].type == DIR_CODE && p.op.params[2].type == DIR_CODE)
-	{
-		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
-		param1, param2, (short)param1 + (short)param2,
-		(p.offset + p.pc + (short)param1 + (short)param2) % IDX_MOD);
-	}
-	else if (p.op.params[1].type == DIR_CODE)
-	{
-		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
-		param1, param2, (short)param1 + param2,
-		(p.offset + p.pc + (short)param1 + param2) % IDX_MOD);
-	}
-	else if (p.op.params[2].type == DIR_CODE)
-	{
-		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
-		param1, param2, param1 + (short)param2,
-		(p.offset + p.pc + param1 + (short)param2) % IDX_MOD);
-	}
-	else
-	{
-		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
-		param1, param2, param1 + param2,
-		(p.offset + p.pc + param1 + param2) % IDX_MOD);
-	}
-	// ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
-	// 	param1, param2, param1 + param2,
-	// 	(p.offset + p.pc + param1 + param2) % IDX_MOD);
+	ft_printf(" %hd (%hd)", p.op.params[0].value, p.pc + p.op.params[0].value);
 	ft_printf("\n");
-}
-
-void
-    vm_lfork_print(t_process p)
-{
-    ft_printf("P %4d | ", p.champ + 1);
-    ft_printf("%s", g_op_dict[p.op.opcode].name);
-    ft_printf(" %hd (%hd)", p.op.params[0].value, p.pc + p.op.params[0].value);
-    ft_printf("\n");
 }

@@ -61,4 +61,3 @@ int		vm_start_ncurse(time_t *start, t_vm vm)
 	usleep(g_draw_status.delay);
 	return (0);
 }
-

@@ -141,9 +141,12 @@ void			vm_or_print(t_process p);
 void			vm_xor_print(t_process p);
 void			vm_zjmp_print(t_process p);
 void			vm_ldi_print(t_process p);
+void			vm_ldi_print2(t_process p, int param1, int param2);
 void			vm_sti_print(t_process p);
 void			vm_fork_print(t_process p);
 void			vm_lfork_print(t_process p);
+int				ft_cursor(t_process *p, int param1, int param2, int i);
+int				ft_init_param(t_process *p, int i);
 
 void			vm_fork_print(t_process p);
 void			vm_aff_print(t_process p);

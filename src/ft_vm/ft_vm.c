@@ -100,7 +100,6 @@ int
 	{
 		(vm.v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
 		vm_decompiler(&vm);
-		vm_executor(&vm);
 		(vm.dump && vm.cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
 		(vm.v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, vm) : 0;
 		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
