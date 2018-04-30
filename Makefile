@@ -28,7 +28,7 @@ FTVM:=	ft_vm \
 		vm_decompiler_file \
 		vm_executor \
 		vm_checker \
-		vm_op_1 vm_op_2 vm_op_3 vm_op_4 \
+		vm_op_1 vm_op_2 vm_op_3 vm_op_4 vm_op_5\
 		vm_op_print_1 vm_op_print_2 vm_op_print_3 vm_op_print_4\
 		vm_print \
 		vm_error \

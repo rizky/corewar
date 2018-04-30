@@ -32,7 +32,7 @@ void
 }
 
 void
-	vm_lldi_print2(t_process p)
+	vm_lldi_print2(t_process p, int param0, int param1)
 {
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
@@ -80,7 +80,7 @@ void
 	param0 = (p.op.params[0].type == IND_CODE) ?
 		vm_binary_toint(&g_memory[(p.offset + p.pc + p.op.params[0].value)], 4)
 		: param0;
-	vm_lldi_print2(p);
+	vm_lldi_print2(p, param0, param1);
 }
 
 void

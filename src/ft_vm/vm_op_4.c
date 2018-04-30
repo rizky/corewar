@@ -13,26 +13,6 @@
 #include "ft_vm.h"
 
 void
-	vm_op_zjmp(t_vm *vm, t_process *p)
-{
-	short		value;
-
-	(void)vm;
-	if (g_carry)
-	{
-		value = p->op.params[0].value;
-		value = value % IDX_MOD;
-		value += p->offset + p->pc;
-		value = value % MEM_SIZE;
-		p->pc = value - p->offset;
-		if (value < 0)
-			p->pc += MEM_SIZE;
-	}
-	else
-		vm_op_inc(vm, p);
-}
-
-void
 	vm_op_lld(t_vm *vm, t_process *p)
 {
 	int		param0;
@@ -57,7 +37,7 @@ void
 }
 
 int
-	ft_init_param(t_process *p, int i)
+	ft_init_param_long(t_process *p, int i)
 {
 	int			result;
 
@@ -103,8 +83,8 @@ void
 		vm_op_inc(vm, p);
 		return ;
 	}
-	param0 = ft_init_param(p, 0);
-	param1 = ft_init_param(p, 1);
+	param0 = ft_init_param_long(p, 0);
+	param1 = ft_init_param_long(p, 1);
 	param0 = (p->op.params[0].type == IND_CODE) ?
 		vm_binary_toint(&g_memory[p->offset + p->pc + p->op.params[0].value], 4)
 		: param0;

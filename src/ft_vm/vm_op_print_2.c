@@ -120,3 +120,23 @@ void
 		ft_printf(" OK");
 	ft_printf("\n");
 }
+
+void
+	vm_op_print(t_process p)
+{
+	int i;
+
+	ft_printf("P %4d | ", p.index);
+	ft_printf("%s", g_op_dict[p.op.opcode].name);
+	i = -1;
+	while (++i < p.op.param_c)
+		if (p.op.params[i].type == REG_CODE)
+			if (i > 0)
+				ft_printf(" %hd", g_reg[p.champ][p.op.params[i].value]);
+			else
+				ft_printf(" r%d", p.op.params[i].value);
+		else
+			ft_printf(" %hd", p.op.params[i].value);
+	ft_printf("\n");
+}
+

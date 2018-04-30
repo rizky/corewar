@@ -41,8 +41,8 @@ void	vm_op_ld(t_vm *vm, t_process *p)
 		return ;
 	}
 	param0 = (p->op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p->offset + p->pc +
-			(p->op.params[0].value) % IDX_MOD], 4)
+		vm_binary_toint(&g_memory[(p->offset + p->pc +
+			(p->op.params[0].value % IDX_MOD)) % MEM_SIZE], 4)
 		: p->op.params[0].value;
 	g_reg[p->champ][p->op.params[1].value] = param0;
 	if (param0 == 0)
@@ -70,7 +70,7 @@ void	vm_op_st(t_vm *vm, t_process *p)
 			g_reg[p->champ][p->op.params[0].value];
 	else
 	{
-		param1 = (p->offset + p->pc + (p->op.params[1].value % IDX_MOD));
+		param1 = (p->offset + p->pc + ((short)p->op.params[1].value % IDX_MOD)) % MEM_SIZE;
 		if (param1 < 0)
 			param1 += MEM_SIZE;
 		temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
