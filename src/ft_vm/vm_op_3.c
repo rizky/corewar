@@ -57,6 +57,7 @@ void
 	cursor = ft_cursor(p, param0, param1, 0);
 	if (cursor < 0)
 		cursor += MEM_SIZE;
+
 	g_reg[p->champ][p->op.params[2].value] =
 		vm_binary_toint(&g_memory[cursor], 4);
 	vm_op_inc(vm, p);
