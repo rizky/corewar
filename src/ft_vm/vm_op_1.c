@@ -69,8 +69,8 @@ void	vm_op_st(t_vm *vm, t_process *p)
 			g_reg[p->champ][p->op.params[0].value];
 	else
 	{
-		param1 = (p->offset + p->pc + p->op.params[1].value);
-		param1 = param1 % IDX_MOD;
+		param1 = p->op.params[1].value % IDX_MOD;
+		param1 = (p->offset + p->pc + param1);
 		if (param1 < 0)
 			param1 += MEM_SIZE;
 		temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);

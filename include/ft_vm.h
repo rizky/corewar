@@ -143,6 +143,8 @@ void			vm_zjmp_print(t_process p);
 void			vm_ldi_print(t_process p);
 void			vm_sti_print(t_process p);
 void			vm_fork_print(t_process p);
+void			vm_lld_print(t_process p);
+void			vm_lldi_print(t_process p);
 void			vm_lfork_print(t_process p);
 
 void			vm_fork_print(t_process p);
@@ -211,10 +213,10 @@ static	t_op_dict g_op_dict[17] = {
 		{T_DIR, 0, 0}, &vm_op_fork, &vm_fork_print, .is_car = 0, .cycles = 800},
 	{ .name = "lld", .opcode = 0x0d, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_IND | T_DIR, T_REG, 0},
-		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
+		&vm_op_lld, &vm_lld_print, .is_car = 1, .cycles = 10},
 	{ .name = "lldi", .opcode = 0x0e, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
-		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 50},
+		&vm_op_lldi, &vm_lldi_print, .is_car = 0, .cycles = 50},
 	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0}, &vm_op_lfork, &vm_lfork_print, .is_car = 0, .cycles = 1000},
 	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,

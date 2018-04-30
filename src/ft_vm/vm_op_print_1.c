@@ -102,43 +102,43 @@ void
 	// 	: param1;
 	// param2 = (p.op.params[2].type == REG_CODE) ?
 	// 	g_reg[p.champ][p.op.params[2].value] : p.op.params[2].value;
-	param1 = (p.op.params[0].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[0].value] : p.op.params[0].value;
-	param2 = (p.op.params[1].type == REG_CODE) ?
+	param1 = (p.op.params[1].type == REG_CODE) ?
 		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
-	param1 = (p.op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p.offset + p.pc + p.op.params[0].value) % IDX_MOD], 4)
+	param2 = (p.op.params[2].type == REG_CODE) ?
+		g_reg[p.champ][p.op.params[2].value] : p.op.params[2].value;
+	param1 = (p.op.params[1].type == IND_CODE) ?
+		vm_binary_toint(&g_memory[p.offset + p.pc + (p.op.params[1].value % IDX_MOD)], 4)
 		: param1;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	ft_printfln(" r%d ", p.op.params[0].value);
-	(p.op.params[0].type == DIR_CODE) ?
-	ft_printf(" %hd", param1) : ft_printf(" %d", param1);
+	ft_printf(" r%d", p.op.params[0].value);
 	(p.op.params[1].type == DIR_CODE) ?
-	ft_printf(" %hd\n", param2) : ft_printf(" %d", param2);
+	ft_printf(" %hd", param1) : ft_printf(" %d", param1);
+	(p.op.params[2].type == DIR_CODE) ?
+	ft_printf(" %hd\n", param2) : ft_printf(" %d\n", param2);
 	if (p.op.params[1].type == DIR_CODE && p.op.params[2].type == DIR_CODE)
 	{
-		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
+		ft_printf("       | -> store to %hd + %hd = %d (with pc and mod %d)",
 		param1, param2, (short)param1 + (short)param2,
-		(p.offset + p.pc + (short)param1 + (short)param2) % IDX_MOD);
+		(p.offset + p.pc + (((short)param1 + (short)param2) % IDX_MOD)));
 	}
 	else if (p.op.params[1].type == DIR_CODE)
 	{
-		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
+		ft_printf("       | -> store to %hd + %d = %d (with pc and mod %d)",
 		param1, param2, (short)param1 + param2,
-		(p.offset + p.pc + (short)param1 + param2) % IDX_MOD);
+		(p.offset + p.pc + (((short)param1 + param2) % IDX_MOD)));
 	}
 	else if (p.op.params[2].type == DIR_CODE)
 	{
-		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
+		ft_printf("       | -> store to %d + %hd = %d (with pc and mod %d)",
 		param1, param2, param1 + (short)param2,
-		(p.offset + p.pc + param1 + (short)param2) % IDX_MOD);
+		(p.offset + p.pc + ((param1 + (short)param2) % IDX_MOD)));
 	}
 	else
 	{
 		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
 		param1, param2, param1 + param2,
-		(p.offset + p.pc + param1 + param2) % IDX_MOD);
+		(p.offset + p.pc + ((param1 + param2) % IDX_MOD)));
 	}
 	// ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)",
 	// 	param1, param2, param1 + param2,

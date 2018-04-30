@@ -68,18 +68,20 @@ void	vm_op_ldi(t_vm *vm, t_process *p)
 	param1 = (p->op.params[1].type == REG_CODE) ?
 		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
 	param0 = (p->op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p->offset + p->pc + p->op.params[0].value) % IDX_MOD], 4)
+		vm_binary_toint(&g_memory[p->offset + p->pc + (p->op.params[0].value % IDX_MOD)], 4)
 		: param0;
 	if (p->op.params[0].type == DIR_CODE && p->op.params[1].type == DIR_CODE)
-		cursor = (p->offset + p->pc + (short)param0 + (short)param1) % IDX_MOD;
+		cursor = p->offset + p->pc + (((short)param0 + (short)param1) % IDX_MOD);
 	else if (p->op.params[0].type == DIR_CODE)
-		cursor = (p->offset + p->pc + (short)param0 + param1) % IDX_MOD;
+		cursor = p->offset + p->pc + (((short)param0 + param1) % IDX_MOD);
 	else if (p->op.params[1].type == DIR_CODE)
-		cursor = (p->offset + p->pc + param0 + (short)param1) % IDX_MOD;
+		cursor = p->offset + p->pc + ((param0 + (short)param1) % IDX_MOD);
 	else
-		cursor = (p->offset + p->pc + param0 + param1) % IDX_MOD;
+		cursor = p->offset + p->pc + ((param0 + param1) % IDX_MOD);
+	
 	if (cursor < 0)
 		cursor += MEM_SIZE;
+
 	g_reg[p->champ][p->op.params[2].value] =
 		vm_binary_toint(&g_memory[cursor], 4);
 	vm_op_inc(vm, p);
@@ -107,16 +109,18 @@ void	vm_op_sti(t_vm *vm, t_process *p)
 	param2 = (p->op.params[2].type == REG_CODE) ?
 		g_reg[p->champ][p->op.params[2].value] : p->op.params[2].value;
 	param1 = (p->op.params[1].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p->offset + p->pc + p->op.params[1].value) % IDX_MOD], 4)
+		vm_binary_toint(&g_memory[p->offset + p->pc + (p->op.params[1].value % IDX_MOD)], 4)
 		: param1;
 	if (p->op.params[1].type == DIR_CODE && p->op.params[2].type == DIR_CODE)
-		cursor = (p->offset + p->pc + (short)param1 + (short)param2) % IDX_MOD;
+		cursor = p->offset + p->pc + (((short)param1 + (short)param2) % IDX_MOD);
 	else if (p->op.params[1].type == DIR_CODE)
-		cursor = (p->offset + p->pc + (short)param1 + param2) % IDX_MOD;
+		cursor = p->offset + p->pc + (((short)param1 + param2) % IDX_MOD);
 	else if (p->op.params[2].type == DIR_CODE)
-		cursor = (p->offset + p->pc + param1 + (short)param2) % IDX_MOD;
+		cursor = p->offset + p->pc + ((param1 + (short)param2) % IDX_MOD);
 	else
-		cursor = (p->offset + p->pc + param1 + param2) % IDX_MOD;
+		cursor = p->offset + p->pc + ((param1 + param2) % IDX_MOD);
+	if (cursor < 0)
+		cursor += MEM_SIZE;
 	temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
 	ft_memcpy(&g_memory[cursor], temp, 4);
 	vm_memmark(&g_memory_mark[cursor], p->champ + 1, 4);
