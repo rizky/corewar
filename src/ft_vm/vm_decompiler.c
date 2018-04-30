@@ -84,7 +84,11 @@ int
 		ft_bzero(op, sizeof(t_op));
 		return (-1);
 	}
-	p->pc_next = p->pc + op->size;
+	// p->pc_next = p->pc + op->size;
+	if ((p->pc + op->size) >= MEM_SIZE)
+		p->pc_next = (p->pc + op->size) * -1;
+	else
+		p->pc_next = p->pc + op->size;
 	p->cycles = g_cycles - 1 + g_op_dict[op->opcode].cycles;
 	return (0);
 }

@@ -19,7 +19,7 @@ void	vm_op_inc(t_vm *vm, t_process *p)
 		p->pc = p->pc_next;
 	else
 		p->pc++;
-	if (p->pc + p->offset == MEM_SIZE)
+	if (p->pc + p->offset >= MEM_SIZE)
 		p->pc = p->offset * -1;
 }
 

@@ -93,5 +93,9 @@ void
 		cursor += MEM_SIZE;
 	g_reg[p->champ][p->op.params[2].value] =
 		vm_binary_toint(&g_memory[cursor], 4);
+	if (g_reg[p->champ][p->op.params[2].value] == 0)
+		g_carry = 1;
+	else
+		g_carry = 0;
 	vm_op_inc(vm, p);
 }
