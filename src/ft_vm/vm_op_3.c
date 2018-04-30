@@ -32,6 +32,36 @@ void
 		vm_op_inc(vm, p);
 }
 
+int
+	ft_init_param(t_process *p, int i)
+{
+	int			result;
+
+	result = (p->op.params[i].type == REG_CODE) ?
+		g_reg[p->champ][p->op.params[i].value] : p->op.params[i].value;
+	result = (p->op.params[i].type == IND_CODE) ?
+		vm_binary_toint(&g_memory[p->offset + p->pc + p->op.params[i].value
+			% IDX_MOD], 4) : result;
+	return (result);
+}
+
+int
+	ft_cursor(t_process *p, int param1, int param2, int i)
+{
+	int cursor;
+
+	if (p->op.params[i].type == DIR_CODE && p->op.params[i + 1].type
+		== DIR_CODE)
+		cursor = p->offset + p->pc + ((short)param1 + (short)param2) % IDX_MOD;
+	else if (p->op.params[i].type == DIR_CODE)
+		cursor = p->offset + p->pc + ((short)param1 + param2) % IDX_MOD;
+	else if (p->op.params[i + 1].type == DIR_CODE)
+		cursor = p->offset + p->pc + (param1 + (short)param2) % IDX_MOD;
+	else
+		cursor = p->offset + p->pc + (param1 + param2) % IDX_MOD;
+	return (cursor);
+}
+
 void
 	vm_op_ldi(t_vm *vm, t_process *p)
 {
@@ -57,23 +87,9 @@ void
 	cursor = ft_cursor(p, param0, param1, 0);
 	if (cursor < 0)
 		cursor += MEM_SIZE;
-
 	g_reg[p->champ][p->op.params[2].value] =
 		vm_binary_toint(&g_memory[cursor], 4);
 	vm_op_inc(vm, p);
-}
-
-int
-	ft_init_param(t_process *p, int i)
-{
-	int			result;
-
-	result = (p->op.params[i].type == REG_CODE) ?
-		g_reg[p->champ][p->op.params[i].value] : p->op.params[i].value;
-	result = (p->op.params[i].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p->offset + p->pc + p->op.params[i].value
-			% IDX_MOD], 4) : result;
-	return (result);
 }
 
 void
@@ -103,26 +119,5 @@ void
 	ft_memcpy(&g_memory[cursor], temp, 4);
 	vm_memmark(&g_memory_mark[cursor], p->champ + 1, 4);
 	free(temp);
-	vm_op_inc(vm, p);
-}
-
-void
-	vm_op_fork(t_vm *vm, t_process *p)
-{
-	t_process	new_p;
-	short		value;
-
-	ft_bzero(&new_p, sizeof(new_p));
-	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
-	new_p.champ = p->champ;
-	value = p->op.params[0].value;
-	value = value % IDX_MOD;
-	value += p->offset + p->pc;
-	value = value % MEM_SIZE;
-	new_p.pc = value - p->offset;
-	if (value < 0)
-		new_p.pc += MEM_SIZE;
-	new_p.champ = p->champ;
-	fta_append(vm->champ[p->champ].processes, &new_p, 1);
 	vm_op_inc(vm, p);
 }

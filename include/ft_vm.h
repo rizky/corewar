@@ -147,8 +147,6 @@ void			vm_fork_print(t_process p);
 void			vm_lld_print(t_process p);
 void			vm_lldi_print(t_process p);
 void			vm_lfork_print(t_process p);
-int				ft_cursor(t_process *p, int param1, int param2, int i);
-int				ft_init_param(t_process *p, int i);
 
 void			vm_fork_print(t_process p);
 void			vm_aff_print(t_process p);

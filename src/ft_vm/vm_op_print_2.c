@@ -13,65 +13,110 @@
 #include "ft_vm.h"
 
 void
-	vm_fork_print(t_process p)
+	vm_and_print(t_process p)
 {
-	int value;
-
-	ft_printf("P %4d | ", p.champ + 1);
-	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	value = p.pc + p.offset + p.op.params[0].value;
-	if (value > MEM_SIZE)
-		value = value % MEM_SIZE;
-	ft_printf(" %hd (%hd)", p.op.params[0].value,
-		p.pc + p.offset + p.op.params[0].value);
-	ft_printf("\n");
-}
-
-void
-	vm_ld_print(t_process p)
-{
-	int param0;
-
-	if (p.op.params[1].value < 1 || p.op.params[1].value > 16)
-		return ;
-	param0 = (p.op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p.offset + p.pc +
-		p.op.params[0].value % IDX_MOD], 4) : p.op.params[0].value;
-	ft_printf("P %4d | ", p.index);
-	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	ft_printf(" %d", param0);
-	ft_printf(" r%d", p.op.params[1].value);
-	ft_printf("\n");
-}
-
-void
-	vm_st_print(t_process p)
-{
-	if (p.op.params[0].value < 1 || p.op.params[0].value > 16 ||
+	if (p.op.params[2].value < 1 || p.op.params[2].value > 16 ||
 		((p.op.params[1].type == REG_CODE) &&
-			(p.op.params[1].value < 1 || p.op.params[1].value > 16)))
+			(p.op.params[1].value < 1 || p.op.params[1].value > 16)) ||
+		((p.op.params[0].type == REG_CODE) &&
+			(p.op.params[0].value < 1 || p.op.params[0].value > 16)))
 		return ;
+	(void)p;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	ft_printf(" r%d", p.op.params[0].value);
-	ft_printf(" %hd", p.op.params[1].value);
+	if (p.op.params[0].type == REG_CODE)
+		ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
+	else if (p.op.params[0].type == IND_CODE)
+		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset +
+			p.pc + p.op.params[0].value % IDX_MOD], 4));
+	else
+		ft_printf(" %d", p.op.params[0].value);
+	if (p.op.params[1].type == REG_CODE)
+		ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]);
+	else if (p.op.params[1].type == IND_CODE)
+		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset + p.pc
+			+ p.op.params[1].value % IDX_MOD], 4));
+	else
+		ft_printf(" %d", p.op.params[1].value);
+	ft_printf(" r%d", p.op.params[2].value);
 	ft_printf("\n");
 }
 
 void
-	vm_add_print(t_process p)
+	vm_or_print(t_process p)
 {
-	if (p.op.params[0].value < 1 ||
-		p.op.params[0].value > 16 ||
-		p.op.params[1].value < 1 ||
-		p.op.params[1].value > 16 ||
-		p.op.params[2].value < 1 ||
-		p.op.params[2].value > 16)
+	if (p.op.params[2].value < 1 || p.op.params[2].value > 16 ||
+		((p.op.params[1].type == REG_CODE) &&
+			(p.op.params[1].value < 1 || p.op.params[1].value > 16)) ||
+		((p.op.params[0].type == REG_CODE) &&
+			(p.op.params[0].value < 1 || p.op.params[0].value > 16)))
 		return ;
+	(void)p;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	ft_printf(" r%d", p.op.params[0].value);
-	ft_printf(" r%d", p.op.params[1].value);
+	if (p.op.params[0].type == REG_CODE)
+		ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
+	else if (p.op.params[0].type == IND_CODE)
+		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset +
+		p.pc + p.op.params[0].value % IDX_MOD], 4));
+	else
+		ft_printf(" %d", p.op.params[0].value);
+	if (p.op.params[1].type == REG_CODE)
+		ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]);
+	else if (p.op.params[1].type == IND_CODE)
+		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset +
+		p.pc + p.op.params[1].value % IDX_MOD], 4));
+	else
+		ft_printf(" %d", p.op.params[1].value);
 	ft_printf(" r%d", p.op.params[2].value);
+	ft_printf("\n");
+}
+
+void
+	vm_xor_print(t_process p)
+{
+	if (p.op.params[2].value < 1 || p.op.params[2].value > 16 ||
+		((p.op.params[1].type == REG_CODE) &&
+			(p.op.params[1].value < 1 || p.op.params[1].value > 16)) ||
+		((p.op.params[0].type == REG_CODE) &&
+			(p.op.params[0].value < 1 || p.op.params[0].value > 16)))
+		return ;
+	(void)p;
+	ft_printf("P %4d | ", p.index);
+	ft_printf("%s", g_op_dict[p.op.opcode].name);
+	if (p.op.params[0].type == REG_CODE)
+		ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
+	else if (p.op.params[0].type == IND_CODE)
+		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset
+		+ p.pc + p.op.params[0].value % IDX_MOD], 4));
+	else
+		ft_printf(" %d", p.op.params[0].value);
+	if (p.op.params[1].type == REG_CODE)
+		ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]);
+	else if (p.op.params[1].type == IND_CODE)
+		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset +
+		p.pc + p.op.params[1].value % IDX_MOD], 4));
+	else
+		ft_printf(" %d", p.op.params[1].value);
+	ft_printf(" r%d", p.op.params[2].value);
+	ft_printf("\n");
+}
+
+void
+	vm_zjmp_print(t_process p)
+{
+	short	value;
+
+	(void)p;
+	value = (p.op.params[0].value + p.offset + p.pc);
+	if (value > MEM_SIZE)
+		value = (p.op.params[0].value + p.offset + p.pc) % MEM_SIZE;
+	ft_printf("P %4d | ", p.index);
+	ft_printf("%s", g_op_dict[p.op.opcode].name);
+	ft_printf(" %d", value - (p.offset + p.pc));
+	if (!g_carry)
+		ft_printf(" FAILED");
+	else
+		ft_printf(" OK");
 	ft_printf("\n");
 }
