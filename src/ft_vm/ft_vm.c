@@ -6,30 +6,26 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 15:52:41 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/04/30 14:09:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 #include "ft_vm_draw.h"
 
-static void
+void
 	vm_load_champs(t_vm *vm, unsigned char memory[MEM_SIZE])
 {
 	int			i;
 	t_process	p;
 
 	i = -1;
-	g_cycles_to_die = CYCLE_TO_DIE;
+	vm_init_g_var();
 	ft_bzero(&p, sizeof(t_process));
-	ft_bzero(&g_memory, MEM_SIZE);
-	ft_bzero(&g_reg, sizeof(int) * (MAX_PLAYERS * REG_NUMBER));
-	g_reg[i][1] = (i + 1) * -1;
-	ft_bzero(&g_memory_mark, MEM_SIZE);
-	g_carry = 0;
 	ft_printfln("Introducing contestants...");
 	while (++i < vm->champ_size)
 	{
+		g_reg[i][1] = (i + 1) * -1;
 		ft_printfln("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !", i + 1,
 		vm->champ[i].header.prog_size, vm->champ[i].header.prog_name,
 		vm->champ[i].header.comment);
@@ -91,7 +87,6 @@ int
 	t_vm		vm;
 	time_t		start;
 
-	g_cycles = 1;
 	ft_bzero(&vm, sizeof(t_vm));
 	if (ac < 2 || vm_options(av, &vm) == -1)
 		return (vm_print_usage(av, -1));

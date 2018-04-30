@@ -74,10 +74,8 @@ void	vm_op_st(t_vm *vm, t_process *p)
 		if (param1 < 0)
 			param1 += MEM_SIZE;
 		temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
-		ft_memcpy(&g_memory[param1],
-			temp, 4);
-		vm_memmark(&g_memory_mark[param1],
-			p->champ + 1, 4);
+		ft_memcpy(&g_memory[param1], temp, 4);
+		vm_memmark(&g_memory_mark[param1], p->champ + 1, 4);
 		free(temp);
 	}
 	vm_op_inc(vm, p);
