@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/30 14:23:17 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:32:29 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int
 		return (INVALID_FILE);
 	champ->header.magic = vm_binary_toint(buf, 4);
 	if (vm_binary_toint(buf, 4) != COREWAR_EXEC_MAGIC)
-		return (INVALID_FILE);
+		return (INVALID_HEAD);
 	return (0);
 }
 
@@ -80,7 +80,9 @@ int
 			return (vm_error(INVALID_FILE, -1, paths[i]));
 		if ((error = vm_read_header(fd, &champ)) > 0)
 			return (vm_error(error, -1, paths[i]));
-		if (read(fd, &buf, champ.header.prog_size) <= 0)
+		if (read(fd, &buf, champ.header.prog_size) < champ.header.prog_size)
+			return (vm_error(INVALID_FILE, -1, paths[i]));
+		if (read(fd, &buf, 1) > 0)
 			return (vm_error(INVALID_FILE, -1, paths[i]));
 		champ.op = ft_memalloc(champ.header.prog_size + 1);
 		ft_memcpy(champ.op, buf, champ.header.prog_size + 1);

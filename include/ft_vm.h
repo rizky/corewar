@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 17:35:49 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:31:21 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # define CHAMP_MIN		2
 # define CHAMP_MAX		3
 # define INVALID_FILE	4
-# define CODE_MAX		5
+# define INVALID_HEAD	5
+# define CODE_MAX		6
 
 # define V_LVL_0		0
 # define V_LVL_1		1
