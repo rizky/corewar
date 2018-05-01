@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 22:25:40 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/01 10:19:02 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/01 17:05:10 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	vm_signal(int sig)
 	exit(0);
 }
 
-void		draw(t_vm *vm)
+static void	draw(t_vm *vm)
 {
 	signal(SIGINT, vm_signal);
 	g_draw_status.delay = DELAY / g_draw_status.speed;
@@ -36,13 +36,13 @@ void		draw(t_vm *vm)
 	wrefresh(g_draw_win.nyan);
 }
 
-void	sighandle(int dummy)
+static void	sighandle(int dummy)
 {
 	dummy = 0;
 	g_signal = 0;
 }
 
-int		vm_start_ncurse(time_t *start, t_vm vm)
+int			vm_start_ncurse(time_t *start, t_vm vm)
 {
 	int		key;
 
