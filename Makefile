@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/01 17:06:38 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/01 17:52:39 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -256,7 +256,7 @@ tests_vm_dump: corewar
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_OP) test_vm_dump;)
 	@$(foreach x, $(T_VM_FILES_HC), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_HC) test_vm_dump;)
 
-NUMBERS = 1 20 50 80 150 200 600 800 1400 2400 5000
+NUMBERS = 1 20 50 80 150 200 600 800 1400 2400 5000 8000 10000 50000
 tests_vm_dump_loop: corewar
 	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_OP) tests_vm_dump;)
 

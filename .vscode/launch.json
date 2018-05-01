@@ -26,7 +26,24 @@
 			"args": [
 					"-v",
 					"4",
-					"tests/vm/op/sti_1.cor"
+					"tests/vm/op/add_carry.cor"
+					],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
+		},
+		{
+			"preLaunchTask": "make debug",
+			"name": "(lldb) Launch VM -dump 2400",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/corewar",
+			"args": [
+					"-dump",
+					"2400",
+					"tests/vm/op/add_carry.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

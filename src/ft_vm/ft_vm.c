@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 15:46:55 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:59:14 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,15 @@ int
 	vm_load_champs(&vm, g_memory);
 	while (g_cycles == 1 || vm_checker(&vm))
 	{
-		(vm.v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
-		vm_decompiler(&vm);
-		(vm.dump && vm.cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
-		(vm.v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, vm) : 0;
+		vm_executor(&vm);
 		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
 			break ;
 		g_cycles++;
 		g_cycles_to++;
 	}
+	(!vm.dump || g_cycles < vm.cycles) ?
+	ft_printfln("Contestant %d, \"%s\", has won !",
+		vm.winner + 1, vm.champ[vm.winner].header.prog_name) : 0;
 	(vm.v_lvl[V_LVL_1]) ? draw_end(&g_draw_win) : 0;
 	return (0);
 }

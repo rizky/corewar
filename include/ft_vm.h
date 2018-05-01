@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 15:14:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:35:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ typedef struct	s_vm
 	t_champ		champ[4];
 	int			process_size;
 	int			champ_size;
+	int			last_dead_champ;
+	int			last_live_champ;
+	int			winner;
 }				t_vm;
 
 unsigned char	g_memory[MEM_SIZE];

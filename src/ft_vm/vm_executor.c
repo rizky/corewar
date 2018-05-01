@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 15:45:03 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:59:37 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void
 	t_process	*p;
 
 	i = vm->champ_size - 1;
+	vm_decompiler(vm);
 	while (i >= 0)
 	{
 		j = -1;
@@ -59,4 +60,7 @@ void
 		}
 		i--;
 	}
+	(vm->v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
+	(vm->dump && vm->cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
+	(vm->v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, *vm) : 0;
 }
