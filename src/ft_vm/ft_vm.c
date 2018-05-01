@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 18:58:23 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:59:21 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int
 	if (vm_read_binaries(vm.players, &vm) == -1)
 		return (-1);
 	vm_load_champs(&vm, g_memory);
-	while (g_cycles == 1 || vm_checker(&vm))
+	while (vm_checker(&vm))
 	{
 		vm_executor(&vm);
 		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
@@ -105,6 +105,7 @@ int
 		g_cycles++;
 		g_cycles_to++;
 	}
+	(vm.v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
 	(!vm.dump || g_cycles < vm.cycles) ?
 	ft_printfln("Contestant %d, \"%s\", has won !",
 		vm.winner + 1, vm.champ[vm.winner].header.prog_name) : 0;
