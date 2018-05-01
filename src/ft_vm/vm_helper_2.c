@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/01 21:31:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 22:14:20 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,23 @@ void
 		index++;
 		i++;
 	}
+}
+
+int
+	vm_ld_mem(int index, int size)
+{
+	int		i;
+	int		result;
+
+	i = 1;
+	result = 0;
+	while (i <= size)
+	{
+		if (index == MEM_SIZE)
+			index = 0;
+		result += g_memory[index] << ((size - i) * 8);
+		i++;
+		index++;
+	}
+	return (result);
 }

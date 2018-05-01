@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/01 21:42:18 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/01 22:10:54 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -304,7 +304,7 @@ tests_vm_dump_overflow: corewar
 	@$(foreach x, $(T_VM_FILES_O), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_O) test_vm_dump_overflow;)
 
 NUMBERS = 1 5 50 80 400 888 1200
-tests_vm_overflow_dump_loop: corewar
+tests_vm_dump_overflow_loop: corewar
 	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_O) tests_vm_dump_overflow;)
 
 test_vm_op_overflow : corewar

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 19:45:16 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 22:14:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void
 	if (p.op.params[1].value < 1 || p.op.params[1].value > 16)
 		return ;
 	param0 = (p.op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p.offset + p.pc +
-		p.op.params[0].value % IDX_MOD], 4) : p.op.params[0].value;
+		vm_ld_mem(p.offset + p.pc +
+		p.op.params[0].value % IDX_MOD, 4) : p.op.params[0].value;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %d", param0);
