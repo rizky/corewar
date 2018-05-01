@@ -51,6 +51,27 @@
 			"environment": [],
 			"externalConsole": true,
 			"MIMode": "lldb"
+		},
+		{
+			"preLaunchTask": "make debug",
+			"name": "(lldb) Launch VM Overflow",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/corewar",
+			"args": [
+					"-v",
+					"4",
+					"2",
+					"tests/vm/overflow/process_next_pc_overflow.cor",
+					"tests/vm/overflow/process_next_pc_overflow.cor",
+					"tests/vm/overflow/process_next_pc_overflow.cor",
+					"tests/vm/overflow/process_next_pc_overflow.cor"
+					],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
 		}
 	]
 }

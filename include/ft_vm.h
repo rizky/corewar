@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 22:14:53 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 00:01:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int				vm_read_binaries(char **paths, t_vm *vm);
 void			*vm_memmark(void *dst, int i, size_t n);
 void			vm_st_mem(int index, char *value, int champ, int size);
 int				vm_ld_mem(int index, int size);
+int				vm_decompiler_param(t_process *p, t_op *op);
 
 void			vm_print_memory(unsigned char memory[MEM_SIZE]);
 void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);
