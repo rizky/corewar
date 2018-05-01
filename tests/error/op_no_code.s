@@ -1,2 +1,0 @@
-.name    "sebc"
-.comment "sebc"
