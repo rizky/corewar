@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 15:09:55 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 15:42:11 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void
 	t_process	*p;
 
 	i = -1;
-	vm->process_size = 0;
 	while (++i < vm->champ_size && (j = -1))
 	{
 		while (++j < (int)(vm->champ[i].processes->size))
@@ -116,7 +115,6 @@ void
 					&op);
 				p->op = op;
 			}
-			vm->process_size++;
 		}
 	}
 	vm_executor(vm);
