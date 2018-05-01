@@ -36,14 +36,15 @@
 		},
 		{
 			"preLaunchTask": "make debug",
-			"name": "(lldb) Launch VM -dump 2400",
+			"name": "(lldb) Launch VM battle",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
 			"args": [
-					"-dump",
-					"2400",
-					"tests/vm/op/add_carry.cor"
+					"-v",
+					"4",
+					"tests/vm/battle/zork.cor",
+					"tests/vm/battle/zorkX.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
