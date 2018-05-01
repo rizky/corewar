@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:29:55 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/01 16:04:53 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 21:32:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,7 @@ void
 	p->offset + p->pc + p->op.params[1].value) % IDX_MOD], 4) : param1;
 	cursor = ft_cursor(p, param1, param2, 1);
 	temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
-	ft_memcpy(&g_memory[cursor], temp, 4);
-	vm_memmark(&g_memory_mark[cursor], p->champ + 1, 4);
+	vm_st_mem(cursor, temp, p->champ, 4);
 	free(temp);
 	vm_op_inc(vm, p);
 }

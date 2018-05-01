@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/30 14:23:52 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 21:31:04 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,21 @@ void
 	ft_bzero(&g_memory, MEM_SIZE);
 	ft_bzero(&g_reg, sizeof(int) * (MAX_PLAYERS * REG_NUMBER));
 	ft_bzero(&g_memory_mark, MEM_SIZE);
+}
+
+void
+	vm_st_mem(int index, char *value, int champ, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (index == MEM_SIZE)
+			index = 0;
+		g_memory[index] = value[i];
+		g_memory_mark[index] = champ + 1;
+		index++;
+		i++;
+	}
 }
