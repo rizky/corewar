@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 04:40:04 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/01 16:46:40 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ static int	vm_option_n(int i, char **av, t_vm *vm)
 	num = 1;
 	if (!ft_strcmp(av[i], "-n"))
 	{
+		if (!ft_isnumber(av[i + 1]))
+			return (-1);
 		num = ft_abs(ft_atoi(av[i + 1]));
 		if (num < 1 || num > MAX_PLAYERS)
 			return (-1);
