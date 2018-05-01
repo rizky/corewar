@@ -6,15 +6,27 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 04:54:09 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 14:22:29 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/01 15:15:22 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm_draw.h"
 
+static void	update_info(t_vm *vm, t_win win)
+{
+	int		live_nbr;
+	int		process_nbr;
+
+	live_nbr = vm_checker_livenbr(*vm);
+	process_nbr = vm_checker_processnbr(*vm);
+	mvwprintw(win.info, 9, 3, "* Processes : %d", process_nbr);
+	wattron(win.info, COLOR_PAIR(5));
+	mvwprintw(win.info, 19, 3, "* NBR_LIVE : %d/%d	* MAX_CHECKS : %d/%d",
+		live_nbr, NBR_LIVE, vm->check_nbr, MAX_CHECKS);
+}
+
 static void	draw_main_info(t_vm *vm, t_win win, t_status *s)
 {
-	(void)*vm;
 	if ((*s).pause == 1)
 	{
 		wattron(win.info, COLOR_PAIR(5));
@@ -28,15 +40,12 @@ static void	draw_main_info(t_vm *vm, t_win win, t_status *s)
 	wattron(win.info, COLOR_PAIR(2));
 	mvwprintw(win.info, 4, 3, "Cycles/second limit : %d", (*s).speed);
 	mvwprintw(win.info, 7, 3, "* Total cycle : %d", g_cycles);
-	mvwprintw(win.info, 9, 3, "* Processes : 2");
 	wattron(win.info, COLOR_PAIR(4));
-	mvwprintw(win.info, 11, 3, "* CYCLE_TO_DIE : %d / %d", (*s).c_now,
+	mvwprintw(win.info, 11, 3, "* CYCLE_TO_DIE : %d / %d", g_cycles_to,
 		g_cycles_to_die);
 	wattron(win.info, COLOR_PAIR(6));
 	mvwprintw(win.info, 17, 3, "* CYCLE_DELTA : %d", CYCLE_DELTA);
-	wattron(win.info, COLOR_PAIR(5));
-	mvwprintw(win.info, 19, 3, "* NBR_LIVE : %d	* MAX_CHECKS : %d",
-		NBR_LIVE, MAX_CHECKS);
+	update_info(vm, win);
 	wattron(win.info, COLOR_PAIR(2));
 }
 
@@ -93,10 +102,11 @@ void		draw_info(t_vm *vm)
 	double	c_tmp;
 	double	ctd_tmp;
 
-	c_tmp = ((double)g_draw_status.c_now / (double)g_cycles_to_die * 20);
+	c_tmp = ((double)g_cycles_to / (double)g_cycles_to_die * 20);
 	ctd_tmp = ((double)g_cycles_to_die / (double)CYCLE_TO_DIE * 20);
 	draw_main_info(vm, g_draw_win, &g_draw_status);
 	draw_counter(g_draw_win, &c_tmp);
 	draw_max_counter(g_draw_win, &ctd_tmp);
+	draw_player_info(vm, g_draw_win);
 	draw_animation(g_draw_win.info, g_cycles);
 }

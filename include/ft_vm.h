@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/30 14:09:03 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 15:14:01 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ unsigned char	g_memory_mark[MEM_SIZE];
 int				g_reg[MAX_PLAYERS][REG_NUMBER];
 int				g_carry;
 int				g_cycles;
+int				g_carrier;
 int				g_cycles_to;
 int				g_cycles_to_die;
 int				g_max_check;
@@ -118,6 +119,8 @@ void			vm_op_sub(t_vm *vm, t_process *p);
 void			vm_op_and(t_vm *vm, t_process *p);
 void			vm_op_or(t_vm *vm, t_process *p);
 void			vm_op_xor(t_vm *vm, t_process *p);
+void			vm_op_fork(t_vm *vm, t_process *p);
+void			vm_op_lfork(t_vm *vm, t_process *p);
 void			vm_op_zjmp(t_vm *vm, t_process *p);
 void			vm_op_ldi(t_vm *vm, t_process *p);
 void			vm_op_sti(t_vm *vm, t_process *p);
@@ -134,9 +137,17 @@ void			vm_st_print(t_process p);
 void			vm_add_print(t_process p);
 void			vm_sub_print(t_process p);
 void			vm_and_print(t_process p);
+void			vm_or_print(t_process p);
+void			vm_xor_print(t_process p);
 void			vm_zjmp_print(t_process p);
 void			vm_ldi_print(t_process p);
+void			vm_ldi_print2(t_process p, int param1, int param2);
 void			vm_sti_print(t_process p);
+void			vm_fork_print(t_process p);
+void			vm_lld_print(t_process p);
+void			vm_lldi_print(t_process p);
+void			vm_lfork_print(t_process p);
+
 void			vm_fork_print(t_process p);
 void			vm_aff_print(t_process p);
 
@@ -186,10 +197,10 @@ static	t_op_dict g_op_dict[17] = {
 		&vm_op_and, &vm_and_print, .is_car = 1, .cycles = 6},
 	{ .name = "or", .opcode = 0x07, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 6},
+		&vm_op_or, &vm_or_print, .is_car = 1, .cycles = 6},
 	{ .name = "xor", .opcode = 0x08, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 6},
+		&vm_op_xor, &vm_xor_print, .is_car = 1, .cycles = 6},
 	{ .name = "zjmp", .opcode = 0x09, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0},
 		&vm_op_zjmp, &vm_zjmp_print, .is_car = 0, .cycles = 20},
@@ -200,15 +211,16 @@ static	t_op_dict g_op_dict[17] = {
 		{T_REG, T_REG | T_IND | T_DIR, T_DIR | T_REG},
 		&vm_op_sti, &vm_sti_print, .is_car = 0, .cycles = 25},
 	{ .name = "fork", .opcode = 0x0c, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc, &vm_fork_print, .is_car = 0, .cycles = 800},
+		{T_DIR, 0, 0}, &vm_op_fork, &vm_fork_print, .is_car = 0, .cycles = 800},
 	{ .name = "lld", .opcode = 0x0d, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_IND | T_DIR, T_REG, 0},
-		&vm_op_inc, &vm_op_print, .is_car = 1, .cycles = 10},
+		&vm_op_lld, &vm_lld_print, .is_car = 1, .cycles = 10},
 	{ .name = "lldi", .opcode = 0x0e, .d_size = 2, .param_c = 3, .is_oc = 1,
 		{T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG},
-		&vm_op_inc, &vm_op_print, .is_car = 0, .cycles = 50},
+		&vm_op_lldi, &vm_lldi_print, .is_car = 0, .cycles = 50},
 	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1, .is_oc = 0,
-		{T_DIR, 0, 0}, &vm_op_inc, &vm_fork_print, .is_car = 0, .cycles = 1000},
+		{T_DIR, 0, 0},
+		vm_op_lfork, &vm_lfork_print, .is_car = 0, .cycles = 1000},
 	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
 		{T_REG, 0, 0}, &vm_op_inc, &vm_aff_print, .is_car = 0, .cycles = 2}
 };
