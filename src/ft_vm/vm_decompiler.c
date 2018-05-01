@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 00:08:24 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 00:55:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int
 		(op->params[i].type == DIR_CODE) ? op->params[i].size =
 			g_op_dict[op->opcode].d_size : 0;
 		op->params[i].value =
-		vm_binary_toint(&g_memory[p->offset + p->pc + op->size],
+		vm_ld_mem(p->offset + p->pc + op->size,
 			op->params[i].size);
 		op->size += op->params[i].size;
 		i++;
