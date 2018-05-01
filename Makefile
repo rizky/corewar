@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/04/27 17:14:49 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/01 09:28:31 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ FTVM:=	ft_vm \
 		vm_executor \
 		vm_checker \
 		vm_op_1 vm_op_2 vm_op_3 vm_op_4 \
-		vm_op_print_1 vm_op_print_2 vm_op_print_3\
+		vm_op_print_1 vm_op_print_2 vm_op_print_3 \
 		vm_print \
 		vm_error \
 		vm_options \
