@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/01 15:35:08 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/01 16:09:23 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -219,6 +219,8 @@ T_VM_DIR_OP = tests/vm/op/
 T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 T_VM_DIR_HC = tests/vm/hardcore/
 T_VM_FILES_HC:=$(shell cd $(T_VM_DIR_HC); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+T_VM_DIR_C = tests/vm/champ/
+T_VM_FILES_C:=$(shell cd $(T_VM_DIR_C); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 DUMP = 150
 
 test_vm_op : corewar
@@ -235,6 +237,10 @@ tests_vm_op: corewar
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_OP) test_vm_op;)
 	@echo $(CYAN) " - Test Hardcore Cases" $(EOC)
 	@$(foreach x, $(T_VM_FILES_HC), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_HC) test_vm_op;)
+
+tests_vm_champs: corewar
+	@echo $(CYAN) " - Test Champs" $(EOC)
+	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_C) test_vm_op;)
 
 test_vm_dump : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
