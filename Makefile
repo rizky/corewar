@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/01 15:19:10 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/01 15:35:08 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -216,34 +216,40 @@ tests_vm_error:
 
 # ----- TEST UNIT VM ------
 T_VM_DIR_OP = tests/vm/op/
-T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE_OP).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+T_VM_DIR_HC = tests/vm/hardcore/
+T_VM_FILES_HC:=$(shell cd $(T_VM_DIR_HC); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 DUMP = 150
 
 test_vm_op : corewar
-	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
-	@./corewar -v 4 $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
-	@./resources/binaries/corewar -v 4 -a $(T_VM_DIR_OP)$(X).cor > out2; true
+	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
+	@./corewar -v 4 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 4 -a $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR_OP)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
 	fi
 
 tests_vm_op: corewar
 	@echo $(CYAN) " - Test Basic Operations" $(EOC)
-	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_op;)
+	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_OP) test_vm_op;)
+	@echo $(CYAN) " - Test Hardcore Cases" $(EOC)
+	@$(foreach x, $(T_VM_FILES_HC), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_HC) test_vm_op;)
 
 test_vm_dump : corewar
-	@./resources/binaries/asm $(T_VM_DIR_OP)$(X).s > /dev/null; true
-	@./corewar -dump $(DUMP) $(T_VM_DIR_OP)$(X).cor > out1 2>> out1; true
-	@./resources/binaries/corewar -d $(DUMP) $(T_VM_DIR_OP)$(X).cor > out2; true
+	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
+	@./corewar -dump $(DUMP) $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -d $(DUMP) $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR_OP)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_VM_DIR_OP)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
 	fi
 
 tests_vm_dump: corewar
 	@echo $(CYAN) " - Test Memory Dump" $(EOC)
-	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x test_vm_dump;)
+	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_OP) test_vm_dump;)
+	@echo $(CYAN) " - Test Hardcore Cases" $(EOC)
+	@$(foreach x, $(T_VM_FILES_HC), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_HC) test_vm_dump;)
 
 test_vm_leak: corewar
 	@valgrind ./corewar $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
