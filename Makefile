@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/01 19:50:56 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/01 21:08:23 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -217,8 +217,6 @@ tests_vm_error:
 # ----- TEST UNIT VM ------
 T_VM_DIR_OP = tests/vm/op/
 T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
-T_VM_DIR_HC = tests/vm/hardcore/
-T_VM_FILES_HC:=$(shell cd $(T_VM_DIR_HC); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 T_VM_DIR_C = tests/vm/champ/
 T_VM_FILES_C:=$(shell cd $(T_VM_DIR_C); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 DUMP = 150
@@ -235,8 +233,6 @@ test_vm_op : corewar
 tests_vm_op: corewar
 	@echo $(CYAN) " - Test Basic Operations" $(EOC)
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_OP) test_vm_op;)
-	@echo $(CYAN) " - Test Hardcore Cases" $(EOC)
-	@$(foreach x, $(T_VM_FILES_HC), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_HC) test_vm_op;)
 
 tests_vm_champs: corewar
 	@echo $(CYAN) " - Test Champs" $(EOC)
@@ -289,6 +285,28 @@ tests_vm: corewar
 	@$(MAKE) tests_vm_op
 	@$(MAKE) tests_vm_dump
 
+T_VM_DIR_O = tests/vm/overflow/
+T_VM_FILES_O:=$(shell cd $(T_VM_DIR_O); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+
+.PHONY: tests_vm_overflow test_vm_overflow
+
+test_vm_overflow : corewar
+	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
+	./corewar -dump $(DUMP) $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	./resources/binaries/corewar -d $(DUMP) $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
+	@if diff out1 out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
+	fi
+
+tests_vm_overflow: corewar
+	@echo $(CYAN) " - Test Overflow Case $(DUMP)" $(EOC)
+	@$(foreach x, $(T_VM_FILES_O), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_O) test_vm_overflow;)
+
+NUMBERS = 888
+tests_vm_overflow_loop: corewar
+	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_OP) tests_vm_overflow;)
+	
 tests: tests_asm tests_vm
 
 .PHONY: all clean fclean re debug norm norm2 tests tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
