@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 21:57:24 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 22:14:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 # define CHAMP_MIN		2
 # define CHAMP_MAX		3
 # define INVALID_FILE	4
-# define INVALID_HEAD	5
-# define CODE_MAX		6
+# define INVALID_HEADER	5
+# define INVALID_MAGIC	6
+# define INVALID_INSTR	7
+# define CODE_MAX		8
 
 # define V_LVL_0		0
 # define V_LVL_1		1

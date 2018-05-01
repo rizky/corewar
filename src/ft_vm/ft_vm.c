@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 19:59:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 21:47:32 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ void
 	while (++i < vm->champ_size)
 	{
 		g_reg[i][1] = (i + 1) * -1;
-		ft_printfln("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !", i + 1,
-		vm->champ[i].header.prog_size, vm->champ[i].header.prog_name,
-		vm->champ[i].header.comment);
+		ft_printfln("* Player %d, weighing %d %s, \"%s\" (\"%s\") !", i + 1,
+			vm->champ[i].header.prog_size, (vm->champ[i].header.prog_size > 1) ?
+			"bytes" : "byte", vm->champ[i].header.prog_name,
+			vm->champ[i].header.comment);
 		ft_memcpy(&memory[i * MEM_SIZE / vm->champ_size], vm->champ[i].op,
-				vm->champ[i].header.prog_size);
+			vm->champ[i].header.prog_size);
 		vm_memmark(&g_memory_mark[i * MEM_SIZE / vm->champ_size], i + 1,
-				vm->champ[i].header.prog_size);
+			vm->champ[i].header.prog_size);
 		p.offset = i * MEM_SIZE / vm->champ_size;
 		p.champ = i;
 		p.index = 1 + vm->process_size++;
