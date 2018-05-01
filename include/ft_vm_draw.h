@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 22:13:56 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 19:15:36 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 15:13:07 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ void			draw(t_vm *vm);
 void			draw_info(t_vm *vm);
 void			draw_player_info(t_vm *vm, t_win win);
 void			draw_game(t_vm *v, t_win w);
-
 
 #endif

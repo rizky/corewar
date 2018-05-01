@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 04:54:09 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 14:22:29 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/01 15:15:22 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ void		draw_info(t_vm *vm)
 	draw_main_info(vm, g_draw_win, &g_draw_status);
 	draw_counter(g_draw_win, &c_tmp);
 	draw_max_counter(g_draw_win, &ctd_tmp);
-	// draw_player_info(vm, g_draw_win);
+	draw_player_info(vm, g_draw_win);
 	draw_animation(g_draw_win.info, g_cycles);
 }

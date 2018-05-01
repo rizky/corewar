@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 16:24:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 15:09:55 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int
 		ft_bzero(op, sizeof(t_op));
 		return (-1);
 	}
-	// p->pc_next = p->pc + op->size;
 	if ((p->pc + op->size) >= MEM_SIZE)
 		p->pc_next = (p->pc + op->size) * -1;
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_op_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:30:28 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 04:34:21 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/01 15:12:43 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,12 @@ void
 	}
 	param0 = ft_init_param_long(p, 0);
 	param1 = ft_init_param_long(p, 1);
-	param0 = (p->op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p->offset + p->pc + p->op.params[0].value], 4)
-		: param0;
+	param0 = (p->op.params[0].type == IND_CODE) ? vm_binary_toint(
+		&g_memory[p->offset + p->pc + p->op.params[0].value], 4) : param0;
 	cursor = ft_cursor_long(p, param0, param1, 0) % MEM_SIZE;
-	if (cursor < 0)
-		cursor += MEM_SIZE;
+	(cursor < 0) ? cursor += MEM_SIZE : 0;
 	g_reg[p->champ][p->op.params[2].value] =
 		vm_binary_toint(&g_memory[cursor], 4);
-	if (g_reg[p->champ][p->op.params[2].value] == 0)
-		g_carry = 1;
-	else
-		g_carry = 0;
+	g_carry = (g_reg[p->champ][p->op.params[2].value] == 0) ? 1 : 0;
 	vm_op_inc(vm, p);
 }

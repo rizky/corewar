@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:27:57 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 16:47:39 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 15:10:31 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	vm_op_st(t_vm *vm, t_process *p)
 			g_reg[p->champ][p->op.params[0].value];
 	else
 	{
-		param1 = (p->offset + p->pc + ((short)p->op.params[1].value % IDX_MOD)) % MEM_SIZE;
-		if (param1 < 0)
-			param1 += MEM_SIZE;
+		param1 = (p->offset + p->pc +
+			((short)p->op.params[1].value % IDX_MOD)) % MEM_SIZE;
+		(param1 < 0) ? param1 += MEM_SIZE : 0;
 		temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
 		ft_memcpy(&g_memory[param1], temp, 4);
 		vm_memmark(&g_memory_mark[param1], p->champ + 1, 4);
