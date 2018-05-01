@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_op_print_1.c                                    :+:      :+:    :+:   */
+/*   vm_op_print_4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/27 15:01:44 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 15:03:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ void
 	ft_printf(" r%d", p.op.params[2].value);
 	ft_printf("\n");
 	if (p.op.params[0].type == DIR_CODE && p.op.params[1].type == DIR_CODE)
-		ft_printf("       | -> load from %hd + %hd = %d (with pc and mod %d)",
+		ft_printf("       | -> load from %hd + %hd = %d (with pc %d)",
 		param0, param1, (short)param0 + (short)param1,
 		(p.offset + p.pc + ((short)param0 + (short)param1)));
 	else if (p.op.params[0].type == DIR_CODE)
-		ft_printf("       | -> load from %hd + %d = %d (with pc and mod %d)",
+		ft_printf("       | -> load from %hd + %d = %d (with pc %d)",
 		param0, param1, (short)param0 + param1,
 		(p.offset + p.pc + ((short)param0 + param1)));
 	else if (p.op.params[1].type == DIR_CODE)
-		ft_printf("       | -> load from %d + %hd = %d (with pc and mod %d)",
+		ft_printf("       | -> load from %d + %hd = %d (with pc %d)",
 		param0, param1, param0 + (short)param1,
 		(p.offset + p.pc + (param0 + (short)param1)));
 	else
-		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)",
+		ft_printf("       | -> load from %d + %d = %d (with pc %d)",
 		param0, param1, param0 + param1,
 		(p.offset + p.pc + (param0 + param1)));
 	ft_printf("\n");
