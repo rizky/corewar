@@ -26,7 +26,7 @@
 			"args": [
 					"-v",
 					"4",
-					"tests/vm/op/st.cor"
+					"tests/vm/op/sti_1.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
