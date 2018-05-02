@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 17:21:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:18:27 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void
 	int			i;
 	t_process	*p;
 
+	g_cycles++;
+	g_cycles_to++;
 	vm_decompiler(vm);
 	(vm->v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
 	i = (int)(vm->processes.size);
@@ -70,6 +72,5 @@ void
 			vm_executor_op(vm, p);
 		i--;
 	}
-	(vm->dump && vm->cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
 	(vm->v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, *vm) : 0;
 }

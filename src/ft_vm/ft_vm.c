@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 17:34:14 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:19:19 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,10 @@ int
 	vm_load_champs(&vm, g_memory);
 	while (vm_checker(&vm))
 	{
-		g_cycles++;
-		g_cycles_to++;
 		vm_executor(&vm);
+		(vm.dump && vm.cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
+		if (vm.dump && vm.cycles == g_cycles)
+			break ;
 		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
 			break ;
 	}
