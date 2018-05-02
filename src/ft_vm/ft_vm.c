@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 14:35:30 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:54:16 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void
 			vm->champ[i].header.prog_size);
 		p.offset = i * MEM_SIZE / vm->champ_size;
 		p.champ = i;
-		p.index = 1 + vm->process_size++;
+		p.index = 1 + vm->processes->size;
 		p.reg[1] = (i + 1) * -1;
-		fta_append(vm->champ[i].processes, &p, 1);
+		fta_append(vm->processes, &p, 1);
 	}
 }
 

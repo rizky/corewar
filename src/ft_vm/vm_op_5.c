@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:30:28 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/02 02:58:19 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:55:43 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void
 	new_p.pc = value - p->offset;
 	if (value < 0)
 		new_p.pc += MEM_SIZE;
-	new_p.index = 1 + vm->process_size++;
-	fta_append(vm->champ[p->champ].processes, &new_p, 1);
+	new_p.index = 1 + vm->processes->size;
+	fta_append(vm->processes, &new_p, 1);
 	vm_op_inc(vm, p);
 }
 
@@ -53,8 +53,8 @@ void
 	new_p.pc = value - p->offset;
 	if (value < 0)
 		new_p.pc += MEM_SIZE;
-	new_p.index = 1 + vm->process_size++;
-	fta_append(vm->champ[p->champ].processes, &new_p, 1);
+	new_p.index = 1 + vm->processes->size;
+	fta_append(vm->processes, &new_p, 1);
 	vm_op_inc(vm, p);
 }
 

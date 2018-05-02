@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 14:04:05 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:58:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct	s_champ
 {
 	t_header	header;
 	char		*op;
-	t_array		*processes;
 	int			live_nbr;
 }				t_champ;
 
@@ -79,7 +78,7 @@ typedef struct	s_vm
 	int			check_nbr;
 	char		*players[MAX_PLAYERS + 1];
 	t_champ		champ[4];
-	int			process_size;
+	t_array		*processes;
 	int			champ_size;
 	int			last_dead_champ;
 	int			last_live_champ;
@@ -168,7 +167,6 @@ int				ft_abs(int i);
 
 int				vm_checker(t_vm *vm);
 int				vm_checker_livenbr(t_vm vm);
-int				vm_checker_processnbr(t_vm vm);
 
 typedef struct	s_op_dict
 {

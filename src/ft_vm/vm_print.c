@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 16:16:40 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/02 15:58:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,15 @@ void	vm_print_memory(unsigned char memory[MEM_SIZE])
 
 int		vm_get_cursor_color(t_vm vm, int index)
 {
-	int		j;
 	int		k;
 
-	j = 0;
-	while (j < vm.champ_size)
+	k = 0;
+	while (k < (int)(vm.processes->size))
 	{
-		k = 0;
-		while (k < (int)(vm.champ[j].processes->size))
-		{
-			if (((t_process*)vm.champ[j].processes->data)[k].offset +
-				((t_process*)vm.champ[j].processes->data)[k].pc == index)
-				return (j + 1);
-			k++;
-		}
-		j++;
+		if (((t_process*)vm.processes->data)[k].offset +
+			((t_process*)vm.processes->data)[k].pc == index)
+			return (((t_process*)vm.processes->data)[k].champ + 1);
+		k++;
 	}
 	return (0);
 }
@@ -88,7 +82,7 @@ void	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
 	ft_printf("%0.0v%150Q%0.0vCycles:%4d\tCTD:%4d/%4d(-%d)",
 		' ', g_cycles, g_cycles_to, g_cycles_to_die, CYCLE_DELTA);
 	ft_printfln("\tLives:%4d\tProcesses:%4d\tMax Check:%2d/%2d",
-		vm_checker_livenbr(vm), vm_checker_processnbr(vm),
+		vm_checker_livenbr(vm), vm.processes->size,
 		g_max_check, MAX_CHECKS);
 	while (i < MEM_SIZE)
 	{

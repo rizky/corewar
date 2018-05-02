@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 00:55:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:46:37 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,25 +86,21 @@ void
 	vm_decompiler(t_vm *vm)
 {
 	int			i;
-	int			j;
 	t_op		op;
 	t_process	*p;
 
 	i = -1;
-	while (++i < vm->champ_size && (j = -1))
+	while (++i < (int)(vm->processes->size))
 	{
-		while (++j < (int)(vm->champ[i].processes->size))
+		ft_bzero(&op, sizeof(t_op));
+		p = &(((t_process*)vm->processes->data)[i]);
+		if (p->op.opcode == 0)
 		{
-			ft_bzero(&op, sizeof(t_op));
-			p = &(((t_process*)vm->champ[i].processes->data)[j]);
-			if (p->op.opcode == 0)
-			{
-				p->cycles = g_cycles;
-				vm_decompiler_op(vm,
-					&(((t_process*)vm->champ[i].processes->data)[j]),
-					&op);
-				p->op = op;
-			}
+			p->cycles = g_cycles;
+			vm_decompiler_op(vm,
+				&(((t_process*)vm->processes->data)[i]),
+				&op);
+			p->op = op;
 		}
 	}
 }

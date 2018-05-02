@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 14:37:49 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:13:52 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,16 @@
 int
 	vm_checker_livenbr(t_vm vm)
 {
-	int			i;
 	int			j;
 	int			live_nbr;
 	t_process	*p;
 
 	live_nbr = 0;
-	i = -1;
-	while (++i < vm.champ_size)
+	j = -1;
+	while (++j < (int)(vm.processes->size))
 	{
-		j = -1;
-		while (++j < (int)(vm.champ[i].processes->size))
-		{
-			p = &(((t_process*)vm.champ[i].processes->data)[j]);
-			live_nbr += p->live_nbr;
-		}
+		p = &(((t_process*)vm.processes->data)[j]);
+		live_nbr += p->live_nbr;
 	}
 	return (live_nbr);
 }
@@ -37,43 +32,16 @@ int
 void
 	vm_reset_livenbr(t_vm *vm)
 {
-	int			i;
 	int			j;
 	t_process	*p;
 
-	i = -1;
-	while (++i < vm->champ_size)
+	j = -1;
+	while (++j < (int)(vm->processes->size))
 	{
-		j = -1;
-		while (++j < (int)(vm->champ[i].processes->size))
-		{
-			p = &(((t_process*)vm->champ[i].processes->data)[j]);
-			p->live_nbr = 0;
-		}
-		vm->champ[i].live_nbr = 0;
+		p = &(((t_process*)vm->processes->data)[j]);
+		p->live_nbr = 0;
+		vm->champ[p->champ].live_nbr = 0;
 	}
-}
-
-int
-	vm_checker_processnbr(t_vm vm)
-{
-	int			i;
-	int			j;
-	int			process_nbr;
-	t_process	*p;
-
-	process_nbr = 0;
-	i = -1;
-	while (++i < vm.champ_size)
-	{
-		j = -1;
-		while (++j < (int)(vm.champ[i].processes->size))
-		{
-			p = &(((t_process*)vm.champ[i].processes->data)[j]);
-			process_nbr++;
-		}
-	}
-	return (process_nbr);
 }
 
 int
@@ -91,14 +59,17 @@ int
 	{
 		j = -1;
 		palive_nbr = 0;
-		while (++j < (int)(vm.champ[i].processes->size))
+		while (++j < (int)(vm.processes->size))
 		{
 			*winner = i;
-			p = &(((t_process*)vm.champ[i].processes->data)[j]);
-			if (p->live_nbr > 0)
-				palive_nbr++;
-			else
-				fta_popindex(vm.champ[i].processes, j, 1);
+			p = &(((t_process*)vm.processes->data)[j]);
+			if (p->champ == i)
+			{
+				if (p->live_nbr > 0)
+					palive_nbr++;
+				else
+					fta_popindex(vm.processes, j, 1);
+			}
 		}
 		if (palive_nbr > 0)
 			calive_nbr++;
