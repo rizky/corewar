@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 01:23:02 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 01:38:08 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int
 int
 	vm_checker(t_vm *vm)
 {
-	if (g_cycles > 6084)
-		0;
 	if (g_cycles_to_die < 0)
 	{
 		vm->winner = vm->last_live_champ;
