@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 04:54:09 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/01 15:15:22 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 03:41:51 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	update_info(t_vm *vm, t_win win)
 	mvwprintw(win.info, 9, 3, "* Processes : %d", process_nbr);
 	wattron(win.info, COLOR_PAIR(5));
 	mvwprintw(win.info, 19, 3, "* NBR_LIVE : %d/%d	* MAX_CHECKS : %d/%d",
-		live_nbr, NBR_LIVE, vm->check_nbr, MAX_CHECKS);
+		live_nbr, NBR_LIVE, g_max_check, MAX_CHECKS);
 }
 
 static void	draw_main_info(t_vm *vm, t_win win, t_status *s)
