@@ -1,16 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_op_print_3.c                                    :+:      :+:    :+:   */
+/*   op_sti.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/27 15:13:56 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:17:35 by rnugroho         ###   ########.fr       */
+/*   Created: 2018/05/02 17:56:40 by rnugroho          #+#    #+#             */
+/*   Updated: 2018/05/02 17:57:14 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
+
+void
+	vm_op_sti(t_vm *vm, t_process *p)
+{
+	int			param1;
+	int			param2;
+	int			cursor;
+	char		*temp;
+
+	(void)vm;
+	if (p->op.params[0].value < 1 || p->op.params[0].value > 16 ||
+		((p->op.params[1].type == REG_CODE) &&
+			(p->op.params[1].value < 1 || p->op.params[1].value > 16)) ||
+		((p->op.params[2].type == REG_CODE) &&
+			(p->op.params[2].value < 1 || p->op.params[2].value > 16)))
+	{
+		vm_op_inc(vm, p);
+		return ;
+	}
+	param1 = ft_init_param(p, 1);
+	param2 = (p->op.params[2].type == REG_CODE) ?
+		p->reg[p->op.params[2].value] : p->op.params[2].value;
+	cursor = ft_cursor(p, param1, param2, 1) % MEM_SIZE;
+	if (cursor < 0)
+		cursor += MEM_SIZE;
+	temp = vm_to_big_endian(p->reg[p->op.params[0].value], 4);
+	vm_st_mem(cursor, temp, p->champ, 4);
+	free(temp);
+	vm_op_inc(vm, p);
+}
 
 void
 	vm_sti_print2(t_process p, int param1, int param2)
@@ -61,71 +91,4 @@ void
 		vm_ld_mem((p.offset + p.pc +
 			(p.op.params[1].value % IDX_MOD)) % MEM_SIZE, 4) : param1;
 	vm_sti_print2(p, param1, param2);
-}
-
-void
-	vm_ldi_print2(t_process p, int param0, int param1)
-{
-	ft_printf("P %4d | ", p.index);
-	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	(p.op.params[0].type == DIR_CODE) ?
-	ft_printf(" %hd", param0) : ft_printf(" %d", param0);
-	(p.op.params[1].type == DIR_CODE) ?
-	ft_printf(" %hd", param1) : ft_printf(" %d", param1);
-	ft_printf(" r%d", p.op.params[2].value);
-	ft_printf("\n");
-	if (p.op.params[0].type == DIR_CODE && p.op.params[1].type == DIR_CODE)
-		ft_printf("       | -> load from %hd + %hd = %d (with pc and mod %d)",
-		param0, param1, (short)param0 + (short)param1,
-		p.offset + p.pc + ((short)param0 + (short)param1) % IDX_MOD);
-	else if (p.op.params[0].type == DIR_CODE)
-		ft_printf("       | -> load from %hd + %d = %d (with pc and mod %d)",
-		param0, param1, (short)param0 + param1,
-		p.offset + p.pc + ((short)param0 + param1) % IDX_MOD);
-	else if (p.op.params[1].type == DIR_CODE)
-		ft_printf("       | -> load from %d + %hd = %d (with pc and mod %d)",
-		param0, param1, param0 + (short)param1,
-		p.offset + p.pc + (param0 + (short)param1) % IDX_MOD);
-	else
-		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)",
-		param0, param1, param0 + param1,
-		p.offset + p.pc + (param0 + param1) % IDX_MOD);
-	ft_printf("\n");
-}
-
-void
-	vm_ldi_print(t_process p)
-{
-	int param0;
-	int	param1;
-
-	if (p.op.params[2].value < 1 || p.op.params[2].value > 16 ||
-		((p.op.params[1].type == REG_CODE) &&
-			(p.op.params[1].value < 1 || p.op.params[1].value > 16)) ||
-		((p.op.params[0].type == REG_CODE) &&
-			(p.op.params[0].value < 1 || p.op.params[0].value > 16)))
-		return ;
-	param0 = (p.op.params[0].type == REG_CODE) ?
-		p.reg[p.op.params[0].value] : p.op.params[0].value;
-	param1 = (p.op.params[1].type == REG_CODE) ?
-		p.reg[p.op.params[1].value] : p.op.params[1].value;
-	param0 = (p.op.params[0].type == IND_CODE) ?
-		vm_ld_mem((p.offset + p.pc +
-			(p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : param0;
-	vm_ldi_print2(p, param0, param1);
-}
-
-void
-	vm_fork_print(t_process p)
-{
-	int value;
-
-	ft_printf("P %4d | ", p.index);
-	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	value = p.pc + p.offset + p.op.params[0].value;
-	if (value > MEM_SIZE)
-		value = value % MEM_SIZE;
-	ft_printf(" %hd (%hd)", p.op.params[0].value,
-		p.pc + p.offset + p.op.params[0].value);
-	ft_printf("\n");
 }

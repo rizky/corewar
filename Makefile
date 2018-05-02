@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/02 17:15:42 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/02 18:05:04 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,6 @@ FTVM:=	ft_vm \
 		vm_decompiler_file \
 		vm_executor \
 		vm_checker \
-		vm_op_1 vm_op_2 vm_op_3 vm_op_4 vm_op_5\
-		vm_op_print_1 vm_op_print_2 vm_op_print_3 vm_op_print_4\
 		vm_print \
 		vm_error \
 		vm_options \
@@ -46,6 +44,12 @@ FTVMDRAW:= draw_animation_1 \
 		draw_key_utils \
 		draw_nyan \
 		draw \
+
+FTVMOPPATH:= ft_vm/vm_op/
+FTVMOP:= op.and op_add op_aff op_fork \
+		op_ld op_ldi op_lfork op_live \
+		op_lld op_lldi op_or op_st \
+		op_sti op_sub op_xor op_zjmp
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -76,6 +80,7 @@ EOC:="\033[0;0m"
 FILES_ASM:=$(addprefix $(FTASMPATH),$(FTASM))
 FILES_VM:=$(addprefix $(FTVMPATH),$(FTVM))
 FILES_VM_DRAW:=$(addprefix $(FTVMDRAWPATH),$(FTVMDRAW))
+FILES_VM_OP:=$(addprefix $(FTVMOPPATH),$(FTVMOP))
 
 # ------ Auto ------
 SRC_ASM:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_ASM)))
@@ -86,6 +91,9 @@ OBJ_VM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM)))
 
 SRC_VM+=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM_DRAW)))
 OBJ_VM+=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM_DRAW)))
+
+SRC_VM+=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM_OP)))
+OBJ_VM+=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM_OP)))
 
 # ==================
 CCHF:=.cache_exists
@@ -120,6 +128,7 @@ $(CCHF):
 	@mkdir $(CCHPATH)$(FTASMPATH)
 	@mkdir $(CCHPATH)$(FTVMPATH)
 	@mkdir $(CCHPATH)$(FTVMDRAWPATH)
+	@mkdir $(CCHPATH)$(FTVMOPPATH)
 	@touch $(CCHF)
 
 clean:
