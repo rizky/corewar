@@ -6,12 +6,27 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 14:35:30 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:51:07 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 #include "ft_vm_draw.h"
+
+void
+	vm_free(t_vm *vm)
+{
+	int i;
+
+	i = 0;
+	while (i < vm->champ_size)
+	{
+		free(vm->champ[i].op);
+		fta_clear(vm->champ[i].processes);
+		free(vm->champ[i].processes);
+		i++;
+	}
+}
 
 void
 	vm_load_champs(t_vm *vm, unsigned char memory[MEM_SIZE])
@@ -111,5 +126,6 @@ int
 	ft_printfln("Contestant %d, \"%s\", has won !",
 		vm.winner + 1, vm.champ[vm.winner].header.prog_name) : 0;
 	(vm.v_lvl[V_LVL_1]) ? draw_end(&g_draw_win) : 0;
+	vm_free(&vm);
 	return (0);
 }
