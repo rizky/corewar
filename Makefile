@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/02 18:05:04 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/02 18:09:07 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ FTVMDRAW:= draw_animation_1 \
 		draw \
 
 FTVMOPPATH:= ft_vm/vm_op/
-FTVMOP:= op.and op_add op_aff op_fork \
+FTVMOP:= op_and op_add op_aff op_fork \
 		op_ld op_ldi op_lfork op_live \
 		op_lld op_lldi op_or op_st \
 		op_sti op_sub op_xor op_zjmp
