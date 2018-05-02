@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 18:19:19 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:47:11 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void
 
 	i = -1;
 	vm_init_g_var();
+	vm->last_live_champ = vm->champ_size - 1;
 	ft_bzero(&p, sizeof(t_process));
 	ft_printfln("Introducing contestants...");
 	vm->process_index = 1;
