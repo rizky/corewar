@@ -20,8 +20,7 @@ void
 	if (p.op.params[1].value < 1 || p.op.params[1].value > 16)
 		return ;
 	param0 = (p.op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p.offset + p.pc + p.op.params[0].value)
-			% MEM_SIZE], 2)
+		vm_ld_mem((p.offset + p.pc + p.op.params[0].value) % MEM_SIZE, 2)
 		: p.op.params[0].value;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
@@ -74,11 +73,11 @@ void
 			(p.op.params[0].value < 1 || p.op.params[0].value > 16)))
 		return ;
 	param0 = (p.op.params[0].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[0].value] : p.op.params[0].value;
+		p.reg[p.op.params[0].value] : p.op.params[0].value;
 	param1 = (p.op.params[1].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
+		p.reg[p.op.params[1].value] : p.op.params[1].value;
 	param0 = (p.op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p.offset + p.pc + p.op.params[0].value)], 4)
+		vm_ld_mem((p.offset + p.pc + p.op.params[0].value), 4)
 		: param0;
 	vm_lldi_print2(p, param0, param1);
 }
@@ -95,5 +94,5 @@ void
 void
 	vm_aff_print(t_process p)
 {
-	ft_printfln("Aff: %c", g_reg[p.champ][p.op.params[0].value]);
+	ft_printfln("Aff: %c", p.reg[p.op.params[0].value]);
 }

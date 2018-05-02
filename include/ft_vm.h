@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 00:01:53 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:04:05 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct	s_process
 	int			pc_next;
 	int			live_nbr;
 	int			champ;
+	int			carry;
+	int			reg[REG_NUMBER];
 	t_op		op;
 	int			index;
 }				t_process;
@@ -86,8 +88,6 @@ typedef struct	s_vm
 
 unsigned char	g_memory[MEM_SIZE];
 unsigned char	g_memory_mark[MEM_SIZE];
-int				g_reg[MAX_PLAYERS][REG_NUMBER];
-int				g_carry;
 int				g_cycles;
 int				g_carrier;
 int				g_cycles_to;

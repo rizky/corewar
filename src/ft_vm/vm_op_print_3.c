@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:13:56 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 02:13:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:03:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void
 			(p.op.params[2].value < 1 || p.op.params[2].value > 16)))
 		return ;
 	param1 = (p.op.params[1].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
+		p.reg[p.op.params[1].value] : p.op.params[1].value;
 	param2 = (p.op.params[2].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[2].value] : p.op.params[2].value;
+		p.reg[p.op.params[2].value] : p.op.params[2].value;
 	param1 = (p.op.params[1].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p.offset + p.pc +
-			p.op.params[1].value % IDX_MOD], 4) : param1;
+		vm_ld_mem((p.offset + p.pc +
+			(p.op.params[1].value % IDX_MOD)) % MEM_SIZE, 4) : param1;
 	vm_sti_print2(p, param1, param2);
 }
 
@@ -106,12 +106,12 @@ void
 			(p.op.params[0].value < 1 || p.op.params[0].value > 16)))
 		return ;
 	param0 = (p.op.params[0].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[0].value] : p.op.params[0].value;
+		p.reg[p.op.params[0].value] : p.op.params[0].value;
 	param1 = (p.op.params[1].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
+		p.reg[p.op.params[1].value] : p.op.params[1].value;
 	param0 = (p.op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p.offset + p.pc
-		+ p.op.params[0].value % IDX_MOD], 4) : param0;
+		vm_ld_mem((p.offset + p.pc +
+			(p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : param0;
 	vm_ldi_print2(p, param0, param1);
 }
 
