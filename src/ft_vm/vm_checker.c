@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 18:01:17 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:37:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,17 @@ int
 int
 	vm_checker(t_vm *vm)
 {
-	int live_nbr;
-
-	live_nbr = vm_checker_livenbr(*vm);
+	if (g_cycles_to_die < 0)
+	{
+		vm->winner = vm->last_live_champ;
+		return (0);
+	}
 	if (g_cycles_to == g_cycles_to_die)
 	{
 		if (vm_checker_processalive(*vm, &(vm->winner)) < 1)
 			return (0);
 		g_cycles_to = 0;
-		if (live_nbr > NBR_LIVE || ++g_max_check == MAX_CHECKS)
+		if (vm_checker_livenbr(*vm) > NBR_LIVE || ++g_max_check == MAX_CHECKS)
 		{
 			g_max_check = g_max_check == MAX_CHECKS ? 0 : g_max_check;
 			g_cycles_to_die -= CYCLE_DELTA;
@@ -125,11 +127,6 @@ int
 			ft_printfln("Cycle to die is now %d", g_cycles_to_die) : 0;
 		}
 		vm_reset_livenbr(vm);
-	}
-	if (g_cycles_to_die < 0)
-	{
-		vm->winner = vm->last_live_champ;
-		return (0);
 	}
 	return (1);
 }

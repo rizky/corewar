@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/02 14:04:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:29:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ char
 void
 	vm_init_g_var(void)
 {
-	g_cycles = 1;
-	g_cycles_to = 1;
+	g_cycles = 0;
+	g_cycles_to = 0;
 	g_cycles_to_die = CYCLE_TO_DIE;
 	ft_bzero(&g_memory, MEM_SIZE);
 	ft_bzero(&g_memory_mark, MEM_SIZE);

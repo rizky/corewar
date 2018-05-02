@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 14:02:44 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:35:30 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,12 @@ int
 	vm_load_champs(&vm, g_memory);
 	while (vm_checker(&vm))
 	{
+		g_cycles++;
+		g_cycles_to++;
 		vm_executor(&vm);
 		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
 			break ;
-		g_cycles++;
-		g_cycles_to++;
 	}
-	(vm.v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
 	(!vm.dump || g_cycles < vm.cycles) ?
 	ft_printfln("Contestant %d, \"%s\", has won !",
 		vm.winner + 1, vm.champ[vm.winner].header.prog_name) : 0;
