@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 18:06:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:59:26 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,6 @@ int				ft_abs(int i);
 
 int				vm_checker(t_vm *vm);
 int				vm_checker_livenbr(t_vm vm);
-
 
 int				ft_init_param(t_process *p, int i);
 int				ft_cursor(t_process *p, int param1, int param2, int i);

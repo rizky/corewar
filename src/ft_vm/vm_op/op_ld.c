@@ -6,13 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:46:49 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 17:59:13 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:58:34 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void	vm_op_ld(t_vm *vm, t_process *p)
+void
+	vm_op_ld(t_vm *vm, t_process *p)
 {
 	int		param0;
 

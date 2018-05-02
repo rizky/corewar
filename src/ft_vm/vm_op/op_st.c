@@ -6,13 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:47:29 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 17:47:56 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:59:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void	vm_op_st(t_vm *vm, t_process *p)
+void
+	vm_op_st(t_vm *vm, t_process *p)
 {
 	short	param1;
 	char	*temp;

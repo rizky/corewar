@@ -6,13 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:49:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 17:49:32 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:59:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void	vm_op_sub(t_vm *vm, t_process *p)
+void
+	vm_op_sub(t_vm *vm, t_process *p)
 {
 	(void)vm;
 	if (p->op.params[0].value < 1 ||

@@ -6,13 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:45:30 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 17:52:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:00:38 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void	vm_op_live(t_vm *vm, t_process *p)
+void
+	vm_op_live(t_vm *vm, t_process *p)
 {
 	(void)vm;
 	p->live_nbr++;
@@ -33,7 +34,8 @@ void
 	ft_printf("\n");
 }
 
-void	vm_op_inc(t_vm *vm, t_process *p)
+void
+	vm_op_inc(t_vm *vm, t_process *p)
 {
 	int val;
 

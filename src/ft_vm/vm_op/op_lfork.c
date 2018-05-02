@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:00:19 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 18:01:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:00:06 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,3 @@ void
 	ft_printf(" %hd (%hd)", p.op.params[0].value, p.pc + p.op.params[0].value);
 	ft_printf("\n");
 }
-
