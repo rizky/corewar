@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/02 15:26:33 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/02 16:35:42 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -284,6 +284,8 @@ tests_vm: corewar
 	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
 	@$(MAKE) tests_vm_op
 	@$(MAKE) tests_vm_dump
+	@$(MAKE) tests_vm_battle
+	@$(MAKE) tests_vm_dump_overflow
 
 T_VM_DIR_O = tests/vm/overflow/
 T_VM_FILES_O:=$(shell cd $(T_VM_DIR_O); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )

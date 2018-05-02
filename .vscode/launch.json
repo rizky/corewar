@@ -26,7 +26,7 @@
 			"args": [
 					"-v",
 					"4",
-					"tests/vm/op/add_carry.cor"
+					"tests/vm/champ/Car.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

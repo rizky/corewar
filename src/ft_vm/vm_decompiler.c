@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 15:46:37 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:34:23 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,15 @@ void
 	t_process	*p;
 
 	i = -1;
-	while (++i < (int)(vm->processes->size))
+	while (++i < (int)(vm->processes.size))
 	{
 		ft_bzero(&op, sizeof(t_op));
-		p = &(((t_process*)vm->processes->data)[i]);
+		p = &(((t_process*)vm->processes.data)[i]);
 		if (p->op.opcode == 0)
 		{
 			p->cycles = g_cycles;
 			vm_decompiler_op(vm,
-				&(((t_process*)vm->processes->data)[i]),
+				&(((t_process*)vm->processes.data)[i]),
 				&op);
 			p->op = op;
 		}

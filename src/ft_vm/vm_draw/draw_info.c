@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 04:54:09 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/02 15:58:49 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:34:30 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	update_info(t_vm *vm, t_win win)
 	int		process_nbr;
 
 	live_nbr = vm_checker_livenbr(*vm);
-	process_nbr = vm->processes->size;
+	process_nbr = vm->processes.size;
 	mvwprintw(win.info, 9, 3, "* Processes : %d", process_nbr);
 	wattron(win.info, COLOR_PAIR(5));
 	mvwprintw(win.info, 19, 3, "* NBR_LIVE : %d/%d	* MAX_CHECKS : %d/%d",

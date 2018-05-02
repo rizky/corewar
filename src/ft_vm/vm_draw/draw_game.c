@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:04:15 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/02 15:57:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:34:28 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void		color_picker(t_vm *vm, unsigned char *m, int *i, int *color)
 	else
 		*color = 7;
 	y = -1;
-	while (++y < (int)vm->processes->size)
+	while (++y < (int)vm->processes.size)
 	{
-		p = &(((t_process*)vm->processes->data)[y]);
+		p = &(((t_process*)vm->processes.data)[y]);
 		process_color(p, m, i, color);
 	}
 }

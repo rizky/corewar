@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 15:48:58 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:33:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void
 
 	vm_decompiler(vm);
 	(vm->v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
-	i = (int)(vm->processes->size);
+	i = (int)(vm->processes.size);
 	while (i >= 0)
 	{
-		p = &(((t_process*)vm->processes->data)[i]);
+		p = &(((t_process*)vm->processes.data)[i]);
 		if (p->cycles == g_cycles)
 			vm_executor_op(vm, p);
 		i--;

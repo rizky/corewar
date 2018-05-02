@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:13:52 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:34:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int
 
 	live_nbr = 0;
 	j = -1;
-	while (++j < (int)(vm.processes->size))
+	while (++j < (int)(vm.processes.size))
 	{
-		p = &(((t_process*)vm.processes->data)[j]);
+		p = &(((t_process*)vm.processes.data)[j]);
 		live_nbr += p->live_nbr;
 	}
 	return (live_nbr);
@@ -36,9 +36,9 @@ void
 	t_process	*p;
 
 	j = -1;
-	while (++j < (int)(vm->processes->size))
+	while (++j < (int)(vm->processes.size))
 	{
-		p = &(((t_process*)vm->processes->data)[j]);
+		p = &(((t_process*)vm->processes.data)[j]);
 		p->live_nbr = 0;
 		vm->champ[p->champ].live_nbr = 0;
 	}
@@ -59,16 +59,16 @@ int
 	{
 		j = -1;
 		palive_nbr = 0;
-		while (++j < (int)(vm.processes->size))
+		while (++j < (int)(vm.processes.size))
 		{
 			*winner = i;
-			p = &(((t_process*)vm.processes->data)[j]);
+			p = &(((t_process*)vm.processes.data)[j]);
 			if (p->champ == i)
 			{
 				if (p->live_nbr > 0)
 					palive_nbr++;
 				else
-					fta_popindex(vm.processes, j, 1);
+					fta_popindex(&(vm.processes), j, 1);
 			}
 		}
 		if (palive_nbr > 0)
