@@ -19,7 +19,7 @@ static void	draw_nyan_2(WINDOW *w, int *nyan_col)
 	wattron(w, COLOR_PAIR(13));
 	mvwprintw(w, 1, 2 + *nyan_col, " o    +        +");
 	wattron(w, COLOR_PAIR(2));
-	mvwprintw(w, 2, 2 + *nyan_col, " ,- - - - -,");
+	mvwprintw(w, 2, 2 + *nyan_col, "  _ _ _ _ _ ");
 	mvwprintw(w, 3, 2 + *nyan_col, " |         |");
 	mvwprintw(w, 4, 2 + *nyan_col, " |      ^   ^");
 	mvwprintw(w, 5, 2 + *nyan_col, "\\|_ _ _( ^ .^)");
@@ -40,7 +40,7 @@ static void	draw_nyan_1(WINDOW *w, int *nyan_col)
 	mvwprintw(w, 2, 2 + *nyan_col, " ,- - - - -,");
 	mvwprintw(w, 3, 2 + *nyan_col, " |         |");
 	mvwprintw(w, 4, 2 + *nyan_col, " |      ^   ^");
-	mvwprintw(w, 5, 2 + *nyan_col, "~|_ _ _( ^ .^)");
+	mvwprintw(w, 5, 2 + *nyan_col, "~`- - -( ^ .^)");
 	mvwprintw(w, 6, 2 + *nyan_col, "  \"\"   \"\" ");
 	wattron(w, COLOR_PAIR(13));
 	mvwprintw(w, 7, 2 + *nyan_col, "     +     + ");
@@ -55,11 +55,11 @@ static void	draw_nyan_path_2(WINDOW *w, int col)
 	wattron(w, COLOR_PAIR(3));
 	mvwprintw(w, 1, col, " +   ");
 	wattron(w, COLOR_PAIR(5));
-	mvwprintw(w, 2, col, "- - -");
+	mvwprintw(w, 2, col, "_ _ _");
 	wattron(w, COLOR_PAIR(4));
 	mvwprintw(w, 3, col, " _ _ ");
 	wattron(w, COLOR_PAIR(8));
-	mvwprintw(w, 4, col, "- - -");
+	mvwprintw(w, 4, col, "_ _ _");
 	wattron(w, COLOR_PAIR(12));
 	mvwprintw(w, 5, col, " _ _ ");
 	wattron(w, COLOR_PAIR(13));
@@ -77,11 +77,11 @@ static void	draw_nyan_path_1(WINDOW *w, int col)
 	wattron(w, COLOR_PAIR(13));
 	mvwprintw(w, 1, col, "   o ");
 	wattron(w, COLOR_PAIR(5));
-	mvwprintw(w, 2, col, " _ _ ");
+	mvwprintw(w, 2, col, " - - ");
 	wattron(w, COLOR_PAIR(4));
 	mvwprintw(w, 3, col, "- - -");
 	wattron(w, COLOR_PAIR(8));
-	mvwprintw(w, 4, col, " _ _ ");
+	mvwprintw(w, 4, col, " - - ");
 	wattron(w, COLOR_PAIR(12));
 	mvwprintw(w, 5, col, "- - -");
 	wattron(w, COLOR_PAIR(3));

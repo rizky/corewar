@@ -89,7 +89,7 @@ typedef struct	s_vm
 unsigned char	g_memory[MEM_SIZE];
 unsigned char	g_memory_mark[MEM_SIZE];
 // int				g_reg[MAX_PLAYERS][REG_NUMBER];
-// int				p->carry;
+// int				g_carry;
 int				g_cycles;
 int				g_carrier;
 int				g_cycles_to;

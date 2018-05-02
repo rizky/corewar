@@ -41,7 +41,7 @@ int
 		p->reg[p->op.params[i].value] : p->op.params[i].value;
 	result = (p->op.params[i].type == IND_CODE) ?
 		vm_ld_mem((p->offset + p->pc +
-			(p->op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : result;
+			(p->op.params[i].value % IDX_MOD)) % MEM_SIZE, 4) : result;
 	return (result);
 }
 
