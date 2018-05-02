@@ -6,7 +6,7 @@
 /*   By: jyeo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 01:02:28 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/28 01:02:30 by jyeo             ###   ########.fr       */
+/*   Updated: 2018/05/02 20:42:58 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void			draw_player_info(t_vm *vm, t_win w)
 		mvwprintw(w.info, 24 + i + row, 3, "* Lives in current period :		%d",
 			vm->champ[i].live_nbr);
 		wattron(w.info, COLOR_PAIR(color));
-		mvwprintw(w.info, 23 + i + row, 15, "%s",
+		if (ft_strlen(vm->champ[i].header.prog_name) < 38)
+			mvwprintw(w.info, 23 + i + row, 15, "%s",
+			vm->champ[i].header.prog_name);
+		else
+			mvwprintw(w.info, 23 + i + row, 15, "%.38s...",
 			vm->champ[i].header.prog_name);
 		wattroff(w.info, COLOR_PAIR(color));
 		row += 3;
