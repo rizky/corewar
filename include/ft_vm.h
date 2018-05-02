@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:31:57 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:32:26 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct	s_vm
 	char		*players[MAX_PLAYERS + 1];
 	t_champ		champ[4];
 	t_array		processes;
+	int			process_index;
 	int			champ_size;
 	int			last_dead_champ;
 	int			last_live_champ;

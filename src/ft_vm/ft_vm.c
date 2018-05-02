@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:34:24 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:34:14 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void
 	vm_init_g_var();
 	ft_bzero(&p, sizeof(t_process));
 	ft_printfln("Introducing contestants...");
+	vm->process_index = 1;
 	while (++i < vm->champ_size)
 	{
 		ft_printfln("* Player %d, weighing %d %s, \"%s\" (\"%s\") !", i + 1,
@@ -49,7 +50,7 @@ void
 			vm->champ[i].header.prog_size);
 		p.offset = i * MEM_SIZE / vm->champ_size;
 		p.champ = i;
-		p.index = 1 + vm->processes.size;
+		p.index = vm->process_index++;
 		p.reg[1] = (i + 1) * -1;
 		fta_append(&(vm->processes), &p, 1);
 	}
