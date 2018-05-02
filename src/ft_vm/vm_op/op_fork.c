@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:57:27 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 18:58:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 01:22:21 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void
 	t_process	new_p;
 	short		value;
 
-	ft_bzero(&new_p, sizeof(new_p));
+	ft_bzero(&new_p, sizeof(t_process));
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
 	new_p.live_nbr = p->live_nbr;
 	new_p.carry = p->carry;
-	ft_memcpy(new_p.reg, p->reg, REG_NUMBER);
+	ft_memcpy(&(new_p.reg), &(p->reg), sizeof(int) * REG_NUMBER);
 	value = p->op.params[0].value;
 	value = value % IDX_MOD;
 	value += p->offset + p->pc;

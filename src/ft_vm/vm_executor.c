@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 19:03:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 01:24:30 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ void
 	{
 		p = &(((t_process*)vm->processes.data)[i]);
 		if (p->cycles == g_cycles)
+		{
 			vm_executor_op(vm, p);
+			(((t_process*)vm->processes.data)[i]) = *p;
+		}
 		i--;
 	}
 	(vm->dump && vm->cycles == g_cycles) ? vm_print_memory(g_memory) : 0;

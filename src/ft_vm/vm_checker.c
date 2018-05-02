@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 18:46:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 01:23:02 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void
 }
 
 int
-	vm_checker_processalive(t_vm vm, int *winner)
+	vm_checker_processalive(t_vm *vm)
 {
 	int			j;
 	int			palive_nbr;
@@ -53,14 +53,11 @@ int
 
 	j = -1;
 	palive_nbr = 0;
-	while (++j <= (int)(vm.processes.size))
+	while (++j < (int)(vm->processes.size))
 	{
-		p = &(((t_process*)vm.processes.data)[j]);
+		p = &(((t_process*)vm->processes.data)[j]);
 		if (p->live_nbr == 0)
-		{
-			*winner = p->champ;
-			fta_popindex(&(vm.processes), j, 1);
-		}
+			fta_popindex(&(vm->processes), j, 1);
 		else
 			palive_nbr++;
 	}
@@ -70,6 +67,8 @@ int
 int
 	vm_checker(t_vm *vm)
 {
+	if (g_cycles > 6084)
+		0;
 	if (g_cycles_to_die < 0)
 	{
 		vm->winner = vm->last_live_champ;
@@ -77,7 +76,7 @@ int
 	}
 	if (g_cycles_to == g_cycles_to_die)
 	{
-		if (vm_checker_processalive(*vm, &(vm->winner)) < 1)
+		if (vm_checker_processalive(vm) < 1)
 		{
 			vm->winner = vm->last_live_champ;
 			return (0);
