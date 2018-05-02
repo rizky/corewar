@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/30 14:23:17 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 22:04:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int
 	unsigned char	buf[COMMENT_LENGTH + 4];
 
 	if ((ret = read(fd, &buf, 4)) <= 0)
-		return (INVALID_FILE);
+		return (INVALID_MAGIC);
 	champ->header.magic = vm_binary_toint(buf, 4);
 	if (vm_binary_toint(buf, 4) != COREWAR_EXEC_MAGIC)
-		return (INVALID_FILE);
+		return (INVALID_MAGIC);
 	return (0);
 }
 
@@ -49,17 +49,17 @@ int
 	unsigned char	buf[COMMENT_LENGTH + 4];
 
 	if (vm_read_magic(fd, champ) > 0)
-		return (INVALID_FILE);
+		return (INVALID_MAGIC);
 	if ((ret = read(fd, &buf, PROG_NAME_LENGTH + 4)) <= 0)
-		return (INVALID_FILE);
+		return (INVALID_HEADER);
 	ft_strncpy(champ->header.prog_name, (char*)buf, PROG_NAME_LENGTH + 4 + 1);
 	if ((ret = read(fd, &buf, 4) <= 0))
-		return (INVALID_FILE);
+		return (INVALID_HEADER);
 	champ->header.prog_size = vm_binary_toint(buf, 4);
 	if (champ->header.prog_size > CHAMP_MAX_SIZE)
 		return (CODE_MAX);
 	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) <= 0)
-		return (INVALID_FILE);
+		return (INVALID_HEADER);
 	ft_strncpy(champ->header.comment, (char*)buf, COMMENT_LENGTH + 4 + 1);
 	return (0);
 }
@@ -80,8 +80,10 @@ int
 			return (vm_error(INVALID_FILE, -1, paths[i]));
 		if ((error = vm_read_header(fd, &champ)) > 0)
 			return (vm_error(error, -1, paths[i]));
-		if (read(fd, &buf, champ.header.prog_size) <= 0)
-			return (vm_error(INVALID_FILE, -1, paths[i]));
+		if (read(fd, &buf, champ.header.prog_size) < champ.header.prog_size)
+			return (vm_error(INVALID_INSTR, -1, paths[i]));
+		if (read(fd, &buf, 1) > 0)
+			return (vm_error(INVALID_INSTR, -1, paths[i]));
 		champ.op = ft_memalloc(champ.header.prog_size + 1);
 		ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
 		champ.op[champ.header.prog_size] = '\0';

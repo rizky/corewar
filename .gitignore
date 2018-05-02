@@ -52,7 +52,6 @@ Mkfile.old
 dkms.conf
 .idea
 cmake-build-debug
-.DS_Store
 CMakeLists.txt
 asm
 asm *
@@ -65,9 +64,9 @@ corewar
 text
 *cor
 *.cor
-resources/champs/ex1.cor
-
 *cor
 out1
 out2
 *.DS_Store
+!tests/vm/error/zork_lt_size.s.cor
+!tests/vm/error/zork_mt_size.s.cor

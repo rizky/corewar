@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 22:13:56 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/01 15:13:07 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:06:11 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,9 @@ void			draw_singer(WINDOW *w, int cycle);
 void			draw_bass(WINDOW *w, int cycle);
 void			draw_nyan(WINDOW *w, int cycle, int *nyan_col);
 void			draw_end(t_win *win);
-void			sighandle(int dummy);
 
 void			init_ncurses(t_vm *vm, time_t *start);
 int				vm_start_ncurse(time_t *start, t_vm vm);
-void			draw(t_vm *vm);
 void			draw_info(t_vm *vm);
 void			draw_player_info(t_vm *vm, t_win win);
 void			draw_game(t_vm *v, t_win w);

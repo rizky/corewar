@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 15:14:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 00:01:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 # define CHAMP_MIN		2
 # define CHAMP_MAX		3
 # define INVALID_FILE	4
-# define CODE_MAX		5
+# define INVALID_HEADER	5
+# define INVALID_MAGIC	6
+# define INVALID_INSTR	7
+# define CODE_MAX		8
 
 # define V_LVL_0		0
 # define V_LVL_1		1
@@ -76,6 +79,9 @@ typedef struct	s_vm
 	t_champ		champ[4];
 	int			process_size;
 	int			champ_size;
+	int			last_dead_champ;
+	int			last_live_champ;
+	int			winner;
 }				t_vm;
 
 unsigned char	g_memory[MEM_SIZE];
@@ -100,6 +106,9 @@ int				vm_error(int errnum, int status, char *name);
 int				vm_binary_toint(unsigned char *bin, int size);
 int				vm_read_binaries(char **paths, t_vm *vm);
 void			*vm_memmark(void *dst, int i, size_t n);
+void			vm_st_mem(int index, char *value, int champ, int size);
+int				vm_ld_mem(int index, int size);
+int				vm_decompiler_param(t_process *p, t_op *op);
 
 void			vm_print_memory(unsigned char memory[MEM_SIZE]);
 void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);

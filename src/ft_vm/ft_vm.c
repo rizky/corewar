@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/30 14:09:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 00:46:43 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@ void
 	while (++i < vm->champ_size)
 	{
 		g_reg[i][1] = (i + 1) * -1;
-		ft_printfln("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !", i + 1,
-		vm->champ[i].header.prog_size, vm->champ[i].header.prog_name,
-		vm->champ[i].header.comment);
+		ft_printfln("* Player %d, weighing %d %s, \"%s\" (\"%s\") !", i + 1,
+			vm->champ[i].header.prog_size, (vm->champ[i].header.prog_size > 1) ?
+			"bytes" : "byte", vm->champ[i].header.prog_name,
+			vm->champ[i].header.comment);
 		ft_memcpy(&memory[i * MEM_SIZE / vm->champ_size], vm->champ[i].op,
-				vm->champ[i].header.prog_size);
+			vm->champ[i].header.prog_size);
 		vm_memmark(&g_memory_mark[i * MEM_SIZE / vm->champ_size], i + 1,
-				vm->champ[i].header.prog_size);
+			vm->champ[i].header.prog_size);
 		p.offset = i * MEM_SIZE / vm->champ_size;
 		p.champ = i;
+		p.index = 1 + vm->process_size++;
 		fta_append(vm->champ[i].processes, &p, 1);
 	}
 }
@@ -78,7 +80,9 @@ static int
 			num++;
 		}
 	}
-	return (vm->champ_size = num);
+	if (num < 1 || num > MAX_PLAYERS)
+		return (-1);
+	return (num);
 }
 
 int
@@ -90,23 +94,23 @@ int
 	ft_bzero(&vm, sizeof(t_vm));
 	if (ac < 2 || vm_options(av, &vm) == -1)
 		return (vm_print_usage(av, -1));
-	vm_get_champions(av, &vm);
-	if (vm.champ_size < 1 || vm.champ_size > MAX_PLAYERS)
+	if ((vm.champ_size = vm_get_champions(av, &vm)) == -1)
 		return (vm_error(vm.champ_size < 1 ? CHAMP_MIN : CHAMP_MAX, -1, NULL));
 	if (vm_read_binaries(vm.players, &vm) == -1)
 		return (-1);
 	vm_load_champs(&vm, g_memory);
-	while (g_cycles == 1 || vm_checker(&vm))
+	while (vm_checker(&vm))
 	{
-		(vm.v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
-		vm_decompiler(&vm);
-		(vm.dump && vm.cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
-		(vm.v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, vm) : 0;
+		vm_executor(&vm);
 		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
 			break ;
 		g_cycles++;
 		g_cycles_to++;
 	}
+	(vm.v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
+	(!vm.dump || g_cycles < vm.cycles) ?
+	ft_printfln("Contestant %d, \"%s\", has won !",
+		vm.winner + 1, vm.champ[vm.winner].header.prog_name) : 0;
 	(vm.v_lvl[V_LVL_1]) ? draw_end(&g_draw_win) : 0;
 	return (0);
 }

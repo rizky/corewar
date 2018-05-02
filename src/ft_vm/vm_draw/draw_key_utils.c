@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:01:43 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 14:22:42 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/02 03:38:38 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ int			key_hook(t_status *status)
 	{
 		if ((*status).pause == 0)
 		{
-			system("kill -STOP $(pgrep afplay)");
+			system("if [ $(pgrep afplay) ]; \
+				then kill -STOP $(pgrep afplay); fi");
 			(*status).pause = 1;
 		}
 		else if ((*status).pause == 1)
 		{
-			system("kill -CONT $(pgrep afplay)");
+			system("if [ $(pgrep afplay) ]; \
+				then kill -CONT $(pgrep afplay); fi");
 			(*status).pause = 0;
 		}
 	}

@@ -6,14 +6,26 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 22:25:40 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 14:21:53 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/02 02:35:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm_draw.h"
 
-void	draw(t_vm *vm)
+static void	vm_signal(int sig)
 {
+	(void)sig;
+	system("pkill afplay 2>&-");
+	delwin(g_draw_win.game);
+	delwin(g_draw_win.info);
+	delwin(g_draw_win.nyan);
+	endwin();
+	exit(0);
+}
+
+static void	draw(t_vm *vm)
+{
+	signal(SIGINT, vm_signal);
 	g_draw_status.delay = DELAY / g_draw_status.speed;
 	werase(g_draw_win.game);
 	werase(g_draw_win.info);
@@ -27,13 +39,13 @@ void	draw(t_vm *vm)
 	wrefresh(g_draw_win.nyan);
 }
 
-void	sighandle(int dummy)
+static void	sighandle(int dummy)
 {
 	dummy = 0;
 	g_signal = 0;
 }
 
-int		vm_start_ncurse(time_t *start, t_vm vm)
+int			vm_start_ncurse(time_t *start, t_vm vm)
 {
 	int		key;
 

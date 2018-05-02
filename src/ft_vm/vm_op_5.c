@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_op_4.c                                          :+:      :+:    :+:   */
+/*   vm_op_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:30:28 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/27 04:34:21 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/02 02:58:19 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void
 	ft_bzero(&new_p, sizeof(new_p));
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
+	new_p.live_nbr = p->live_nbr;
 	value = p->op.params[0].value;
 	value = value % IDX_MOD;
 	value += p->offset + p->pc;
@@ -28,7 +29,7 @@ void
 	new_p.pc = value - p->offset;
 	if (value < 0)
 		new_p.pc += MEM_SIZE;
-	new_p.champ = p->champ;
+	new_p.index = 1 + vm->process_size++;
 	fta_append(vm->champ[p->champ].processes, &new_p, 1);
 	vm_op_inc(vm, p);
 }
@@ -42,11 +43,12 @@ void
 	ft_bzero(&new_p, sizeof(new_p));
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
+	new_p.live_nbr = p->live_nbr;
 	value = (p->op.params[0].value + p->offset + p->pc);
 	if (value > MEM_SIZE)
 		value = value % MEM_SIZE;
 	new_p.pc = p->pc + value - (p->offset + p->pc);
-	new_p.champ = p->champ;
+	new_p.index = 1 + vm->process_size++;
 	fta_append(vm->champ[p->champ].processes, &new_p, 1);
 	vm_op_inc(vm, p);
 }

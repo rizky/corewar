@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 15:09:55 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 00:55:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int
 	int		i;
 
 	i = 0;
+	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
+	op->oc = (g_op_dict[op->opcode].is_oc) ?
+		g_memory[p->offset + p->pc + 1] :
+		g_op_dict[op->opcode].p_type[0];
 	op->param_c = g_op_dict[op->opcode].param_c;
 	while (i < op->param_c)
 	{
@@ -57,7 +61,7 @@ int
 		(op->params[i].type == DIR_CODE) ? op->params[i].size =
 			g_op_dict[op->opcode].d_size : 0;
 		op->params[i].value =
-		vm_binary_toint(&g_memory[p->offset + p->pc + op->size],
+		vm_ld_mem(p->offset + p->pc + op->size,
 			op->params[i].size);
 		op->size += op->params[i].size;
 		i++;
@@ -74,20 +78,6 @@ int
 	if (cursor < 0x01 || cursor > 0x10)
 		return (-1);
 	op->opcode = cursor;
-	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
-	if (g_op_dict[op->opcode].is_oc)
-		op->oc = g_memory[p->offset + p->pc + 1];
-	else
-		op->oc = g_op_dict[op->opcode].p_type[0];
-	if (vm_decompiler_param(p, op) == -1)
-	{
-		ft_bzero(op, sizeof(t_op));
-		return (-1);
-	}
-	if ((p->pc + op->size) >= MEM_SIZE)
-		p->pc_next = (p->pc + op->size) * -1;
-	else
-		p->pc_next = p->pc + op->size;
 	p->cycles = g_cycles - 1 + g_op_dict[op->opcode].cycles;
 	return (0);
 }
@@ -101,7 +91,6 @@ void
 	t_process	*p;
 
 	i = -1;
-	vm->process_size = 0;
 	while (++i < vm->champ_size && (j = -1))
 	{
 		while (++j < (int)(vm->champ[i].processes->size))
@@ -116,8 +105,6 @@ void
 					&op);
 				p->op = op;
 			}
-			vm->process_size++;
 		}
 	}
-	vm_executor(vm);
 }

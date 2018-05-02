@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/30 14:21:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/01 18:01:17 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void
 			p = &(((t_process*)vm->champ[i].processes->data)[j]);
 			p->live_nbr = 0;
 		}
+		vm->champ[i].live_nbr = 0;
 	}
 }
 
@@ -109,17 +110,12 @@ int
 	vm_checker(t_vm *vm)
 {
 	int live_nbr;
-	int winner;
 
 	live_nbr = vm_checker_livenbr(*vm);
 	if (g_cycles_to == g_cycles_to_die)
 	{
-		if (vm_checker_processalive(*vm, &winner) <= 1)
-		{
-			(!vm->dump) ? ft_printfln("Contestant %d, \"%s\", has won !",
-				winner + 1, vm->champ[winner].header.prog_name) : 0;
+		if (vm_checker_processalive(*vm, &(vm->winner)) < 1)
 			return (0);
-		}
 		g_cycles_to = 0;
 		if (live_nbr > NBR_LIVE || ++g_max_check == MAX_CHECKS)
 		{
@@ -131,6 +127,9 @@ int
 		vm_reset_livenbr(vm);
 	}
 	if (g_cycles_to_die < 0)
+	{
+		vm->winner = vm->last_live_champ;
 		return (0);
+	}
 	return (1);
 }
