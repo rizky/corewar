@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:58:02 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/26 11:50:10 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/02 16:21:31 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int		ft_isnumber(char *str)
 	sign = 0;
 	digit = 0;
 	if (!str)
+		return (0);
+	if (ft_atoll(str) < -2147483648 || ft_atoll(str) > 2147483647)
 		return (0);
 	while (str[++i])
 	{
