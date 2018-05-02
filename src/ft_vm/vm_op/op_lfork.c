@@ -34,11 +34,27 @@ void
 	vm_op_inc(vm, p);
 }
 
+// void
+// 	vm_lfork_print(t_process p)
+// {
+// 	ft_printf("P %4d | ", p.champ + 1);
+// 	ft_printf("%s", g_op_dict[p.op.opcode].name);
+// 	ft_printf(" %hd (%d)", p.op.params[0].value, p.pc + p.op.params[0].value);
+// 	ft_printf("\n");
+// }
+
 void
 	vm_lfork_print(t_process p)
 {
-	ft_printf("P %4d | ", p.champ + 1);
+	int value;
+
+	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	ft_printf(" %hd (%hd)", p.op.params[0].value, p.pc + p.op.params[0].value);
+	value = p.pc + p.offset + p.op.params[0].value;
+	if (value > MEM_SIZE)
+		value = value % MEM_SIZE;
+	ft_printf(" %hd (%hd)", p.op.params[0].value,
+		p.pc + p.offset + p.op.params[0].value);
 	ft_printf("\n");
 }
+
