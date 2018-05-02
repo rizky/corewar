@@ -45,9 +45,10 @@ void
 	new_p.champ = p->champ;
 	new_p.live_nbr = p->live_nbr;
 	value = (p->op.params[0].value + p->offset + p->pc);
-	if (value > MEM_SIZE)
-		value = value % MEM_SIZE;
-	new_p.pc = p->pc + value - (p->offset + p->pc);
+	value = value % MEM_SIZE;
+	new_p.pc = value - p->offset;
+	if (value < 0)
+		new_p.pc += MEM_SIZE;
 	new_p.index = 1 + vm->process_size++;
 	fta_append(vm->champ[p->champ].processes, &new_p, 1);
 	vm_op_inc(vm, p);

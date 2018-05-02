@@ -58,8 +58,8 @@ void
 	param2 = (p.op.params[2].type == REG_CODE) ?
 		g_reg[p.champ][p.op.params[2].value] : p.op.params[2].value;
 	param1 = (p.op.params[1].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p.offset + p.pc +
-			p.op.params[1].value % IDX_MOD], 4) : param1;
+		vm_ld_mem((p.offset + p.pc +
+			(p.op.params[1].value % IDX_MOD)) % MEM_SIZE, 4)  : param1;
 	vm_sti_print2(p, param1, param2);
 }
 
@@ -110,8 +110,8 @@ void
 	param1 = (p.op.params[1].type == REG_CODE) ?
 		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
 	param0 = (p.op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[p.offset + p.pc
-		+ p.op.params[0].value % IDX_MOD], 4) : param0;
+		vm_ld_mem((p.offset + p.pc +
+			(p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : param0;
 	vm_ldi_print2(p, param0, param1);
 }
 

@@ -27,15 +27,15 @@ void
 	if (p.op.params[0].type == REG_CODE)
 		ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
 	else if (p.op.params[0].type == IND_CODE)
-		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset +
-			p.pc + p.op.params[0].value % IDX_MOD], 4));
+		ft_printf(" %d", vm_ld_mem((p.offset +
+			p.pc + (p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4));
 	else
 		ft_printf(" %d", p.op.params[0].value);
 	if (p.op.params[1].type == REG_CODE)
 		ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]);
 	else if (p.op.params[1].type == IND_CODE)
-		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset + p.pc
-			+ p.op.params[1].value % IDX_MOD], 4));
+		ft_printf(" %d", vm_ld_mem((p.offset + p.pc
+			+ (p.op.params[1].value % IDX_MOD)) % MEM_SIZE, 4));
 	else
 		ft_printf(" %d", p.op.params[1].value);
 	ft_printf(" r%d", p.op.params[2].value);
@@ -57,15 +57,15 @@ void
 	if (p.op.params[0].type == REG_CODE)
 		ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
 	else if (p.op.params[0].type == IND_CODE)
-		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset +
-		p.pc + p.op.params[0].value % IDX_MOD], 4));
+		ft_printf(" %d", vm_ld_mem((p.offset +
+			p.pc + (p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4));
 	else
 		ft_printf(" %d", p.op.params[0].value);
 	if (p.op.params[1].type == REG_CODE)
 		ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]);
 	else if (p.op.params[1].type == IND_CODE)
-		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset +
-		p.pc + p.op.params[1].value % IDX_MOD], 4));
+		ft_printf(" %d", vm_ld_mem((p.offset +
+			p.pc + (p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4));
 	else
 		ft_printf(" %d", p.op.params[1].value);
 	ft_printf(" r%d", p.op.params[2].value);
@@ -87,15 +87,15 @@ void
 	if (p.op.params[0].type == REG_CODE)
 		ft_printf(" %d", g_reg[p.champ][p.op.params[0].value]);
 	else if (p.op.params[0].type == IND_CODE)
-		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset
-		+ p.pc + p.op.params[0].value % IDX_MOD], 4));
+		ft_printf(" %d", vm_ld_mem((p.offset +
+			p.pc + (p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4));
 	else
 		ft_printf(" %d", p.op.params[0].value);
 	if (p.op.params[1].type == REG_CODE)
 		ft_printf(" %d", g_reg[p.champ][p.op.params[1].value]);
 	else if (p.op.params[1].type == IND_CODE)
-		ft_printf(" %d", vm_binary_toint(&g_memory[p.offset +
-		p.pc + p.op.params[1].value % IDX_MOD], 4));
+		ft_printf(" %d", vm_ld_mem((p.offset +
+			p.pc + (p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4));
 	else
 		ft_printf(" %d", p.op.params[1].value);
 	ft_printf(" r%d", p.op.params[2].value);

@@ -54,11 +54,11 @@ void	vm_op_and(t_vm *vm, t_process *p)
 	param1 = (p->op.params[1].type == REG_CODE) ?
 		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
 	param0 = (p->op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p->offset + p->pc +
-		(p->op.params[0].value % IDX_MOD)) % MEM_SIZE], 4) : param0;
+		vm_ld_mem((p->offset + p->pc +
+		(p->op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : param0;
 	param1 = (p->op.params[1].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p->offset + p->pc +
-		(p->op.params[1].value % IDX_MOD)) % MEM_SIZE], 4) : param1;
+		vm_ld_mem((p->offset + p->pc +
+		(p->op.params[1].value % IDX_MOD)) % MEM_SIZE, 4) : param1;
 	g_reg[p->champ][p->op.params[2].value] = param0 & param1;
 	g_carry = (g_reg[p->champ][p->op.params[2].value] == 0) ? 1 : 0;
 	vm_op_inc(vm, p);
@@ -83,11 +83,11 @@ void	vm_op_or(t_vm *vm, t_process *p)
 	param1 = (p->op.params[1].type == REG_CODE) ?
 		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
 	param0 = (p->op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p->offset + p->pc +
-		(p->op.params[0].value % IDX_MOD)) % MEM_SIZE], 4) : param0;
+		vm_ld_mem((p->offset + p->pc +
+		(p->op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : param0;
 	param1 = (p->op.params[1].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p->offset + p->pc +
-		(p->op.params[1].value % IDX_MOD)) % MEM_SIZE], 4) : param1;
+		vm_ld_mem((p->offset + p->pc +
+		(p->op.params[1].value % IDX_MOD)) % MEM_SIZE, 4) : param1;
 	g_reg[p->champ][p->op.params[2].value] = param0 | param1;
 	g_carry = (g_reg[p->champ][p->op.params[2].value] == 0) ? 1 : 0;
 	vm_op_inc(vm, p);
@@ -112,11 +112,11 @@ void	vm_op_xor(t_vm *vm, t_process *p)
 	param1 = (p->op.params[1].type == REG_CODE) ?
 		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
 	param0 = (p->op.params[0].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p->offset + p->pc +
-		(p->op.params[0].value % IDX_MOD)) % MEM_SIZE], 4) : param0;
+		vm_ld_mem((p->offset + p->pc +
+		(p->op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : param0;
 	param1 = (p->op.params[1].type == IND_CODE) ?
-		vm_binary_toint(&g_memory[(p->offset + p->pc +
-		(p->op.params[1].value % IDX_MOD)) % MEM_SIZE], 4) : param1;
+		vm_ld_mem((p->offset + p->pc +
+		(p->op.params[1].value % IDX_MOD)) % MEM_SIZE, 4) : param1;
 	g_reg[p->champ][p->op.params[2].value] = param0 ^ param1;
 	g_carry = (g_reg[p->champ][p->op.params[2].value] == 0) ? 1 : 0;
 	vm_op_inc(vm, p);
