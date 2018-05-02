@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:27:57 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/02 02:01:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 03:01:57 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	vm_op_inc(t_vm *vm, t_process *p)
 {
 	int val;
-	
+
 	(void)vm;
 	if (p->op.opcode != 0)
 		p->pc = p->pc_next;

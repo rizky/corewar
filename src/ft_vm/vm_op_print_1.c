@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:51:02 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 02:00:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 03:00:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void
 	vm_live_print(t_process p)
 {
-	ft_printf("P %4d | ", p.champ + 1);
+	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %d", p.op.params[0].value);
 	ft_printf("\n");

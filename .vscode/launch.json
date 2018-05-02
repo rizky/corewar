@@ -62,10 +62,10 @@
 					"-v",
 					"4",
 					"2",
-					"tests/vm/overflow/process_next_pc_overflow.cor",
-					"tests/vm/overflow/process_next_pc_overflow.cor",
-					"tests/vm/overflow/process_next_pc_overflow.cor",
-					"tests/vm/overflow/process_next_pc_overflow.cor"
+					"tests/vm/overflow/test_limit.cor",
+					"tests/vm/overflow/test_limit.cor",
+					"tests/vm/overflow/test_limit.cor",
+					"tests/vm/overflow/test_limit.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

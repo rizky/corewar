@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 22:25:40 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/01 17:05:10 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/02 02:35:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ static void	vm_signal(int sig)
 {
 	(void)sig;
 	system("pkill afplay 2>&-");
+	delwin(g_draw_win.game);
+	delwin(g_draw_win.info);
+	delwin(g_draw_win.nyan);
 	endwin();
 	exit(0);
 }
