@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:29:55 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/01 21:32:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:03:16 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int
 
 	if (p->op.params[i].type == DIR_CODE && p->op.params[i + 1].type
 		== DIR_CODE)
-		cursor = p->offset + p->pc + (((short)param1 + (short)param2) % IDX_MOD);
+		cursor = p->offset + p->pc +
+			(((short)param1 + (short)param2) % IDX_MOD);
 	else if (p->op.params[i].type == DIR_CODE)
 		cursor = p->offset + p->pc + (((short)param1 + param2) % IDX_MOD);
 	else if (p->op.params[i + 1].type == DIR_CODE)

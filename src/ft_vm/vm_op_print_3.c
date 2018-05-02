@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:13:56 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 04:12:25 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:03:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void
 		p.reg[p.op.params[2].value] : p.op.params[2].value;
 	param1 = (p.op.params[1].type == IND_CODE) ?
 		vm_ld_mem((p.offset + p.pc +
-			(p.op.params[1].value % IDX_MOD)) % MEM_SIZE, 4)  : param1;
+			(p.op.params[1].value % IDX_MOD)) % MEM_SIZE, 4) : param1;
 	vm_sti_print2(p, param1, param2);
 }
 
