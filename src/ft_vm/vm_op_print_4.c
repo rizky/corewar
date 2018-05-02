@@ -73,9 +73,9 @@ void
 			(p.op.params[0].value < 1 || p.op.params[0].value > 16)))
 		return ;
 	param0 = (p.op.params[0].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[0].value] : p.op.params[0].value;
+		p.reg[p.op.params[0].value] : p.op.params[0].value;
 	param1 = (p.op.params[1].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
+		p.reg[p.op.params[1].value] : p.op.params[1].value;
 	param0 = (p.op.params[0].type == IND_CODE) ?
 		vm_ld_mem((p.offset + p.pc + p.op.params[0].value), 4)
 		: param0;
@@ -94,5 +94,5 @@ void
 void
 	vm_aff_print(t_process p)
 {
-	ft_printfln("Aff: %c", g_reg[p.champ][p.op.params[0].value]);
+	ft_printfln("Aff: %c", p.reg[p.op.params[0].value]);
 }

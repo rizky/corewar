@@ -54,9 +54,9 @@ void
 			(p.op.params[2].value < 1 || p.op.params[2].value > 16)))
 		return ;
 	param1 = (p.op.params[1].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
+		p.reg[p.op.params[1].value] : p.op.params[1].value;
 	param2 = (p.op.params[2].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[2].value] : p.op.params[2].value;
+		p.reg[p.op.params[2].value] : p.op.params[2].value;
 	param1 = (p.op.params[1].type == IND_CODE) ?
 		vm_ld_mem((p.offset + p.pc +
 			(p.op.params[1].value % IDX_MOD)) % MEM_SIZE, 4)  : param1;
@@ -106,9 +106,9 @@ void
 			(p.op.params[0].value < 1 || p.op.params[0].value > 16)))
 		return ;
 	param0 = (p.op.params[0].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[0].value] : p.op.params[0].value;
+		p.reg[p.op.params[0].value] : p.op.params[0].value;
 	param1 = (p.op.params[1].type == REG_CODE) ?
-		g_reg[p.champ][p.op.params[1].value] : p.op.params[1].value;
+		p.reg[p.op.params[1].value] : p.op.params[1].value;
 	param0 = (p.op.params[0].type == IND_CODE) ?
 		vm_ld_mem((p.offset + p.pc +
 			(p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : param0;

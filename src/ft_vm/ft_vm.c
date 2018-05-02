@@ -25,7 +25,7 @@ void
 	ft_printfln("Introducing contestants...");
 	while (++i < vm->champ_size)
 	{
-		g_reg[i][1] = (i + 1) * -1;
+		// g_reg[i][1] = (i + 1) * -1;
 		ft_printfln("* Player %d, weighing %d %s, \"%s\" (\"%s\") !", i + 1,
 			vm->champ[i].header.prog_size, (vm->champ[i].header.prog_size > 1) ?
 			"bytes" : "byte", vm->champ[i].header.prog_name,
@@ -37,6 +37,7 @@ void
 		p.offset = i * MEM_SIZE / vm->champ_size;
 		p.champ = i;
 		p.index = 1 + vm->process_size++;
+		p.reg[1] = (i + 1) * -1;
 		fta_append(vm->champ[i].processes, &p, 1);
 	}
 }

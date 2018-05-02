@@ -47,9 +47,9 @@ void
 	g_cycles = 1;
 	g_cycles_to = 1;
 	g_cycles_to_die = CYCLE_TO_DIE;
-	g_carry = 0;
+	// g_carry = 0;
 	ft_bzero(&g_memory, MEM_SIZE);
-	ft_bzero(&g_reg, sizeof(int) * (MAX_PLAYERS * REG_NUMBER));
+	// ft_bzero(&g_reg, sizeof(int) * (MAX_PLAYERS * REG_NUMBER));
 	ft_bzero(&g_memory_mark, MEM_SIZE);
 }
 

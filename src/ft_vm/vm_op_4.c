@@ -26,12 +26,12 @@ void
 	param0 = (p->op.params[0].type == IND_CODE) ?
 		vm_ld_mem((p->offset + p->pc + p->op.params[0].value) % MEM_SIZE, 2)
 		: p->op.params[0].value;
-	g_reg[p->champ][p->op.params[1].value] = (p->op.params[0].type == IND_CODE)
+	p->reg[p->op.params[1].value] = (p->op.params[0].type == IND_CODE)
 	? (short)param0 : param0;
 	if (param0 == 0)
-		g_carry = 1;
+		p->carry = 1;
 	else
-		g_carry = 0;
+		p->carry = 0;
 	vm_op_inc(vm, p);
 }
 
@@ -41,7 +41,7 @@ int
 	int			result;
 
 	result = (p->op.params[i].type == REG_CODE) ?
-		g_reg[p->champ][p->op.params[i].value] : p->op.params[i].value;
+		p->reg[p->op.params[i].value] : p->op.params[i].value;
 	result = (p->op.params[i].type == IND_CODE) ?
 		vm_ld_mem(p->offset + p->pc + p->op.params[i].value, 4)
 		: result;
@@ -84,10 +84,10 @@ void
 	}
 	param0 = ft_init_param_long(p, 0);
 	param1 = (p->op.params[1].type == REG_CODE) ?
-		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
+		p->reg[p->op.params[1].value] : p->op.params[1].value;
 	cursor = ft_cursor_long(p, param0, param1, 0) % MEM_SIZE;
 	(cursor < 0) ? cursor += MEM_SIZE : 0;
-	g_reg[p->champ][p->op.params[2].value] = vm_ld_mem(cursor, 4);
-	g_carry = (g_reg[p->champ][p->op.params[2].value] == 0) ? 1 : 0;
+	p->reg[p->op.params[2].value] = vm_ld_mem(cursor, 4);
+	p->carry = (p->reg[p->op.params[2].value] == 0) ? 1 : 0;
 	vm_op_inc(vm, p);
 }

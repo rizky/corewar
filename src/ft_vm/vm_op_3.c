@@ -18,7 +18,7 @@ void
 	short		value;
 
 	(void)vm;
-	if (g_carry)
+	if (p->carry)
 	{
 		value = p->op.params[0].value;
 		value = value % IDX_MOD;
@@ -38,7 +38,7 @@ int
 	int			result;
 
 	result = (p->op.params[i].type == REG_CODE) ?
-		g_reg[p->champ][p->op.params[i].value] : p->op.params[i].value;
+		p->reg[p->op.params[i].value] : p->op.params[i].value;
 	result = (p->op.params[i].type == IND_CODE) ?
 		vm_ld_mem((p->offset + p->pc +
 			(p->op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : result;
@@ -81,11 +81,11 @@ void
 	}
 	param0 = ft_init_param(p, 0);
 	param1 = (p->op.params[1].type == REG_CODE) ?
-		g_reg[p->champ][p->op.params[1].value] : p->op.params[1].value;
+		p->reg[p->op.params[1].value] : p->op.params[1].value;
 	cursor = ft_cursor(p, param0, param1, 0) % MEM_SIZE;
 	if (cursor < 0)
 		cursor += MEM_SIZE;
-	g_reg[p->champ][p->op.params[2].value] = vm_ld_mem(cursor, 4);
+	p->reg[p->op.params[2].value] = vm_ld_mem(cursor, 4);
 	vm_op_inc(vm, p);
 }
 
@@ -109,11 +109,11 @@ void
 	}
 	param1 = ft_init_param(p, 1);
 	param2 = (p->op.params[2].type == REG_CODE) ?
-		g_reg[p->champ][p->op.params[2].value] : p->op.params[2].value;
+		p->reg[p->op.params[2].value] : p->op.params[2].value;
 	cursor = ft_cursor(p, param1, param2, 1) % MEM_SIZE;
 	if (cursor < 0)
 		cursor += MEM_SIZE;
-	temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
+	temp = vm_to_big_endian(p->reg[p->op.params[0].value], 4);
 	vm_st_mem(cursor, temp, p->champ, 4);
 	free(temp);
 	vm_op_inc(vm, p);

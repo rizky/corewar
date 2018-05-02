@@ -54,11 +54,11 @@ void	vm_op_ld(t_vm *vm, t_process *p)
 		vm_ld_mem((p->offset + p->pc +
 			(p->op.params[0].value % IDX_MOD)) % MEM_SIZE, 4)
 		: p->op.params[0].value;
-	g_reg[p->champ][p->op.params[1].value] = param0;
+	p->reg[p->op.params[1].value] = param0;
 	if (param0 == 0)
-		g_carry = 1;
+		p->carry = 1;
 	else
-		g_carry = 0;
+		p->carry = 0;
 	vm_op_inc(vm, p);
 }
 
@@ -76,14 +76,14 @@ void	vm_op_st(t_vm *vm, t_process *p)
 		return ;
 	}
 	if (p->op.params[1].type == REG_CODE)
-		g_reg[p->champ][p->op.params[1].value] =
-			g_reg[p->champ][p->op.params[0].value];
+		p->reg[p->op.params[1].value] =
+			p->reg[p->op.params[0].value];
 	else
 	{
 		param1 = (p->offset + p->pc +
 			((short)p->op.params[1].value % IDX_MOD)) % MEM_SIZE;
 		(param1 < 0) ? param1 += MEM_SIZE : 0;
-		temp = vm_to_big_endian(g_reg[p->champ][p->op.params[0].value], 4);
+		temp = vm_to_big_endian(p->reg[p->op.params[0].value], 4);
 		vm_st_mem(param1, temp, p->champ, 4);
 		free(temp);
 	}
@@ -103,12 +103,12 @@ void	vm_op_add(t_vm *vm, t_process *p)
 		vm_op_inc(vm, p);
 		return ;
 	}
-	g_reg[p->champ][p->op.params[2].value] =
-		g_reg[p->champ][p->op.params[0].value] +
-		g_reg[p->champ][p->op.params[1].value];
-	if (g_reg[p->champ][p->op.params[2].value] == 0)
-		g_carry = 1;
+	p->reg[p->op.params[2].value] =
+		p->reg[p->op.params[0].value] +
+		p->reg[p->op.params[1].value];
+	if (p->reg[p->op.params[2].value] == 0)
+		p->carry = 1;
 	else
-		g_carry = 0;
+		p->carry = 0;
 	vm_op_inc(vm, p);
 }

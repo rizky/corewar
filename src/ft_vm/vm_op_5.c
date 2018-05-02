@@ -22,6 +22,8 @@ void
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
 	new_p.live_nbr = p->live_nbr;
+	new_p.carry = p->carry;
+	ft_memcpy(new_p.reg, p->reg, REG_NUMBER);
 	value = p->op.params[0].value;
 	value = value % IDX_MOD;
 	value += p->offset + p->pc;
@@ -44,6 +46,8 @@ void
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
 	new_p.live_nbr = p->live_nbr;
+	new_p.carry = p->carry;
+	ft_memcpy(new_p.reg, p->reg, REG_NUMBER);
 	value = (p->op.params[0].value + p->offset + p->pc);
 	value = value % MEM_SIZE;
 	new_p.pc = value - p->offset;
