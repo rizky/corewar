@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:22:05 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:23:57 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void
 	while (i < vm->champ_size)
 	{
 		free(vm->champ[i].op);
-		fta_clear(vm->champ[i].processes);
-		free(vm->champ[i].processes);
+		fta_clear(vm->processes);
+		free(vm->processes);
 		i++;
 	}
 }
