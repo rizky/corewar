@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 08:27:57 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/02 01:22:33 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 02:01:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	vm_op_ld(t_vm *vm, t_process *p)
 	int		param0;
 
 	(void)vm;
-	if (g_cycles > 1180)
-		0;
 	if (p->op.params[1].value < 1 || p->op.params[1].value > 16)
 	{
 		vm_op_inc(vm, p);
