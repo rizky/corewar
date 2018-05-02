@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:30:25 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:54:49 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int
 			return (vm_error(INVALID_INSTR, -1, paths[i]));
 		if (read(fd, &buf, 1) > 0)
 			return (vm_error(INVALID_INSTR, -1, paths[i]));
-		champ.op = ft_memalloc(champ.header.prog_size + 1);
+		if ((champ.op = ft_memalloc(champ.header.prog_size + 1)) == NULL)
+			return (vm_error(MALLOC, -1, NULL));
 		ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
 		champ.op[champ.header.prog_size] = '\0';
 		vm->champ[i] = champ;
