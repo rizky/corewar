@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:34:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:11:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,24 @@ void
 int
 	vm_checker_processalive(t_vm vm, int *winner)
 {
-	int			i;
 	int			j;
 	int			palive_nbr;
-	int			calive_nbr;
 	t_process	*p;
 
-	calive_nbr = 0;
-	i = -1;
-	while (++i < vm.champ_size)
+	j = -1;
+	palive_nbr = 0;
+	while (++j <= (int)(vm.processes.size))
 	{
-		j = -1;
-		palive_nbr = 0;
-		while (++j < (int)(vm.processes.size))
+		p = &(((t_process*)vm.processes.data)[j]);
+		if (p->live_nbr == 0)
 		{
-			*winner = i;
-			p = &(((t_process*)vm.processes.data)[j]);
-			if (p->champ == i)
-			{
-				if (p->live_nbr > 0)
-					palive_nbr++;
-				else
-					fta_popindex(&(vm.processes), j, 1);
-			}
+			*winner = p->champ;
+			fta_popindex(&(vm.processes), j, 1);
 		}
-		if (palive_nbr > 0)
-			calive_nbr++;
+		else
+			palive_nbr++;
 	}
-	return (calive_nbr);
+	return (palive_nbr);
 }
 
 int

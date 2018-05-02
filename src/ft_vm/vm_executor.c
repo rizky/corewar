@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:33:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:21:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void
 	if (vm_decompiler_param(p, &(p->op)) == -1)
 	{
 		ft_bzero(&(p->op), sizeof(t_op));
-		p->pc += 2;
+		p->pc += 1;
 		if (p->pc + p->offset >= MEM_SIZE)
 			p->pc = p->offset * -1;
 	}
