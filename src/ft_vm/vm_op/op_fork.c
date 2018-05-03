@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:57:27 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:25:15 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/03 17:24:29 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	vm_fork_print(t_process p)
 
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
-	value = p.pc + p.offset + p.op.params[0].value;
+	value = p.pc + p.offset + (p.op.params[0].value % IDX_MOD);
 	if (value > MEM_SIZE)
 		value = value % MEM_SIZE;
 	ft_printf(" %hd (%hd)", p.op.params[0].value,
-		p.pc + p.offset + p.op.params[0].value);
+		value);
 	ft_printf("\n");
 }
