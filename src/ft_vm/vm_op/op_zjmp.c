@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:51:58 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 19:25:34 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 21:18:39 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ void	vm_zjmp_print(t_process p)
 
 	(void)p;
 	value = (p.op.params[0].value);
-	// if (value < 0)
-	// 	value += MEM_SIZE;
-	// if (value > MEM_SIZE)
-	// value = (p.op.params[0].value + p.offset + p.pc) % MEM_SIZE;
-	// value = value - (p.offset + p.pc);
-	// if (p.offset + value < 0)
-	// 	value += MEM_SIZE;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %hd", value);
