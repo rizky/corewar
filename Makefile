@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/03 19:08:24 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/04 01:48:22 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -225,6 +225,8 @@ T_VM_DIR_OP = tests/vm/op/
 T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 T_VM_DIR_C = tests/vm/champ/
 T_VM_FILES_C:=$(shell cd $(T_VM_DIR_C); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+T_VM_DIR_OCP = tests/vm/ocp/
+T_VM_FILES_OCP:=$(shell cd $(T_VM_DIR_OCP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 DUMP = 150
 
 test_vm_op : corewar
@@ -251,6 +253,10 @@ tests_vm_dump_champs_loop: corewar
 tests_vm_op_champs: corewar
 	@echo $(CYAN) " - Test Basic Operations on Champs" $(EOC)
 	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_C) test_vm_op;)
+
+tests_vm_ocp: corewar
+	@echo $(CYAN) " - Test Basic Operations on Champs" $(EOC)
+	@$(foreach x, $(T_VM_FILES_OCP), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_OCP) test_vm_op;)
 
 test_vm_dump : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
