@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/03 01:57:40 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/03 02:01:32 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -321,7 +321,7 @@ test_vm_op_overflow : corewar
 	fi
 
 tests_vm_op_overflow: corewar
-	@echo $(CYAN) " - Test Overflow Op Case $(DUMP)" $(EOC)
+	@echo $(CYAN) " - Test Overflow Op Case" $(EOC)
 	@$(foreach x, $(T_VM_FILES_O), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_O) SILENT='> /dev/null' test_vm_op_overflow;)
 
 T_VM_DIR_ERROR = tests/vm/error/
