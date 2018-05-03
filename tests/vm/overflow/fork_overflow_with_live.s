@@ -1,6 +1,7 @@
 .name "tester"
 .comment "test fork_overflow"
 
+live %2147483647
 ld 512, r2
 ld 512, r2
 ld 512, r2
