@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:10:56 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/03 18:45:01 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	vm_reset_livenbr(t_vm *vm)
 	t_process	*p;
 
 	j = -1;
+	g_live_nbr = 0;
 	while (++j < (int)(vm->processes.size))
 	{
 		p = &(((t_process*)vm->processes.data)[j]);
@@ -98,7 +99,7 @@ int			vm_checker(t_vm *vm)
 			return (0);
 		}
 		g_cycles_to = 0;
-		if (vm_checker_livenbr(*vm) > NBR_LIVE || ++g_max_check == MAX_CHECKS)
+		if (g_live_nbr >= NBR_LIVE || ++g_max_check == MAX_CHECKS)
 		{
 			g_max_check = g_max_check == MAX_CHECKS ? 0 : g_max_check;
 			g_cycles_to_die -= CYCLE_DELTA;

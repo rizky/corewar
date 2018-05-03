@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:45:30 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:22:06 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/03 18:43:54 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	vm_op_live(t_vm *vm, t_process *p)
 	(void)vm;
 	p->live_nbr++;
 	p->live_cycle = g_cycles;
+	g_live_nbr++;
 	if (p->op.params[0].value == ((p->champ + 1) * -1))
 	{
 		vm->champ[p->champ].live_nbr++;

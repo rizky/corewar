@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/03 11:15:43 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/03 18:43:46 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void
 	g_cycles = 0;
 	g_cycles_to = 0;
 	g_cycles_to_die = CYCLE_TO_DIE;
+	g_live_nbr = 0;
 	ft_bzero(&g_memory, MEM_SIZE);
 	ft_bzero(&g_memory_mark, MEM_SIZE);
 }
