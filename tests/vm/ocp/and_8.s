@@ -1,0 +1,5 @@
+.name "tester"
+.comment "test ocp 0x8 and"
+
+ld %1544, r2
+st r2, 58
