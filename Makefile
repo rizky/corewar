@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/03 03:27:21 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/03 04:06:19 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -246,6 +246,10 @@ tests_vm_dump_champs: corewar
 NUMBERS = 1 20 50 80 150 200 600 800 1400 2400 5000 8000 10000 50000
 tests_vm_dump_champs_loop: corewar
 	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_C) tests_vm_dump_champs;)
+
+tests_vm_op_champs: corewar
+	@echo $(CYAN) " - Test Basic Operations on Champs" $(EOC)
+	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_C) test_vm_op;)
 
 test_vm_dump : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
