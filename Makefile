@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/02 18:34:11 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/03 01:57:40 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -219,10 +219,6 @@ tests_asm_leak:
 	@$(foreach x, $(T_ASM_FILES_VALID), $(MAKE) X=$(T_ASM_DIR_VALID)$(x) test_asm_leak;)
 	@$(foreach x, $(T_ASM_FILES_ERROR), $(MAKE) X=$(T_ASM_DIR_ERROR)$(x) test_asm_leak;)
 
-tests_vm_error:
-	@echo $(CYAN) " - Test Error Cases" $(EOC)
-	./corewar -d 1 -n 0 tests/asm/valid/ex.cor -n 1 tests/asm/valid/Car.cor | head -4
-
 # ----- TEST UNIT VM ------
 T_VM_DIR_OP = tests/vm/op/
 T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
@@ -293,13 +289,6 @@ tests_vm_battle: corewar
 	@echo $(CYAN) " - Test Battle" $(EOC)
 	@$(foreach x, $(T_VM_FILES_B), $(MAKE) X=$x test_vm_battle;)
 
-tests_vm: corewar
-	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
-	@$(MAKE) tests_vm_op
-	@$(MAKE) tests_vm_dump
-	@$(MAKE) tests_vm_battle
-	@$(MAKE) tests_vm_dump_overflow
-
 T_VM_DIR_O = tests/vm/overflow/
 T_VM_FILES_O:=$(shell cd $(T_VM_DIR_O); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 
@@ -318,14 +307,14 @@ tests_vm_dump_overflow: corewar
 	@echo $(CYAN) " - Test Overflow DUMP Case $(DUMP)" $(EOC)
 	@$(foreach x, $(T_VM_FILES_O), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_O) test_vm_dump_overflow;)
 
-NUMBERS = 1 5 50 80 400 888 1200
+NUMBERS = 1 20 50 80 150 200 600 800 1400 2400 5000 8000 10000 50000
 tests_vm_dump_overflow_loop: corewar
-	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_O) tests_vm_dump_overflow;)
+	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_O)  SILENT='> /dev/null' tests_vm_dump_overflow;)
 
 test_vm_op_overflow : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	./corewar -v 4 2 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
-	./resources/binaries/corewar -v 6 -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
+	@./corewar -v 4 2 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 6 -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
@@ -333,8 +322,31 @@ test_vm_op_overflow : corewar
 
 tests_vm_op_overflow: corewar
 	@echo $(CYAN) " - Test Overflow Op Case $(DUMP)" $(EOC)
-	@$(foreach x, $(T_VM_FILES_O), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_O) test_vm_op_overflow;)
+	@$(foreach x, $(T_VM_FILES_O), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_O) SILENT='> /dev/null' test_vm_op_overflow;)
 
+T_VM_DIR_ERROR = tests/vm/error/
+T_VM_FILES_ERROR:=$(shell cd $(T_VM_DIR_ERROR); ls | egrep '^[^X]+$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+
+test_vm_error : corewar
+	@./resources/binaries/asm $(T_VM_DIR_ERROR)$(X).s > /dev/null; true
+	@if [[ $$(./corewar $(T_VM_DIR_ERROR)$(X).cor $(SILENT) ) < 0 ]] ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_ERROR)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_ERROR)$(X)" $(EOC) ; \
+	fi
+
+tests_vm_error: corewar
+	@echo $(CYAN) " - Test VM Error Cases" $(EOC)
+	@$(foreach x, $(T_VM_FILES_ERROR), $(MAKE) X=$x test_vm_error;)
+
+tests_vm: corewar
+	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
+	@$(MAKE) tests_vm_error SILENT='2> /dev/null'
+	@$(MAKE) tests_vm_op
+	@$(MAKE) tests_vm_dump
+	@$(MAKE) tests_vm_battle
+	@$(MAKE) tests_vm_dump_overflow
+	@$(MAKE) tests_vm_op_overflow
+	
 tests: tests_asm tests_vm
 
 .PHONY: all clean fclean re debug norm norm2 tests tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
