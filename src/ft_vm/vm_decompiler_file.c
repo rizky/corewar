@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 10:54:25 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/03 11:29:20 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int
-	vm_binary_toint(unsigned char *bin, int size)
+int			vm_binary_toint(unsigned char *bin, int size)
 {
 	int		i;
 	int		result;
@@ -28,8 +27,7 @@ int
 	return (result);
 }
 
-int
-	vm_read_magic(int fd, t_champ *champ)
+static int	vm_read_magic(int fd, t_champ *champ)
 {
 	int				ret;
 	unsigned char	buf[COMMENT_LENGTH + 4];
@@ -42,8 +40,7 @@ int
 	return (0);
 }
 
-int
-	vm_read_header(int fd, t_champ *champ)
+static int	vm_read_header(int fd, t_champ *champ)
 {
 	int				ret;
 	unsigned char	buf[COMMENT_LENGTH + 4];
@@ -64,25 +61,7 @@ int
 	return (0);
 }
 
-static int
-	vm_free_err(t_vm *vm, int max, int errnum, char *file)
-{
-	int i;
-
-	i = 0;
-	while (i < max)
-	{
-		free(vm->champ[i].op);
-		fta_clear(&(vm->processes));
-		i++;
-	}
-	if (errnum == MALLOC)
-		return (vm_error(errnum, -1, NULL));
-	return (vm_error(errnum, -1, file));
-}
-
-int
-	vm_read_binaries(char **paths, t_vm *vm)
+int			vm_read_binaries(char **paths, t_vm *vm)
 {
 	int				fd;
 	unsigned char	buf[COMMENT_LENGTH + 4];

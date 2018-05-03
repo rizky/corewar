@@ -6,13 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:34:27 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:27:48 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int		vm_print_usage(char **av, int status)
+int			vm_print_usage(char **av, int status)
 {
 	ft_dprintf(2, "usage: %s [-dump nbr_cycles] ", av[0]);
 	ft_dprintf(2, "[-v N...] [-n number] champion1.cor ...\n");
@@ -29,17 +29,7 @@ int		vm_print_usage(char **av, int status)
 	return (status);
 }
 
-void	vm_print_verbose(t_vm vm, int i)
-{
-	ft_printfln("magic: %x", vm.champ[i].header.magic);
-	ft_printfln("name: %s", vm.champ[i].header.prog_name);
-	ft_printfln("size: %d", vm.champ[i].header.prog_size);
-	ft_printfln("comment: %s", vm.champ[i].header.comment);
-	ft_printfln("operations:");
-	ft_printfln("%*m", vm.champ[i].header.prog_size, vm.champ[i].op);
-}
-
-void	vm_print_memory(unsigned char memory[MEM_SIZE])
+void		vm_print_memory(unsigned char memory[MEM_SIZE])
 {
 	int		i;
 
@@ -56,7 +46,7 @@ void	vm_print_memory(unsigned char memory[MEM_SIZE])
 	ft_printf("\n");
 }
 
-int		vm_get_cursor_color(t_vm vm, int index)
+static int	vm_get_cursor_color(t_vm vm, int index)
 {
 	int		k;
 
@@ -71,7 +61,7 @@ int		vm_get_cursor_color(t_vm vm, int index)
 	return (0);
 }
 
-void	vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
+void		vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm)
 {
 	int		i;
 	int		color;

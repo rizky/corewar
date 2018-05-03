@@ -6,30 +6,14 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 19:04:51 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:28:42 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 #include "ft_vm_draw.h"
 
-void
-	vm_free(t_vm *vm)
-{
-	int i;
-
-	(vm->v_lvl[V_LVL_1]) ? draw_end(&g_draw_win) : 0;
-	i = 0;
-	while (i < vm->champ_size)
-	{
-		free(vm->champ[i].op);
-		fta_clear(&(vm->processes));
-		i++;
-	}
-}
-
-void
-	vm_load_champs(t_vm *vm)
+static void	vm_load_champs(t_vm *vm)
 {
 	int			i;
 	t_process	p;
@@ -56,8 +40,7 @@ void
 	}
 }
 
-static int
-	vm_populate_players(int i, char **av, t_vm *vm)
+static int	vm_populate_players(int i, char **av, t_vm *vm)
 {
 	int j;
 
@@ -71,8 +54,7 @@ static int
 	return (0);
 }
 
-static int
-	vm_get_champions(char **av, t_vm *vm)
+static int	vm_get_champions(char **av, t_vm *vm)
 {
 	int i;
 	int j;
@@ -100,8 +82,7 @@ static int
 	return (num);
 }
 
-int
-	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_vm				vm;
 	time_t				start;

@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:00:19 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 03:09:09 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:26:13 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void
-	vm_op_lfork(t_vm *vm, t_process *p)
+void	vm_op_lfork(t_vm *vm, t_process *p)
 {
 	t_process	new_p;
 	int			value;
@@ -35,8 +34,7 @@ void
 	vm_op_inc(vm, p);
 }
 
-void
-	vm_lfork_print(t_process p)
+void	vm_lfork_print(t_process p)
 {
 	int value;
 

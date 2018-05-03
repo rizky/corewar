@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 16:34:23 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:12:15 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int
-	vm_checker_oc(t_op *op)
+static int	vm_checker_oc(t_op *op)
 {
 	int param[3];
 	int i;
@@ -39,8 +38,7 @@ int
 	return (0);
 }
 
-int
-	vm_decompiler_param(t_process *p, t_op *op)
+int			vm_decompiler_param(t_process *p, t_op *op)
 {
 	int		i;
 
@@ -69,8 +67,7 @@ int
 	return (0);
 }
 
-int
-	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
+static int	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
 {
 	const int cursor = g_memory[p->offset + p->pc];
 
@@ -82,8 +79,7 @@ int
 	return (0);
 }
 
-void
-	vm_decompiler(t_vm *vm)
+void		vm_decompiler(t_vm *vm)
 {
 	int			i;
 	t_op		op;

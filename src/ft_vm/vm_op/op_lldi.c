@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:59:23 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 18:00:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:26:02 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int
-	ft_init_param_long(t_process *p, int i)
+static int	ft_init_param_long(t_process *p, int i)
 {
 	int			result;
 
@@ -25,8 +24,7 @@ int
 	return (result);
 }
 
-int
-	ft_cursor_long(t_process *p, int param1, int param2, int i)
+static int	ft_cursor_long(t_process *p, int param1, int param2, int i)
 {
 	int cursor;
 
@@ -42,8 +40,7 @@ int
 	return (cursor);
 }
 
-void
-	vm_op_lldi(t_vm *vm, t_process *p)
+void		vm_op_lldi(t_vm *vm, t_process *p)
 {
 	int		param0;
 	int		param1;
@@ -69,8 +66,7 @@ void
 	vm_op_inc(vm, p);
 }
 
-void
-	vm_lldi_print2(t_process p, int param0, int param1)
+static void	vm_lldi_print2(t_process p, int param0, int param1)
 {
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
@@ -99,8 +95,7 @@ void
 	ft_printf("\n");
 }
 
-void
-	vm_lldi_print(t_process p)
+void		vm_lldi_print(t_process p)
 {
 	int param0;
 	int	param1;

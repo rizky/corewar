@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:45:30 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 03:08:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:22:06 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void
-	vm_op_live(t_vm *vm, t_process *p)
+void	vm_op_live(t_vm *vm, t_process *p)
 {
 	(void)vm;
 	p->live_nbr++;
@@ -26,8 +25,7 @@ void
 	vm_op_inc(vm, p);
 }
 
-void
-	vm_live_print(t_process p)
+void	vm_live_print(t_process p)
 {
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
@@ -35,8 +33,7 @@ void
 	ft_printf("\n");
 }
 
-void
-	vm_op_inc(t_vm *vm, t_process *p)
+void	vm_op_inc(t_vm *vm, t_process *p)
 {
 	int val;
 
@@ -52,8 +49,7 @@ void
 	}
 }
 
-void
-	vm_op_print(t_process p)
+void	vm_op_print(t_process p)
 {
 	int i;
 

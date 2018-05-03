@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:56:40 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 18:59:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:25:03 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void
-	vm_op_sti(t_vm *vm, t_process *p)
+void		vm_op_sti(t_vm *vm, t_process *p)
 {
 	int			param1;
 	int			param2;
@@ -42,8 +41,7 @@ void
 	vm_op_inc(vm, p);
 }
 
-void
-	vm_sti_print2(t_process p, int param1, int param2)
+static void	vm_sti_print2(t_process p, int param1, int param2)
 {
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
@@ -71,8 +69,7 @@ void
 	ft_printf("\n");
 }
 
-void
-	vm_sti_print(t_process p)
+void		vm_sti_print(t_process p)
 {
 	int param1;
 	int param2;

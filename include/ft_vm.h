@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 03:08:02 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:32:15 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,33 +90,35 @@ typedef struct	s_vm
 unsigned char	g_memory[MEM_SIZE];
 unsigned char	g_memory_mark[MEM_SIZE];
 int				g_cycles;
-int				g_carrier;
 int				g_cycles_to;
 int				g_cycles_to_die;
 int				g_max_check;
 
-void			vm_init_g_var();
-int				vm_print_usage(char **av, int status);
-void			vm_print(t_vm vm);
-void			vm_print_verbose(t_vm vm, int i);
-
 int				vm_options(char **av, t_vm *vm);
+int				vm_print_usage(char **av, int status);
+void			vm_init_g_var(void);
 
 int				vm_error(int errnum, int status, char *name);
+
+void			vm_free(t_vm *vm);
+int				vm_free_err(t_vm *vm, int max, int errnum, char *file);
 
 int				vm_binary_toint(unsigned char *bin, int size);
 int				vm_read_binaries(char **paths, t_vm *vm);
 void			*vm_memmark(void *dst, int i, size_t n);
 void			vm_st_mem(int index, char *value, int champ, int size);
 int				vm_ld_mem(int index, int size);
+
+void			vm_decompiler(t_vm *vm);
 int				vm_decompiler_param(t_process *p, t_op *op);
+
+int				vm_checker(t_vm *vm);
+int				vm_checker_livenbr(t_vm vm);
+
+void			vm_executor(t_vm *vm);
 
 void			vm_print_memory(unsigned char memory[MEM_SIZE]);
 void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);
-void			vm_print(t_vm vm);
-
-void			vm_executor(t_vm *vm);
-void			vm_decompiler(t_vm *vm);
 
 char			*vm_to_big_endian(int value, int size);
 void			vm_op_inc(t_vm *vm, t_process *p);
@@ -129,8 +131,6 @@ void			vm_op_sub(t_vm *vm, t_process *p);
 void			vm_op_and(t_vm *vm, t_process *p);
 void			vm_op_or(t_vm *vm, t_process *p);
 void			vm_op_xor(t_vm *vm, t_process *p);
-void			vm_op_fork(t_vm *vm, t_process *p);
-void			vm_op_lfork(t_vm *vm, t_process *p);
 void			vm_op_zjmp(t_vm *vm, t_process *p);
 void			vm_op_ldi(t_vm *vm, t_process *p);
 void			vm_op_sti(t_vm *vm, t_process *p);
@@ -151,15 +151,15 @@ void			vm_or_print(t_process p);
 void			vm_xor_print(t_process p);
 void			vm_zjmp_print(t_process p);
 void			vm_ldi_print(t_process p);
-void			vm_ldi_print2(t_process p, int param1, int param2);
 void			vm_sti_print(t_process p);
 void			vm_fork_print(t_process p);
 void			vm_lld_print(t_process p);
 void			vm_lldi_print(t_process p);
 void			vm_lfork_print(t_process p);
-
-void			vm_fork_print(t_process p);
 void			vm_aff_print(t_process p);
+
+int				ft_init_param(t_process *p, int i);
+int				ft_cursor(t_process *p, int param1, int param2, int i);
 
 int				vm_valid_arg(char *arg, t_vm *vm);
 int				vm_valid_verbosity_lvl(int lvl);
@@ -167,11 +167,6 @@ int				vm_lvl_to_index(int index);
 int				ft_isnumber(char *str);
 int				ft_abs(int i);
 
-int				vm_checker(t_vm *vm);
-int				vm_checker_livenbr(t_vm vm);
-
-int				ft_init_param(t_process *p, int i);
-int				ft_cursor(t_process *p, int param1, int param2, int i);
 typedef struct	s_op_dict
 {
 	char		*name;

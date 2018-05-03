@@ -6,21 +6,20 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/02 14:29:18 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:15:43 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
 void
-	*vm_memmark(void *dst, int i, size_t n)
+	vm_init_g_var(void)
 {
-	unsigned char *dst_p;
-
-	dst_p = (unsigned char*)dst;
-	while (n-- > 0)
-		*dst_p++ = i;
-	return (dst);
+	g_cycles = 0;
+	g_cycles_to = 0;
+	g_cycles_to_die = CYCLE_TO_DIE;
+	ft_bzero(&g_memory, MEM_SIZE);
+	ft_bzero(&g_memory_mark, MEM_SIZE);
 }
 
 char
@@ -42,13 +41,14 @@ char
 }
 
 void
-	vm_init_g_var(void)
+	*vm_memmark(void *dst, int i, size_t n)
 {
-	g_cycles = 0;
-	g_cycles_to = 0;
-	g_cycles_to_die = CYCLE_TO_DIE;
-	ft_bzero(&g_memory, MEM_SIZE);
-	ft_bzero(&g_memory_mark, MEM_SIZE);
+	unsigned char *dst_p;
+
+	dst_p = (unsigned char*)dst;
+	while (n-- > 0)
+		*dst_p++ = i;
+	return (dst);
 }
 
 void

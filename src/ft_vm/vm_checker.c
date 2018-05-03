@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 03:57:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:10:56 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int
-	vm_checker_livenbr(t_vm vm)
+int			vm_checker_livenbr(t_vm vm)
 {
 	int			j;
 	int			live_nbr;
@@ -29,8 +28,7 @@ int
 	return (live_nbr);
 }
 
-void
-	vm_reset_livenbr(t_vm *vm)
+static void	vm_reset_livenbr(t_vm *vm)
 {
 	int			j;
 	t_process	*p;
@@ -44,8 +42,7 @@ void
 	}
 }
 
-int
-	vm_checker_processalive(t_vm *vm)
+static int	vm_checker_processalive(t_vm *vm)
 {
 	int			j;
 	int			palive_nbr;
@@ -71,8 +68,7 @@ int
 	return (palive_nbr);
 }
 
-static void
-	vm_process_kill(t_vm *vm)
+static void	vm_process_kill(t_vm *vm)
 {
 	t_process	*p;
 
@@ -86,8 +82,7 @@ static void
 	}
 }
 
-int
-	vm_checker(t_vm *vm)
+int			vm_checker(t_vm *vm)
 {
 	if (g_cycles_to_die < 0)
 	{

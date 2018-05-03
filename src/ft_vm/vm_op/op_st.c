@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:47:29 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 18:59:54 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:22:34 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void
-	vm_op_st(t_vm *vm, t_process *p)
+void	vm_op_st(t_vm *vm, t_process *p)
 {
 	short	param1;
 	char	*temp;
@@ -41,8 +40,7 @@ void
 	vm_op_inc(vm, p);
 }
 
-void
-	vm_st_print(t_process p)
+void	vm_st_print(t_process p)
 {
 	if (p.op.params[0].value < 1 || p.op.params[0].value > 16 ||
 		((p.op.params[1].type == REG_CODE) &&

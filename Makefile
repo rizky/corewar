@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/03 04:06:19 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/03 11:34:37 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,14 @@ FTASM:= ft_asm \
 NAME_VM:= corewar
 FTVMPATH:= ft_vm/
 FTVM:=	ft_vm \
+		vm_options \
 		vm_decompiler \
 		vm_decompiler_file \
-		vm_executor \
 		vm_checker \
+		vm_executor \
 		vm_print \
 		vm_error \
-		vm_options \
+		vm_free \
 		vm_helper_1 vm_helper_2
 
 FTVMDRAWPATH:= ft_vm/vm_draw/
@@ -43,7 +44,7 @@ FTVMDRAW:= draw_animation_1 \
 		draw_init \
 		draw_key_utils \
 		draw_nyan \
-		draw \
+		draw
 
 FTVMOPPATH:= ft_vm/vm_op/
 FTVMOP:= op_and op_add op_aff op_fork \

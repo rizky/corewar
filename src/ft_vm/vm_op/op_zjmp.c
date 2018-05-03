@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:51:58 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 17:52:30 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:23:46 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void
-	vm_op_zjmp(t_vm *vm, t_process *p)
+void	vm_op_zjmp(t_vm *vm, t_process *p)
 {
 	short		value;
 
@@ -32,8 +31,7 @@ void
 		vm_op_inc(vm, p);
 }
 
-void
-	vm_zjmp_print(t_process p)
+void	vm_zjmp_print(t_process p)
 {
 	short	value;
 
