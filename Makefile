@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/03 11:34:37 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/03 19:08:24 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -278,7 +278,7 @@ tests_vm_leak:
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$(T_VM_DIR_OP)$(x) test_vm_leak;)
 
 T_VM_DIR_B = tests/vm/battle/
-T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^$(T_FILE).*.s$$' | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 
 test_vm_battle : corewar
 	@./resources/binaries/asm $(T_VM_DIR_B)$(X).s > /dev/null; true
