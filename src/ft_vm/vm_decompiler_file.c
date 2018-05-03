@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:29:20 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/03 11:58:25 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,35 +61,42 @@ static int	vm_read_header(int fd, t_champ *champ)
 	return (0);
 }
 
+static int	vm_read_binaries_2(char *file, t_champ *champ, unsigned char *buf)
+{
+	int fd;
+	int error;
+
+	if ((fd = open(file, O_RDONLY)) == -1)
+		error = INVALID_FILE;
+	else if ((error = vm_read_header(fd, champ)) > 0)
+		;
+	else if (read(fd, buf, champ->header.prog_size) < champ->header.prog_size)
+		error = INVALID_INSTR;
+	else if (read(fd, &buf, 1) > 0)
+		error = INVALID_INSTR;
+	else if ((champ->op = ft_memalloc(champ->header.prog_size + 1)) == NULL)
+		error = MALLOC;
+	close(fd);
+	return (error);
+}
+
 int			vm_read_binaries(char **paths, t_vm *vm)
 {
-	int				fd;
-	unsigned char	buf[COMMENT_LENGTH + 4];
-	t_champ			champ;
 	int				i;
 	int				error;
+	unsigned char	buf[COMMENT_LENGTH + 4];
+	t_champ			champ;
 
-	i = -1;
+	i = 0;
 	error = 0;
-	while (++i < vm->champ_size)
+	while (i < vm->champ_size)
 	{
-		if ((fd = open(paths[i], O_RDONLY)) == -1)
-			error = INVALID_FILE;
-		else if ((error = vm_read_header(fd, &champ)) > 0)
-			;
-		else if (read(fd, &buf, champ.header.prog_size) <
-			champ.header.prog_size)
-			error = INVALID_INSTR;
-		else if (read(fd, &buf, 1) > 0)
-			error = INVALID_INSTR;
-		else if ((champ.op = ft_memalloc(champ.header.prog_size + 1)) == NULL)
-			error = MALLOC;
-		if (error)
+		if ((error = vm_read_binaries_2(paths[i], &champ, buf)) > 0)
 			return (vm_free_err(vm, i, error, paths[i]));
 		ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
 		champ.op[champ.header.prog_size] = '\0';
 		vm->champ[i] = champ;
-		close(fd);
+		i++;
 	}
 	return (0);
 }
