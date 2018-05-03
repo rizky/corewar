@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:32:15 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/03 16:39:59 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct	s_process
 	int			live_cycle;
 	int			champ;
 	int			carry;
-	int			reg[REG_NUMBER];
+	int			reg[REG_NUMBER + 1];
 	t_op		op;
 	int			index;
 }				t_process;
