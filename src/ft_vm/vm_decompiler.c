@@ -6,39 +6,39 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:12:15 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 01:44:13 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-static int	vm_checker_oc(t_op *op)
+int			vm_checker_oc(t_op op)
 {
 	int param[3];
 	int i;
 
-	if (!g_op_dict[op->opcode].is_oc)
+	if (!g_op_dict[op.opcode].is_oc)
 		return (0);
-	param[0] = (op->oc & 192) >> 6;
-	param[1] = (op->oc & 48) >> 4;
-	param[2] = (op->oc & 12) >> 2;
+	param[0] = (op.oc & 192) >> 6;
+	param[1] = (op.oc & 48) >> 4;
+	param[2] = (op.oc & 12) >> 2;
 	i = 0;
 	while (i != 3)
 	{
-		if (param[i] == IND_CODE && !(g_op_dict[op->opcode].p_type[i] >= T_IND))
+		if (param[i] == IND_CODE && !(g_op_dict[op.opcode].p_type[i] >= T_IND))
 			return (-1);
-		if (param[i] == DIR_CODE && !(g_op_dict[op->opcode].p_type[i] & T_DIR))
+		if (param[i] == DIR_CODE && !(g_op_dict[op.opcode].p_type[i] & T_DIR))
 			return (-1);
-		if (param[i] == REG_CODE && !(g_op_dict[op->opcode].p_type[i] & T_REG))
+		if (param[i] == REG_CODE && !(g_op_dict[op.opcode].p_type[i] & T_REG))
 			return (-1);
-		if (param[i] == 0 && g_op_dict[op->opcode].p_type[i])
+		if (param[i] == 0 && g_op_dict[op.opcode].p_type[i])
 			return (-1);
 		i++;
 	}
 	return (0);
 }
 
-int			vm_decompiler_param(t_process *p, t_op *op)
+void		vm_decompiler_param(t_process *p, t_op *op)
 {
 	int		i;
 
@@ -50,8 +50,6 @@ int			vm_decompiler_param(t_process *p, t_op *op)
 	op->param_c = g_op_dict[op->opcode].param_c;
 	while (i < op->param_c)
 	{
-		if (vm_checker_oc(op) == -1)
-			return (-1);
 		op->params[i].type = (g_op_dict[op->opcode].is_oc) ?
 		(op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2) : op->oc;
 		(op->params[i].type == REG_CODE) ? op->params[i].size = 1 : 0;
@@ -64,7 +62,6 @@ int			vm_decompiler_param(t_process *p, t_op *op)
 		op->size += op->params[i].size;
 		i++;
 	}
-	return (0);
 }
 
 static int	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)

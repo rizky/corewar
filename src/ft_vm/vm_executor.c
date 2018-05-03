@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 16:40:31 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 01:44:38 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void
 static void
 	vm_executor_op(t_vm *vm, t_process *p)
 {
-	if (vm_decompiler_param(p, &(p->op)) == -1)
+	vm_decompiler_param(p, &(p->op));
+	if (vm_checker_oc(p->op) == -1)
 	{
 		ft_bzero(&(p->op), sizeof(t_op));
 		p->pc += 1;
