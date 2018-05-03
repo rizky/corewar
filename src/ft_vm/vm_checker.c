@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 01:38:08 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 03:57:38 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,39 @@ int
 	int			palive_nbr;
 	t_process	*p;
 
-	j = -1;
+	j = (int)(vm->processes.size) - 1;
 	palive_nbr = 0;
-	while (++j < (int)(vm->processes.size))
+	while (j >= 0)
 	{
 		p = &(((t_process*)vm->processes.data)[j]);
 		if (p->live_nbr == 0)
+		{
+			(vm->v_lvl[V_LVL_8]) ?
+				ft_printfln("Process %d hasn't lived for %d cycles (CTD %d)",
+				p->index, g_cycles - p->live_cycle, g_cycles_to_die) : 0;
 			fta_popindex(&(vm->processes), j, 1);
+			j = (int)(vm->processes.size);
+		}
 		else
 			palive_nbr++;
+		j--;
 	}
 	return (palive_nbr);
+}
+
+static void
+	vm_process_kill(t_vm *vm)
+{
+	t_process	*p;
+
+	while (vm->processes.size > 0)
+	{
+		p = &(((t_process*)vm->processes.data)[vm->processes.size - 1]);
+		(vm->v_lvl[V_LVL_8]) ?
+			ft_printfln("Process %d hasn't lived for %d cycles (CTD %d)",
+			p->index, g_cycles - p->live_cycle, g_cycles_to_die) : 0;
+		fta_popindex(&(vm->processes), vm->processes.size - 1, 1);
+	}
 }
 
 int
@@ -70,6 +92,7 @@ int
 	if (g_cycles_to_die < 0)
 	{
 		vm->winner = vm->last_live_champ;
+		vm_process_kill(vm);
 		return (0);
 	}
 	if (g_cycles_to == g_cycles_to_die)

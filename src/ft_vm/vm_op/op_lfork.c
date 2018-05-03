@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:00:19 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 01:38:42 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 03:09:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void
 	new_p.offset = p->champ * MEM_SIZE / vm->champ_size;
 	new_p.champ = p->champ;
 	new_p.live_nbr = p->live_nbr;
+	new_p.live_cycle = p->live_cycle;
 	new_p.carry = p->carry;
 	ft_memcpy(&(new_p.reg), &(p->reg), sizeof(int) * REG_NUMBER);
 	value = (p->op.params[0].value + p->offset + p->pc);

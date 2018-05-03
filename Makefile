@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/03 02:01:32 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/03 03:27:21 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -228,8 +228,8 @@ DUMP = 150
 
 test_vm_op : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./corewar -v 4 2 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
-	@./resources/binaries/corewar -v 6 -a $(T_VM_DIR)$(X).cor > out2; true
+	@./corewar -v 8 4 2 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 14 -a $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
@@ -278,8 +278,8 @@ T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^[^X]+.s$$' | rev | cut -f 2
 test_vm_battle : corewar
 	@./resources/binaries/asm $(T_VM_DIR_B)$(X).s > /dev/null; true
 	@./resources/binaries/asm $(T_VM_DIR_B)$(X)X.s > /dev/null; true
-	@./corewar -v 4 2 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
-	@./resources/binaries/corewar -v 6 -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
+	@./corewar -v 8 4 2 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 14 -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR_B)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR_B)$(X)" $(EOC) ; \
@@ -313,8 +313,8 @@ tests_vm_dump_overflow_loop: corewar
 
 test_vm_op_overflow : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./corewar -v 4 2 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
-	@./resources/binaries/corewar -v 6 -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
+	@./corewar -v 8 4 2 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 14 -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \

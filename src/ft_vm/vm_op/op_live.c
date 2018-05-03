@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:45:30 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 19:00:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/03 03:08:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void
 {
 	(void)vm;
 	p->live_nbr++;
+	p->live_cycle = g_cycles;
 	if (p->op.params[0].value == ((p->champ + 1) * -1))
 	{
 		vm->champ[p->champ].live_nbr++;
