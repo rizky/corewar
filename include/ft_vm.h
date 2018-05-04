@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 02:42:33 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:19:13 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,9 @@ int				vm_checker_livenbr(t_vm vm);
 
 void			vm_executor(t_vm *vm);
 
-void			vm_print_memory(unsigned char memory[MEM_SIZE]);
-void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);
+void			vm_print_memory(void);
+void			vm_print_memory_color(t_vm vm);
+void			vm_print_memory_cursor(t_vm vm);
 
 char			*vm_to_big_endian(int value, int size);
 void			vm_op_inc(t_vm *vm, t_process *p);
