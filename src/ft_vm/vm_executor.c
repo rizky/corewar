@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 16:25:28 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:41:53 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static void
 	if (p.op.opcode != 0 && (p.op.opcode != 9 || !p.carry))
 	{
 		ft_printf("ADV %d (0x%04x -> 0x%04x) ",
-					p.pc_next - p.pc, 
-					p.offset + p.pc, 
-					p.offset + p.pc_next);
+			p.pc_next - p.pc,
+			p.offset + p.pc,
+			p.offset + p.pc_next);
 		i = p.offset + p.pc;
 		size = 0;
 		while (size < p.pc_next - p.pc)
