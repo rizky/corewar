@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 21:49:58 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 23:28:46 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,12 @@ static int	vm_get_champions(char **av, t_vm *vm)
 				if (ft_strequ(av[i], vm->players[j]) && av[i] == vm->players[j])
 					equ = 1;
 			if (!equ && vm_populate_players(i, av, vm) == -1)
-				return (vm->champ_size = MAX_PLAYERS + 1);
+				num = MAX_PLAYERS + 1;
 			num++;
 		}
 	}
-	if (num < 1 || num > MAX_PLAYERS)
-		return (-1);
-	return (num);
+	vm->champ_size = num;
+	return ((num < 1 || num > MAX_PLAYERS) ? -1 : num);
 }
 
 int			main(int ac, char **av)
@@ -92,7 +91,7 @@ int			main(int ac, char **av)
 	vm.processes = processes;
 	if (ac < 2 || vm_options(av, &vm) == -1)
 		return (vm_print_usage(av, -1));
-	if ((vm.champ_size = vm_get_champions(av, &vm)) == -1)
+	if (vm_get_champions(av, &vm) == -1)
 		return (vm_error(vm.champ_size < 1 ? CHAMP_MIN : CHAMP_MAX, -1, NULL));
 	if (vm_read_binaries(vm.players, &vm) == -1)
 		return (-1);
