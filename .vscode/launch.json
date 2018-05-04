@@ -29,7 +29,7 @@
 					"8",
 					"4",
 					"2",
-					"tests/vm/champ/Explosive_Kitty.cor"
+					"tests/vm/champ/run_Kitty_RUN.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

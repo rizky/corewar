@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 21:26:15 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 22:59:13 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		vm_decompiler_param(t_process *p, t_op *op)
 
 	i = 0;
 	cursor = p->offset + p->pc + 1;
-	if (cursor > MEM_SIZE)
+	if (cursor >= MEM_SIZE)
 		cursor = cursor - MEM_SIZE;
 	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
 	op->oc = (g_op_dict[op->opcode].is_oc) ?
@@ -61,7 +61,7 @@ void		vm_decompiler_param(t_process *p, t_op *op)
 		(op->params[i].type == DIR_CODE) ? op->params[i].size =
 			g_op_dict[op->opcode].d_size : 0;
 		cursor = p->offset + p->pc + op->size;
-		if (cursor > MEM_SIZE)
+		if (cursor >= MEM_SIZE)
 			cursor = cursor - MEM_SIZE;
 		op->params[i].value =
 		vm_ld_mem(cursor,
