@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/03 18:43:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 14:21:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,21 @@ int
 {
 	int		i;
 	int		result;
+	int		max;
 
 	i = 1;
 	result = 0;
+	max = 0;
 	while (i <= size)
 	{
 		if (index == MEM_SIZE)
 			index = 0;
 		result += g_memory[index] << ((size - i) * 8);
+		max += 0xff << ((i - 1) * 8);
 		i++;
 		index++;
 	}
+	if (result > max / 2 + 1)
+		result = result - (max + 1);
 	return (result);
 }

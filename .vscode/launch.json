@@ -28,7 +28,7 @@
 					"8",
 					"4",
 					"2",
-					"tests/vm/ocp/sub_18.cor"
+					"tests/vm/champ/Explosive_Kitty.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
