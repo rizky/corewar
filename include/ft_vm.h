@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 18:43:08 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 01:44:25 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void			vm_st_mem(int index, char *value, int champ, int size);
 int				vm_ld_mem(int index, int size);
 
 void			vm_decompiler(t_vm *vm);
-int				vm_decompiler_param(t_process *p, t_op *op);
+void			vm_decompiler_param(t_process *p, t_op *op);
 
 int				vm_checker(t_vm *vm);
 int				vm_checker_livenbr(t_vm vm);
@@ -123,6 +123,7 @@ void			vm_print_memory_cursor(unsigned char memory[MEM_SIZE], t_vm vm);
 
 char			*vm_to_big_endian(int value, int size);
 void			vm_op_inc(t_vm *vm, t_process *p);
+int				vm_checker_oc(t_op op);
 
 void			vm_op_live(t_vm *vm, t_process *p);
 void			vm_op_ld(t_vm *vm, t_process *p);
