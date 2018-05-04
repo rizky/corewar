@@ -25,6 +25,7 @@
 			"program": "${workspaceFolder}/corewar",
 			"args": [
 					"-v",
+					"16",
 					"8",
 					"4",
 					"2",

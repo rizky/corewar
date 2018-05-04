@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:46:49 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:22:22 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 17:37:15 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	vm_op_ld(t_vm *vm, t_process *p)
 {
 	int		param0;
+	int		val;
 
 	(void)vm;
 	if (p->op.params[1].value < 1 || p->op.params[1].value > 16)
@@ -22,10 +23,12 @@ void	vm_op_ld(t_vm *vm, t_process *p)
 		vm_op_inc(vm, p);
 		return ;
 	}
+	val = p->op.params[0].value % IDX_MOD;
+	val = (p->offset + p->pc + (val)) % MEM_SIZE;
+	if (val < 0)
+		val = MEM_SIZE + val;
 	param0 = (p->op.params[0].type == IND_CODE) ?
-		vm_ld_mem((p->offset + p->pc +
-			(p->op.params[0].value % IDX_MOD)) % MEM_SIZE, 4)
-		: p->op.params[0].value;
+		vm_ld_mem(val, 4) : p->op.params[0].value;
 	p->reg[p->op.params[1].value] = param0;
 	if (param0 == 0)
 		p->carry = 1;
@@ -37,12 +40,16 @@ void	vm_op_ld(t_vm *vm, t_process *p)
 void	vm_ld_print(t_process p)
 {
 	int param0;
+	int	val;
 
 	if (p.op.params[1].value < 1 || p.op.params[1].value > 16)
 		return ;
+	val = p.op.params[0].value % IDX_MOD;
+	val = (p.offset + p.pc + (val)) % MEM_SIZE;
+	if (val < 0)
+		val = MEM_SIZE + val;
 	param0 = (p.op.params[0].type == IND_CODE) ?
-		vm_ld_mem((p.offset + p.pc +
-		(p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4) : p.op.params[0].value;
+		vm_ld_mem(val, 4) : p.op.params[0].value;
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
 	ft_printf(" %d", param0);
