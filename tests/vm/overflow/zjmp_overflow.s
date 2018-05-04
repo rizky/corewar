@@ -126,5 +126,11 @@ ld 512, r2
 ld 512, r2
 ld 512, r2
 ld 512, r2
-and 50, 50, r4
-zjmp %392
+ld 512, r2
+ld 512, r2
+ld 512, r2
+ld 512, r2
+ld 512, r2
+ld 512, r2
+and r2, r3, r4
+zjmp %511

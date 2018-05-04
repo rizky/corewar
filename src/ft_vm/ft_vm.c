@@ -6,22 +6,23 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 14:02:44 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:13:44 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 #include "ft_vm_draw.h"
 
-void
-	vm_load_champs(t_vm *vm, unsigned char memory[MEM_SIZE])
+static void	vm_load_champs(t_vm *vm)
 {
 	int			i;
 	t_process	p;
 
 	i = -1;
 	vm_init_g_var();
+	vm->last_live_champ = vm->champ_size - 1;
 	ft_bzero(&p, sizeof(t_process));
+	vm->process_index = 1;
 	ft_printfln("Introducing contestants...");
 	while (++i < vm->champ_size)
 	{
@@ -29,20 +30,17 @@ void
 			vm->champ[i].header.prog_size, (vm->champ[i].header.prog_size > 1) ?
 			"bytes" : "byte", vm->champ[i].header.prog_name,
 			vm->champ[i].header.comment);
-		ft_memcpy(&memory[i * MEM_SIZE / vm->champ_size], vm->champ[i].op,
-			vm->champ[i].header.prog_size);
-		vm_memmark(&g_memory_mark[i * MEM_SIZE / vm->champ_size], i + 1,
+		vm_st_mem(i * MEM_SIZE / vm->champ_size, vm->champ[i].op, i,
 			vm->champ[i].header.prog_size);
 		p.offset = i * MEM_SIZE / vm->champ_size;
 		p.champ = i;
-		p.index = 1 + vm->process_size++;
+		p.index = vm->process_index++;
 		p.reg[1] = (i + 1) * -1;
-		fta_append(vm->champ[i].processes, &p, 1);
+		fta_append(&(vm->processes), &p, 1);
 	}
 }
 
-static int
-	vm_populate_players(int i, char **av, t_vm *vm)
+static int	vm_populate_players(int i, char **av, t_vm *vm)
 {
 	int j;
 
@@ -56,8 +54,7 @@ static int
 	return (0);
 }
 
-static int
-	vm_get_champions(char **av, t_vm *vm)
+static int	vm_get_champions(char **av, t_vm *vm)
 {
 	int i;
 	int j;
@@ -85,32 +82,31 @@ static int
 	return (num);
 }
 
-int
-	main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	t_vm		vm;
-	time_t		start;
+	t_vm				vm;
+	time_t				start;
+	static t_array		processes = NEW_ARRAY(t_process);
 
 	ft_bzero(&vm, sizeof(t_vm));
+	vm.processes = processes;
 	if (ac < 2 || vm_options(av, &vm) == -1)
 		return (vm_print_usage(av, -1));
 	if ((vm.champ_size = vm_get_champions(av, &vm)) == -1)
 		return (vm_error(vm.champ_size < 1 ? CHAMP_MIN : CHAMP_MAX, -1, NULL));
 	if (vm_read_binaries(vm.players, &vm) == -1)
 		return (-1);
-	vm_load_champs(&vm, g_memory);
+	vm_load_champs(&vm);
 	while (vm_checker(&vm))
 	{
 		vm_executor(&vm);
-		if (vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1)
+		if ((vm.dump && vm.cycles == g_cycles) ||
+			(vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1))
 			break ;
-		g_cycles++;
-		g_cycles_to++;
 	}
-	(vm.v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
 	(!vm.dump || g_cycles < vm.cycles) ?
 	ft_printfln("Contestant %d, \"%s\", has won !",
 		vm.winner + 1, vm.champ[vm.winner].header.prog_name) : 0;
-	(vm.v_lvl[V_LVL_1]) ? draw_end(&g_draw_win) : 0;
+	vm_free(&vm);
 	return (0);
 }

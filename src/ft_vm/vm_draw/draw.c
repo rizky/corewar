@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 22:25:40 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/02 02:35:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 21:32:45 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			vm_start_ncurse(time_t *start, t_vm vm)
 		else if (key == 1)
 			return (0);
 	}
-	if (time(NULL) - *start >= 121)
+	if (time(NULL) - *start >= 121 && system("test -r sound/nyan.mp3"))
 	{
 		system("afplay -t 120 sound/nyan.mp3&");
 		*start = time(NULL);

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 14:08:55 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 18:03:04 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,61 +23,66 @@ static void
 	vm_print_v_16(t_process p)
 {
 	int i;
+	int	size;
 
-	if (p.op.opcode != 0)
+	if (p.op.opcode != 0 && (p.op.opcode != 9 || !p.carry))
 	{
 		ft_printf("ADV %d (0x%04x -> 0x%04x) ",
-					p.pc_next - p.pc, p.pc, p.pc_next);
-		i = p.pc;
-		while (i < p.pc_next)
-			ft_printf("%02x ", g_memory[i++]);
+			p.pc_next - p.pc,
+			p.offset + p.pc,
+			p.offset + p.pc_next);
+		i = p.offset + p.pc;
+		size = 0;
+		while (size < p.pc_next - p.pc)
+		{
+			if (i == MEM_SIZE)
+				i = 0;
+			ft_printf("%02x ", g_memory[i]);
+			i++;
+			size++;
+		}
 		ft_printf("\n");
 	}
 }
 
-static int
+static void
 	vm_executor_op(t_vm *vm, t_process *p)
 {
-	if (vm_decompiler_param(p, &(p->op)) == -1)
-	{
-		ft_bzero(&(p->op), sizeof(t_op));
-		p->pc += 2;
-		if (p->pc + p->offset >= MEM_SIZE)
-			p->pc = p->offset * -1;
-		return (-1);
-	}
-	p->pc_next = ((p->pc + p->op.size) >= MEM_SIZE) ?
-		(p->pc + p->op.size) * -1 :
-		p->pc + p->op.size;
+	t_process *prev_p;
+
+	vm_decompiler_param(p, &(p->op));
+	p->pc_next = p->pc + p->op.size;
+	prev_p = ft_memalloc(sizeof(t_process));
+	ft_memcpy(prev_p, p, sizeof(t_process));
 	(vm->v_lvl[V_LVL_4]) ? vm_print_v_4(*p) : 0;
-	(vm->v_lvl[V_LVL_16]) ? vm_print_v_16(*p) : 0;
 	(((void (*)())g_op_dict[p->op.opcode].opfunc)(vm, p));
+	(vm->v_lvl[V_LVL_16]) ? vm_print_v_16(*prev_p) : 0;
+	free(prev_p);
 	ft_bzero(&(p->op), sizeof(t_op));
-	return (0);
 }
 
 void
 	vm_executor(t_vm *vm)
 {
 	int			i;
-	int			j;
 	t_process	*p;
 
-	i = vm->champ_size - 1;
+	g_cycles++;
+	g_cycles_to++;
 	vm_decompiler(vm);
 	(vm->v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
+	i = (int)(vm->processes.size) - 1;
 	while (i >= 0)
 	{
-		j = -1;
-		while (++j < (int)(vm->champ[i].processes->size))
+		p = &(((t_process*)vm->processes.data)[i]);
+		if (p->cycles == g_cycles)
 		{
-			p = &(((t_process*)vm->champ[i].processes->data)[j]);
-			if (p->cycles == g_cycles)
-				if (vm_executor_op(vm, p) == -1)
-					break ;
+			vm_executor_op(vm, p);
+			(((t_process*)vm->processes.data)[i]) = *p;
 		}
 		i--;
 	}
-	(vm->dump && vm->cycles == g_cycles) ? vm_print_memory(g_memory) : 0;
-	(vm->v_lvl[V_LVL_0]) ? vm_print_memory_cursor(g_memory, *vm) : 0;
+	(vm->dump == 1 && vm->cycles == g_cycles) ? vm_print_memory() : 0;
+	(vm->dump == 2 && vm->cycles == g_cycles) ? vm_print_memory_color(*vm) : 0;
+	(vm->v_lvl[V_LVL_0]) ? vm_print_memory_cursor(*vm) : 0;
 }

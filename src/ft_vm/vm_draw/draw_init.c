@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:00:22 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/01 15:25:37 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/02 21:32:59 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void		init_ncurses(t_vm *vm, time_t *start)
 	keypad(stdscr, TRUE);
 	init_all_color();
 	ft_bzero(&g_draw_status, sizeof(g_draw_status));
-	system("afplay -t 120 resources/sound/nyan.mp3&");
+	system("test -r resources/sound/nyan.mp3 &&\
+		afplay -t 120 resources/sound/nyan.mp3&");
 	g_draw_win.game = newwin(4 + (MEM_SIZE / 64), 197, 0, 0);
 	g_draw_win.info = newwin(4 + (MEM_SIZE / 64), 58, 0, 196);
 	g_draw_win.nyan = newwin(9, 254, 4 + (MEM_SIZE / 64), 0);

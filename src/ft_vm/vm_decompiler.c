@@ -6,41 +6,39 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/02 00:55:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 01:44:13 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int
-	vm_checker_oc(t_op *op)
+int			vm_checker_oc(t_op op)
 {
 	int param[3];
 	int i;
 
-	if (!g_op_dict[op->opcode].is_oc)
+	if (!g_op_dict[op.opcode].is_oc)
 		return (0);
-	param[0] = (op->oc & 192) >> 6;
-	param[1] = (op->oc & 48) >> 4;
-	param[2] = (op->oc & 12) >> 2;
+	param[0] = (op.oc & 192) >> 6;
+	param[1] = (op.oc & 48) >> 4;
+	param[2] = (op.oc & 12) >> 2;
 	i = 0;
 	while (i != 3)
 	{
-		if (param[i] == IND_CODE && !(g_op_dict[op->opcode].p_type[i] >= T_IND))
+		if (param[i] == IND_CODE && !(g_op_dict[op.opcode].p_type[i] >= T_IND))
 			return (-1);
-		if (param[i] == DIR_CODE && !(g_op_dict[op->opcode].p_type[i] & T_DIR))
+		if (param[i] == DIR_CODE && !(g_op_dict[op.opcode].p_type[i] & T_DIR))
 			return (-1);
-		if (param[i] == REG_CODE && !(g_op_dict[op->opcode].p_type[i] & T_REG))
+		if (param[i] == REG_CODE && !(g_op_dict[op.opcode].p_type[i] & T_REG))
 			return (-1);
-		if (param[i] == 0 && g_op_dict[op->opcode].p_type[i])
+		if (param[i] == 0 && g_op_dict[op.opcode].p_type[i])
 			return (-1);
 		i++;
 	}
 	return (0);
 }
 
-int
-	vm_decompiler_param(t_process *p, t_op *op)
+void		vm_decompiler_param(t_process *p, t_op *op)
 {
 	int		i;
 
@@ -52,8 +50,6 @@ int
 	op->param_c = g_op_dict[op->opcode].param_c;
 	while (i < op->param_c)
 	{
-		if (vm_checker_oc(op) == -1)
-			return (-1);
 		op->params[i].type = (g_op_dict[op->opcode].is_oc) ?
 		(op->oc & (0xC0 >> (i * 2))) >> ((3 - i) * 2) : op->oc;
 		(op->params[i].type == REG_CODE) ? op->params[i].size = 1 : 0;
@@ -66,11 +62,9 @@ int
 		op->size += op->params[i].size;
 		i++;
 	}
-	return (0);
 }
 
-int
-	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
+static int	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
 {
 	const int cursor = g_memory[p->offset + p->pc];
 
@@ -82,29 +76,24 @@ int
 	return (0);
 }
 
-void
-	vm_decompiler(t_vm *vm)
+void		vm_decompiler(t_vm *vm)
 {
 	int			i;
-	int			j;
 	t_op		op;
 	t_process	*p;
 
 	i = -1;
-	while (++i < vm->champ_size && (j = -1))
+	while (++i < (int)(vm->processes.size))
 	{
-		while (++j < (int)(vm->champ[i].processes->size))
+		ft_bzero(&op, sizeof(t_op));
+		p = &(((t_process*)vm->processes.data)[i]);
+		if (p->op.opcode == 0)
 		{
-			ft_bzero(&op, sizeof(t_op));
-			p = &(((t_process*)vm->champ[i].processes->data)[j]);
-			if (p->op.opcode == 0)
-			{
-				p->cycles = g_cycles;
-				vm_decompiler_op(vm,
-					&(((t_process*)vm->champ[i].processes->data)[j]),
-					&op);
-				p->op = op;
-			}
+			p->cycles = g_cycles;
+			vm_decompiler_op(vm,
+				&(((t_process*)vm->processes.data)[i]),
+				&op);
+			p->op = op;
 		}
 	}
 }

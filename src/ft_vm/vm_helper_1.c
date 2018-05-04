@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_helper_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:58:02 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/26 11:50:10 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 16:27:09 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		vm_valid_arg(char *arg, t_vm *vm)
 {
-	if (!ft_strcmp(arg, "-dump") ||
+	if (!ft_strcmp(arg, "-dump") || !ft_strcmp(arg, "-dumpc") ||
 		!ft_strcmp(arg, "-v") || !ft_strcmp(arg, "-n"))
 	{
-		if (!ft_strcmp(arg, "-dump"))
+		if (!ft_strcmp(arg, "-dump") || !ft_strcmp(arg, "-dumpc"))
 			return (vm->valid_arg[0] = 1);
 		else
 			return (vm->valid_arg[1] = 1);
@@ -69,6 +69,8 @@ int		ft_isnumber(char *str)
 	sign = 0;
 	digit = 0;
 	if (!str)
+		return (0);
+	if (ft_atoll(str) < -2147483648 || ft_atoll(str) > 2147483647)
 		return (0);
 	while (str[++i])
 	{

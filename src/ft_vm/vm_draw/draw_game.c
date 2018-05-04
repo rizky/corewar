@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:04:15 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 14:22:23 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/02 16:34:28 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ static void		process_color(t_process *p, unsigned char *m, int *i, int *col)
 
 static void		color_picker(t_vm *vm, unsigned char *m, int *i, int *color)
 {
-	int			x;
 	int			y;
 	t_process	*p;
 
-	x = vm->champ_size - 1;
 	if (m[*i] == 1)
 		*color = 13;
 	else if (m[*i] == 2)
@@ -46,15 +44,11 @@ static void		color_picker(t_vm *vm, unsigned char *m, int *i, int *color)
 		*color = 12;
 	else
 		*color = 7;
-	while (x >= 0)
+	y = -1;
+	while (++y < (int)vm->processes.size)
 	{
-		y = -1;
-		while (++y < (int)vm->champ[x].processes->size)
-		{
-			p = &(((t_process*)vm->champ[x].processes->data)[y]);
-			process_color(p, m, i, color);
-		}
-		x--;
+		p = &(((t_process*)vm->processes.data)[y]);
+		process_color(p, m, i, color);
 	}
 }
 

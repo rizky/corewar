@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/02 02:16:31 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/04 14:32:02 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,14 @@ FTASM:= ft_asm \
 NAME_VM:= corewar
 FTVMPATH:= ft_vm/
 FTVM:=	ft_vm \
+		vm_options \
 		vm_decompiler \
 		vm_decompiler_file \
-		vm_executor \
 		vm_checker \
-		vm_op_1 vm_op_2 vm_op_3 vm_op_4 vm_op_5\
-		vm_op_print_1 vm_op_print_2 vm_op_print_3 vm_op_print_4\
+		vm_executor \
 		vm_print \
 		vm_error \
-		vm_options \
+		vm_free \
 		vm_helper_1 vm_helper_2
 
 FTVMDRAWPATH:= ft_vm/vm_draw/
@@ -45,7 +44,13 @@ FTVMDRAW:= draw_animation_1 \
 		draw_init \
 		draw_key_utils \
 		draw_nyan \
-		draw \
+		draw
+
+FTVMOPPATH:= ft_vm/vm_op/
+FTVMOP:= op_and op_add op_aff op_fork \
+		op_ld op_ldi op_lfork op_live \
+		op_lld op_lldi op_or op_st \
+		op_sti op_sub op_xor op_zjmp
 
 # ----- Libft ------
 LFTDIR:=./libft
@@ -76,6 +81,7 @@ EOC:="\033[0;0m"
 FILES_ASM:=$(addprefix $(FTASMPATH),$(FTASM))
 FILES_VM:=$(addprefix $(FTVMPATH),$(FTVM))
 FILES_VM_DRAW:=$(addprefix $(FTVMDRAWPATH),$(FTVMDRAW))
+FILES_VM_OP:=$(addprefix $(FTVMOPPATH),$(FTVMOP))
 
 # ------ Auto ------
 SRC_ASM:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_ASM)))
@@ -86,6 +92,9 @@ OBJ_VM:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM)))
 
 SRC_VM+=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM_DRAW)))
 OBJ_VM+=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM_DRAW)))
+
+SRC_VM+=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM_OP)))
+OBJ_VM+=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM_OP)))
 
 # ==================
 CCHF:=.cache_exists
@@ -120,6 +129,7 @@ $(CCHF):
 	@mkdir $(CCHPATH)$(FTASMPATH)
 	@mkdir $(CCHPATH)$(FTVMPATH)
 	@mkdir $(CCHPATH)$(FTVMDRAWPATH)
+	@mkdir $(CCHPATH)$(FTVMOPPATH)
 	@touch $(CCHF)
 
 clean:
@@ -210,21 +220,19 @@ tests_asm_leak:
 	@$(foreach x, $(T_ASM_FILES_VALID), $(MAKE) X=$(T_ASM_DIR_VALID)$(x) test_asm_leak;)
 	@$(foreach x, $(T_ASM_FILES_ERROR), $(MAKE) X=$(T_ASM_DIR_ERROR)$(x) test_asm_leak;)
 
-tests_vm_error:
-	@echo $(CYAN) " - Test Error Cases" $(EOC)
-	./corewar -d 1 -n 0 tests/asm/valid/ex.cor -n 1 tests/asm/valid/Car.cor | head -4
-
 # ----- TEST UNIT VM ------
 T_VM_DIR_OP = tests/vm/op/
 T_VM_FILES_OP:=$(shell cd $(T_VM_DIR_OP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 T_VM_DIR_C = tests/vm/champ/
 T_VM_FILES_C:=$(shell cd $(T_VM_DIR_C); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+T_VM_DIR_OCP = tests/vm/ocp/
+T_VM_FILES_OCP:=$(shell cd $(T_VM_DIR_OCP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 DUMP = 150
 
 test_vm_op : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./corewar -v 4 2 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
-	@./resources/binaries/corewar -v 6 -a $(T_VM_DIR)$(X).cor > out2; true
+	@./corewar -v 16 8 4 2 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
@@ -234,9 +242,21 @@ tests_vm_op: corewar
 	@echo $(CYAN) " - Test Basic Operations" $(EOC)
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_OP) test_vm_op;)
 
-tests_vm_champs: corewar
-	@echo $(CYAN) " - Test Champs" $(EOC)
+tests_vm_dump_champs: corewar
+	@echo $(CYAN) " - Test Memory Dump on Champs $(DUMP)" $(EOC)
+	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_C) test_vm_dump;)
+
+NUMBERS = 1 20 50 80 150 200 600 800 1400 2400 5000 8000 10000 50000
+tests_vm_dump_champs_loop: corewar
+	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_C) tests_vm_dump_champs;)
+
+tests_vm_op_champs: corewar
+	@echo $(CYAN) " - Test Basic Operations on Champs" $(EOC)
 	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_C) test_vm_op;)
+
+tests_vm_ocp: corewar
+	@echo $(CYAN) " - Test Basic Operations on Champs" $(EOC)
+	@$(foreach x, $(T_VM_FILES_OCP), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_OCP) test_vm_op;)
 
 test_vm_dump : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
@@ -264,13 +284,13 @@ tests_vm_leak:
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$(T_VM_DIR_OP)$(x) test_vm_leak;)
 
 T_VM_DIR_B = tests/vm/battle/
-T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^$(T_FILE).*.s$$' | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 
 test_vm_battle : corewar
 	@./resources/binaries/asm $(T_VM_DIR_B)$(X).s > /dev/null; true
 	@./resources/binaries/asm $(T_VM_DIR_B)$(X)X.s > /dev/null; true
-	@./corewar -v 4 2 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
-	@./resources/binaries/corewar -v 6 -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
+	@./corewar -v 16 8 4 2 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR_B)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR_B)$(X)" $(EOC) ; \
@@ -279,11 +299,6 @@ test_vm_battle : corewar
 tests_vm_battle: corewar
 	@echo $(CYAN) " - Test Battle" $(EOC)
 	@$(foreach x, $(T_VM_FILES_B), $(MAKE) X=$x test_vm_battle;)
-
-tests_vm: corewar
-	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
-	@$(MAKE) tests_vm_op
-	@$(MAKE) tests_vm_dump
 
 T_VM_DIR_O = tests/vm/overflow/
 T_VM_FILES_O:=$(shell cd $(T_VM_DIR_O); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
@@ -303,23 +318,46 @@ tests_vm_dump_overflow: corewar
 	@echo $(CYAN) " - Test Overflow DUMP Case $(DUMP)" $(EOC)
 	@$(foreach x, $(T_VM_FILES_O), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_O) test_vm_dump_overflow;)
 
-NUMBERS = 1 5 50 80 400 888 1200
+NUMBERS = 1 20 50 80 150 200 600 800 1400 2400 5000 8000 10000 50000
 tests_vm_dump_overflow_loop: corewar
-	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_O) tests_vm_dump_overflow;)
+	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_O)  SILENT='> /dev/null' tests_vm_dump_overflow;)
 
 test_vm_op_overflow : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./corewar -v 4 2 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
-	@./resources/binaries/corewar -v 6 -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
+	@./corewar -v 16 8 4 2 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
 		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
 	fi
 
 tests_vm_op_overflow: corewar
-	@echo $(CYAN) " - Test Overflow Op Case $(DUMP)" $(EOC)
-	@$(foreach x, $(T_VM_FILES_O), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_O) test_vm_op_overflow;)
+	@echo $(CYAN) " - Test Overflow Op Case" $(EOC)
+	@$(foreach x, $(T_VM_FILES_O), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_O) SILENT='> /dev/null' test_vm_op_overflow;)
 
+T_VM_DIR_ERROR = tests/vm/error/
+T_VM_FILES_ERROR:=$(shell cd $(T_VM_DIR_ERROR); ls | egrep '^[^X]+$$' | rev | cut -f 2- -d '.' | rev | sort -f )
+
+test_vm_error : corewar
+	@./resources/binaries/asm $(T_VM_DIR_ERROR)$(X).s > /dev/null; true
+	@if [[ $$(./corewar $(T_VM_DIR_ERROR)$(X).cor $(SILENT) ) < 0 ]] ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_ERROR)$(X)" $(EOC); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_ERROR)$(X)" $(EOC) ; \
+	fi
+
+tests_vm_error: corewar
+	@echo $(CYAN) " - Test VM Error Cases" $(EOC)
+	@$(foreach x, $(T_VM_FILES_ERROR), $(MAKE) X=$x test_vm_error;)
+
+tests_vm: corewar
+	@echo $(CYAN) " - Test Virtual Machine" $(EOC)
+	@$(MAKE) tests_vm_error SILENT='2> /dev/null'
+	@$(MAKE) tests_vm_op
+	@$(MAKE) tests_vm_dump
+	@$(MAKE) tests_vm_battle
+	@$(MAKE) tests_vm_dump_overflow
+	@$(MAKE) tests_vm_op_overflow
+	
 tests: tests_asm tests_vm
 
 .PHONY: all clean fclean re debug norm norm2 tests tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
