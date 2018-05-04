@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 16:20:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:25:28 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void
 		}
 		i--;
 	}
-	(vm->dump && vm->cycles == g_cycles) ? vm_print_memory() : 0;
+	(vm->dump == 1 && vm->cycles == g_cycles) ? vm_print_memory() : 0;
+	(vm->dump == 2 && vm->cycles == g_cycles) ? vm_print_memory_color(*vm) : 0;
 	(vm->v_lvl[V_LVL_0]) ? vm_print_memory_cursor(*vm) : 0;
 }

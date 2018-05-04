@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/01 17:04:32 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 16:25:51 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,14 @@ int			vm_options(char **av, t_vm *vm)
 			if ((vm->cycles = ft_atoi(av[i + 1])) < 0)
 				return (-1);
 			vm->dump = 1;
+		}
+		if (!ft_strcmp(av[i], "-dumpc"))
+		{
+			if (!ft_isnumber(av[i + 1]))
+				return (-1);
+			if ((vm->cycles = ft_atoi(av[i + 1])) < 0)
+				return (-1);
+			vm->dump = 2;
 		}
 		else if (vm_option_v(i, av, vm) == -1)
 			return (-1);
