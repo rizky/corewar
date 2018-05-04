@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 19:53:02 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 21:49:50 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@
 # define INVALID_INSTR	7
 # define CODE_MAX		8
 
-# define V_LVL_0		0
-# define V_LVL_1		1
-# define V_LVL_2		2
-# define V_LVL_4		3
-# define V_LVL_8		4
-# define V_LVL_16		5
+# define VISU_1			0
+# define VISU_2			1
+
+# define V_LVL_2		0
+# define V_LVL_4		1
+# define V_LVL_8		2
+# define V_LVL_16		3
 
 typedef struct	s_param
 {
@@ -75,7 +76,8 @@ typedef struct	s_vm
 	int			valid_arg[2];
 	int			dump;
 	int			cycles;
-	int			v_lvl[6];
+	int			option_v[4];
+	int			option_g[2];
 	int			check_nbr;
 	char		*players[MAX_PLAYERS + 1];
 	t_champ		champ[4];

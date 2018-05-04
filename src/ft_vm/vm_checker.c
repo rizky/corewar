@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 18:45:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 21:50:35 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	vm_checker_processalive(t_vm *vm)
 		p = &(((t_process*)vm->processes.data)[j]);
 		if (p->live_nbr == 0)
 		{
-			(vm->v_lvl[V_LVL_8]) ?
+			(vm->option_v[V_LVL_8]) ?
 				ft_printfln("Process %d hasn't lived for %d cycles (CTD %d)",
 				p->index, g_cycles - p->live_cycle, g_cycles_to_die) : 0;
 			fta_popindex(&(vm->processes), j, 1);
@@ -76,7 +76,7 @@ static void	vm_process_kill(t_vm *vm)
 	while (vm->processes.size > 0)
 	{
 		p = &(((t_process*)vm->processes.data)[vm->processes.size - 1]);
-		(vm->v_lvl[V_LVL_8]) ?
+		(vm->option_v[V_LVL_8]) ?
 			ft_printfln("Process %d hasn't lived for %d cycles (CTD %d)",
 			p->index, g_cycles - p->live_cycle, g_cycles_to_die) : 0;
 		fta_popindex(&(vm->processes), vm->processes.size - 1, 1);
@@ -103,7 +103,7 @@ int			vm_checker(t_vm *vm)
 		{
 			g_max_check = g_max_check == MAX_CHECKS ? 0 : g_max_check;
 			g_cycles_to_die -= CYCLE_DELTA;
-			(vm->v_lvl[V_LVL_2]) ?
+			(vm->option_v[V_LVL_2]) ?
 			ft_printfln("Cycle to die is now %d", g_cycles_to_die) : 0;
 		}
 		vm_reset_livenbr(vm);

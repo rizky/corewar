@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:28:14 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/04 13:57:14 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 21:51:40 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	vm_free(t_vm *vm)
 {
 	int i;
 
-	(vm->v_lvl[V_LVL_1]) ? draw_end(&g_draw_win) : 0;
+	(vm->option_g[VISU_2]) ? draw_end(&g_draw_win) : 0;
 	i = 0;
 	while (i < vm->champ_size)
 	{

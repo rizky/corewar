@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:58:02 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/04 19:57:24 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 21:58:00 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int		vm_valid_arg(char *arg, t_vm *vm)
 		vm->valid_arg[0] = 0;
 		return (1);
 	}
-	else if (!ft_strcmp(&arg[ft_strlen(arg) - 4], ".cor"))
+	else if (!ft_strcmp(&arg[ft_strlen(arg) - 4], ".cor") ||
+		!ft_strcmp(arg, "-g") || !ft_strcmp(arg, "-G"))
 	{
 		vm->valid_arg[0] = 0;
 		vm->valid_arg[1] = 0;
@@ -41,13 +42,13 @@ int		vm_valid_arg(char *arg, t_vm *vm)
 
 int		vm_valid_verbosity_lvl(int v)
 {
-	return (v == 0 || v == 1 || v == 2 || v == 4 || v == 8 || v == 16);
+	return (v == 2 || v == 4 || v == 8 || v == 16);
 }
 
 int		vm_lvl_to_index(int lvl)
 {
-	if (lvl == 0 || lvl == 1 || lvl == 2)
-		return (lvl);
+	if (lvl == 2)
+		return (V_LVL_2);
 	else if (lvl == 4)
 		return (V_LVL_4);
 	else if (lvl == 8)

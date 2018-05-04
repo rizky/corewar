@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 18:03:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 21:51:30 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static void
 	p->pc_next = p->pc + p->op.size;
 	prev_p = ft_memalloc(sizeof(t_process));
 	ft_memcpy(prev_p, p, sizeof(t_process));
-	(vm->v_lvl[V_LVL_4]) ? vm_print_v_4(*p) : 0;
+	(vm->option_v[V_LVL_4]) ? vm_print_v_4(*p) : 0;
 	(((void (*)())g_op_dict[p->op.opcode].opfunc)(vm, p));
-	(vm->v_lvl[V_LVL_16]) ? vm_print_v_16(*prev_p) : 0;
+	(vm->option_v[V_LVL_16]) ? vm_print_v_16(*prev_p) : 0;
 	free(prev_p);
 	ft_bzero(&(p->op), sizeof(t_op));
 }
@@ -70,7 +70,7 @@ void
 	g_cycles++;
 	g_cycles_to++;
 	vm_decompiler(vm);
-	(vm->v_lvl[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
+	(vm->option_v[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
 	i = (int)(vm->processes.size) - 1;
 	while (i >= 0)
 	{
@@ -84,5 +84,5 @@ void
 	}
 	(vm->dump == 1 && vm->cycles == g_cycles) ? vm_print_memory() : 0;
 	(vm->dump == 2 && vm->cycles == g_cycles) ? vm_print_memory_color(*vm) : 0;
-	(vm->v_lvl[V_LVL_0]) ? vm_print_memory_cursor(*vm) : 0;
+	(vm->option_g[VISU_1]) ? vm_print_memory_cursor(*vm) : 0;
 }

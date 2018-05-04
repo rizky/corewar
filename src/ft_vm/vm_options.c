@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/04 16:38:49 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 21:52:46 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ static int	vm_option_v_2(int i, char **av, t_vm *vm)
 		lvl = ft_atoi(&av[i][2]);
 		if (!vm_valid_verbosity_lvl(lvl))
 			return (-1);
-		vm->v_lvl[vm_lvl_to_index(lvl)] =
-		(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->v_lvl[lvl];
+		vm->option_v[vm_lvl_to_index(lvl)] =
+		(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->option_v[lvl];
 		while (av[++i] && ft_isnumber(av[i]))
 		{
 			lvl = ft_atoi(av[i]);
 			if (!vm_valid_verbosity_lvl(lvl))
 				return (-1);
-			vm->v_lvl[vm_lvl_to_index(lvl)] =
-			(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->v_lvl[lvl];
+			vm->option_v[vm_lvl_to_index(lvl)] =
+			(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->option_v[lvl];
 		}
 	}
 	return (0);
@@ -50,8 +50,8 @@ static int	vm_option_v(int i, char **av, t_vm *vm)
 			lvl = ft_atoi(av[i]);
 			if (!vm_valid_verbosity_lvl(lvl))
 				return (-1);
-			vm->v_lvl[vm_lvl_to_index(lvl)] =
-			(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->v_lvl[lvl];
+			vm->option_v[vm_lvl_to_index(lvl)] =
+			(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->option_v[lvl];
 		}
 	}
 	else if (vm_option_v_2(i, av, vm) == -1)
@@ -121,6 +121,13 @@ int			vm_options(char **av, t_vm *vm)
 			return (-1);
 		else if (vm_option_n(i, av, vm) == -1)
 			return (-1);
+		else if (!ft_strcmp(av[i], "-g"))
+			vm->option_g[VISU_1] = 1;
+		else if (!ft_strcmp(av[i], "-G"))
+		{
+			vm->option_g[VISU_2] = 1;
+			vm->option_g[VISU_1] = 0;
+		}
 	}
 	return (0);
 }

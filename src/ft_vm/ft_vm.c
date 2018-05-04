@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 19:55:12 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 21:49:58 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int			main(int ac, char **av)
 	{
 		vm_executor(&vm);
 		if ((vm.dump && vm.cycles == g_cycles) ||
-			(vm.v_lvl[V_LVL_1] && vm_start_ncurse(&start, vm) == -1))
+			(vm.option_g[VISU_2] && vm_start_ncurse(&start, vm) == -1))
 			break ;
 	}
 	(!vm.dump || g_cycles < vm.cycles) ?
