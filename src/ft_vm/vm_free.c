@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 11:28:14 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/03 11:35:40 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 13:57:14 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,5 @@ int		vm_free_err(t_vm *vm, int max, int errnum, char *file)
 		fta_clear(&(vm->processes));
 		i++;
 	}
-	if (errnum == MALLOC)
-		return (vm_error(errnum, -1, NULL));
-	return (vm_error(errnum, -1, file));
+	return (vm_error(errnum, -1, (errnum == MALLOC) ? NULL : file));
 }
