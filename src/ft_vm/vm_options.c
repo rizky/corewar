@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/04 21:52:46 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 00:27:23 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,23 +111,18 @@ int			vm_options(char **av, t_vm *vm)
 			return (-1);
 		if (!ft_strcmp(av[i], "-dump") || !ft_strcmp(av[i], "-dumpc"))
 		{
-			if (!ft_isnumber(av[i + 1]))
-				return (-1);
-			if ((vm->cycles = ft_atoi(av[i + 1])) < 0)
+			if (!ft_isnumber(av[i + 1]) ||
+				((vm->cycles = ft_atoi(av[i + 1])) < 0))
 				return (-1);
 			vm->dump = (!ft_strcmp(av[i], "-dump")) ? 1 : 2;
 		}
-		else if (vm_option_v(i, av, vm) == -1)
-			return (-1);
-		else if (vm_option_n(i, av, vm) == -1)
+		else if ((vm_option_v(i, av, vm) == -1) ||
+			(vm_option_n(i, av, vm) == -1))
 			return (-1);
 		else if (!ft_strcmp(av[i], "-g"))
 			vm->option_g[VISU_1] = 1;
 		else if (!ft_strcmp(av[i], "-G"))
-		{
 			vm->option_g[VISU_2] = 1;
-			vm->option_g[VISU_1] = 0;
-		}
 	}
 	return (0);
 }
