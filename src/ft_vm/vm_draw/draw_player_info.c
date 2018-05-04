@@ -6,13 +6,13 @@
 /*   By: jyeo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 01:02:28 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/02 21:03:42 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 20:17:18 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm_draw.h"
 
-static void		color_picker(int *i, int *color)
+static void	color_picker(int *i, int *color)
 {
 	if (*i + 1 == 1)
 		*color = 13;
@@ -26,7 +26,7 @@ static void		color_picker(int *i, int *color)
 		*color = 7;
 }
 
-void			draw_player_info(t_vm *vm, t_win w)
+void		draw_player_info(t_vm *vm, t_win w)
 {
 	int			i;
 	int			row;

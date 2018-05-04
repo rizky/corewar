@@ -6,13 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:04:15 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/02 16:34:28 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 20:16:41 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm_draw.h"
 
-static void		process_color(t_process *p, unsigned char *m, int *i, int *col)
+static void	process_color(t_process *p, unsigned char *m, int *i, int *col)
 {
 	if (p->pc + p->offset == *i)
 	{
@@ -29,7 +29,7 @@ static void		process_color(t_process *p, unsigned char *m, int *i, int *col)
 	}
 }
 
-static void		color_picker(t_vm *vm, unsigned char *m, int *i, int *color)
+static void	color_picker(t_vm *vm, unsigned char *m, int *i, int *color)
 {
 	int			y;
 	t_process	*p;
@@ -52,7 +52,7 @@ static void		color_picker(t_vm *vm, unsigned char *m, int *i, int *color)
 	}
 }
 
-static void		draw_map(t_vm *v, t_win w)
+static void	draw_map(t_vm *v, t_win w)
 {
 	int			i;
 	int			col;
@@ -79,7 +79,7 @@ static void		draw_map(t_vm *v, t_win w)
 	wattroff(w.game, COLOR_PAIR(7));
 }
 
-void			draw_game(t_vm *v, t_win w)
+void		draw_game(t_vm *v, t_win w)
 {
 	wattron(w.game, COLOR_PAIR(1));
 	box(w.game, 'x', 'x');
