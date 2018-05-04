@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 01:44:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 02:05:38 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ static void
 	vm_executor_op(t_vm *vm, t_process *p)
 {
 	vm_decompiler_param(p, &(p->op));
-	if (vm_checker_oc(p->op) == -1)
-	{
-		ft_bzero(&(p->op), sizeof(t_op));
-		p->pc += 1;
-		if (p->pc + p->offset >= MEM_SIZE)
-			p->pc = p->offset * -1;
-	}
 	p->pc_next = p->pc + p->op.size;
 	(vm->v_lvl[V_LVL_4]) ? vm_print_v_4(*p) : 0;
 	(vm->v_lvl[V_LVL_16]) ? vm_print_v_16(*p) : 0;
