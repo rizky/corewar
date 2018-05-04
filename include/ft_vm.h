@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 22:49:36 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/05 00:17:08 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,13 @@ void			*vm_memmark(void *dst, int i, size_t n);
 void			vm_st_mem(int index, char *value, int champ, int size);
 int				vm_ld_mem(int index, int size);
 
-void			vm_decompiler(t_vm *vm);
 void			vm_decompiler_param(t_process *p, t_op *op);
 
 int				vm_checker(t_vm *vm);
 int				vm_checker_livenbr(t_vm vm);
 
 void			vm_executor(t_vm *vm);
-int				vm_decompiler_op(t_vm *vm, t_process *p, t_op *op);
+int				vm_decompiler_op(t_vm *vm, t_process *p);
 
 void			vm_print_memory(void);
 void			vm_print_memory_color(t_vm vm);

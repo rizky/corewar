@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 22:59:13 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/05 00:17:01 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,9 @@ void		vm_decompiler_param(t_process *p, t_op *op)
 
 	i = 0;
 	cursor = p->offset + p->pc + 1;
-	if (cursor >= MEM_SIZE)
-		cursor = cursor - MEM_SIZE;
+	(cursor >= MEM_SIZE) ? cursor = cursor - MEM_SIZE : 0;
 	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
-	op->oc = (g_op_dict[op->opcode].is_oc) ?
-		g_memory[cursor] :
+	op->oc = (g_op_dict[op->opcode].is_oc) ? g_memory[cursor] :
 		g_op_dict[op->opcode].p_type[0];
 	op->param_c = g_op_dict[op->opcode].param_c;
 	while (i < op->param_c)
@@ -61,46 +59,23 @@ void		vm_decompiler_param(t_process *p, t_op *op)
 		(op->params[i].type == DIR_CODE) ? op->params[i].size =
 			g_op_dict[op->opcode].d_size : 0;
 		cursor = p->offset + p->pc + op->size;
-		if (cursor >= MEM_SIZE)
-			cursor = cursor - MEM_SIZE;
-		op->params[i].value =
-		vm_ld_mem(cursor,
-			op->params[i].size);
+		(cursor >= MEM_SIZE) ? cursor = cursor - MEM_SIZE : 0;
+		op->params[i].value = vm_ld_mem(cursor, op->params[i].size);
 		op->size += op->params[i].size;
 		i++;
 	}
 }
 
-int			vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
+int			vm_decompiler_op(t_vm *vm, t_process *p)
 {
 	const int cursor = g_memory[p->offset + p->pc];
 
 	(void)vm;
+	ft_bzero(&(p->op), sizeof(t_op));
+	p->cycles = g_cycles;
 	if (cursor < 0x01 || cursor > 0x10)
 		return (-1);
-	op->opcode = cursor;
-	p->cycles = g_cycles - 1 + g_op_dict[op->opcode].cycles;
+	p->op.opcode = cursor;
+	p->cycles = g_cycles - 1 + g_op_dict[p->op.opcode].cycles;
 	return (0);
-}
-
-void		vm_decompiler(t_vm *vm)
-{
-	int			i;
-	t_op		op;
-	t_process	*p;
-
-	i = -1;
-	while (++i < (int)(vm->processes.size))
-	{
-		ft_bzero(&op, sizeof(t_op));
-		p = &(((t_process*)vm->processes.data)[i]);
-		if (p->op.opcode == 0)
-		{
-			p->cycles = g_cycles;
-			vm_decompiler_op(vm,
-				&(((t_process*)vm->processes.data)[i]),
-				&op);
-			p->op = op;
-		}
-	}
 }
