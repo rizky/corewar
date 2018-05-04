@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 22:12:21 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 00:05:26 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int
 	ft_dprintf(2, "       -dump  nbr_cycles  : ");
 	ft_dprintf(2, "Dump the memory after nbr_cycles\n");
 	ft_dprintf(2, "       -dumpc nbr_cycles  : ");
-	ft_dprintf(2, "%*wC%w%*wo%w%*wl%w%*wo%w%*wr%wized -dump\n", 1, 2, 3, 4, 5);
+	ft_dprintf(2, "%*wC%w%*wo%w%*wl%w%*wo%w%*wr%wized -dump\n", 1, 2, 3, 6, 5);
 	ft_dprintf(2, "       -v N : ");
 	ft_dprintf(2, "Verbosity levels, can be added together to enable several");
 	ft_dprintf(2, "\n                - 2  : Show cycles\n");

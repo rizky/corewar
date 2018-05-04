@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:00:18 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/01 22:05:59 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 00:07:40 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			vm_error(int errnum, int status, char *name)
 	if (name)
 		ft_dprintf(2, "%*w%s%w\n", RED, name);
 	if (errnum == MALLOC)
-		ft_dprintf(2, "Error - Malloc 💥\n");
+		write(2, "Error - Malloc 💥\n", 20);
 	else if (errnum == CHAMP_MIN)
 		ft_dprintf(2, "Error - Minimum number of players is 1\n");
 	else if (errnum == CHAMP_MAX)
