@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:28:42 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 16:13:44 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	vm_load_champs(t_vm *vm)
 			vm->champ[i].header.prog_size, (vm->champ[i].header.prog_size > 1) ?
 			"bytes" : "byte", vm->champ[i].header.prog_name,
 			vm->champ[i].header.comment);
-		vm_st_mem(i * MEM_SIZE / vm->champ_size, vm->champ[i].op, i + 1,
+		vm_st_mem(i * MEM_SIZE / vm->champ_size, vm->champ[i].op, i,
 			vm->champ[i].header.prog_size);
 		p.offset = i * MEM_SIZE / vm->champ_size;
 		p.champ = i;
