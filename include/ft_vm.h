@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 01:44:25 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 02:42:33 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,13 +191,13 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "ld", .opcode = 0x02, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_DIR | T_IND, T_REG, 0},
 		&vm_op_ld, &vm_ld_print, .is_car = 1, .cycles = 5},
-	{ .name = "st", .opcode = 0x03, .d_size = 0, .param_c = 2, .is_oc = 1,
+	{ .name = "st", .opcode = 0x03, .d_size = 4, .param_c = 2, .is_oc = 1,
 		{T_REG, T_REG | T_IND, 0},
 		&vm_op_st, &vm_st_print, .is_car = 0, .cycles = 5},
-	{ .name = "add", .opcode = 0x04, .d_size = 0, .param_c = 3, .is_oc = 1,
+	{ .name = "add", .opcode = 0x04, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG},
 		&vm_op_add, &vm_add_print, .is_car = 1, .cycles = 10},
-	{ .name = "sub", .opcode = 0x05, .d_size = 0, .param_c = 3, .is_oc = 1,
+	{ .name = "sub", .opcode = 0x05, .d_size = 4, .param_c = 3, .is_oc = 1,
 		{T_REG, T_REG, T_REG},
 		&vm_op_sub, &vm_sub_print, .is_car = 1, .cycles = 10},
 	{ .name = "and", .opcode = 0x06, .d_size = 4, .param_c = 3, .is_oc = 1,

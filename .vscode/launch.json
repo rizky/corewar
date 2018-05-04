@@ -28,7 +28,7 @@
 					"8",
 					"4",
 					"2",
-					"tests/vm/champ/bee_gees.cor"
+					"tests/vm/ocp/sub_18.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
