@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 01:44:13 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 20:59:19 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		vm_decompiler_param(t_process *p, t_op *op)
 	}
 }
 
-static int	vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
+int			vm_decompiler_op(t_vm *vm, t_process *p, t_op *op)
 {
 	const int cursor = g_memory[p->offset + p->pc];
 
