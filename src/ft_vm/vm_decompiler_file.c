@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:58:25 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 13:55:13 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ static int	vm_read_binaries_2(char *file, t_champ *champ, unsigned char *buf)
 		error = INVALID_INSTR;
 	else if ((champ->op = ft_memalloc(champ->header.prog_size + 1)) == NULL)
 		error = MALLOC;
-	close(fd);
+	if (fd != -1)
+		close(fd);
 	return (error);
 }
 
