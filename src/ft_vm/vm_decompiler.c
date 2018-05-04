@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 20:59:19 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 21:26:15 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ int			vm_checker_oc(t_op op)
 void		vm_decompiler_param(t_process *p, t_op *op)
 {
 	int		i;
+	int		cursor;
 
 	i = 0;
+	cursor = p->offset + p->pc + 1;
+	if (cursor > MEM_SIZE)
+		cursor = cursor - MEM_SIZE;
 	op->size += g_op_dict[op->opcode].is_oc ? 2 : 1;
 	op->oc = (g_op_dict[op->opcode].is_oc) ?
-		g_memory[p->offset + p->pc + 1] :
+		g_memory[cursor] :
 		g_op_dict[op->opcode].p_type[0];
 	op->param_c = g_op_dict[op->opcode].param_c;
 	while (i < op->param_c)
@@ -56,8 +60,11 @@ void		vm_decompiler_param(t_process *p, t_op *op)
 		(op->params[i].type == IND_CODE) ? op->params[i].size = 2 : 0;
 		(op->params[i].type == DIR_CODE) ? op->params[i].size =
 			g_op_dict[op->opcode].d_size : 0;
+		cursor = p->offset + p->pc + op->size;
+		if (cursor > MEM_SIZE)
+			cursor = cursor - MEM_SIZE;
 		op->params[i].value =
-		vm_ld_mem(p->offset + p->pc + op->size,
+		vm_ld_mem(cursor,
 			op->params[i].size);
 		op->size += op->params[i].size;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 18:45:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 21:58:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int			vm_checker(t_vm *vm)
 		g_cycles_to = 0;
 		if (g_live_nbr >= NBR_LIVE || ++g_max_check == MAX_CHECKS)
 		{
-			g_max_check = g_max_check == MAX_CHECKS ? 0 : g_max_check;
+			g_max_check = 0;
 			g_cycles_to_die -= CYCLE_DELTA;
 			(vm->v_lvl[V_LVL_2]) ?
 			ft_printfln("Cycle to die is now %d", g_cycles_to_die) : 0;
