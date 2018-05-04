@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 22:25:40 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/04 20:26:20 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 21:52:59 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			vm_start_ncurse(time_t *start, t_vm vm)
 {
 	int		key;
 
-	(vm.v_lvl[V_LVL_1] && g_cycles == 1) ? init_ncurses(&vm, start) : 0;
+	(vm.option_g[VISU_2] && g_cycles == 1) ? init_ncurses(&vm, start) : 0;
 	signal(SIGINT, sighandle);
 	if (g_signal == 0)
 		return (-1);

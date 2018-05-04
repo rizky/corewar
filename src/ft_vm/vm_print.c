@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 16:19:04 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 22:12:21 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,21 @@
 int
 	vm_print_usage(char **av, int status)
 {
-	ft_dprintf(2, "usage: %s [-dump nbr_cycles] ", av[0]);
-	ft_dprintf(2, "[-v N...] [-n number] champion1.cor ...\n");
-	ft_dprintf(2, "    -v N      : Verbosity levels");
-	ft_dprintf(2, ", can be added together to enable several\n");
-	ft_dprintf(2, "                - 0 : Show only essentials\n");
-	ft_dprintf(2, "                - 1 : Show visualization\n");
-	ft_dprintf(2, "                - 2 : Show cycles\n");
-	ft_dprintf(2, "                - 4 : Show operations ");
-	ft_dprintf(2, "(Params are NOT literal ...)\n");
-	ft_dprintf(2, "                - 8 : Show deaths\n");
+	ft_dprintf(2, "usage: %s [options] [-n number] champion1.cor ...\n", av[0]);
+	ft_dprintf(2, "\n\033[1;37mOPTIONS\033[0m\n", 9);
+	ft_dprintf(2, "       -dump  nbr_cycles  : ");
+	ft_dprintf(2, "Dump the memory after nbr_cycles\n");
+	ft_dprintf(2, "       -dumpc nbr_cycles  : ");
+	ft_dprintf(2, "%*wC%w%*wo%w%*wl%w%*wo%w%*wr%wized -dump\n", 1, 2, 3, 4, 5);
+	ft_dprintf(2, "       -v N : ");
+	ft_dprintf(2, "Verbosity levels, can be added together to enable several");
+	ft_dprintf(2, "\n                - 2  : Show cycles\n");
+	ft_dprintf(2, "                - 4  : Show operations\n");
+	ft_dprintf(2, "                - 8  : Show deaths\n");
 	ft_dprintf(2, "                - 16 : Show PC movements ");
 	ft_dprintf(2, "(Except for jumps)\n");
+	ft_dprintf(2, "       -g : Printf  visualization\n");
+	ft_dprintf(2, "       -G : Ncurses visualization\n");
 	return (status);
 }
 
