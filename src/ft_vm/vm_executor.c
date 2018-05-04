@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 02:05:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 14:40:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,24 @@ static void
 	vm_print_v_16(t_process p)
 {
 	int i;
+	int	size;
 
-	if (p.op.opcode != 0)
+	if (p.op.opcode != 0 && (p.op.opcode != 9 || !p.carry))
 	{
 		ft_printf("ADV %d (0x%04x -> 0x%04x) ",
-					p.pc_next - p.pc, p.pc, p.pc_next);
-		i = p.pc;
-		while (i < p.pc_next)
-			ft_printf("%02x ", g_memory[i++]);
+					p.pc_next - p.pc, 
+					p.offset + p.pc, 
+					p.offset + p.pc_next);
+		i = p.offset + p.pc;
+		size = 0;
+		while (size < p.pc_next - p.pc)
+		{
+			if (i == MEM_SIZE)
+				i = 0;
+			ft_printf("%02x ", g_memory[i]);
+			i++;
+			size++;
+		}
 		ft_printf("\n");
 	}
 }
