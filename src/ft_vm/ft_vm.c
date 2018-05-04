@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 16:13:44 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 19:55:12 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ static int	vm_get_champions(char **av, t_vm *vm)
 
 int			main(int ac, char **av)
 {
-	t_vm				vm;
-	time_t				start;
-	static t_array		processes = NEW_ARRAY(t_process);
+	t_vm			vm;
+	time_t			start;
+	static t_array	processes = NEW_ARRAY(t_process);
 
 	ft_bzero(&vm, sizeof(t_vm));
 	vm.processes = processes;
