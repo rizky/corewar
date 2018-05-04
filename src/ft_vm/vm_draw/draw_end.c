@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:08:34 by jyeo              #+#    #+#             */
-/*   Updated: 2018/04/26 14:22:17 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 20:17:30 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	draw_end(t_win *win)
 	wrefresh((*win).info);
 	getch();
 	system("if [ $(pgrep afplay) ]; \
-				then kill $(pgrep afplay); fi");
+		then kill $(pgrep afplay); fi");
 	delwin((*win).game);
 	delwin((*win).info);
 	delwin((*win).nyan);

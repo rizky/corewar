@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vm_helper_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/04 14:21:48 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 19:58:05 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void
-	vm_init_g_var(void)
+void	vm_init_g_var(void)
 {
 	g_cycles = 0;
 	g_cycles_to = 0;
@@ -23,8 +22,7 @@ void
 	ft_bzero(&g_memory_mark, MEM_SIZE);
 }
 
-char
-	*vm_to_big_endian(int value, int size)
+char	*vm_to_big_endian(int value, int size)
 {
 	t_array	result;
 	int		i;
@@ -41,8 +39,7 @@ char
 	return (result.data);
 }
 
-void
-	*vm_memmark(void *dst, int i, size_t n)
+void	*vm_memmark(void *dst, int i, size_t n)
 {
 	unsigned char *dst_p;
 
@@ -52,8 +49,7 @@ void
 	return (dst);
 }
 
-void
-	vm_st_mem(int index, char *value, int champ, int size)
+void	vm_st_mem(int index, char *value, int champ, int size)
 {
 	int	i;
 
@@ -69,8 +65,7 @@ void
 	}
 }
 
-int
-	vm_ld_mem(int index, int size)
+int		vm_ld_mem(int index, int size)
 {
 	int		i;
 	int		result;

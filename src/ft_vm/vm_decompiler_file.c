@@ -6,13 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 13:55:13 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/04 19:52:49 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int			vm_binary_toint(unsigned char *bin, int size)
+static int	vm_binary_to_int(unsigned char *bin, int size)
 {
 	int		i;
 	int		result;
@@ -34,8 +34,8 @@ static int	vm_read_magic(int fd, t_champ *champ)
 
 	if ((ret = read(fd, &buf, 4)) <= 0)
 		return (INVALID_MAGIC);
-	champ->header.magic = vm_binary_toint(buf, 4);
-	if (vm_binary_toint(buf, 4) != COREWAR_EXEC_MAGIC)
+	champ->header.magic = vm_binary_to_int(buf, 4);
+	if (vm_binary_to_int(buf, 4) != COREWAR_EXEC_MAGIC)
 		return (INVALID_MAGIC);
 	return (0);
 }
@@ -52,7 +52,7 @@ static int	vm_read_header(int fd, t_champ *champ)
 	ft_strncpy(champ->header.prog_name, (char*)buf, PROG_NAME_LENGTH + 4 + 1);
 	if ((ret = read(fd, &buf, 4) <= 0))
 		return (INVALID_HEADER);
-	champ->header.prog_size = vm_binary_toint(buf, 4);
+	champ->header.prog_size = vm_binary_to_int(buf, 4);
 	if (champ->header.prog_size > CHAMP_MAX_SIZE)
 		return (CODE_MAX);
 	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) <= 0)
