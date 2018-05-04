@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 21:12:16 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/04 22:47:19 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,8 +230,8 @@ static	t_op_dict g_op_dict[17] = {
 	{ .name = "lfork", .opcode = 0x0f, .d_size = 2, .param_c = 1, .is_oc = 0,
 		{T_DIR, 0, 0},
 		vm_op_lfork, &vm_lfork_print, .is_car = 0, .cycles = 1000},
-	{ .name = "aff", .opcode = 0x10, .d_size = 0, .param_c = 1, .is_oc = 1,
-		{T_REG, 0, 0}, &vm_op_inc, &vm_aff_print, .is_car = 0, .cycles = 2}
+	{ .name = "aff", .opcode = 0x10, .d_size = 4, .param_c = 1, .is_oc = 1,
+		{T_REG, 0, 0}, &vm_op_aff, &vm_aff_print, .is_car = 0, .cycles = 2}
 };
 
 #endif
