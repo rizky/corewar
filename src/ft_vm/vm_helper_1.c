@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_helper_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:58:02 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/05 09:01:44 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 00:27:07 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		vm_valid_arg(char *arg, t_vm *vm)
 		return (1);
 	}
 	else if (!ft_strcmp(&arg[ft_strlen(arg) - 4], ".cor") ||
-		!ft_strcmp(arg, "-g") || !ft_strcmp(arg, "-G"))
+		!ft_strcmp(arg, "-g") || !ft_strcmp(arg, "-G") ||
+		!ft_strcmp(arg, "-u"))
 	{
 		vm->opt_num = 0;
 		return (1);

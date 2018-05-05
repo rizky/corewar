@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vm_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/05 20:17:08 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 00:25:21 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-static int	vm_option_n_2(int i, char **av, t_vm *vm)
+static int	vm_opt_n_2(int i, char **av, t_vm *vm)
 {
 	int num;
 
@@ -31,7 +31,7 @@ static int	vm_option_n_2(int i, char **av, t_vm *vm)
 	return (0);
 }
 
-static int	vm_option_n(int i, char **av, t_vm *vm)
+static int	vm_opt_n(int i, char **av, t_vm *vm)
 {
 	int num;
 
@@ -48,12 +48,12 @@ static int	vm_option_n(int i, char **av, t_vm *vm)
 			return (-1);
 		vm->players[num - 1] = av[i + 2];
 	}
-	else if (vm_option_n_2(i, av, vm) == -1)
+	else if (vm_opt_n_2(i, av, vm) == -1)
 		return (-1);
 	return (0);
 }
 
-static int	vm_option_v_2(int i, char **av, t_vm *vm)
+static int	vm_opt_v_2(int i, char **av, t_vm *vm)
 {
 	int lvl;
 
@@ -69,7 +69,7 @@ static int	vm_option_v_2(int i, char **av, t_vm *vm)
 	return (0);
 }
 
-static int	vm_option_v(int i, char **av, t_vm *vm)
+static int	vm_opt_v(int i, char **av, t_vm *vm)
 {
 	int lvl;
 
@@ -82,7 +82,7 @@ static int	vm_option_v(int i, char **av, t_vm *vm)
 			return (-1);
 		vm_set_v_lvl(lvl, vm);
 	}
-	else if (vm_option_v_2(i, av, vm) == -1)
+	else if (vm_opt_v_2(i, av, vm) == -1)
 		return (-1);
 	return (0);
 }
@@ -103,13 +103,14 @@ int			vm_options(char **av, t_vm *vm)
 				return (-1);
 			vm->dump = (!ft_strcmp(av[i], "-dump")) ? 1 : 2;
 		}
-		else if ((vm_option_v(i, av, vm) == -1) ||
-			(vm_option_n(i, av, vm) == -1))
+		else if ((vm_opt_v(i, av, vm) == -1) || (vm_opt_n(i, av, vm) == -1))
 			return (-1);
 		else if (!ft_strcmp(av[i], "-g") && !vm->option_g[VISU_2])
 			vm->option_g[VISU_1] = 1;
 		else if (!ft_strcmp(av[i], "-G") && !vm->option_g[VISU_1])
 			vm->option_g[VISU_2] = 1;
+		else if (!ft_strcmp(av[i], "-u"))
+			vm->dump = 3;
 	}
 	vm->option_g[VISU_2] ? ft_bzero(vm->option_v, sizeof(vm->option_v)) : 0;
 	return (0);

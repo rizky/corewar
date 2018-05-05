@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 00:19:10 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 00:25:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int			main(int ac, char **av)
 	(!vm.dump || g_cycles < vm.cycles) ?
 	ft_printfln("Contestant %d, \"%s\", has won !",
 		vm.winner + 1, vm.champ[vm.winner].header.prog_name) : 0;
-	vm_uncompiler(vm);
 	vm_free(&vm);
 	return (0);
 }
