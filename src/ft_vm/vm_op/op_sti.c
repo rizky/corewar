@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:56:40 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/05 17:40:43 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/05 18:27:42 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void		vm_op_sti(t_vm *vm, t_process *p)
 	param2 = (p->op.params[2].type == REG_CODE) ?
 		p->reg[p->op.params[2].value] : p->op.params[2].value;
 	cursor = ft_cursor(p, param1, param2, 1) % MEM_SIZE;
-	if (cursor < 0)
-		cursor += MEM_SIZE;
+	(cursor < 0) ? cursor += MEM_SIZE : 0;
 	temp = vm_to_big_endian(p->reg[p->op.params[0].value], 4);
 	vm_st_mem(cursor, temp, p->champ, 4);
 	free(temp);
