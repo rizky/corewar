@@ -14,15 +14,18 @@
 
 static void	update_info(t_vm *vm, t_win win)
 {
-	int		live_nbr;
 	int		process_nbr;
 
-	live_nbr = vm_checker_livenbr(*vm);
 	process_nbr = vm->processes.size;
+	if (process_nbr > g_draw_status.process)
+		system("afplay -v 1 resources/sound/fork.wav&");
+	if (process_nbr < g_draw_status.process)
+		system("afplay -v 3 resources/sound/kill.mp3&");
 	mvwprintw(win.info, 9, 3, "* Processes : %d", process_nbr);
 	wattron(win.info, COLOR_PAIR(5));
 	mvwprintw(win.info, 19, 3, "* NBR_LIVE : %d/%d	* MAX_CHECKS : %d/%d",
-		live_nbr, NBR_LIVE, g_max_check, MAX_CHECKS);
+		g_live_nbr, NBR_LIVE, g_max_check, MAX_CHECKS);
+	g_draw_status.process = process_nbr;
 }
 
 static void	draw_main_info(t_vm *vm, t_win win, t_status *s)

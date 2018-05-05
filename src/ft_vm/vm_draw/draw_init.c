@@ -58,5 +58,6 @@ void		init_ncurses(t_vm *vm, time_t *start)
 	g_draw_win.nyan = newwin(9, 254, 4 + (MEM_SIZE / 64), 0);
 	g_draw_status.speed = 50;
 	g_draw_status.pause = 1;
+	g_draw_status.process = vm->processes.size;
 	g_signal = 1;
 }

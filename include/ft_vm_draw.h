@@ -22,7 +22,6 @@
 # include "ft_vm.h"
 
 # define DELAY 1000000
-# define THREADS 16
 # define COLOR_GREY 20
 # define COLOR_BRIGHT_W 21
 # define COLOR_BROWN_1 22
@@ -35,6 +34,7 @@ typedef	struct	s_status
 	int			delay;
 	int			speed;
 	int			nyan_col;
+	int			process;
 }				t_status;
 
 typedef	struct	s_win

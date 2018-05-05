@@ -62,9 +62,9 @@ int			vm_start_ncurses(time_t *start, t_vm vm)
 		else if (key == 1)
 			return (0);
 	}
-	if (time(NULL) - *start >= 121 && system("test -r sound/nyan.mp3"))
+	if (time(NULL) - *start > 121)
 	{
-		system("afplay -t 120 sound/nyan.mp3&");
+		system("afplay -t 120 resources/sound/nyan.mp3&");
 		*start = time(NULL);
 	}
 	draw(&vm);
