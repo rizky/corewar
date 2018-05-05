@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/05 15:41:03 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/05 16:56:27 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ HDRPATH:=include/
 CCHPATH:=obj/
 IFLAGS:=-I $(HDRPATH) -I $(LFTDIR)/include
 LFLAGS:=-L $(LFTDIR) -lft
-CFLAGS:=-Wall -Wextra -Werror $(IFLAGS)
+CFLAGS:=-Wall -Wextra $(IFLAGS)
 # ==================
 
 # ----- Colors -----
@@ -234,12 +234,14 @@ T_VM_DIR_OCP = tests/vm/ocp/
 T_VM_FILES_OCP:=$(shell cd $(T_VM_DIR_OCP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 DUMP = 150
 
+OK = 0
+TOTAL = 0
 test_vm_op : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
 	@./corewar -v 30 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
 	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) ; \
 		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
 	fi
 
@@ -255,9 +257,18 @@ NUMBERS = 1 20 50 80 150 200 600 800 1400 2400 5000 8000 10000 50000
 tests_vm_dump_champs_loop: corewar
 	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_C) tests_vm_dump_champs;)
 
+test_vm_op_champ : corewar
+	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
+	@./corewar -v 30 $(T_VM_DIR)$(X).cor > $(T_VM_DIR)$(X).out1 2>> $(T_VM_DIR)$(X).out1; true
+	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor > $(T_VM_DIR)$(X).out2; true
+	@if diff $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 $(SILENT); \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && rm $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2; \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
+	fi
+
 tests_vm_op_champs: corewar
 	@echo $(CYAN) " - Test Basic Operations on Champs" $(EOC)
-	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_C) SILENT='> /dev/null' test_vm_op;)
+	@$(foreach x, $(T_VM_FILES_C), ($(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_C) SILENT='> /dev/null' test_vm_op_champ;)&)
 
 tests_vm_ocp: corewar
 	@echo $(CYAN) " - Test Basic Operations on Champs" $(EOC)

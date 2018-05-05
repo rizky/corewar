@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:46:49 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 17:37:15 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/05 16:05:10 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	vm_op_ld(t_vm *vm, t_process *p)
 	int		val;
 
 	(void)vm;
-	if (p->op.params[1].value < 1 || p->op.params[1].value > 16)
+	if (p->op.params[1].value < 1 || p->op.params[1].value > 16 ||
+		p->op.params[0].type == 0)
 	{
 		vm_op_inc(vm, p);
 		return ;
@@ -42,7 +43,8 @@ void	vm_ld_print(t_process p)
 	int param0;
 	int	val;
 
-	if (p.op.params[1].value < 1 || p.op.params[1].value > 16)
+	if (p.op.params[1].value < 1 || p.op.params[1].value > 16 ||
+		p.op.params[0].type == 0)
 		return ;
 	val = p.op.params[0].value % IDX_MOD;
 	val = (p.offset + p.pc + (val)) % MEM_SIZE;
