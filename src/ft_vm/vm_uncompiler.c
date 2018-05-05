@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 00:39:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 01:09:14 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ int
 	int		fd;
 	char	*cor;
 
-	cor = malloc(sizeof(char) * (ft_strlen(path) + 2));
+	cor = malloc(sizeof(char) * (ft_strlen(path) + 3));
 	if (cor == NULL)
 		return (-1);
-	ft_bzero(cor, ft_strlen(path) + 2);
-	cor = ft_strncpy(cor, path, ft_strlen(path) - 3);
-	cor = ft_strcat(cor, "s2");
+	ft_bzero(cor, ft_strlen(path) + 3);
+	cor = ft_strncpy(cor, path, ft_strlen(path) - 4);
+	cor = ft_strcat(cor, "1.s");
 	fd = open(cor, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	i = -1;
 	ft_printfln("Writing output program to %s", cor);
