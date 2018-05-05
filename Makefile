@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/06 00:35:10 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/06 00:47:39 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -297,11 +297,15 @@ test_vm_leak: corewar
 
 tests_vm_leak:
 	@echo $(CYAN) " - Test Leaks" $(EOC)
+	@$(foreach x, $(T_VM_FILES_ERROR), $(MAKE) X=$(T_VM_DIR_ERROR)$(x) test_vm_leak;)
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$(T_VM_DIR_OP)$(x) test_vm_leak;)
 	@$(foreach x, $(T_VM_FILES_B), $(MAKE) X=$(T_VM_DIR_B)$(x) test_vm_leak;)
-	@$(foreach x, $(T_VM_FILES_OCP), $(MAKE) X=$(T_VM_DIR_OCP)$(x) test_vm_leak;)
 	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$(T_VM_DIR_C)$(x) test_vm_leak;)
-	@$(foreach x, $(T_VM_FILES_ERROR), $(MAKE) X=$(T_VM_DIR_ERROR)$(x) test_vm_leak;)
+	@valgrind ./corewar -u $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar -g $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar -dump 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar -dumpc 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar -v 30 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 
 T_VM_DIR_B = tests/vm/battle/
 T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^$(T_FILE).*.s$$' | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )

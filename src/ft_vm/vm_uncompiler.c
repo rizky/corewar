@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 00:11:36 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 00:39:50 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,6 @@ void
 		fta_append_free(file, temp, len);
 	}
 	fta_append_char(file, '\n');
-}
-
-int
-	vm_ld_op(int index, int size, char *op)
-{
-	int		i;
-	int		result;
-
-	i = 1;
-	result = 0;
-	while (i <= size)
-	{
-		if (index == MEM_SIZE)
-			index = 0;
-		result += op[index] << ((size - i) * 8);
-		i++;
-		index++;
-	}
-	return (result);
 }
 
 void
@@ -91,7 +72,7 @@ t_op
 		(op.params[j].type == DIR_CODE) ? op.params[j].size =
 			g_op_dict[op.opcode].d_size : 0;
 		cursor = *index + op.size;
-		op.params[j].value = vm_ld_op(cursor, op.params[j].size, op_str);
+		op.params[j].value = vm_ld(cursor, op.params[j].size, op_str);
 		op.size += op.params[j].size;
 	}
 	return (op);

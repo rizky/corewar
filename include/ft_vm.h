@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 00:06:16 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 00:40:16 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ int				ft_isnumber(char *str);
 int				ft_abs(int i);
 
 void			vm_uncompiler(t_vm vm);
+int				vm_ld(int index, int size, char *op);
 
 typedef struct	s_op_dict
 {
