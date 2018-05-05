@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/05 00:36:38 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/05 09:04:42 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,7 @@ static int	vm_option_v_2(int i, char **av, t_vm *vm)
 		lvl = ft_atoi(&av[i][2]);
 		if (!vm_valid_verbosity_lvl(lvl))
 			return (-1);
-		vm->option_v[vm_lvl_to_index(lvl)] =
-		(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->option_v[lvl];
-		while (av[++i] && ft_isnumber(av[i]))
-		{
-			lvl = ft_atoi(av[i]);
-			if (!vm_valid_verbosity_lvl(lvl))
-				return (-1);
-			vm->option_v[vm_lvl_to_index(lvl)] =
-			(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->option_v[lvl];
-		}
+		vm_set_v_lvl(lvl, vm);
 	}
 	return (0);
 }
@@ -86,14 +77,10 @@ static int	vm_option_v(int i, char **av, t_vm *vm)
 	{
 		if (!ft_isnumber(av[i + 1]))
 			return (-1);
-		while (av[++i] && ft_isnumber(av[i]))
-		{
-			lvl = ft_atoi(av[i]);
-			if (!vm_valid_verbosity_lvl(lvl))
-				return (-1);
-			vm->option_v[vm_lvl_to_index(lvl)] =
-			(vm_valid_verbosity_lvl(lvl)) ? 1 : vm->option_v[lvl];
-		}
+		lvl = ft_atoi(av[i + 1]);
+		if (!vm_valid_verbosity_lvl(lvl))
+			return (-1);
+		vm_set_v_lvl(lvl, vm);
 	}
 	else if (vm_option_v_2(i, av, vm) == -1)
 		return (-1);
