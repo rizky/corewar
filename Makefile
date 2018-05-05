@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/05 11:09:11 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/05 15:41:03 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -257,7 +257,7 @@ tests_vm_dump_champs_loop: corewar
 
 tests_vm_op_champs: corewar
 	@echo $(CYAN) " - Test Basic Operations on Champs" $(EOC)
-	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_C) test_vm_op;)
+	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_C) SILENT='> /dev/null' test_vm_op;)
 
 tests_vm_ocp: corewar
 	@echo $(CYAN) " - Test Basic Operations on Champs" $(EOC)

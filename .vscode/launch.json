@@ -25,11 +25,8 @@
 			"program": "${workspaceFolder}/corewar",
 			"args": [
 					"-v",
-					"16",
-					"8",
-					"4",
-					"2",
-					"tests/vm/champ/run_Kitty_RUN.cor"
+					"30",
+					"tests/vm/champ/gateau.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
@@ -45,7 +42,7 @@
 			"program": "${workspaceFolder}/corewar",
 			"args": [
 					"-v",
-					"4",
+					"30",
 					"tests/vm/battle/zork.cor",
 					"tests/vm/battle/zorkX.cor"
 					],
@@ -63,8 +60,7 @@
 			"program": "${workspaceFolder}/corewar",
 			"args": [
 					"-v",
-					"4",
-					"2",
+					"30",
 					"tests/vm/overflow/add.cor",
 					"tests/vm/overflow/add.cor",
 					"tests/vm/overflow/add.cor",
