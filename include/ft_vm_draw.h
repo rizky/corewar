@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 22:13:56 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/03 11:33:09 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 20:17:48 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_win			g_draw_win;
 int				g_signal;
 
 void			init_ncurses(t_vm *vm, time_t *start);
-int				vm_start_ncurse(time_t *start, t_vm vm);
+int				vm_start_ncurses(time_t *start, t_vm vm);
 void			draw_info(t_vm *vm);
 void			draw_player_info(t_vm *vm, t_win win);
 void			draw_game(t_vm *v, t_win w);

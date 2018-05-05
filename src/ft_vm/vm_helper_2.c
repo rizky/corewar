@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/04 19:58:05 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 19:59:06 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ char	*vm_to_big_endian(int value, int size)
 		i = i + 8;
 	}
 	return (result.data);
-}
-
-void	*vm_memmark(void *dst, int i, size_t n)
-{
-	unsigned char *dst_p;
-
-	dst_p = (unsigned char*)dst;
-	while (n-- > 0)
-		*dst_p++ = i;
-	return (dst);
 }
 
 void	vm_st_mem(int index, char *value, int champ, int size)

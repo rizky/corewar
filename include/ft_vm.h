@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/05 18:08:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/05 19:59:15 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void			vm_free(t_vm *vm);
 int				vm_free_err(t_vm *vm, int max, int errnum, char *file);
 
 int				vm_read_binaries(char **paths, t_vm *vm);
-void			*vm_memmark(void *dst, int i, size_t n);
 void			vm_st_mem(int index, char *value, int champ, int size);
 int				vm_ld_mem(int index, int size);
 
@@ -124,7 +123,6 @@ void			vm_print_memory_cursor(t_vm vm);
 
 char			*vm_to_big_endian(int value, int size);
 void			vm_op_inc(t_vm *vm, t_process *p);
-int				vm_checker_oc(t_op op);
 
 void			vm_op_live(t_vm *vm, t_process *p);
 void			vm_op_ld(t_vm *vm, t_process *p);

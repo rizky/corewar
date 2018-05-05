@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/05 09:04:42 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 20:17:08 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ int			vm_options(char **av, t_vm *vm)
 		else if (!ft_strcmp(av[i], "-G") && !vm->option_g[VISU_1])
 			vm->option_g[VISU_2] = 1;
 	}
+	vm->option_g[VISU_2] ? ft_bzero(vm->option_v, sizeof(vm->option_v)) : 0;
 	return (0);
 }

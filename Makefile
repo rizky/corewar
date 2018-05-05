@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/05 17:24:48 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/05 19:30:29 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -148,10 +148,10 @@ re: fclean
 	@$(MAKE) all
 
 assemble: asm
-	@./asm -m tests/asm/v*/*.s tests/vm/[bco]*/*.s
+	@./asm -m tests/asm/v*/*.s tests/vm/[bclo]*/*.s
 
 clean_cor:
-	@rm -f tests/asm/v*/*.cor tests/vm/[bco]*/*.cor
+	@rm -f tests/asm/v*/*.cor tests/vm/[bclo]*/*.cor
 
 debug: $(OBJ_ASM) $(OBJ_VM)
 	@echo $(CYAN) " - Compiling debug asm" $(EOC)
