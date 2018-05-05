@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/05 17:24:48 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/05 19:11:23 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,12 @@ FTVMOP:= op_and op_add op_aff op_fork \
 
 # ----- Libft ------
 LFTDIR:=./libft
+
+FTAPATH:= libft/src/ft_array/
+FTA:= fta_alloc fta_append fta_new fta_reserve fta_resize fta_trim \
+	fta_popback fta_popindex fta_clear fta_string fta_replace \
+	fta_swap fta_overwrite fta_printdata
+
 # ==================
 
 # ------------------
@@ -95,6 +101,7 @@ OBJ_VM+=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM_DRAW)))
 SRC_VM+=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES_VM_OP)))
 OBJ_VM+=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM_OP)))
 
+SRC_FTA+=$(addprefix $(FTAPATH),$(addsuffix .c,$(FTA)))
 # ==================
 CCHF:=.cache_exists
 
@@ -103,7 +110,7 @@ all: $(NAME) $(NAME_VM)
 $(NAME): $(OBJ_ASM)
 	@$(MAKE) libft
 	@echo $(CYAN) " - Compiling $@" $(RED)
-	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(SRC_FTA) $(LFLAGS) -o $(NAME)
 	@echo $(GREEN) " - OK" $(EOC)
 
 $(NAME_VM): $(OBJ_VM)
@@ -155,9 +162,9 @@ clean_cor:
 
 debug: $(OBJ_ASM) $(OBJ_VM)
 	@echo $(CYAN) " - Compiling debug asm" $(EOC)
-	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) -g -o $(NAME)
+	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) $(SRC_FTA) -g -o $(NAME)
 	@echo $(CYAN) " - Compiling debug vm" $(EOC)
-	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -g -o $(NAME_VM) -lncurses
+	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) $(SRC_FTA) -g -o $(NAME_VM) -lncurses
 
 norm: all
 	@norminette $(SRC_VM) $(HDRPATH) $(SRC_ASM) | grep -v	Norme -B1 || true

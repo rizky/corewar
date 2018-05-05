@@ -24,9 +24,7 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
 			"args": [
-					"-v",
-					"30",
-					"tests/vm/champ/gateau.cor"
+					"tests/vm/long/Car.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
