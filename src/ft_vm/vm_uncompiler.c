@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 01:09:14 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 01:13:31 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void
 	i = -1;
 	while (++i < op.param_c)
 	{
+		if (i > 0)
+			fta_append_char(file, ',');
 		if (op.params[i].type == REG_CODE)
 			temp = ft_rasprintf(&len, " r%d", op.params[i].value);
 		else if (op.params[i].type == DIR_CODE)
