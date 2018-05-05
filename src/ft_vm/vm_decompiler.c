@@ -6,37 +6,11 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/05 00:17:01 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/05 19:05:02 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
-
-int			vm_checker_oc(t_op op)
-{
-	int param[3];
-	int i;
-
-	if (!g_op_dict[op.opcode].is_oc)
-		return (0);
-	param[0] = (op.oc & 192) >> 6;
-	param[1] = (op.oc & 48) >> 4;
-	param[2] = (op.oc & 12) >> 2;
-	i = 0;
-	while (i != 3)
-	{
-		if (param[i] == IND_CODE && !(g_op_dict[op.opcode].p_type[i] >= T_IND))
-			return (-1);
-		if (param[i] == DIR_CODE && !(g_op_dict[op.opcode].p_type[i] & T_DIR))
-			return (-1);
-		if (param[i] == REG_CODE && !(g_op_dict[op.opcode].p_type[i] & T_REG))
-			return (-1);
-		if (param[i] == 0 && g_op_dict[op.opcode].p_type[i])
-			return (-1);
-		i++;
-	}
-	return (0);
-}
 
 void		vm_decompiler_param(t_process *p, t_op *op)
 {
