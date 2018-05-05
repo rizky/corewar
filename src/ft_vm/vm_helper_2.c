@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_helper_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/05 19:59:06 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 00:41:17 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,23 @@ int		vm_ld_mem(int index, int size)
 	}
 	if (result > max / 2 + 1)
 		result = result - (max + 1);
+	return (result);
+}
+
+int		vm_ld(int index, int size, char *op)
+{
+	int		i;
+	int		result;
+
+	i = 1;
+	result = 0;
+	while (i <= size)
+	{
+		if (index == MEM_SIZE)
+			index = 0;
+		result += op[index] << ((size - i) * 8);
+		i++;
+		index++;
+	}
 	return (result);
 }

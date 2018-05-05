@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 19:52:49 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 00:09:12 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int			vm_read_binaries(char **paths, t_vm *vm)
 			return (vm_free_err(vm, i, error, paths[i]));
 		ft_memcpy(champ.op, buf, champ.header.prog_size + 1);
 		champ.op[champ.header.prog_size] = '\0';
+		champ.path = paths[i];
 		vm->champ[i] = champ;
 		i++;
 	}

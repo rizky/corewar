@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/05 19:59:15 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 00:40:16 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct	s_champ
 	t_header	header;
 	char		*op;
 	int			live_nbr;
+	char		*path;
 }				t_champ;
 
 typedef struct	s_vm
@@ -167,6 +168,9 @@ int				vm_valid_verbosity_lvl(int v);
 void			vm_set_v_lvl(int v, t_vm *vm);
 int				ft_isnumber(char *str);
 int				ft_abs(int i);
+
+void			vm_uncompiler(t_vm vm);
+int				vm_ld(int index, int size, char *op);
 
 typedef struct	s_op_dict
 {

@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/05 19:30:29 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/06 00:47:39 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ FTVM:=	ft_vm \
 		vm_print \
 		vm_error \
 		vm_free \
-		vm_helper_1 vm_helper_2
+		vm_helper_1 vm_helper_2 \
+		vm_uncompiler
 
 FTVMDRAWPATH:= ft_vm/vm_draw/
 FTVMDRAW:= draw_animation_1 \
@@ -286,7 +287,6 @@ test_vm_dump : corewar
 tests_vm_dump: corewar
 	@echo $(CYAN) " - Test Memory Dump $(DUMP)" $(EOC)
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_OP) test_vm_dump;)
-	@$(foreach x, $(T_VM_FILES_HC), $(MAKE) X=$x T_VM_DIR=$(T_VM_DIR_HC) test_vm_dump;)
 
 NUMBERS = 1 20 50 80 150 200 600 800 1400 2400 5000 8000 10000 20000
 tests_vm_dump_loop: corewar
@@ -297,7 +297,15 @@ test_vm_leak: corewar
 
 tests_vm_leak:
 	@echo $(CYAN) " - Test Leaks" $(EOC)
+	@$(foreach x, $(T_VM_FILES_ERROR), $(MAKE) X=$(T_VM_DIR_ERROR)$(x) test_vm_leak;)
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$(T_VM_DIR_OP)$(x) test_vm_leak;)
+	@$(foreach x, $(T_VM_FILES_B), $(MAKE) X=$(T_VM_DIR_B)$(x) test_vm_leak;)
+	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$(T_VM_DIR_C)$(x) test_vm_leak;)
+	@valgrind ./corewar -u $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar -g $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar -dump 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar -dumpc 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar -v 30 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
 
 T_VM_DIR_B = tests/vm/battle/
 T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^$(T_FILE).*.s$$' | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
