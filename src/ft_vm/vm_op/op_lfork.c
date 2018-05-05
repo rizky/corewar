@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:00:19 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:26:13 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 02:17:49 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	vm_op_lfork(t_vm *vm, t_process *p)
 	new_p.live_nbr = p->live_nbr;
 	new_p.live_cycle = p->live_cycle;
 	new_p.carry = p->carry;
-	ft_memcpy(&(new_p.reg), &(p->reg), sizeof(int) * REG_NUMBER);
+	ft_memcpy(&(new_p.reg), &(p->reg), sizeof(int) * (REG_NUMBER + 1));
 	value = (p->op.params[0].value + p->offset + p->pc);
 	value = value % MEM_SIZE;
 	new_p.pc = value - p->offset;
