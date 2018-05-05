@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/06 00:47:39 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/06 01:55:12 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -219,7 +219,7 @@ tests_asm: asm
 	@$(MAKE) tests_asm_bin SILENT='> /dev/null'
 
 test_asm_leak: asm
-	@valgrind ./asm $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./asm $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 
 tests_asm_leak:
 	@echo $(CYAN) " - Test Leaks" $(EOC)
@@ -293,7 +293,7 @@ tests_vm_dump_loop: corewar
 	@$(foreach x, $(NUMBERS), $(MAKE) DUMP=$x T_VM_DIR=$(T_VM_DIR_OP) tests_vm_dump;)
 
 test_vm_leak: corewar
-	@valgrind ./corewar $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar $(X) 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 
 tests_vm_leak:
 	@echo $(CYAN) " - Test Leaks" $(EOC)
@@ -301,11 +301,11 @@ tests_vm_leak:
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$(T_VM_DIR_OP)$(x) test_vm_leak;)
 	@$(foreach x, $(T_VM_FILES_B), $(MAKE) X=$(T_VM_DIR_B)$(x) test_vm_leak;)
 	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$(T_VM_DIR_C)$(x) test_vm_leak;)
-	@valgrind ./corewar -u $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
-	@valgrind ./corewar -g $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
-	@valgrind ./corewar -dump 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
-	@valgrind ./corewar -dumpc 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
-	@valgrind ./corewar -v 30 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*'
+	@valgrind ./corewar -u $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
+	@valgrind ./corewar -g $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
+	@valgrind ./corewar -dump 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
+	@valgrind ./corewar -dumpc 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
+	@valgrind ./corewar -v 30 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 
 T_VM_DIR_B = tests/vm/battle/
 T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^$(T_FILE).*.s$$' | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
