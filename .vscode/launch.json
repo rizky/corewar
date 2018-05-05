@@ -5,6 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"preLaunchTask": "make debug",
 			"name": "(lldb) Launch ASM",
 			"type": "cppdbg",
 			"request": "launch",
@@ -17,11 +18,58 @@
 			"MIMode": "lldb"
 		},
 		{
+			"preLaunchTask": "make debug",
 			"name": "(lldb) Launch VM",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": [""],
+			"args": [
+					"-v",
+					"16",
+					"8",
+					"4",
+					"2",
+					"tests/vm/champ/run_Kitty_RUN.cor"
+					],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
+		},
+		{
+			"preLaunchTask": "make debug",
+			"name": "(lldb) Launch VM battle",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/corewar",
+			"args": [
+					"-v",
+					"4",
+					"tests/vm/battle/zork.cor",
+					"tests/vm/battle/zorkX.cor"
+					],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "lldb"
+		},
+		{
+			"preLaunchTask": "make debug",
+			"name": "(lldb) Launch VM Overflow",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/corewar",
+			"args": [
+					"-v",
+					"4",
+					"2",
+					"tests/vm/overflow/add.cor",
+					"tests/vm/overflow/add.cor",
+					"tests/vm/overflow/add.cor",
+					"tests/vm/overflow/add.cor"
+					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
