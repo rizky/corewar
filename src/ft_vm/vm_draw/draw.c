@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 22:25:40 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/04 21:52:59 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 20:18:48 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	sighandle(int dummy)
 	g_signal = 0;
 }
 
-int			vm_start_ncurse(time_t *start, t_vm vm)
+int			vm_start_ncurses(time_t *start, t_vm vm)
 {
 	int		key;
 
