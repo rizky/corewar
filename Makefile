@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/05 17:12:11 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/05 17:24:48 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -263,7 +263,7 @@ test_vm_op_champ : corewar
 	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor > $(T_VM_DIR)$(X).out2; true
 	@if diff $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && rm $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2; \
-		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && diff $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 | head -20 ; \
 	fi
 
 tests_vm_op_champs: corewar
