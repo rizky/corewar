@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/05 00:19:42 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/05 15:34:53 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,14 @@ static void
 static void
 	vm_executor_op(t_vm *vm, t_process *p)
 {
-	t_process *prev_p;
+	t_process prev_p;
 
 	vm_decompiler_param(p, &(p->op));
 	p->pc_next = p->pc + p->op.size;
-	prev_p = ft_memalloc(sizeof(t_process));
-	ft_memcpy(prev_p, p, sizeof(t_process));
+	ft_memcpy(&prev_p, p, sizeof(t_process));
 	(vm->option_v[V_LVL_4]) ? vm_print_v_4(*p) : 0;
 	(((void (*)())g_op_dict[p->op.opcode].opfunc)(vm, p));
-	(vm->option_v[V_LVL_16]) ? vm_print_v_16(*prev_p) : 0;
-	free(prev_p);
+	(vm->option_v[V_LVL_16]) ? vm_print_v_16(prev_p) : 0;
 	ft_bzero(&(p->op), sizeof(t_op));
 }
 
