@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:58:02 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/04 21:58:00 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 09:01:44 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,22 @@ int		vm_valid_arg(char *arg, t_vm *vm)
 {
 	if (!ft_strcmp(arg, "-dump") || !ft_strcmp(arg, "-dumpc") ||
 		!ft_strcmp(arg, "-v") || !ft_strcmp(arg, "-n"))
-	{
-		if (!ft_strcmp(arg, "-dump") || !ft_strcmp(arg, "-dumpc"))
-			return (vm->valid_arg[0] = 1);
-		else
-			return (vm->valid_arg[1] = 1);
-	}
+		return (vm->opt_num = 1);
 	else if ((!ft_strncmp(arg, "-v", 2) || !ft_strncmp(arg, "-n", 2)) &&
 		ft_isnumber(&arg[2]))
-		return (vm->valid_arg[1] = 1);
-	else if (ft_isnumber(arg) && (vm->valid_arg[0] || vm->valid_arg[1]))
 	{
-		vm->valid_arg[0] = 0;
+		vm->opt_num = 0;
+		return (1);
+	}
+	else if (ft_isnumber(arg) && vm->opt_num)
+	{
+		vm->opt_num = 0;
 		return (1);
 	}
 	else if (!ft_strcmp(&arg[ft_strlen(arg) - 4], ".cor") ||
 		!ft_strcmp(arg, "-g") || !ft_strcmp(arg, "-G"))
 	{
-		vm->valid_arg[0] = 0;
-		vm->valid_arg[1] = 0;
+		vm->opt_num = 0;
 		return (1);
 	}
 	return (0);
@@ -42,21 +39,32 @@ int		vm_valid_arg(char *arg, t_vm *vm)
 
 int		vm_valid_verbosity_lvl(int v)
 {
-	return (v == 2 || v == 4 || v == 8 || v == 16);
-}
-
-int		vm_lvl_to_index(int lvl)
-{
-	if (lvl == 2)
-		return (V_LVL_2);
-	else if (lvl == 4)
-		return (V_LVL_4);
-	else if (lvl == 8)
-		return (V_LVL_8);
-	else if (lvl == 16)
-		return (V_LVL_16);
+	if (v == 2 || v == 4 || v == 8 || v == 16)
+		return (1);
+	else if (v == 6 || v == 10 || v == 12 || v == 14)
+		return (1);
+	else if (v == 18 || v == 20 || v == 22 || v == 24)
+		return (1);
+	else if (v == 26 || v == 28 || v == 30)
+		return (1);
 	else
 		return (0);
+}
+
+void	vm_set_v_lvl(int v, t_vm *vm)
+{
+	if (v == 2 || v == 6 || v == 10 || v == 14 ||
+		v == 18 || v == 22 || v == 26 || v == 30)
+		vm->option_v[V_LVL_2] = 1;
+	if (v == 4 || v == 6 || v == 12 || v == 14 ||
+		v == 20 || v == 22 || v == 28 || v == 30)
+		vm->option_v[V_LVL_4] = 1;
+	if (v == 8 || v == 10 || v == 12 || v == 14 ||
+		v == 24 || v == 26 || v == 28 || v == 30)
+		vm->option_v[V_LVL_8] = 1;
+	if (v == 16 || v == 18 || v == 20 || v == 22 ||
+		v == 24 || v == 26 || v == 28 || v == 30)
+		vm->option_v[V_LVL_16] = 1;
 }
 
 int		ft_isnumber(char *str)

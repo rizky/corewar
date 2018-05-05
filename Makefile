@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/04 14:32:02 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/05 11:09:11 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,7 @@ HDRPATH:=include/
 CCHPATH:=obj/
 IFLAGS:=-I $(HDRPATH) -I $(LFTDIR)/include
 LFLAGS:=-L $(LFTDIR) -lft
-# CFLAGS:=-Wall -Wextra -Werror $(IFLAGS)
-CFLAGS:=-Wall -Wextra $(IFLAGS)
+CFLAGS:=-Wall -Wextra -Werror $(IFLAGS)
 # ==================
 
 # ----- Colors -----
@@ -147,6 +146,12 @@ fclean: clean
 
 re: fclean
 	@$(MAKE) all
+
+assemble: asm
+	@./asm -m tests/asm/v*/*.s tests/vm/[bco]*/*.s
+
+clean_cor:
+	@rm -f tests/asm/v*/*.cor tests/vm/[bco]*/*.cor
 
 debug: $(OBJ_ASM) $(OBJ_VM)
 	@echo $(CYAN) " - Compiling debug asm" $(EOC)
@@ -231,7 +236,7 @@ DUMP = 150
 
 test_vm_op : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./corewar -v 16 8 4 2 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./corewar -v 30 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
 	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
@@ -289,7 +294,7 @@ T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^$(T_FILE).*.s$$' | egrep '^
 test_vm_battle : corewar
 	@./resources/binaries/asm $(T_VM_DIR_B)$(X).s > /dev/null; true
 	@./resources/binaries/asm $(T_VM_DIR_B)$(X)X.s > /dev/null; true
-	@./corewar -v 16 8 4 2 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
+	@./corewar -v30 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
 	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR_B)$(X)" $(EOC); \
@@ -324,7 +329,7 @@ tests_vm_dump_overflow_loop: corewar
 
 test_vm_op_overflow : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./corewar -v 16 8 4 2 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./corewar -v 30 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
 	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
@@ -360,4 +365,4 @@ tests_vm: corewar
 	
 tests: tests_asm tests_vm
 
-.PHONY: all clean fclean re debug norm norm2 tests tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
+.PHONY: all clean fclean re assemble clean_cor debug norm norm2 tests tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
