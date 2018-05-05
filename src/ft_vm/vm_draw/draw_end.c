@@ -17,6 +17,9 @@ void	draw_end(t_win *win)
 	nodelay(stdscr, FALSE);
 	mvwprintw((*win).info, 46, 15, "** PRESS ANY KEY TO EXIT **");
 	wrefresh((*win).info);
+	system("if [ $(pgrep afplay) ]; \
+		then kill $(pgrep afplay); fi");
+	system("afplay resources/sound/win.wav&");
 	getch();
 	system("if [ $(pgrep afplay) ]; \
 		then kill $(pgrep afplay); fi");
