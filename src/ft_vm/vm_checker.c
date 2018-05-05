@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 12:15:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/04 22:20:28 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 18:08:02 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,14 @@ int			vm_checker(t_vm *vm)
 {
 	if (g_cycles_to_die < 0)
 	{
-		vm->winner = vm->last_live_champ;
 		vm_process_kill(vm);
 		return (0);
 	}
 	if (g_cycles_to == g_cycles_to_die)
 	{
-		if (vm_checker_processalive(vm) < 1)
-		{
-			vm->winner = vm->last_live_champ;
-			return (0);
-		}
 		g_cycles_to = 0;
+		if (vm_checker_processalive(vm) < 1)
+			return (0);
 		if (g_live_nbr >= NBR_LIVE || ++g_max_check == MAX_CHECKS)
 		{
 			g_max_check = 0;

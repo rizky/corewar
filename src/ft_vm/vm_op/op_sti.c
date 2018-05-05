@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:56:40 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:25:03 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 17:40:43 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void		vm_op_sti(t_vm *vm, t_process *p)
 		((p->op.params[1].type == REG_CODE) &&
 			(p->op.params[1].value < 1 || p->op.params[1].value > 16)) ||
 		((p->op.params[2].type == REG_CODE) &&
-			(p->op.params[2].value < 1 || p->op.params[2].value > 16)))
+			(p->op.params[2].value < 1 || p->op.params[2].value > 16)) ||
+		p->op.params[1].type == 0 || p->op.params[2].type == 0)
 	{
 		vm_op_inc(vm, p);
 		return ;
@@ -78,7 +79,8 @@ void		vm_sti_print(t_process p)
 		((p.op.params[1].type == REG_CODE) &&
 			(p.op.params[1].value < 1 || p.op.params[1].value > 16)) ||
 		((p.op.params[2].type == REG_CODE) &&
-			(p.op.params[2].value < 1 || p.op.params[2].value > 16)))
+			(p.op.params[2].value < 1 || p.op.params[2].value > 16)) ||
+		p.op.params[1].type == 0 || p.op.params[2].type == 0)
 		return ;
 	param1 = (p.op.params[1].type == REG_CODE) ?
 		p.reg[p.op.params[1].value] : p.op.params[1].value;

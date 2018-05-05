@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/05 08:55:25 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/05 18:08:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ typedef struct	s_vm
 	int			process_index;
 	int			champ_size;
 	int			last_dead_champ;
-	int			last_live_champ;
 	int			winner;
 }				t_vm;
 

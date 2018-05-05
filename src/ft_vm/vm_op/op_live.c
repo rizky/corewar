@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:45:30 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 18:43:54 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/05 18:08:48 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	vm_op_live(t_vm *vm, t_process *p)
 	if (p->op.params[0].value == ((p->champ + 1) * -1))
 	{
 		vm->champ[p->champ].live_nbr++;
-		vm->last_live_champ = p->champ;
+		vm->winner = p->champ;
 	}
 	vm_op_inc(vm, p);
 }
