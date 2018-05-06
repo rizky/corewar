@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:00:22 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/04 20:30:47 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 04:12:52 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,22 @@ static void	init_all_color(void)
 	init_pair(11, COLOR_RED, COLOR_RED);
 	init_pair(12, COLOR_PINK, COLOR_BLACK);
 	init_pair(13, COLOR_BLUE_L, COLOR_BLACK);
-
 	init_pair(14, COLOR_GREY, COLOR_BLUE_BG);
 	init_pair(15, COLOR_GREY, COLOR_GREEN_BG);
 	init_pair(16, COLOR_GREY, COLOR_BROWN_BG);
 	init_pair(17, COLOR_GREY, COLOR_PINK_BG);
-
 	init_pair(18, COLOR_BLUE_L, COLOR_BLUE_BG);
 	init_pair(19, COLOR_BLUE_L, COLOR_GREEN_BG);
 	init_pair(20, COLOR_BLUE_L, COLOR_BROWN_BG);
 	init_pair(21, COLOR_BLUE_L, COLOR_PINK_BG);
-
 	init_pair(22, COLOR_GREEN, COLOR_BLUE_BG);
 	init_pair(23, COLOR_GREEN, COLOR_GREEN_BG);
 	init_pair(24, COLOR_GREEN, COLOR_BROWN_BG);
 	init_pair(25, COLOR_GREEN, COLOR_PINK_BG);
-
 	init_pair(26, COLOR_BROWN_1, COLOR_BLUE_BG);
 	init_pair(27, COLOR_BROWN_1, COLOR_GREEN_BG);
 	init_pair(28, COLOR_BROWN_1, COLOR_BROWN_BG);
 	init_pair(29, COLOR_BROWN_1, COLOR_PINK_BG);
-
 	init_pair(30, COLOR_PINK, COLOR_BLUE_BG);
 	init_pair(31, COLOR_PINK, COLOR_GREEN_BG);
 	init_pair(32, COLOR_PINK, COLOR_BROWN_BG);

@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 00:28:36 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 04:12:18 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void
 	vm_decompiler_param(p, &(p->op));
 	p->pc_next = p->pc + p->op.size;
 	ft_memcpy(&prev_p, p, sizeof(t_process));
-	
 	if (vm_checker_oc(p->op) == -1)
 		vm_op_inc(vm, p);
 	else
