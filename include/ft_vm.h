@@ -125,6 +125,7 @@ void			vm_print_memory_cursor(t_vm vm);
 char			*vm_to_big_endian(int value, int size);
 void			vm_op_inc(t_vm *vm, t_process *p);
 
+int				vm_checker_oc(t_op op);
 void			vm_op_live(t_vm *vm, t_process *p);
 void			vm_op_ld(t_vm *vm, t_process *p);
 void			vm_op_st(t_vm *vm, t_process *p);

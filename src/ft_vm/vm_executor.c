@@ -53,8 +53,14 @@ static void
 	vm_decompiler_param(p, &(p->op));
 	p->pc_next = p->pc + p->op.size;
 	ft_memcpy(&prev_p, p, sizeof(t_process));
-	(vm->option_v[V_LVL_4]) ? vm_print_v_4(*p) : 0;
-	(((void (*)())g_op_dict[p->op.opcode].opfunc)(vm, p));
+	
+	if (vm_checker_oc(p->op) == -1)
+		vm_op_inc(vm, p);
+	else
+	{
+		(vm->option_v[V_LVL_4]) ? vm_print_v_4(*p) : 0;
+		(((void (*)())g_op_dict[p->op.opcode].opfunc)(vm, p));
+	}
 	(vm->option_v[V_LVL_16]) ? vm_print_v_16(prev_p) : 0;
 	ft_bzero(&(p->op), sizeof(t_op));
 }

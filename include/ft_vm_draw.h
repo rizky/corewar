@@ -27,6 +27,10 @@
 # define COLOR_BROWN_1 22
 # define COLOR_PINK 23
 # define COLOR_BLUE_L 24
+# define COLOR_BROWN_BG 25
+# define COLOR_PINK_BG 26
+# define COLOR_GREEN_BG 27
+# define COLOR_BLUE_BG 28
 
 typedef	struct	s_status
 {
