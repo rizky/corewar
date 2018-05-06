@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:51:19 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:23:35 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 03:53:51 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	vm_xor_print(t_process p)
 		ft_printf(" %d", p.reg[p.op.params[1].value]);
 	else if (p.op.params[1].type == IND_CODE)
 		ft_printf(" %d", vm_ld_mem((p.offset +
-			p.pc + (p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4));
+			p.pc + (p.op.params[1].value % IDX_MOD)) % MEM_SIZE, 4));
 	else
 		ft_printf(" %d", p.op.params[1].value);
 	ft_printf(" r%d", p.op.params[2].value);

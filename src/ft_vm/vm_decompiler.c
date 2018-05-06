@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:59:39 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/05 19:05:02 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 03:53:22 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int			vm_checker_oc(t_op op)
 	param[1] = (op.oc & 48) >> 4;
 	param[2] = (op.oc & 12) >> 2;
 	i = 0;
-	while (i != 3)
+	while (i < g_op_dict[op.opcode].param_c)
 	{
-		if (param[i] == IND_CODE && !(g_op_dict[op.opcode].p_type[i] >= T_IND))
+		if (param[i] == IND_CODE && !(g_op_dict[op.opcode].p_type[i] & T_IND))
 			return (-1);
 		if (param[i] == DIR_CODE && !(g_op_dict[op.opcode].p_type[i] & T_DIR))
 			return (-1);
