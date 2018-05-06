@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_player_info.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jyeo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 01:02:28 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/04 20:17:18 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 01:26:35 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		draw_player_info(t_vm *vm, t_win w)
 		color_picker(&i, &color);
 		wattron(w.info, COLOR_PAIR(2));
 		mvwprintw(w.info, 23 + i + row, 3, "Player -%d : ", i + 1);
+		(vm->winner == i) ? wattron(w.info, COLOR_PAIR(8)) : 0;
 		mvwprintw(w.info, 24 + i + row, 3, "* Lives in current period :		%d",
 			vm->champ[i].live_nbr);
 		wattron(w.info, COLOR_PAIR(color));
