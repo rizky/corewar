@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:38:33 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 00:25:50 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 09:09:49 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ static void	vm_load_champs(t_vm *vm)
 	t_process	p;
 
 	i = -1;
-	vm_init_g_var();
+	vm_init_globals();
 	vm->winner = vm->champ_size - 1;
 	ft_bzero(&p, sizeof(t_process));
 	vm->process_index = 1;
 	fta_reserve(&(vm->processes), 3000000 * sizeof(t_process));
-	ft_printfln("Introducing contestants...");
+	(vm->dump != 3) ? ft_printfln("Introducing contestants...") : 0;
 	while (++i < vm->champ_size)
 	{
-		ft_printfln("* Player %d, weighing %d %s, \"%s\" (\"%s\") !", i + 1,
+		if (vm->dump != 3)
+			ft_printfln("* Player %d, weighing %d %s, \"%s\" (\"%s\") !", i + 1,
 			vm->champ[i].header.prog_size, (vm->champ[i].header.prog_size > 1) ?
 			"bytes" : "byte", vm->champ[i].header.prog_name,
 			vm->champ[i].header.comment);

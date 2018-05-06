@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 00:40:16 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 08:44:56 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int				g_live_nbr;
 
 int				vm_options(char **av, t_vm *vm);
 int				vm_print_usage(char **av, int status);
-void			vm_init_g_var(void);
+void			vm_init_globals(void);
 
 int				vm_error(int errnum, int status, char *name);
 
@@ -109,6 +109,7 @@ int				vm_free_err(t_vm *vm, int max, int errnum, char *file);
 int				vm_read_binaries(char **paths, t_vm *vm);
 void			vm_st_mem(int index, char *value, int champ, int size);
 int				vm_ld_mem(int index, int size);
+int				vm_ld(int index, int size, char *op);
 
 void			vm_decompiler_param(t_process *p, t_op *op);
 
@@ -117,6 +118,8 @@ int				vm_checker_livenbr(t_vm vm);
 
 void			vm_executor(t_vm *vm);
 int				vm_decompiler_op(t_vm *vm, t_process *p);
+
+void			vm_uncompiler(t_vm vm);
 
 void			vm_print_memory(void);
 void			vm_print_memory_color(t_vm vm);
@@ -169,9 +172,6 @@ int				vm_valid_verbosity_lvl(int v);
 void			vm_set_v_lvl(int v, t_vm *vm);
 int				ft_isnumber(char *str);
 int				ft_abs(int i);
-
-void			vm_uncompiler(t_vm vm);
-int				vm_ld(int index, int size, char *op);
 
 typedef struct	s_op_dict
 {

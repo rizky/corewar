@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vm_helper_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:28:03 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/06 00:41:17 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 08:46:13 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-void	vm_init_g_var(void)
+void	vm_init_globals(void)
 {
 	g_cycles = 0;
 	g_cycles_to = 0;

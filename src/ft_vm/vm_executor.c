@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 04:12:18 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 09:00:45 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void
 
 	g_cycles++;
 	g_cycles_to++;
-	(vm->option_v[V_LVL_2]) ? ft_printfln("It is now cycle %d", g_cycles) : 0;
+	(vm->option_v[V_LVL_2] && vm->dump != 3)
+		? ft_printfln("It is now cycle %d", g_cycles) : 0;
 	i = (int)(vm->processes.size) - 1;
 	while (i >= 0)
 	{
