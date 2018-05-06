@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 15:11:44 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/06 00:25:21 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 08:39:59 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,12 @@ int			vm_options(char **av, t_vm *vm)
 		}
 		else if ((vm_opt_v(i, av, vm) == -1) || (vm_opt_n(i, av, vm) == -1))
 			return (-1);
+		else if (!ft_strcmp(av[i], "-u"))
+			vm->dump = 3;
 		else if (!ft_strcmp(av[i], "-g") && !vm->option_g[VISU_2])
 			vm->option_g[VISU_1] = 1;
 		else if (!ft_strcmp(av[i], "-G") && !vm->option_g[VISU_1])
 			vm->option_g[VISU_2] = 1;
-		else if (!ft_strcmp(av[i], "-u"))
-			vm->dump = 3;
 	}
 	vm->option_g[VISU_2] ? ft_bzero(vm->option_v, sizeof(vm->option_v)) : 0;
 	return (0);

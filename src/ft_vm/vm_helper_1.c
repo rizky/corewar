@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_helper_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:58:02 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/06 00:27:07 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 07:45:57 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,13 @@ int		vm_valid_arg(char *arg, t_vm *vm)
 		return (vm->opt_num = 1);
 	else if ((!ft_strncmp(arg, "-v", 2) || !ft_strncmp(arg, "-n", 2)) &&
 		ft_isnumber(&arg[2]))
-	{
-		vm->opt_num = 0;
-		return (1);
-	}
+		return ((vm->opt_num = 0) + 1);
 	else if (ft_isnumber(arg) && vm->opt_num)
-	{
-		vm->opt_num = 0;
-		return (1);
-	}
+		return ((vm->opt_num = 0) + 1);
 	else if (!ft_strcmp(&arg[ft_strlen(arg) - 4], ".cor") ||
 		!ft_strcmp(arg, "-g") || !ft_strcmp(arg, "-G") ||
 		!ft_strcmp(arg, "-u"))
-	{
-		vm->opt_num = 0;
-		return (1);
-	}
+		return ((vm->opt_num = 0) + 1);
 	return (0);
 }
 
