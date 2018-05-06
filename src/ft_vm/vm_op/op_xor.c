@@ -63,7 +63,7 @@ void	vm_xor_print(t_process p)
 		ft_printf(" %d", p.reg[p.op.params[1].value]);
 	else if (p.op.params[1].type == IND_CODE)
 		ft_printf(" %d", vm_ld_mem((p.offset +
-			p.pc + (p.op.params[0].value % IDX_MOD)) % MEM_SIZE, 4));
+			p.pc + (p.op.params[1].value % IDX_MOD)) % MEM_SIZE, 4));
 	else
 		ft_printf(" %d", p.op.params[1].value);
 	ft_printf(" r%d", p.op.params[2].value);
