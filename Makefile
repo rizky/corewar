@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/06 17:21:23 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/06 18:15:26 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ HDRPATH:=include/
 CCHPATH:=obj/
 IFLAGS:=-I $(HDRPATH) -I $(LFTDIR)/include
 LFLAGS:=-L $(LFTDIR) -lft
-CFLAGS:=-Wall -Wextra $(IFLAGS)
+CFLAGS:=-Wall -Werror -Wextra $(IFLAGS)
 # ==================
 
 # ----- Colors -----
@@ -161,7 +161,7 @@ debug: $(OBJ_ASM) $(OBJ_VM)
 	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -g -o $(NAME_VM) -lncurses
 
 norm: all
-	@norminette $(HDRPATH) $(SRC_ASM) $(SRC_VM) | grep -v	Norme -B1 || true
+	@norminette $(HDRPATH) $(SRC_ASM) $(SRC_VM) | grep -v Norme -B1 || true
 	@cd $(LFTDIR) && $(MAKE) norm
 
 norm2:
@@ -329,8 +329,6 @@ tests_vm_battle: corewar
 T_VM_DIR_O = tests/vm/overflow/
 T_VM_FILES_O:=$(shell cd $(T_VM_DIR_O); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 
-.PHONY: test_vm_op_overflow test_vm_dump_overflow tests_vm_overflow
-
 test_vm_dump_overflow : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
 	@./corewar -dump $(DUMP) $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
@@ -388,4 +386,4 @@ tests: tests_asm tests_vm
 
 tests_leaks: tests_asm_leak tests_vm_leak
 
-.PHONY: all clean fclean re assemble clean_cor debug norm norm2 tests tests_leaks tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
+.PHONY: all clean fclean re assemble clean_cor debug norm norm2 tests tests_leaks tests_asm test_asm_leak tests_asm_leak test_asm_valid tests_asm_valid test_asm_bin tests_asm_bin tests_asm_v tests_asm_error tests_asm_v tests_vm test_vm_leak tests_vm_leak test_vm_battle tests_vm_battle test_vm_dump tests_vm_dump tests_vm_dump_champs tests_vm_dump_champs_loop tests_vm_dump_loop test_vm_dump_overflow tests_vm_dump_overflow tests_vm_dump_overflow_loop tests_vm_ocp test_vm_op tests_vm_op test_vm_op_champ tests_vm_op_champs test_vm_op_overflow tests_vm_op_overflow test_vm_error tests_vm_error libft
