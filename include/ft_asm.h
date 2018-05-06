@@ -13,7 +13,7 @@
 #ifndef FT_ASM_H
 # define FT_ASM_H
 
-# include "libft.h"
+# include "../libft/include/libft.h"
 # include "op.h"
 
 # define SOURCEFILE		1

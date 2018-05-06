@@ -52,8 +52,7 @@ void		vm_op_ldi(t_vm *vm, t_process *p)
 		((p->op.params[1].type == REG_CODE) &&
 			(p->op.params[1].value < 1 || p->op.params[1].value > 16)) ||
 		((p->op.params[0].type == REG_CODE) &&
-			(p->op.params[0].value < 1 || p->op.params[0].value > 16)) ||
-		p->op.params[0].type == 0 || p->op.params[1].type == 0)
+			(p->op.params[0].value < 1 || p->op.params[0].value > 16)))
 	{
 		vm_op_inc(vm, p);
 		return ;
@@ -106,8 +105,7 @@ void		vm_ldi_print(t_process p)
 		((p.op.params[1].type == REG_CODE) &&
 			(p.op.params[1].value < 1 || p.op.params[1].value > 16)) ||
 		((p.op.params[0].type == REG_CODE) &&
-			(p.op.params[0].value < 1 || p.op.params[0].value > 16)) ||
-		p.op.params[0].type == 0 || p.op.params[1].type == 0)
+			(p.op.params[0].value < 1 || p.op.params[0].value > 16)))
 		return ;
 	param0 = (p.op.params[0].type == REG_CODE) ?
 		p.reg[p.op.params[0].value] : p.op.params[0].value;
