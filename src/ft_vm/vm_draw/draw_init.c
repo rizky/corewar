@@ -12,6 +12,30 @@
 
 #include "ft_vm_draw.h"
 
+static void	init_all_color_2(void)
+{
+	init_pair(14, COLOR_GREY, COLOR_BLUE_BG);
+	init_pair(15, COLOR_GREY, COLOR_GREEN_BG);
+	init_pair(16, COLOR_GREY, COLOR_BROWN_BG);
+	init_pair(17, COLOR_GREY, COLOR_PINK_BG);
+	init_pair(18, COLOR_BLUE_L, COLOR_BLUE_BG);
+	init_pair(19, COLOR_BLUE_L, COLOR_GREEN_BG);
+	init_pair(20, COLOR_BLUE_L, COLOR_BROWN_BG);
+	init_pair(21, COLOR_BLUE_L, COLOR_PINK_BG);
+	init_pair(22, COLOR_GREEN, COLOR_BLUE_BG);
+	init_pair(23, COLOR_GREEN, COLOR_GREEN_BG);
+	init_pair(24, COLOR_GREEN, COLOR_BROWN_BG);
+	init_pair(25, COLOR_GREEN, COLOR_PINK_BG);
+	init_pair(26, COLOR_BROWN_1, COLOR_BLUE_BG);
+	init_pair(27, COLOR_BROWN_1, COLOR_GREEN_BG);
+	init_pair(28, COLOR_BROWN_1, COLOR_BROWN_BG);
+	init_pair(29, COLOR_BROWN_1, COLOR_PINK_BG);
+	init_pair(30, COLOR_PINK, COLOR_BLUE_BG);
+	init_pair(31, COLOR_PINK, COLOR_GREEN_BG);
+	init_pair(32, COLOR_PINK, COLOR_BROWN_BG);
+	init_pair(33, COLOR_PINK, COLOR_PINK_BG);
+}
+
 static void	init_all_color(void)
 {
 	init_color(COLOR_GREY, 350, 350, 350);
@@ -36,31 +60,7 @@ static void	init_all_color(void)
 	init_pair(11, COLOR_RED, COLOR_RED);
 	init_pair(12, COLOR_PINK, COLOR_BLACK);
 	init_pair(13, COLOR_BLUE_L, COLOR_BLACK);
-
-	init_pair(14, COLOR_GREY, COLOR_BLUE_BG);
-	init_pair(15, COLOR_GREY, COLOR_GREEN_BG);
-	init_pair(16, COLOR_GREY, COLOR_BROWN_BG);
-	init_pair(17, COLOR_GREY, COLOR_PINK_BG);
-
-	init_pair(18, COLOR_BLUE_L, COLOR_BLUE_BG);
-	init_pair(19, COLOR_BLUE_L, COLOR_GREEN_BG);
-	init_pair(20, COLOR_BLUE_L, COLOR_BROWN_BG);
-	init_pair(21, COLOR_BLUE_L, COLOR_PINK_BG);
-
-	init_pair(22, COLOR_GREEN, COLOR_BLUE_BG);
-	init_pair(23, COLOR_GREEN, COLOR_GREEN_BG);
-	init_pair(24, COLOR_GREEN, COLOR_BROWN_BG);
-	init_pair(25, COLOR_GREEN, COLOR_PINK_BG);
-
-	init_pair(26, COLOR_BROWN_1, COLOR_BLUE_BG);
-	init_pair(27, COLOR_BROWN_1, COLOR_GREEN_BG);
-	init_pair(28, COLOR_BROWN_1, COLOR_BROWN_BG);
-	init_pair(29, COLOR_BROWN_1, COLOR_PINK_BG);
-
-	init_pair(30, COLOR_PINK, COLOR_BLUE_BG);
-	init_pair(31, COLOR_PINK, COLOR_GREEN_BG);
-	init_pair(32, COLOR_PINK, COLOR_BROWN_BG);
-	init_pair(33, COLOR_PINK, COLOR_PINK_BG);
+	init_all_color_2();
 }
 
 void		init_ncurses(t_vm *vm, time_t *start)

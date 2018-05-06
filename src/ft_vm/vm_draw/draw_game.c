@@ -17,60 +17,15 @@ static void	process_color(t_process *p, unsigned char *m, int *i, int *col)
 	if (p->pc + p->offset == *i)
 	{
 		if (m[*i] == 1)
-		{
-			if (p->champ == 0)
-				*col = 18;
-			else if (p->champ == 1)
-				*col = 19;
-			else if (p->champ == 2)
-				*col = 20;
-			else if (p->champ == 3)
-				*col = 21;
-		}
+			*col = 18 + p->champ;
 		else if (m[*i] == 2)
-		{
-			if (p->champ == 0)
-				*col = 22;
-			else if (p->champ == 1)
-				*col = 23;
-			else if (p->champ == 2)
-				*col = 24;
-			else if (p->champ == 3)
-				*col = 25;
-		}
+			*col = 22 + p->champ;
 		else if (m[*i] == 3)
-		{
-			if (p->champ == 0)
-				*col = 26;
-			else if (p->champ == 1)
-				*col = 27;
-			else if (p->champ == 2)
-				*col = 28;
-			else if (p->champ == 3)
-				*col = 29;
-		}
+			*col = 26 + p->champ;
 		else if (m[*i] == 4)
-		{
-			if (p->champ == 0)
-				*col = 30;
-			else if (p->champ == 1)
-				*col = 31;
-			else if (p->champ == 2)
-				*col = 32;
-			else if (p->champ == 3)
-				*col = 33;
-		}
+			*col = 30 + p->champ;
 		else
-		{
-			if (p->champ == 0)
-				*col = 14;
-			else if (p->champ == 1)
-				*col = 15;
-			else if (p->champ == 2)
-				*col = 16;
-			else if (p->champ == 3)
-				*col = 17;
-		}
+			*col = 14 + p->champ;
 	}
 }
 
