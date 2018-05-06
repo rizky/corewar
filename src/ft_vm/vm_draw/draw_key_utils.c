@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:01:43 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/06 10:25:43 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 11:12:57 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			key_hook(t_status *status)
 	int		ch;
 
 	ch = getch();
-	if (ch == 32)
+	if (ch == SPACE)
 	{
 		if ((*status).pause == 0)
 		{
@@ -46,9 +46,9 @@ int			key_hook(t_status *status)
 			(*status).pause = 0;
 		}
 	}
-	if (ch == 27)
+	if (ch == ESC)
 		return (-1);
-	if (ch == 115)
+	if (ch == 's' || ch == 'S')
 		return (1);
 	key_speed(ch, status);
 	return (0);

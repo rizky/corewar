@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 22:13:56 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/05 20:17:48 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 11:10:56 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define COLOR_PINK_BG 26
 # define COLOR_GREEN_BG 27
 # define COLOR_BLUE_BG 28
+
+# define ESC 27
+# define SPACE 32
 
 typedef	struct	s_status
 {

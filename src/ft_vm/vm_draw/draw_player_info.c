@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 01:02:28 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/06 01:26:35 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 11:16:55 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static void	draw_control_info_2(t_win w)
 	wattron(w.info, COLOR_PAIR(13));
 	mvwprintw(w.info, 43, 30, "Arrow left");
 	wattron(w.info, COLOR_PAIR(4));
-	mvwprintw(w.info, 45, 3, "Spacebar");
+	mvwprintw(w.info, 45, 3, "[Spacebar]");
 	wattron(w.info, COLOR_PAIR(8));
-	mvwprintw(w.info, 46, 3, "\"S\"");
+	mvwprintw(w.info, 46, 3, "[S]");
 	wattron(w.info, COLOR_PAIR(5));
-	mvwprintw(w.info, 47, 3, "ESC");
+	mvwprintw(w.info, 47, 3, "[ESC]");
 	wattroff(w.info, COLOR_PAIR(3));
 }
 
@@ -42,7 +42,7 @@ static void	draw_control_info(t_win w)
 	mvwprintw(w.info, 43, 16, "= -1 speed");
 	mvwprintw(w.info, 42, 42, "= +10 speed");
 	mvwprintw(w.info, 43, 42, "= -10 speed");
-	mvwprintw(w.info, 45, 16, "= pause/play");
+	mvwprintw(w.info, 45, 16, "= play/pause");
 	mvwprintw(w.info, 46, 16, "= move by 1 cycle");
 	mvwprintw(w.info, 47, 16, "= exit");
 	draw_control_info_2(w);

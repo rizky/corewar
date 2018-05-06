@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/06 01:55:12 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/06 11:49:47 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,7 +161,7 @@ debug: $(OBJ_ASM) $(OBJ_VM)
 	@$(COMPILER) $(CFLAGS) $(SRC_VM) $(LFLAGS) -g -o $(NAME_VM) -lncurses
 
 norm: all
-	@norminette $(SRC_VM) $(HDRPATH) $(SRC_ASM) | grep -v	Norme -B1 || true
+	@norminette $(HDRPATH) $(SRC_ASM) $(SRC_VM) | grep -v	Norme -B1 || true
 	@cd $(LFTDIR) && $(MAKE) norm
 
 norm2:
@@ -301,8 +301,10 @@ tests_vm_leak:
 	@$(foreach x, $(T_VM_FILES_OP), $(MAKE) X=$(T_VM_DIR_OP)$(x) test_vm_leak;)
 	@$(foreach x, $(T_VM_FILES_B), $(MAKE) X=$(T_VM_DIR_B)$(x) test_vm_leak;)
 	@$(foreach x, $(T_VM_FILES_C), $(MAKE) X=$(T_VM_DIR_C)$(x) test_vm_leak;)
+	@valgrind ./corewar -n2 $(T_VM_DIR_C)zork.cor $(T_VM_DIR_ERROR)magic_number.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
+	@valgrind ./corewar -n2 $(T_VM_DIR_C)zork.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 	@valgrind ./corewar -u $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
-	@valgrind ./corewar -g $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
+	@valgrind ./corewar $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 	@valgrind ./corewar -dump 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 	@valgrind ./corewar -dumpc 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 	@valgrind ./corewar -v 30 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
@@ -384,4 +386,6 @@ tests_vm: corewar
 	
 tests: tests_asm tests_vm
 
-.PHONY: all clean fclean re assemble clean_cor debug norm norm2 tests tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
+tests_leaks: tests_asm_leak tests_vm_leak
+
+.PHONY: all clean fclean re assemble clean_cor debug norm norm2 tests tests_leaks tests_asm test_asm_leak tests_asm_leak tests_asm_valid tests_asm_error tests_asm_v libft
