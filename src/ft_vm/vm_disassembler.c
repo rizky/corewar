@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_uncompiler.c                                    :+:      :+:    :+:   */
+/*   vm_disassembler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:34:43 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 10:01:10 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 17:08:37 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	vm_print_asm(t_array *file, char *path)
 	return (0);
 }
 
-static void	vm_uncompiler_op(t_op op, t_array *file)
+static void	vm_disassembler_op(t_op op, t_array *file)
 {
 	int		i;
 	int		len;
@@ -61,7 +61,7 @@ static void	vm_uncompiler_op(t_op op, t_array *file)
 	fta_append_char(file, '\n');
 }
 
-static t_op	vm_uncompiler_param(int *index, char *op_str)
+static t_op	vm_disassembler_param(int *index, char *op_str)
 {
 	t_op	op;
 	int		j;
@@ -90,7 +90,7 @@ static t_op	vm_uncompiler_param(int *index, char *op_str)
 	return (op);
 }
 
-static void	vm_uncompiler_header(t_header header, t_array *file)
+static void	vm_disassembler_header(t_header header, t_array *file)
 {
 	char		*temp;
 	int			len;
@@ -102,7 +102,7 @@ static void	vm_uncompiler_header(t_header header, t_array *file)
 	fta_append_char(file, '\n');
 }
 
-void		vm_uncompiler(t_vm vm)
+void		vm_disassembler(t_vm vm)
 {
 	t_array		file;
 	int			index;
@@ -113,12 +113,12 @@ void		vm_uncompiler(t_vm vm)
 	while (i < vm.champ_size)
 	{
 		file = NEW_ARRAY(char);
-		vm_uncompiler_header(vm.champ[i].header, &file);
+		vm_disassembler_header(vm.champ[i].header, &file);
 		index = 0;
 		while (index < (int)vm.champ[i].header.prog_size)
 		{
-			op = vm_uncompiler_param(&index, vm.champ[i].op);
-			vm_uncompiler_op(op, &file);
+			op = vm_disassembler_param(&index, vm.champ[i].op);
+			vm_disassembler_op(op, &file);
 			index += op.size;
 		}
 		vm_print_asm(&file, vm.champ[i].path);

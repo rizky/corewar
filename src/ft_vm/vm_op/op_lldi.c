@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 17:59:23 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/03 11:26:02 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 17:26:28 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		vm_op_lldi(t_vm *vm, t_process *p)
 	vm_op_inc(vm, p);
 }
 
-static void	vm_lldi_print2(t_process p, int param0, int param1)
+static void	vm_lldi_print_2(t_process p, int param0, int param1)
 {
 	ft_printf("P %4d | ", p.index);
 	ft_printf("%s", g_op_dict[p.op.opcode].name);
@@ -113,5 +113,5 @@ void		vm_lldi_print(t_process p)
 	param0 = (p.op.params[0].type == IND_CODE) ?
 		vm_ld_mem((p.offset + p.pc + p.op.params[0].value), 4)
 		: param0;
-	vm_lldi_print2(p, param0, param1);
+	vm_lldi_print_2(p, param0, param1);
 }

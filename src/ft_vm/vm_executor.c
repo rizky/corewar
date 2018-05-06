@@ -6,21 +6,19 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:23:54 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 09:00:45 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 17:09:53 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-static void
-	vm_print_v_4(t_process p)
+static void	vm_print_v_4(t_process p)
 {
 	if (p.op.opcode != 0)
 		(((void (*)())g_op_dict[p.op.opcode].opprint)(p));
 }
 
-static void
-	vm_print_v_16(t_process p)
+static void	vm_print_v_16(t_process p)
 {
 	int i;
 	int	size;
@@ -45,8 +43,7 @@ static void
 	}
 }
 
-static void
-	vm_executor_op(t_vm *vm, t_process *p)
+static void	vm_executor_op(t_vm *vm, t_process *p)
 {
 	t_process prev_p;
 
@@ -64,8 +61,7 @@ static void
 	ft_bzero(&(p->op), sizeof(t_op));
 }
 
-void
-	vm_executor(t_vm *vm)
+void		vm_executor(t_vm *vm)
 {
 	int			i;
 	t_process	*p;
@@ -89,6 +85,6 @@ void
 	}
 	(vm->dump == 1 && vm->cycles == g_cycles) ? vm_print_memory() : 0;
 	(vm->dump == 2 && vm->cycles == g_cycles) ? vm_print_memory_color(*vm) : 0;
-	(vm->dump == 3 && (vm->cycles = 1) == 1) ? vm_uncompiler(*vm) : 0;
+	(vm->dump == 3 && (vm->cycles = 1) == 1) ? vm_disassembler(*vm) : 0;
 	(vm->option_g[VISU_1]) ? vm_print_memory_cursor(*vm) : 0;
 }

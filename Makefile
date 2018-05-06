@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/06 11:49:47 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/06 17:21:23 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,11 @@ FTVM:=	ft_vm \
 		vm_decompiler_file \
 		vm_checker \
 		vm_executor \
+		vm_disassembler \
 		vm_print \
 		vm_error \
 		vm_free \
 		vm_helper_1 vm_helper_2 \
-		vm_uncompiler
 
 FTVMDRAWPATH:= ft_vm/vm_draw/
 FTVMDRAW:= draw_animation_1 \
