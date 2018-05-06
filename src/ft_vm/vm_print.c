@@ -6,14 +6,13 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:41:04 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/05 00:05:26 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 08:22:52 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vm.h"
 
-int
-	vm_print_usage(char **av, int status)
+int			vm_print_usage(char **av, int status)
 {
 	ft_dprintf(2, "usage: %s [options] [-n number] champion1.cor ...\n", av[0]);
 	ft_dprintf(2, "\n\033[1;37mOPTIONS\033[0m\n", 9);
@@ -28,13 +27,13 @@ int
 	ft_dprintf(2, "                - 8  : Show deaths\n");
 	ft_dprintf(2, "                - 16 : Show PC movements ");
 	ft_dprintf(2, "(Except for jumps)\n");
+	ft_dprintf(2, "       -u : Decompile .cor back to .s\n");
 	ft_dprintf(2, "       -g : Printf  visualization\n");
 	ft_dprintf(2, "       -G : Ncurses visualization\n");
 	return (status);
 }
 
-void
-	vm_print_memory(void)
+void		vm_print_memory(void)
 {
 	int		i;
 
@@ -51,8 +50,7 @@ void
 	ft_printf("\n");
 }
 
-static int
-	vm_get_cursor_color(t_vm vm, int index)
+static int	vm_get_cursor_color(t_vm vm, int index)
 {
 	int		k;
 
@@ -67,8 +65,7 @@ static int
 	return (0);
 }
 
-void
-	vm_print_memory_cursor(t_vm vm)
+void		vm_print_memory_cursor(t_vm vm)
 {
 	int		i;
 	int		color;
@@ -97,8 +94,7 @@ void
 	ft_printf("\n");
 }
 
-void
-	vm_print_memory_color(t_vm vm)
+void		vm_print_memory_color(t_vm vm)
 {
 	int		i;
 	int		color;
