@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 04:54:09 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/02 16:34:30 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/06 10:14:31 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ static void	update_info(t_vm *vm, t_win win)
 
 	process_nbr = vm->processes.size;
 	if (process_nbr > g_draw_status.process)
-		system("afplay -v 1 resources/sound/fork.wav&");
+		if (system("test -r resources/sound/fork.wav") == 0)
+			system("afplay -v 1 resources/sound/fork.wav&");
 	if (process_nbr < g_draw_status.process)
-		system("afplay -v 3 resources/sound/kill.mp3&");
+		if (system("test -r resources/sound/kill.mp3") == 0)
+			system("afplay -v 3 resources/sound/kill.mp3&");
 	mvwprintw(win.info, 9, 3, "* Processes : %d", process_nbr);
 	wattron(win.info, COLOR_PAIR(5));
 	mvwprintw(win.info, 19, 3, "* NBR_LIVE : %d/%d	* MAX_CHECKS : %d/%d",

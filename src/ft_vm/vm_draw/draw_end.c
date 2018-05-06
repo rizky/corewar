@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 05:08:34 by jyeo              #+#    #+#             */
-/*   Updated: 2018/05/04 20:17:30 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 10:09:19 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	draw_end(t_win *win)
 	wrefresh((*win).info);
 	system("if [ $(pgrep afplay) ]; \
 		then kill $(pgrep afplay); fi");
-	system("afplay resources/sound/win.wav&");
+	if (system("test -r resources/sound/win.wav") == 0)
+		system("afplay resources/sound/win.wav&");
 	getch();
 	system("if [ $(pgrep afplay) ]; \
 		then kill $(pgrep afplay); fi");
