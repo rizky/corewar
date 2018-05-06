@@ -50,18 +50,23 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-
+.idea
+cmake-build-debug
+CMakeLists.txt
 asm
 asm *
 !resources/vm_champs/asm
 corewar
+!resources/binaries/asm
+!resources/binaries/corewar
+!tests/asm
 .cache_exists
 text
 *cor
 *.cor
-resources/champs/ex1.cor
-
 *cor
 out1
 out2
 *.DS_Store
+!tests/vm/error/zork_lt_size.s.cor
+!tests/vm/error/zork_mt_size.s.cor
