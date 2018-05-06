@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:00:18 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/05 00:07:40 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/06 08:56:10 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int			vm_error(int errnum, int status, char *name)
 		ft_dprintf(2, "Error - Minimum number of players is 1\n");
 	else if (errnum == CHAMP_MAX)
 		ft_dprintf(2, "Error - Maximum number of players is %d\n", MAX_PLAYERS);
-	else if (errnum == INVALID_FILE)
+	else if (errnum == INVALID_FILE && name)
 		ft_dprintf(2, "Error - File is invalid\n");
+	else if (errnum == INVALID_FILE)
+		ft_dprintf(2, "Error - Missing player\n");
 	else if (errnum == INVALID_HEADER)
 		ft_dprintf(2, "Error - Header is invalid\n");
 	else if (errnum == INVALID_MAGIC)
