@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 20:42:42 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 00:09:12 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/07 17:05:34 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static int	vm_read_header(int fd, t_champ *champ)
 	if ((ret = read(fd, &buf, 4) <= 0))
 		return (INVALID_HEADER);
 	champ->header.prog_size = vm_binary_to_int(buf, 4);
+	if (champ->header.prog_size == 0)
+		return (NO_CODE);
 	if (champ->header.prog_size > CHAMP_MAX_SIZE)
 		return (CODE_MAX);
 	if ((ret = read(fd, &buf, COMMENT_LENGTH + 4)) <= 0)

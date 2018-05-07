@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 21:39:11 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 17:20:48 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/07 16:59:11 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # define INVALID_HEADER	5
 # define INVALID_MAGIC	6
 # define INVALID_INSTR	7
-# define CODE_MAX		8
+# define NO_CODE		8
+# define CODE_MAX		9
 
 # define VISU_1			0
 # define VISU_2			1
