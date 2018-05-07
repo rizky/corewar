@@ -35,5 +35,7 @@ int			vm_error(int errnum, int status, char *name)
 	else if (errnum == CODE_MAX)
 		ft_dprintf(2, "Error - Code is too large (max %d bytes) \n",
 			CHAMP_MAX_SIZE);
+	else if (errnum == NO_CODE)
+		ft_dprintf(2, "Error - No code found in the file\n");
 	return (status);
 }

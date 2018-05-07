@@ -24,6 +24,7 @@
 # define INVALID_MAGIC	6
 # define INVALID_INSTR	7
 # define CODE_MAX		8
+# define NO_CODE		9
 
 # define VISU_1			0
 # define VISU_2			1
