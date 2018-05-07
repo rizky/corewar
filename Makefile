@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/07 07:07:07 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/07 16:10:16 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -168,9 +168,6 @@ debug: $(OBJ_ASM) $(OBJ_VM)
 norm: all
 	@norminette $(HDRPATH) $(SRC_ASM) $(SRC_VM) | grep -v Norme -B1 || true
 	@cd $(LFTDIR) && $(MAKE) norm
-
-norm2:
-	@sh ./norm/norm.sh
 
 # ----- TEST UNIT ASM ------
 T_ASM_DIR_ERROR = tests/asm/error/
