@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 16:46:15 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/04/19 10:17:16 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/07 18:24:49 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ static char
 	{
 		if (c == str[v[0]] || str[v[0]] == '\0')
 		{
-			strtab[v[1]] = (char*)malloc(sizeof(char) * (v[2] + 1));
+			if (!(strtab[v[1]] = (char*)malloc(sizeof(char) * (v[2] + 1))))
+			{
+				ft_free_strtab(strtab, 0);
+				return (NULL);
+			}
 			strtab[v[1]] = ft_strncpy(strtab[v[1]],
 										str + v[0] - v[2], v[2]);
 			strtab[v[1]][v[2]] = '\0';
@@ -54,8 +58,7 @@ static char
 		}
 		else
 		{
-			if (v[3] == 0)
-				v[3] = 1;
+			(v[3] == 0) ? v[3] = 1 : 0;
 			v[2]++;
 		}
 		v[0]++;

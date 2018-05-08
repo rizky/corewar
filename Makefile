@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/06 18:15:26 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/07 16:10:16 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ OBJ_VM+=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES_VM_OP)))
 
 # ==================
 CCHF:=.cache_exists
+TALLY:=.tally
 
 all: $(NAME) $(NAME_VM)
 
@@ -144,6 +145,7 @@ fclean: clean
 	@rm -rf $(NAME_VM).dSYM/
 	@cd $(LFTDIR) && $(MAKE) fclean
 	@rm -f out1 out2
+	@rm -f $(TALLY)
 
 re: fclean
 	@$(MAKE) all
@@ -154,6 +156,9 @@ assemble: asm
 clean_cor:
 	@rm -f tests/asm/v*/*.cor tests/vm/[bclo]*/*.cor
 
+clean_tally:
+	@rm -f $(TALLY)
+
 debug: $(OBJ_ASM) $(OBJ_VM)
 	@echo $(CYAN) " - Compiling debug asm" $(EOC)
 	@$(COMPILER) $(CFLAGS) $(SRC_ASM) $(LFLAGS) -g -o $(NAME)
@@ -163,9 +168,6 @@ debug: $(OBJ_ASM) $(OBJ_VM)
 norm: all
 	@norminette $(HDRPATH) $(SRC_ASM) $(SRC_VM) | grep -v Norme -B1 || true
 	@cd $(LFTDIR) && $(MAKE) norm
-
-norm2:
-	@sh ./norm/norm.sh
 
 # ----- TEST UNIT ASM ------
 T_ASM_DIR_ERROR = tests/asm/error/
@@ -202,8 +204,8 @@ test_asm_valid : asm
 	@./asm -a $(T_ASM_DIR_VALID)$(X) > out1 2>> out1; true
 	@./resources/binaries/asm -a $(T_ASM_DIR_VALID)$(X) > out2; true
 	@if diff out1 out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_ASM_DIR_VALID)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_ASM_DIR_VALID)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_ASM_DIR_VALID)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
+		else echo $(RED) " - [KO] $(T_ASM_DIR_VALID)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
 	fi
 
 tests_asm_valid: asm
@@ -235,15 +237,13 @@ T_VM_DIR_OCP = tests/vm/ocp/
 T_VM_FILES_OCP:=$(shell cd $(T_VM_DIR_OCP); ls | egrep '^$(T_FILE).*.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
 DUMP = 150
 
-OK = 0
-TOTAL = 0
 test_vm_op : corewar
 	@./resources/binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
 	@./corewar -v 30 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
 	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) ; \
-		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
 	fi
 
 tests_vm_op: corewar
@@ -263,8 +263,8 @@ test_vm_op_champ : corewar
 	@./corewar -v 30 $(T_VM_DIR)$(X).cor > $(T_VM_DIR)$(X).out1 2>> $(T_VM_DIR)$(X).out1; true
 	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor > $(T_VM_DIR)$(X).out2; true
 	@if diff $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && rm $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2; \
-		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && diff $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 | head -20 ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && rm $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 && echo "OK" >> $(TALLY); \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && echo "KO" >> $(TALLY) && diff $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 | head -20; \
 	fi
 
 tests_vm_op_champs: corewar
@@ -280,8 +280,8 @@ test_vm_dump : corewar
 	@./corewar -dump $(DUMP) $(T_VM_DIR)$(X).cor > out1 2>> out1; true
 	@./resources/binaries/corewar -d $(DUMP) $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
 	fi
 
 tests_vm_dump: corewar
@@ -318,8 +318,8 @@ test_vm_battle : corewar
 	@./corewar -v30 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
 	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
 	@if diff out1 out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR_B)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_VM_DIR_B)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_B)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_B)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
 	fi
 
 tests_vm_battle: corewar
@@ -334,8 +334,8 @@ test_vm_dump_overflow : corewar
 	@./corewar -dump $(DUMP) $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
 	@./resources/binaries/corewar -d $(DUMP) $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
 	fi
 
 tests_vm_dump_overflow: corewar
@@ -351,8 +351,8 @@ test_vm_op_overflow : corewar
 	@./corewar -v 30 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
 	@./resources/binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
+		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
 	fi
 
 tests_vm_op_overflow: corewar
@@ -365,8 +365,8 @@ T_VM_FILES_ERROR:=$(shell cd $(T_VM_DIR_ERROR); ls | egrep '^[^X]+$$' | rev | cu
 test_vm_error : corewar
 	@./resources/binaries/asm $(T_VM_DIR_ERROR)$(X).s > /dev/null; true
 	@if [[ $$(./corewar $(T_VM_DIR_ERROR)$(X).cor $(SILENT) ) < 0 ]] ; \
-		then echo $(GREEN) " - [OK] $(T_VM_DIR_ERROR)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_VM_DIR_ERROR)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_VM_DIR_ERROR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
+		else echo $(RED) " - [KO] $(T_VM_DIR_ERROR)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
 	fi
 
 tests_vm_error: corewar
@@ -381,9 +381,24 @@ tests_vm: corewar
 	@$(MAKE) tests_vm_battle
 	@$(MAKE) tests_vm_dump_overflow
 	@$(MAKE) tests_vm_op_overflow
-	
-tests: tests_asm tests_vm
+
+SCORE=`grep "OK" $(TALLY) | wc -l`
+
+TOTAL=`grep "K" $(TALLY) | wc -l`
+
+tests: clean_tally tests_asm tests_vm
+	@if [[ $(SCORE) = $(TOTAL) ]] ; \
+		then echo $(GREEN) ; \
+	fi
+	@if [[ $(SCORE) -lt $(TOTAL) ]] ; \
+		then echo $(CYAN) ; \
+	fi
+	@if [[ $(SCORE) -lt $$(($(TOTAL) / 2)) ]] ; \
+		then echo $(RED) ; \
+	fi
+	@echo " " - [$(SCORE) / $(TOTAL) ] $(EOC)
+	@rm -f $(TALLY)
 
 tests_leaks: tests_asm_leak tests_vm_leak
 
-.PHONY: all clean fclean re assemble clean_cor debug norm norm2 tests tests_leaks tests_asm test_asm_leak tests_asm_leak test_asm_valid tests_asm_valid test_asm_bin tests_asm_bin tests_asm_v tests_asm_error tests_asm_v tests_vm test_vm_leak tests_vm_leak test_vm_battle tests_vm_battle test_vm_dump tests_vm_dump tests_vm_dump_champs tests_vm_dump_champs_loop tests_vm_dump_loop test_vm_dump_overflow tests_vm_dump_overflow tests_vm_dump_overflow_loop tests_vm_ocp test_vm_op tests_vm_op test_vm_op_champ tests_vm_op_champs test_vm_op_overflow tests_vm_op_overflow test_vm_error tests_vm_error libft
+.PHONY: all clean fclean re assemble clean_cor clean_tally debug norm tests tests_leaks tests_asm test_asm_leak tests_asm_leak test_asm_valid tests_asm_valid test_asm_bin tests_asm_bin tests_asm_v tests_asm_error tests_asm_v tests_vm test_vm_leak tests_vm_leak test_vm_battle tests_vm_battle test_vm_dump tests_vm_dump tests_vm_dump_champs tests_vm_dump_champs_loop tests_vm_dump_loop test_vm_dump_overflow tests_vm_dump_overflow tests_vm_dump_overflow_loop tests_vm_ocp test_vm_op tests_vm_op test_vm_op_champ tests_vm_op_champs test_vm_op_overflow tests_vm_op_overflow test_vm_error tests_vm_error libft

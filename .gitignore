@@ -70,3 +70,4 @@ out2
 *.DS_Store
 !tests/vm/error/zork_lt_size.s.cor
 !tests/vm/error/zork_mt_size.s.cor
+.tally

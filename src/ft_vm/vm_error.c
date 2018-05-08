@@ -6,7 +6,7 @@
 /*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:00:18 by rnugroho          #+#    #+#             */
-/*   Updated: 2018/05/06 08:56:10 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/07 16:59:02 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int			vm_error(int errnum, int status, char *name)
 		ft_dprintf(2, "Error - Invalid file signature\n");
 	else if (errnum == INVALID_INSTR)
 		ft_dprintf(2, "Error - Inconsistent number of instructions\n");
+	else if (errnum == NO_CODE)
+		ft_dprintf(2, "Error - No code found in the file\n");
 	else if (errnum == CODE_MAX)
 		ft_dprintf(2, "Error - Code is too large (max %d bytes) \n",
 			CHAMP_MAX_SIZE);
