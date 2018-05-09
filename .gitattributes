@@ -1,1 +1,1 @@
-tests/*/*/*.s linguist-vendored=true
+tests/* linguist-vendored=true
