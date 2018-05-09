@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser_header.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/19 13:32:43 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/09 10:30:59 by rnugroho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int			ft_get_name(t_asm *a)
 		return (-1);
 	a->name = ft_re_capture("\".*\"", a->file[a->i]);
 	(!a->name) ? a->name = "\0" : 0;
+	if (ft_strlen(a->name) > PROG_NAME_LENGTH)
+		return (-1);
 	return (0);
 }
 
@@ -73,5 +75,7 @@ int			ft_get_comment(t_asm *a)
 		return (-1);
 	a->comment = ft_re_capture("\".*\"", a->file[a->i]);
 	(!a->comment) ? a->comment = "\0" : 0;
+	if (ft_strlen(a->comment) > COMMENT_LENGTH)
+		return (-1);
 	return (0);
 }
