@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 09:24:11 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/19 13:32:46 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:50:35 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static int	asm_check_header(t_asm *a)
 		return (ft_error(HEADER, -1, NULL));
 	if (a->comment == NULL)
 		return (ft_error(HEADER, -1, NULL));
+	if (ft_strlen(a->name) - 2 > PROG_NAME_LENGTH)
+		return (ft_error(NAME_LEN, -1, NULL));
+	if (ft_strlen(a->comment) - 2 > COMMENT_LENGTH)
+		return (ft_error(COMMENT_LEN, -1, NULL));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/04/19 13:32:43 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/05/09 17:50:53 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	asm_get_content_nl(t_asm *a, char **content_str)
 	fta_append_char(&content, '\n');
 	fta_append(&content, a->file[a->i], ft_strlen(a->file[a->i]));
 	fta_append_char(&content, '\0');
-	*content_str = (char *)content.data;
+	*content_str = (char*)content.data;
 	return (1);
 }
 

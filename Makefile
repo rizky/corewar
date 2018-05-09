@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/07 16:10:16 by fpetras          ###   ########.fr        #
+#    Updated: 2018/05/08 17:09:38 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -175,8 +175,8 @@ T_ASM_FILES_ERROR:=$(shell cd $(T_ASM_DIR_ERROR); ls  | egrep '^$(T_FILE_ERROR).
 
 test_asm_error : asm
 	@if [[ $$(./asm -a $(T_ASM_DIR_ERROR)$(X) $(SILENT) ) < 0 ]] ; \
-		then echo $(GREEN) " - [OK] $(T_ASM_DIR_ERROR)$(X)" $(EOC); \
-		else echo $(RED) " - [KO] $(T_ASM_DIR_ERROR)$(X)" $(EOC) ; \
+		then echo $(GREEN) " - [OK] $(T_ASM_DIR_ERROR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
+		else echo $(RED) " - [KO] $(T_ASM_DIR_ERROR)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
 	fi
 
 tests_asm_error: asm
