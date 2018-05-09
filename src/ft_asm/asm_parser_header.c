@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser_header.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:56:36 by fpetras           #+#    #+#             */
-/*   Updated: 2018/05/09 10:30:59 by rnugroho         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:50:53 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	asm_get_content_nl(t_asm *a, char **content_str)
 	fta_append_char(&content, '\n');
 	fta_append(&content, a->file[a->i], ft_strlen(a->file[a->i]));
 	fta_append_char(&content, '\0');
-	*content_str = (char *)content.data;
+	*content_str = (char*)content.data;
 	return (1);
 }
 
@@ -55,8 +55,6 @@ int			ft_get_name(t_asm *a)
 		return (-1);
 	a->name = ft_re_capture("\".*\"", a->file[a->i]);
 	(!a->name) ? a->name = "\0" : 0;
-	if (ft_strlen(a->name) > PROG_NAME_LENGTH)
-		return (-1);
 	return (0);
 }
 
@@ -75,7 +73,5 @@ int			ft_get_comment(t_asm *a)
 		return (-1);
 	a->comment = ft_re_capture("\".*\"", a->file[a->i]);
 	(!a->comment) ? a->comment = "\0" : 0;
-	if (ft_strlen(a->comment) > COMMENT_LENGTH)
-		return (-1);
 	return (0);
 }
