@@ -64,30 +64,33 @@ OPTIONS
 Parsing with our own regex library:
 
 ```C
-static int  asm_parser_opnamelabel(char *line, t_op *op)
+int asm_get_paramtype(int opcode, t_param *param)
 {
-    char    *temp;
-
-    if (!ft_re_match("^[^ \t%]+:[ \t]*\\w+[ \t]*.*", line))
-    {
-        temp = ft_re_capture("^[^% \t]+:", line);
-        (*op).label = ft_re_capture("[^:]+", temp);
-        free(temp);
-        temp = ft_re_capture(":[ \t]*\\w+[ \t]*.*", line);
-        (*op).opname = ft_re_capture("\\w+", temp);
-        free(temp);
-    }
-    else if (!ft_re_match("^[^ \t%]+:[ \t]*$", line))
-    {
-        temp = ft_re_capture("^[^% \t]+:", line);
-        (*op).label = ft_re_capture("[^:]+", temp);
-        free(temp);
-    }
-    else if (!ft_re_match("^\\w+[^:][ \t]*.*", line))
-        (*op).opname = ft_re_capture("^\\w+", line);
-    else
-        return (-1);
-    return (0);
+	if (ft_re_match("^r\\d+$", (*param).str) == 0)
+	{
+		(*param).value = asm_get_paramval((*param).str, "\\d+");
+		(*param).size = 1;
+		return (T_REG);
+	}
+	else if (ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0 ||
+                     ft_re_match("^%-?\\d+$", (*param).str) == 0)
+	{
+		(ft_re_match("^%:[\\w_\\d]+$", (*param).str) == 0) ?
+			(*param).is_label = 1 : 0;
+		(*param).value = asm_get_paramval((*param).str, "-?\\d+");
+		(*param).size = g_op_dict[opcode].d_size;
+		return (T_DIR);
+	}
+	else if (ft_re_match("^:[\\w_\\d]+$", (*param).str) == 0 ||
+			ft_re_match("^-?\\d+$", (*param).str) == 0)
+	{
+		!ft_re_match(":[\\w_\\d]+$", (*param).str) ? (*param).is_label = 1 : 0;
+		(*param).value = asm_get_paramval((*param).str, "-?\\d+");
+		(*param).size = 2;
+		return (T_IND);
+	}
+	else
+		return (-1);
 }
 ```
 
