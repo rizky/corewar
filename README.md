@@ -1,12 +1,16 @@
 # Corewar Unit-Tests
 
-Corewar Unit-Tests is a unit testing to check whether your asm and corewar have the same behaviour with zaz's asm and corewar. In order to use most of the tests, some options are expected to be implemented by your asm and corewar.
+Corewar Unit-Tests is a unit testing to check whether your asm and corewar have the same behaviour with zaz's asm and corewar. In order to use most of the tests, some options are expected to be implemented by your asm and corewar. By default unit-tests will use `-v 30`, but you can configure the options inside Makefile in the config session.
 
-Option|Description|
-|---------- |---------- |
-|./asm -a| Prints a stripped and annoted version of the code|
-|./corewar -v 30 | Verbosity levels: 2  : Show cycles, 4  : Show operations, 8  : Show deaths, 16 : Show PC movements (Except for jumps)|
-|./corewar -dump  nbr_cycles | Dump the memory after nbr_cycles|
+Option| Makefile Variable |Description|
+|---------- |---------- |---------- |
+|./asm -a| OPT_A | Prints a stripped and annoted version of the code|
+|./corewar -v 30 | OPT_V | Verbosity levels: 2  : Show cycles, 4  : Show operations, 8  : Show deaths, 16 : Show PC movements (Except for jumps)|
+|./corewar -dump | OPT_DUMP  nbr_cycles | Dump the memory after nbr_cycles|
+
+## Source
+
+https://github.com/rizkyario/42-corewar/tree/unit-tests
 
 ## Instalation
 

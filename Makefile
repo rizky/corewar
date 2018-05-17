@@ -6,12 +6,18 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/17 19:55:26 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/17 21:35:57 by rnugroho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# ----- Config -----
+
 ASM_PATH:=./corewar-project/asm
 VM_PATH:=./corewar-project/corewar
+
+OPT_V:=-v 30
+OPT_A:=-a
+OPT_DUMP:=-dump
 
 # ----- Colors -----
 BLACK:="\033[1;30m"
@@ -32,7 +38,7 @@ T_ASM_DIR_ERROR = tests/asm/error/
 T_ASM_FILES_ERROR:=$(shell cd $(T_ASM_DIR_ERROR); ls  | egrep '^$(T_FILE_ERROR).*.s$$' | sort -f )
 
 test_asm_error :
-	@if [[ $$(./$(ASM_PATH) -a $(T_ASM_DIR_ERROR)$(X) $(SILENT) ) < 0 ]] ; \
+	@if [[ $$(./$(ASM_PATH) $(OPT_A) $(T_ASM_DIR_ERROR)$(X) $(SILENT) ) < 0 ]] ; \
 		then echo $(GREEN) " - [OK] $(T_ASM_DIR_ERROR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
 		else echo $(RED) " - [KO] $(T_ASM_DIR_ERROR)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
 	fi
@@ -59,7 +65,7 @@ tests_asm_bin:
 	@$(foreach x, $(T_ASM_FILES_BIN), $(MAKE) X=$x test_asm_bin;)
 
 test_asm_valid :
-	@./$(ASM_PATH) -a $(T_ASM_DIR_VALID)$(X) > out1 2>> out1; true
+	@./$(ASM_PATH) $(OPT_A) $(T_ASM_DIR_VALID)$(X) > out1 2>> out1; true
 	@./binaries/asm -a $(T_ASM_DIR_VALID)$(X) > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_ASM_DIR_VALID)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
@@ -97,8 +103,8 @@ DUMP = 150
 
 test_vm_op :
 	@./binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./$(VM_PATH) -v 30 $(T_VM_DIR)$(X).cor > out1 2>> out1; true
-	@./binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor > out2; true
+	@./$(VM_PATH) $(OPT_V) $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./binaries/corewar $(OPT_V) -a $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
 		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
@@ -118,8 +124,8 @@ tests_vm_dump_champs_loop:
 
 test_vm_op_champ :
 	@./binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./$(VM_PATH) -v 30 $(T_VM_DIR)$(X).cor > $(T_VM_DIR)$(X).out1 2>> $(T_VM_DIR)$(X).out1; true
-	@./binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor > $(T_VM_DIR)$(X).out2; true
+	@./$(VM_PATH) $(OPT_V) $(T_VM_DIR)$(X).cor > $(T_VM_DIR)$(X).out1 2>> $(T_VM_DIR)$(X).out1; true
+	@./binaries/corewar $(OPT_V) -a $(T_VM_DIR)$(X).cor > $(T_VM_DIR)$(X).out2; true
 	@if diff $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && rm $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 && echo "OK" >> $(TALLY); \
 		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && echo "KO" >> $(TALLY) && diff $(T_VM_DIR)$(X).out1 $(T_VM_DIR)$(X).out2 | head -20; \
@@ -135,7 +141,7 @@ tests_vm_ocp:
 
 test_vm_dump :
 	@./binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./$(VM_PATH) -dump $(DUMP) $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./$(VM_PATH) $(OPT_DUMP) $(DUMP) $(T_VM_DIR)$(X).cor > out1 2>> out1; true
 	@./binaries/corewar -d $(DUMP) $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
@@ -163,9 +169,8 @@ tests_vm_leak:
 	@valgrind ./$(VM_PATH) -n2 $(T_VM_DIR_C)zork.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 	@valgrind ./$(VM_PATH) -u $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 	@valgrind ./$(VM_PATH) $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
-	@valgrind ./$(VM_PATH) -dump 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
-	@valgrind ./$(VM_PATH) -dumpc 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
-	@valgrind ./$(VM_PATH) -v 30 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
+	@valgrind ./$(VM_PATH) $(OPT_DUMP) 150 $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
+	@valgrind ./$(VM_PATH) $(OPT_V) $(T_VM_DIR_OP)add.cor 2>&1 | grep -oE 'Command:.*|definitely.*|indirectly.*|Invalid read.*'
 
 T_VM_DIR_B = tests/vm/battle/
 T_VM_FILES_B:=$(shell cd $(T_VM_DIR_B); ls | egrep '^$(T_FILE).*.s$$' | egrep '^[^X]+.s$$' | rev | cut -f 2- -d '.' | rev | sort -f )
@@ -174,7 +179,7 @@ test_vm_battle :
 	@./binaries/asm $(T_VM_DIR_B)$(X).s > /dev/null; true
 	@./binaries/asm $(T_VM_DIR_B)$(X)X.s > /dev/null; true
 	@./$(VM_PATH) -v30 $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out1 2>> out1; true
-	@./binaries/corewar -v 30 -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
+	@./binaries/corewar $(OPT_V) -a $(T_VM_DIR_B)$(X).cor $(T_VM_DIR_B)$(X)X.cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR_B)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
 		else echo $(RED) " - [KO] $(T_VM_DIR_B)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
@@ -189,7 +194,7 @@ T_VM_FILES_O:=$(shell cd $(T_VM_DIR_O); ls | egrep '^$(T_FILE).*.s$$' | rev | cu
 
 test_vm_dump_overflow :
 	@./binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./$(VM_PATH) -dump $(DUMP) $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./$(VM_PATH) $(OPT_DUMP) $(DUMP) $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
 	@./binaries/corewar -d $(DUMP) $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
@@ -206,8 +211,8 @@ tests_vm_dump_overflow_loop:
 
 test_vm_op_overflow : 
 	@./binaries/asm $(T_VM_DIR)$(X).s > /dev/null; true
-	@./$(VM_PATH) -v 30 $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
-	@./binaries/corewar -v 30 -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
+	@./$(VM_PATH) $(OPT_V) $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out1 2>> out1; true
+	@./binaries/corewar $(OPT_V) -a $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor $(T_VM_DIR)$(X).cor > out2; true
 	@if diff out1 out2 $(SILENT); \
 		then echo $(GREEN) " - [OK] $(T_VM_DIR)$(X)" $(EOC) && echo "OK" >> $(TALLY); \
 		else echo $(RED) " - [KO] $(T_VM_DIR)$(X)" $(EOC) && echo "KO" >> $(TALLY); \
