@@ -1,6 +1,6 @@
 # Corewar Unit-Tests
 
-Corewar Unit-Tests is a unit test-suite to check whether your asm and corewar have the same behaviour as zaz's asm and corewar. In order to use most of the tests, some options are expected to be implemented by your asm and corewar. By default unit-tests will use `-v 30`, but you can configure the options inside Makefile in the config session.
+Corewar Unit-Tests is a unit test-suite to check whether your asm and corewar have the same behaviour as zaz's asm and corewar. In order to use most of the tests, some options are expected to be implemented by your asm and corewar. By default unit-tests will use `-v 30`, but you can configure the options inside Makefile in the config section.
 
 Option| Makefile Variable |Description|
 |---------- |---------- |---------- |
