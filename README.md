@@ -14,7 +14,15 @@ https://github.com/rizkyario/42-corewar/tree/unit-tests
 
 ## Installation
 
-`git clone https://github.com/rizkyario/42-corewar.git && cd 42-corewar && git checkout unit-tests && make tests`
+```
+git clone https://github.com/rizkyario/42-corewar.git && cd 42-corewar && git checkout unit-tests && make tests
+```
+
+or
+
+```
+curl --silent "https://api.github.com/repos/rizkyario/42-corewar/releases/latest" | grep '"tarball_url":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs curl -L | tar zx
+```
 
 ## Instruction
 
