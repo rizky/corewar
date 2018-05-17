@@ -8,6 +8,10 @@ Option|Description|
 |./corewar -v 30 | Verbosity levels: 2  : Show cycles, 4  : Show operations, 8  : Show deaths, 16 : Show PC movements (Except for jumps)|
 |./corewar -dump  nbr_cycles | Dump the memory after nbr_cycles|
 
+## Instalation
+
+`git clone https://github.com/rizkyario/42-corewar.git && cd 42-corewar && git checkout unit-tests && make tests`
+
 ## Instruction
 
 - Add asm binary path to ASM_PATH inside Makefile
