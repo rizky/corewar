@@ -6,7 +6,7 @@ Option| Makefile Variable |Description|
 |---------- |---------- |---------- |
 |./asm -a| OPT_A | Prints a stripped and annoted version of the code|
 |./corewar -v 30 | OPT_V | Verbosity levels: 2  : Show cycles, 4  : Show operations, 8  : Show deaths, 16 : Show PC movements (Except for jumps)|
-|./corewar -dump | OPT_DUMP  nbr_cycles | Dump the memory after nbr_cycles|
+|./corewar -dump {nbr_cycles} | OPT_DUMP | Dump the memory after nbr_cycles|
 
 ## Source
 
