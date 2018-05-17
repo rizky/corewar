@@ -6,7 +6,7 @@
 #    By: rnugroho <rnugroho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/01 20:07:00 by rnugroho          #+#    #+#              #
-#    Updated: 2018/05/17 19:55:26 by rnugroho         ###   ########.fr        #
+#    Updated: 2018/05/17 20:59:26 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,13 @@ PURPLE:="\033[1;36m"
 WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
 # ==================
-
 TALLY:=.tally
+
+all: tests
+
+clean:
+	@rm -f out1 out2
+
 clean_tally:
 	@rm -f $(TALLY)
 
@@ -261,4 +266,4 @@ tests_leaks: tests_asm_leak tests_vm_leak
 
 test: tests
 
-.PHONY: test tests tests_leaks tests_asm test_asm_leak tests_asm_leak test_asm_valid tests_asm_valid test_asm_bin tests_asm_bin tests_asm_v tests_asm_error tests_asm_v tests_vm test_vm_leak tests_vm_leak test_vm_battle tests_vm_battle test_vm_dump tests_vm_dump tests_vm_dump_champs tests_vm_dump_champs_loop tests_vm_dump_loop test_vm_dump_overflow tests_vm_dump_overflow tests_vm_dump_overflow_loop tests_vm_ocp test_vm_op tests_vm_op test_vm_op_champ tests_vm_op_champs test_vm_op_overflow tests_vm_op_overflow test_vm_error tests_vm_error libft
+.PHONY: all clean test tests tests_leaks tests_asm test_asm_leak tests_asm_leak test_asm_valid tests_asm_valid test_asm_bin tests_asm_bin tests_asm_v tests_asm_error tests_asm_v tests_vm test_vm_leak tests_vm_leak test_vm_battle tests_vm_battle test_vm_dump tests_vm_dump tests_vm_dump_champs tests_vm_dump_champs_loop tests_vm_dump_loop test_vm_dump_overflow tests_vm_dump_overflow tests_vm_dump_overflow_loop tests_vm_ocp test_vm_op tests_vm_op test_vm_op_champ tests_vm_op_champs test_vm_op_overflow tests_vm_op_overflow test_vm_error tests_vm_error libft
