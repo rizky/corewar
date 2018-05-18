@@ -8,6 +8,14 @@ We explored the design of a VM (with the relevant instructions, records, etc.) a
 
 `git clone --recurse-submodules https://github.com/rizkyario/42-corewar.git && cd 42-corewar && make`
 
+## Wiki
+* [Home](https://github.com/rizkyario/42-corewar/wiki)
+* [Assembler](https://github.com/rizkyario/42-corewar/wiki/Assembler)
+  * [Binary Structure](https://github.com/rizkyario/42-corewar/wiki/Binary-Structure)
+* [Virtual Machine](https://github.com/rizkyario/42-corewar/wiki/Virtual-Machine)
+  * [Corewar Operations](https://github.com/rizkyario/42-corewar/wiki/Corewar-Operations)
+* [Unit-Tests](https://github.com/rizkyario/42-corewar/wiki/Unit-Tests)
+
 ## Usage:
 
 ### Assembler:
