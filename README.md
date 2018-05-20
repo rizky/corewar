@@ -13,7 +13,8 @@ We explored the design of a VM (with the relevant instructions, records, etc.) a
 * [Assembler](https://github.com/rizkyario/42-corewar/wiki/Assembler)
   * [Binary Structure](https://github.com/rizkyario/42-corewar/wiki/Binary-Structure)
 * [Virtual Machine](https://github.com/rizkyario/42-corewar/wiki/Virtual-Machine)
-  * [Corewar Operations](https://github.com/rizkyario/42-corewar/wiki/Corewar-Operations)
+  * [Operations](https://github.com/rizkyario/42-corewar/wiki/Corewar-Operations)
+  * [Verbose](https://github.com/rizkyario/42-corewar/wiki/Corewar-Verbose)
 * [Unit-Tests](https://github.com/rizkyario/42-corewar/wiki/Unit-Tests)
 
 ## Usage:
