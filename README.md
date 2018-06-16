@@ -6,16 +6,16 @@ We explored the design of a VM (with the relevant instructions, records, etc.) a
 
 ## Installation:
 
-`git clone --recurse-submodules https://github.com/rizkyario/42-corewar.git && cd 42-corewar && make`
+`git clone --recurse-submodules https://github.com/rizkyario/corewar.git && cd corewar && make`
 
 ## Wiki
-* [Home](https://github.com/rizkyario/42-corewar/wiki)
-* [Assembler](https://github.com/rizkyario/42-corewar/wiki/Assembler)
-  * [Binary Structure](https://github.com/rizkyario/42-corewar/wiki/Binary-Structure)
-* [Virtual Machine](https://github.com/rizkyario/42-corewar/wiki/Virtual-Machine)
-  * [Operations](https://github.com/rizkyario/42-corewar/wiki/Corewar-Operations)
-  * [Verbose](https://github.com/rizkyario/42-corewar/wiki/Corewar-Verbose)
-* [Unit-Tests](https://github.com/rizkyario/42-corewar/wiki/Unit-Tests)
+* [Home](https://github.com/rizkyario/corewar/wiki)
+* [Assembler](https://github.com/rizkyario/corewar/wiki/Assembler)
+  * [Binary Structure](https://github.com/rizkyario/corewar/wiki/Binary-Structure)
+* [Virtual Machine](https://github.com/rizkyario/corewar/wiki/Virtual-Machine)
+  * [Operations](https://github.com/rizkyario/corewar/wiki/Corewar-Operations)
+  * [Verbose](https://github.com/rizkyario/corewar/wiki/Corewar-Verbose)
+* [Unit-Tests](https://github.com/rizkyario/corewar/wiki/Unit-Tests)
 
 ## Usage:
 
@@ -55,10 +55,10 @@ OPTIONS
 ### In action:
 
 #### Visualizer using printf:
-![corewar in action_printf](https://github.com/rizkyario/42-corewar/blob/assets/corewar_in_action.gif)
+![corewar in action_printf](https://github.com/rizkyario/corewar/blob/assets/corewar_in_action.gif)
 
 #### Visualizer using ncurses:
-![corewar_in_action_ncurses](https://github.com/rizkyario/42-corewar/blob/assets/corewar_in_action2.gif)
+![corewar_in_action_ncurses](https://github.com/rizkyario/corewar/blob/assets/corewar_in_action2.gif)
 
 ### Test Suite:
 
@@ -68,7 +68,7 @@ OPTIONS
 
 #### All test cases:
 
-<img src="https://github.com/rizkyario/42-corewar/blob/assets/make_tests_large.png" width=80%>
+<img src="https://github.com/rizkyario/corewar/blob/assets/make_tests_large.png" width=80%>
 
 ## Code snippets:
 
